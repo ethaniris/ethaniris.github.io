@@ -9638,8 +9638,8 @@ aUv(a){switch(a.a){case 0:return"\u5c1a\u672a\u555f\u52d5\u6b0a\u9650"
 case 1:return"\u9ede\u64ca\u8033\u6a5f\u958b\u59cb"
 case 2:return"\u9023\u63a5\u4e2d\uff0c\u7a0d\u7b49....."
 case 3:return"\u958b\u59cb\u8aaa\u8a71"}},
-aUu(a){switch(a.a){case 0:return"\u8acb\u5148\u5141\u8a31\u9ea5\u514b\u98a8\u6b0a\u9650\uff01"
-default:return"\u9ede\u64ca\u958b\u59cb\u8ddf\u6211\u8aaa\u8a71\u5427\uff01"}},
+aUu(a){switch(a.a){case 0:return"\u8acb\u5148\u5141\u8a31\u9ea5\u514b\u98a8\u6b0a\u9650\uff0c\u9ede\u64ca\u8033\u6a5f\u958b\u59cb\u8ddf\u6211\u8aaa\u8a71\u5427\uff01"
+default:return"\u9ede\u64ca\u8033\u6a5f\u958b\u59cb\u8ddf\u6211\u8aaa\u8a71\u5427\uff01"}},
 aUw(a){switch(a.a){case 0:return B.GI
 case 1:return B.GH
 case 2:return B.GK
