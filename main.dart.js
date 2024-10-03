@@ -49504,7 +49504,7 @@ d=A.aUD("POST",l)
 d.r.m(0,"Authorization","Bearer "+n.x)
 c=d.x
 c.m(0,"model","whisper-1")
-c.m(0,"prompt","\u5716\u66f8\u9928, \u66f8\u7c4d, \u66c9\u66f8, \u501f\u95b1, \u63a8\u85a6, \u4f5c\u8005, \u4e2d\u6587, \u82f1\u6587, \u66f8\u540d, \u4e3b\u984c, \u53f0\u8a9e, \u82f1\u6aa2, hello, thank you, \u795e\u5947\u67d1\u4ed4\u5e97")
+c.m(0,"prompt","\u5716\u66f8\u9928, \u66f8\u7c4d, \u66c9\u66f8, \u501f\u95b1, \u501f\u66f8\u8b49, \u63a8\u85a6, \u4f5c\u8005, \u4e2d\u6587, \u82f1\u6587, \u66f8\u540d, \u4e3b\u984c, \u53f0\u8a9e, \u82f1\u6aa2, hello, thank you, \u795e\u5947\u67d1\u4ed4\u5e97")
 c=m
 b=A.NZ("audio","mp3",null)
 a=A.aBP(c,t.Cm)
