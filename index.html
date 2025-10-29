@@ -3,26 +3,36 @@
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
   const LIFF_ID = "YOUR_LIFF_ID";
+  const DEFAULT_SHARE_TEXT = "請分享給朋友\nhttps://example.com"; // ← put any test text or URL here
+
   (async () => {
     const here = location.href;
     const p = new URL(here).searchParams;
-    const shareUrl = p.get("url"); // 你要分享出去的文字或短連結
+    // Use ?url=... if provided; otherwise fallback to DEFAULT_SHARE_TEXT
+    const sharePayload = p.get("url") || DEFAULT_SHARE_TEXT;
+
     await liff.init({ liffId: LIFF_ID });
     if (!liff.isLoggedIn()) {
       liff.login({ redirectUri: here });
       return;
     }
+
+    // Optional: also support sharing an image if ?img=... is given
+    const img = p.get("img");
+
     if (!liff.isInClient() || !liff.isApiAvailable("shareTargetPicker")) {
-      alert("請在 LINE 內開啟");
+      alert("請在 LINE 內開啟此分享頁");
       return;
     }
+
     try {
-      await liff.shareTargetPicker([
-        { type: "text", text: `請分享給朋友\n${shareUrl}` },
-      ]);
-      // 這裡只能知道「成功送出」，拿不到「幾位」
+      const msgs = img
+        ? [{ type: "image", originalContentUrl: img, previewImageUrl: img }]
+        : [{ type: "text", text: sharePayload }];
+
+      await liff.shareTargetPicker(msgs);
     } catch (e) {
-      // 使用者取消或錯誤
+      // user cancelled or error — ignore for test
     } finally {
       if (liff.isInClient()) liff.closeWindow();
     }
