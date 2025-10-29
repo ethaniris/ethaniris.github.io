@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Share Image</title>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 16px;
+      }
+      img {
+        max-width: 100%;
+        border-radius: 8px;
+      }
+      button {
+        padding: 12px 16px;
+        margin: 12px 8px 0 0;
+        border: 0;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>要分享這張美照嗎？</h3>
+    <img id="pic" alt="photo" />
+    <div>
+      <button id="share">分享給朋友</button>
+      <button id="save">另存圖片</button>
+    </div>
+
+    <script>
+      const LIFF_ID = "2008383838-vLABV8zo";
+
+      async function main() {
+        await liff.init({ liffId: LIFF_ID });
+        if (!liff.isLoggedIn()) liff.login();
+
+        const params = new URL(location.href).searchParams;
+        const img = params.get("img");
+        document.getElementById("pic").src = img;
+
+        // Share to selected chats/friends
+        document.getElementById("share").onclick = async () => {
+          try {
+            // Image message
+            await liff.shareTargetPicker([
+              {
+                type: "image",
+                originalContentUrl: img,
+                previewImageUrl: img,
+              },
+            ]);
+            // Optionally close the LIFF window after share
+            if (liff.isInClient()) liff.closeWindow();
+          } catch (e) {
+            alert("分享失敗：" + (e?.message || e));
+          }
+        };
+
+        // Save: open the image in a new tab (users can long-press/Save)
+        document.getElementById("save").onclick = () => {
+          // In the LINE in-app browser, long-press on the image also works.
+          window.open(img, "_blank");
+        };
+      }
+      main();
+    </script>
+  </body>
+</html>
