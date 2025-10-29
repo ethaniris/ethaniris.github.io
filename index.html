@@ -2,25 +2,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <body>
-  <button id="shareButton">分享给朋友</button>
+  <button id="shareButton" style="display: none">分享给朋友</button>
   <script>
     const LIFF_ID = "2008383838-vLABV8zo";
-    const DEFAULT_SHARE_TEXT = "請分享給朋友\nhttps://example.com";
 
     async function initializeLiff() {
-      await liff.init({ liffId: LIFF_ID });
-      if (!liff.isLoggedIn()) {
-        liff.login(); // 简化登录流程，默认重定向回当前页
-        return;
+      try {
+        await liff.init({ liffId: LIFF_ID });
+        if (!liff.isLoggedIn()) {
+          liff.login(); // 简化登录流程，默认重定向回当前页
+          return;
+        }
+        // 初始化成功后，显示按钮
+        document.getElementById("shareButton").style.display = "block";
+
+        // 如果是从LINE客户端内打开，自动尝试分享
+        if (liff.isInClient()) {
+          await shareMessage();
+        }
+      } catch (error) {
+        console.error("LIFF初始化失败:", error);
+        alert("初始化失败，请重试");
       }
-      // 初始化成功后，显示按钮并绑定事件
-      document.getElementById("shareButton").style.display = "block";
     }
 
     async function shareMessage() {
       const urlParams = new URLSearchParams(window.location.search);
-      const sharePayload = urlParams.get("url") || DEFAULT_SHARE_TEXT;
-      const img = urlParams.get("img");
+      // 获取要分享的URL，如果没有则使用默认文本
+      const shareUrl =
+        urlParams.get("url") || "https://line.me/R/ti/p/@638ccvfy";
 
       if (!liff.isApiAvailable("shareTargetPicker")) {
         alert("当前环境不支持分享功能，请在LINE App内打开。");
@@ -28,26 +38,32 @@
       }
 
       try {
-        const msgs = img
-          ? [{ type: "image", originalContentUrl: img, previewImageUrl: img }]
-          : [{ type: "text", text: sharePayload }];
-        await liff.shareTargetPicker(msgs);
+        // 创建纯文本分享消息，包含URL
+        const shareMessage = {
+          type: "text",
+          text: `分享给您一个链接：${shareUrl}`,
+        };
+
+        await liff.shareTargetPicker([shareMessage]);
       } catch (error) {
-        // 用户取消分享时会抛出错误，这里可以静默处理或提示
-        console.log("分享被取消或失败:", error);
+        // 用户取消分享时会抛出错误，这里可以静默处理
+        if (error.code !== "CANCEL") {
+          console.log("分享失败:", error);
+        }
+      } finally {
+        // 分享完成后关闭窗口（仅在LINE客户端内）
+        if (liff.isInClient()) {
+          liff.closeWindow();
+        }
       }
     }
 
     // 页面加载完成后初始化LIFF，并为按钮绑定事件
-    liff.ready
-      .then(() => {
-        initializeLiff();
-        document
-          .getElementById("shareButton")
-          .addEventListener("click", shareMessage);
-      })
-      .catch((err) => {
-        console.error("LIFF初始化失败:", err);
-      });
+    document.addEventListener("DOMContentLoaded", () => {
+      initializeLiff();
+      document
+        .getElementById("shareButton")
+        .addEventListener("click", shareMessage);
+    });
   </script>
 </body>
