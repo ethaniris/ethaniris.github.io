@@ -1,69 +1,134 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-<body>
-  <button id="shareButton" style="display: none">分享给朋友</button>
-  <script>
-    const LIFF_ID = "2008383838-vLABV8zo";
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>分享連結</title>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 16px;
+        text-align: center;
+      }
+      .url-box {
+        background: #f5f5f5;
+        padding: 12px;
+        border-radius: 8px;
+        margin: 16px 0;
+        word-break: break-all;
+      }
+      button {
+        padding: 12px 16px;
+        margin: 12px 8px 0 0;
+        border: 0;
+        border-radius: 8px;
+        background: #06c755;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .hint {
+        color: #666;
+        font-size: 14px;
+        margin-top: 8px;
+      }
+      #warn {
+        color: #c00;
+        margin-top: 10px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>要分享這個連結嗎？</h3>
+    <div class="url-box" id="urlDisplay"></div>
+    <div>
+      <button id="share">分享給朋友</button>
+      <div id="warn"></div>
+      <p class="hint">
+        若無法分享，請確認：用 LINE 開啟、已授權 chat_message.write。
+      </p>
+    </div>
 
-    async function initializeLiff() {
-      try {
+    <script>
+      const LIFF_ID = "2008383838-vLABV8zo"; // <-- replace
+
+      // Preserve original URL (including ?url=...) across login redirects
+      const originalUrl = location.href;
+
+      // Read url param NOW, before any redirect
+      const params = new URL(originalUrl).searchParams;
+      const urlParam = params.get("url");
+
+      function setUrlOrWarn(url) {
+        const warn = document.getElementById("warn");
+        const urlDisplay = document.getElementById("urlDisplay");
+        if (!url) {
+          warn.style.display = "block";
+          warn.textContent = "沒有拿到分享連結 (url 參數)。";
+        } else {
+          urlDisplay.textContent = url;
+        }
+      }
+
+      async function main() {
+        // Show URL immediately based on current URL (even before LIFF init)
+        setUrlOrWarn(urlParam);
+
         await liff.init({ liffId: LIFF_ID });
+
+        // If not logged in, log in and come back to the same URL (keeps ?url=)
         if (!liff.isLoggedIn()) {
-          liff.login(); // 简化登录流程，默认重定向回当前页
-          return;
+          liff.login({ redirectUri: originalUrl });
+          return; // stop here; the page will reload after login
         }
-        // 初始化成功后，显示按钮
-        document.getElementById("shareButton").style.display = "block";
 
-        // 如果是从LINE客户端内打开，自动尝试分享
-        if (liff.isInClient()) {
-          await shareMessage();
+        const warn = document.getElementById("warn");
+
+        // Check we're inside LINE client
+        if (!liff.isInClient()) {
+          warn.style.display = "block";
+          warn.textContent = "請在 LINE 內開啟此頁面才能分享 (LIFF)。";
         }
-      } catch (error) {
-        console.error("LIFF初始化失败:", error);
-        alert("初始化失败，请重试");
-      }
-    }
 
-    async function shareMessage() {
-      const urlParams = new URLSearchParams(window.location.search);
-      // 获取要分享的URL，如果没有则使用默认文本
-      const shareUrl =
-        urlParams.get("url") || "https://line.me/R/ti/p/@638ccvfy";
+        // Check API availability
+        const canShare = liff.isApiAvailable("shareTargetPicker");
 
-      if (!liff.isApiAvailable("shareTargetPicker")) {
-        alert("当前环境不支持分享功能，请在LINE App内打开。");
-        return;
-      }
+        // Share button
+        document.getElementById("share").onclick = async () => {
+          try {
+            const url = new URL(location.href).searchParams.get("url");
+            if (!url) {
+              alert("缺少 url 參數，無法分享");
+              return;
+            }
+            if (!canShare) {
+              alert(
+                "此環境不支援 shareTargetPicker，請用 LINE 開啟並確認已授權。"
+              );
+              return;
+            }
 
-      try {
-        // 创建纯文本分享消息，包含URL
-        const shareMessage = {
-          type: "text",
-          text: `分享给您一个链接：${shareUrl}`,
+            // Share the URL as a text message
+            await liff.shareTargetPicker([
+              {
+                type: "text",
+                text: "分享給您一個連結：\n" + url,
+              },
+            ]);
+
+            if (liff.isInClient()) liff.closeWindow();
+          } catch (e) {
+            // If user cancels sharing, don't show error
+            if (e.code !== "CANCEL") {
+              alert("分享失敗：" + (e?.message || e));
+            }
+          }
         };
-
-        await liff.shareTargetPicker([shareMessage]);
-      } catch (error) {
-        // 用户取消分享时会抛出错误，这里可以静默处理
-        if (error.code !== "CANCEL") {
-          console.log("分享失败:", error);
-        }
-      } finally {
-        // 分享完成后关闭窗口（仅在LINE客户端内）
-        if (liff.isInClient()) {
-          liff.closeWindow();
-        }
       }
-    }
 
-    // 页面加载完成后初始化LIFF，并为按钮绑定事件
-    document.addEventListener("DOMContentLoaded", () => {
-      initializeLiff();
-      document
-        .getElementById("shareButton")
-        .addEventListener("click", shareMessage);
-    });
-  </script>
-</body>
+      main();
+    </script>
+  </body>
+</html>
