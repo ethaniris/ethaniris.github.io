@@ -1,137 +1,30 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Share Image</title>
-    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-    <style>
-      body {
-        font-family: system-ui, sans-serif;
-        padding: 16px;
-      }
-      img {
-        max-width: 100%;
-        border-radius: 8px;
-      }
-      button {
-        padding: 12px 16px;
-        margin: 12px 8px 0 0;
-        border: 0;
-        border-radius: 8px;
-      }
-      .hint {
-        color: #666;
-        font-size: 14px;
-        margin-top: 8px;
-      }
-      #warn {
-        color: #c00;
-        margin-top: 10px;
-        display: none;
-      }
-    </style>
-  </head>
-  <body>
-    <h3>要分享這張美照嗎？</h3>
-    <img id="pic" alt="photo" />
-    <div>
-      <button id="share">分享給朋友</button>
-      <button id="save">另存圖片</button>
-      <div id="warn"></div>
-      <p class="hint">
-        若無法分享，請確認：用 LINE 開啟、已授權 chat_message.write。
-      </p>
-    </div>
-
-    <script>
-      const LIFF_ID = "2008383838-vLABV8zo"; // <-- replace
-
-      // Preserve original URL (including ?img=...) across login redirects
-      const originalUrl = location.href;
-
-      // Read img param NOW, before any redirect
-      const params = new URL(originalUrl).searchParams;
-      const imgParam = params.get("img");
-
-      function setImageOrWarn(imgUrl) {
-        const warn = document.getElementById("warn");
-        const imgEl = document.getElementById("pic");
-        if (!imgUrl) {
-          warn.style.display = "block";
-          warn.textContent = "沒有拿到圖片網址 (img 參數)。";
-        } else {
-          imgEl.src = imgUrl;
-        }
-      }
-
-      async function main() {
-        // Show image immediately based on current URL (even before LIFF init)
-        setImageOrWarn(imgParam);
-
-        await liff.init({ liffId: LIFF_ID });
-
-        // If not logged in, log in and come back to the same URL (keeps ?img=)
-        if (!liff.isLoggedIn()) {
-          liff.login({ redirectUri: originalUrl });
-          return; // stop here; the page will reload after login
-        }
-
-        const warn = document.getElementById("warn");
-
-        // Check we're inside LINE client
-        if (!liff.isInClient()) {
-          warn.style.display = "block";
-          warn.textContent = "請在 LINE 內開啟此頁面才能分享 (LIFF)。";
-        }
-
-        // Check API availability
-        const canShare = liff.isApiAvailable("shareTargetPicker");
-
-        // Share button
-        document.getElementById("share").onclick = async () => {
-          try {
-            const img = new URL(location.href).searchParams.get("img");
-            if (!img) {
-              alert("缺少 img 參數，無法分享");
-              return;
-            }
-            if (!canShare) {
-              alert(
-                "此環境不支援 shareTargetPicker，請用 LINE 開啟並確認已授權。"
-              );
-              return;
-            }
-
-            // Ask for chat_message.write if not yet granted (Login channel must include this scope)
-            // If your channel/scopes are set, user will have been prompted already during login.
-
-            await liff.shareTargetPicker([
-              {
-                type: "image",
-                originalContentUrl: img,
-                previewImageUrl: img,
-              },
-            ]);
-
-            if (liff.isInClient()) liff.closeWindow();
-          } catch (e) {
-            alert("分享失敗：" + (e?.message || e));
-          }
-        };
-
-        // Save button: open raw image so user can long-press
-        document.getElementById("save").onclick = () => {
-          const img = new URL(location.href).searchParams.get("img");
-          if (!img) {
-            alert("缺少 img 參數");
-            return;
-          }
-          window.open(img, "_blank");
-        };
-      }
-
-      main();
-    </script>
-  </body>
-</html>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script>
+  const LIFF_ID = "YOUR_LIFF_ID";
+  (async () => {
+    const here = location.href;
+    const p = new URL(here).searchParams;
+    const shareUrl = p.get("url"); // 你要分享出去的文字或短連結
+    await liff.init({ liffId: LIFF_ID });
+    if (!liff.isLoggedIn()) {
+      liff.login({ redirectUri: here });
+      return;
+    }
+    if (!liff.isInClient() || !liff.isApiAvailable("shareTargetPicker")) {
+      alert("請在 LINE 內開啟");
+      return;
+    }
+    try {
+      await liff.shareTargetPicker([
+        { type: "text", text: `請分享給朋友\n${shareUrl}` },
+      ]);
+      // 這裡只能知道「成功送出」，拿不到「幾位」
+    } catch (e) {
+      // 使用者取消或錯誤
+    } finally {
+      if (liff.isInClient()) liff.closeWindow();
+    }
+  })();
+</script>
