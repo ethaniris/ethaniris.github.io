@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>高架花籃訂購</title>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, "Noto Sans TC";
+        margin: 0;
+        background: #f6f7fb;
+      }
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 12px;
+      }
+      label {
+        display: block;
+        font-size: 13px;
+        margin: 12px 0 6px;
+        color: #333;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 12px;
+        border: 1px solid #e2e5ee;
+        border-radius: 12px;
+        font-size: 15px;
+        outline: none;
+        background: #fff;
+      }
+      textarea {
+        min-height: 86px;
+        resize: vertical;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .muted {
+        color: #666;
+        font-size: 12px;
+        margin-top: 8px;
+      }
+      .btn {
+        width: 100%;
+        border: 0;
+        border-radius: 14px;
+        padding: 14px 14px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .btn.primary {
+        background: #111;
+        color: #fff;
+        margin-top: 14px;
+      }
+      .btn.ghost {
+        background: #fff;
+        border: 1px solid #e2e5ee;
+        margin-top: 10px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f0f2f8;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <div class="pill" id="orderPill">訂單：讀取中…</div>
+        <h1>高架花籃訂購資料</h1>
+
+        <div class="row">
+          <div>
+            <label>訂購人姓名</label>
+            <input id="buyerName" autocomplete="name" required />
+          </div>
+          <div>
+            <label>連絡電話</label>
+            <input
+              id="buyerPhone"
+              inputmode="tel"
+              autocomplete="tel"
+              required
+            />
+          </div>
+        </div>
+
+        <label>往生大德</label>
+        <input id="deceasedName" required />
+
+        <div class="row">
+          <div>
+            <label>告別式日期</label>
+            <input id="funeralDate" type="date" required />
+          </div>
+          <div>
+            <label>告別式地點</label>
+            <input id="funeralLocation" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>產品</label>
+            <input value="高架花籃" disabled />
+          </div>
+          <div>
+            <label>數量（對）</label>
+            <select id="qtyPairs">
+              <option value="1">1 對（NT$2000）</option>
+              <option value="2">2 對（NT$4000）</option>
+              <option value="3">3 對（NT$6000）</option>
+            </select>
+          </div>
+        </div>
+
+        <label>下款（公司行號/稱謂+職稱+姓名）</label>
+        <textarea
+          id="signText"
+          placeholder="例：OO公司 敬輓 / OO董事長 OOOO 敬輓"
+        ></textarea>
+
+        <div class="row">
+          <div>
+            <label>是否開立收據</label>
+            <select id="needReceipt">
+              <option value="no">否</option>
+              <option value="yes">是</option>
+            </select>
+          </div>
+          <div>
+            <label>收據抬頭</label>
+            <input id="receiptTitle" placeholder="個人/公司名稱" />
+          </div>
+        </div>
+
+        <label>收據地址</label>
+        <input id="receiptAddr" placeholder="若不需收據可留空" />
+
+        <label>付款方式</label>
+        <select id="payMethod">
+          <option value="linepay">LINE Pay</option>
+          <option value="card">信用卡</option>
+          <option value="wire">匯款</option>
+        </select>
+
+        <button class="btn primary" id="submitBtn">送出並前往付款</button>
+        <button class="btn ghost" id="cancelBtn">取消</button>
+
+        <div class="muted">
+          提醒：請勿在表單內填寫過多敏感個資。送出後可於聊天室收到訂單確認。
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const LIFF_ID = "2008383838-vLABV8zo"; // 換成你的
+      const params = new URLSearchParams(location.search);
+      const orderId = params.get("orderId") || "";
+      document.getElementById("orderPill").textContent = orderId
+        ? `訂單：${orderId}`
+        : "訂單：未帶入";
+
+      async function init() {
+        await liff.init({ liffId: LIFF_ID }); // LIFF v2 :contentReference[oaicite:2]{index=2}
+        if (!liff.isLoggedIn()) liff.login();
+      }
+
+      async function submit() {
+        const profile = await liff.getProfile(); // 取 userId / displayName
+        const data = {
+          orderId,
+          lineUserId: profile.userId,
+          buyerName: document.getElementById("buyerName").value.trim(),
+          buyerPhone: document.getElementById("buyerPhone").value.trim(),
+          deceasedName: document.getElementById("deceasedName").value.trim(),
+          funeralDate: document.getElementById("funeralDate").value,
+          funeralLocation: document
+            .getElementById("funeralLocation")
+            .value.trim(),
+          product: "高架花籃",
+          qtyPairs: Number(document.getElementById("qtyPairs").value),
+          signText: document.getElementById("signText").value.trim(),
+          needReceipt: document.getElementById("needReceipt").value,
+          receiptTitle: document.getElementById("receiptTitle").value.trim(),
+          receiptAddr: document.getElementById("receiptAddr").value.trim(),
+          payMethod: document.getElementById("payMethod").value,
+        };
+
+        // TODO: 你後端的 API（同域或 CORS 放行）
+        const resp = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        if (!resp.ok) {
+          alert("送出失敗，請稍後再試");
+          return;
+        }
+
+        const result = await resp.json();
+        // result: { nextUrl?, message? }
+        if (result.nextUrl) {
+          location.href = result.nextUrl; // LINE Pay / 信用卡付款頁
+        } else {
+          alert(result.message || "已送出");
+          if (liff.isInClient()) liff.closeWindow();
+        }
+      }
+
+      document.getElementById("submitBtn").addEventListener("click", submit);
+      document.getElementById("cancelBtn").addEventListener("click", () => {
+        if (liff.isInClient()) liff.closeWindow();
+        else history.back();
+      });
+
+      init().catch((err) => alert("LIFF 初始化失敗：" + err));
+    </script>
+  </body>
+</html>
