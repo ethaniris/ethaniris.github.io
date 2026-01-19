@@ -137,6 +137,24 @@
       body.theme-sad .only-sad {
         display: block;
       }
+      /* 1) 最重要：讓 padding/border 不會把寬度撐爆 */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      /* 2) Grid 子項目允許縮小，避免內容把格子撐開 */
+      .row > div {
+        min-width: 0;
+      }
+
+      /* 3) 手機螢幕時，兩欄改一欄，避免擠爆/重疊 */
+      @media (max-width: 520px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body class="theme-happy">
