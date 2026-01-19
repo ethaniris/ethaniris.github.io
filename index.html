@@ -659,28 +659,26 @@
       async function loadPrefill(orderId) {
         if (!orderId) return;
 
-        const resp = await fetch(
-          `https://line-flower-shop-f54f9c20b157.herokuapp.com/api/order-context?orderId=${encodeURIComponent(
-            orderId
-          )}`,
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include", // ok even if you don't use cookies
-          }
-        );
+        const url = `https://line-flower-shop-f54f9c20b157.herokuapp.com/api/order-context?orderId=${encodeURIComponent(
+          orderId
+        )}`;
 
-        if (!resp.ok) return; // silently ignore or show message
-        const ctx = await resp.json();
+        try {
+          const resp = await fetch(url); // <-- no headers, no credentials
+          if (!resp.ok) return;
 
-        // Fill 3 values into your inputs
-        if (ctx.customer_name)
-          document.getElementById("buyerName").value = ctx.customer_name;
-        if (ctx.customer_phone)
-          document.getElementById("buyerPhone").value = ctx.customer_phone;
-        if (ctx.customer_address) {
+          const ctx = await resp.json();
+
+          if (ctx.customer_name)
+            document.getElementById("buyerName").value = ctx.customer_name;
+          if (ctx.customer_phone)
+            document.getElementById("buyerPhone").value = ctx.customer_phone;
+
           const addrEl = document.getElementById("customerAddress");
-          if (addrEl) addrEl.value = ctx.customer_address;
+          if (addrEl && ctx.customer_address)
+            addrEl.value = ctx.customer_address;
+        } catch (e) {
+          console.log("prefill fetch failed:", e);
         }
       }
 
