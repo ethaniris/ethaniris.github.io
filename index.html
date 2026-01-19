@@ -295,7 +295,7 @@
           </div>
           <div>
             <label>送達地點</label>
-            <input id="deliveryLocation" />
+            <input id="customerAddress" autocomplete="street-address" />
           </div>
         </div>
 
@@ -643,6 +643,43 @@
       async function init() {
         await liff.init({ liffId: LIFF_ID });
         if (!liff.isLoggedIn()) liff.login();
+
+        // read orderId from URL
+        const params = new URLSearchParams(location.search);
+        const orderId = params.get("orderId") || "";
+
+        // optional: show pill
+        document.getElementById("orderPill").textContent = orderId
+          ? `訂單：${orderId}`
+          : "訂單：未帶入";
+
+        // load prefill
+        await loadPrefill(orderId);
+      }
+      async function loadPrefill(orderId) {
+        if (!orderId) return;
+
+        const resp = await fetch(
+          `/api/order-context?orderId=${encodeURIComponent(orderId)}`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include", // ok even if you don't use cookies
+          }
+        );
+
+        if (!resp.ok) return; // silently ignore or show message
+        const ctx = await resp.json();
+
+        // Fill 3 values into your inputs
+        if (ctx.customer_name)
+          document.getElementById("buyerName").value = ctx.customer_name;
+        if (ctx.customer_phone)
+          document.getElementById("buyerPhone").value = ctx.customer_phone;
+        if (ctx.customer_address) {
+          const addrEl = document.getElementById("customerAddress");
+          if (addrEl) addrEl.value = ctx.customer_address;
+        }
       }
 
       function collectItems() {
