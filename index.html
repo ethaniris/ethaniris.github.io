@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>高架花籃訂購</title>
+    <title>老蕭專業24H線上花店</title>
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <style>
       body {
@@ -83,13 +83,74 @@
         background: #f0f2f8;
         font-size: 12px;
       }
+
+      /* ===== Toggle UI ===== */
+      .toggle {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 12px 0 14px;
+        background: #f0f2f8;
+        padding: 6px;
+        border-radius: 14px;
+      }
+      .toggle button {
+        border: 0;
+        border-radius: 12px;
+        padding: 12px 10px;
+        font-size: 15px;
+        font-weight: 800;
+        cursor: pointer;
+        background: transparent;
+        color: #333;
+      }
+      .toggle button.active {
+        background: #fff;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      }
+
+      /* ===== Theme differences ===== */
+      body.theme-happy {
+        background: #f6f7fb; /* default-ish */
+      }
+      body.theme-sad {
+        background: #f6f4f7; /* slight tint */
+      }
+      .card.theme-happy {
+        background: #ffffff;
+      }
+      .card.theme-sad {
+        background: #fffdfd; /* tiny tint */
+        border: 1px solid #f0e6ee;
+      }
+
+      /* Show/hide blocks */
+      .only-happy {
+        display: none;
+      }
+      .only-sad {
+        display: none;
+      }
+      body.theme-happy .only-happy {
+        display: block;
+      }
+      body.theme-sad .only-sad {
+        display: block;
+      }
     </style>
   </head>
-  <body>
+  <body class="theme-happy">
     <div class="wrap">
-      <div class="card">
+      <div class="card theme-happy" id="formCard">
         <div class="pill" id="orderPill">訂單：讀取中…</div>
         <h1>高架花籃訂購資料</h1>
+
+        <!-- ===== Toggle (喜事 / 喪事) ===== -->
+        <div class="toggle" role="tablist" aria-label="用途選擇">
+          <button type="button" id="btnHappy" class="active">喜事用花</button>
+          <button type="button" id="btnSad">喪事用花</button>
+        </div>
+        <input type="hidden" id="occasionType" value="happy" />
 
         <div class="row">
           <div>
@@ -107,17 +168,31 @@
           </div>
         </div>
 
-        <label>往生大德</label>
+        <!-- Switchable label -->
+        <label id="nameLabel">收花人 / 主角姓名</label>
         <input id="deceasedName" required />
 
-        <div class="row">
+        <!-- 喪事：告別式日期/地點 -->
+        <div class="row only-sad" id="sadDateLocationRow">
           <div>
-            <label>告別式日期</label>
-            <input id="funeralDate" type="date" required />
+            <label id="dateLabel">告別式日期</label>
+            <input id="funeralDate" type="date" />
           </div>
           <div>
-            <label>告別式地點</label>
-            <input id="funeralLocation" required />
+            <label id="locLabel">告別式地點</label>
+            <input id="funeralLocation" />
+          </div>
+        </div>
+
+        <!-- 喜事：送達日期/地點（你若不需要可刪掉這整段 only-happy） -->
+        <div class="row only-happy" id="happyDateLocationRow">
+          <div>
+            <label>送達日期</label>
+            <input id="deliveryDate" type="date" />
+          </div>
+          <div>
+            <label>送達地點</label>
+            <input id="deliveryLocation" />
           </div>
         </div>
 
@@ -139,7 +214,7 @@
         <label>下款（公司行號/稱謂+職稱+姓名）</label>
         <textarea
           id="signText"
-          placeholder="例：OO公司 敬輓 / OO董事長 OOOO 敬輓"
+          placeholder="例：OO公司 敬賀 / OO董事長 OOOO 敬賀"
         ></textarea>
 
         <div class="row">
@@ -179,37 +254,117 @@
       const LIFF_ID = "2008383838-vLABV8zo"; // 換成你的
       const params = new URLSearchParams(location.search);
       const orderId = params.get("orderId") || "";
+
       document.getElementById("orderPill").textContent = orderId
         ? `訂單：${orderId}`
         : "訂單：未帶入";
 
+      // ===== Toggle logic =====
+      const bodyEl = document.body;
+      const cardEl = document.getElementById("formCard");
+
+      const btnHappy = document.getElementById("btnHappy");
+      const btnSad = document.getElementById("btnSad");
+      const occasionTypeEl = document.getElementById("occasionType");
+
+      const nameLabel = document.getElementById("nameLabel");
+      const signText = document.getElementById("signText");
+
+      const funeralDate = document.getElementById("funeralDate");
+      const funeralLocation = document.getElementById("funeralLocation");
+
+      const deliveryDate = document.getElementById("deliveryDate");
+      const deliveryLocation = document.getElementById("deliveryLocation");
+
+      function setOccasion(type) {
+        const isHappy = type === "happy";
+
+        // theme
+        bodyEl.classList.toggle("theme-happy", isHappy);
+        bodyEl.classList.toggle("theme-sad", !isHappy);
+        cardEl.classList.toggle("theme-happy", isHappy);
+        cardEl.classList.toggle("theme-sad", !isHappy);
+
+        // buttons
+        btnHappy.classList.toggle("active", isHappy);
+        btnSad.classList.toggle("active", !isHappy);
+
+        // hidden value
+        occasionTypeEl.value = type;
+
+        // text differences
+        nameLabel.textContent = isHappy ? "收花人 / 主角姓名" : "往生大德";
+
+        // placeholder differences
+        signText.placeholder = isHappy
+          ? "例：OO公司 敬賀 / OO董事長 OOOO 敬賀"
+          : "例：OO公司 敬輓 / OO董事長 OOOO 敬輓";
+
+        // required rules
+        if (funeralDate && funeralLocation) {
+          funeralDate.required = !isHappy;
+          funeralLocation.required = !isHappy;
+          if (isHappy) {
+            funeralDate.value = "";
+            funeralLocation.value = "";
+          }
+        }
+
+        if (deliveryDate && deliveryLocation) {
+          deliveryDate.required = isHappy;
+          deliveryLocation.required = isHappy;
+          if (!isHappy) {
+            deliveryDate.value = "";
+            deliveryLocation.value = "";
+          }
+        }
+      }
+
+      btnHappy.addEventListener("click", () => setOccasion("happy"));
+      btnSad.addEventListener("click", () => setOccasion("sad"));
+
+      // default
+      setOccasion("happy");
+
       async function init() {
-        await liff.init({ liffId: LIFF_ID }); // LIFF v2 :contentReference[oaicite:2]{index=2}
+        await liff.init({ liffId: LIFF_ID });
         if (!liff.isLoggedIn()) liff.login();
       }
 
       async function submit() {
-        const profile = await liff.getProfile(); // 取 userId / displayName
+        const profile = await liff.getProfile();
+
         const data = {
           orderId,
           lineUserId: profile.userId,
+
+          occasionType: document.getElementById("occasionType").value,
+
           buyerName: document.getElementById("buyerName").value.trim(),
           buyerPhone: document.getElementById("buyerPhone").value.trim(),
+
+          // NOTE: keep your original field id to avoid changing backend,
+          // but content is either 收花人/主角 or 往生大德
           deceasedName: document.getElementById("deceasedName").value.trim(),
-          funeralDate: document.getElementById("funeralDate").value,
-          funeralLocation: document
-            .getElementById("funeralLocation")
-            .value.trim(),
+
+          funeralDate: document.getElementById("funeralDate")?.value || "",
+          funeralLocation:
+            document.getElementById("funeralLocation")?.value.trim() || "",
+
+          deliveryDate: document.getElementById("deliveryDate")?.value || "",
+          deliveryLocation:
+            document.getElementById("deliveryLocation")?.value.trim() || "",
+
           product: "高架花籃",
           qtyPairs: Number(document.getElementById("qtyPairs").value),
           signText: document.getElementById("signText").value.trim(),
+
           needReceipt: document.getElementById("needReceipt").value,
           receiptTitle: document.getElementById("receiptTitle").value.trim(),
           receiptAddr: document.getElementById("receiptAddr").value.trim(),
           payMethod: document.getElementById("payMethod").value,
         };
 
-        // TODO: 你後端的 API（同域或 CORS 放行）
         const resp = await fetch("/api/checkout", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -222,9 +377,8 @@
         }
 
         const result = await resp.json();
-        // result: { nextUrl?, message? }
         if (result.nextUrl) {
-          location.href = result.nextUrl; // LINE Pay / 信用卡付款頁
+          location.href = result.nextUrl;
         } else {
           alert(result.message || "已送出");
           if (liff.isInClient()) liff.closeWindow();
