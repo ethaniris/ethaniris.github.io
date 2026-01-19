@@ -6,6 +6,13 @@
     <title>老蕭專業24H線上花店</title>
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <style>
+      /* ===== Base ===== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
       body {
         font-family: system-ui, -apple-system, "Noto Sans TC";
         margin: 0;
@@ -22,6 +29,11 @@
         padding: 18px;
         box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
       }
+      .card.theme-sad {
+        background: #fffdfd;
+        border: 1px solid #f0e6ee;
+      }
+
       h1 {
         font-size: 20px;
         margin: 0 0 12px;
@@ -47,16 +59,37 @@
         min-height: 86px;
         resize: vertical;
       }
+
       .row {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 12px;
       }
+      .row > div {
+        min-width: 0;
+      }
+
+      @media (max-width: 520px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      input[type="date"] {
+        display: block;
+        max-width: 100%;
+        width: 100%;
+        min-width: 0;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
       .muted {
         color: #666;
         font-size: 12px;
         margin-top: 8px;
       }
+
       .btn {
         width: 100%;
         border: 0;
@@ -76,6 +109,7 @@
         border: 1px solid #e2e5ee;
         margin-top: 10px;
       }
+
       .pill {
         display: inline-block;
         padding: 6px 10px;
@@ -84,7 +118,7 @@
         font-size: 12px;
       }
 
-      /* ===== Toggle UI ===== */
+      /* ===== Toggle ===== */
       .toggle {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -102,29 +136,35 @@
         font-weight: 800;
         cursor: pointer;
         background: transparent;
-        color: #333;
+      }
+      .toggle button.happy {
+        color: #0b6b3a;
+      }
+      .toggle button.sad {
+        color: #7a1f3d;
+      }
+      .toggle button:not(.active) {
+        opacity: 0.55;
       }
       .toggle button.active {
-        background: #fff;
+        opacity: 1;
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      }
+      .toggle button.happy.active {
+        background: rgba(11, 107, 58, 0.08);
+      }
+      .toggle button.sad.active {
+        background: rgba(122, 31, 61, 0.08);
       }
 
       /* ===== Theme differences ===== */
       body.theme-happy {
-        background: #f6f7fb; /* default-ish */
+        background: #f6f7fb;
       }
       body.theme-sad {
-        background: #f6f4f7; /* slight tint */
-      }
-      .card.theme-happy {
-        background: #ffffff;
-      }
-      .card.theme-sad {
-        background: #fffdfd; /* tiny tint */
-        border: 1px solid #f0e6ee;
+        background: #f6f4f7;
       }
 
-      /* Show/hide blocks */
       .only-happy {
         display: none;
       }
@@ -137,67 +177,77 @@
       body.theme-sad .only-sad {
         display: block;
       }
-      /* 1) 最重要：讓 padding/border 不會把寬度撐爆 */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
+
+      /* ===== Items (Products) ===== */
+      .item-line {
+        position: relative;
+        margin-top: 10px;
+      }
+      .item-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 6px;
+        font-size: 12px;
+        color: #666;
+      }
+      .item-remove {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 1px solid #e2e5ee;
+        background: #fff;
+        border-radius: 10px;
+        padding: 6px 10px;
+        cursor: pointer;
+        font-weight: 800;
+      }
+      .add-more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 12px;
+        border: 1px dashed #cfd5e6;
+        background: #fff;
+        border-radius: 14px;
+        padding: 12px 12px;
+        cursor: pointer;
+        font-weight: 800;
+      }
+      .add-more .plus {
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #e2e5ee;
+        font-size: 18px;
+        line-height: 1;
       }
 
-      /* 2) Grid 子項目允許縮小，避免內容把格子撐開 */
-      .row > div {
-        min-width: 0;
-      }
-
-      /* 3) 手機螢幕時，兩欄改一欄，避免擠爆/重疊 */
-      @media (max-width: 520px) {
-        .row {
-          grid-template-columns: 1fr;
-        }
-      }
-      /* Fix mobile date input overflow */
-      input[type="date"] {
-        display: block;
-        max-width: 100%;
-        width: 100%;
-        min-width: 0;
-        -webkit-appearance: none;
-        appearance: none;
-      }
-      /* Toggle text color difference */
-      .toggle button.happy {
-        color: #0b6b3a; /* 綠一點，喜事 */
-      }
-      .toggle button.sad {
-        color: #7a1f3d; /* 紫紅一點，喪事 */
-      }
-
-      /* inactive 變淡一點 */
-      .toggle button:not(.active) {
-        opacity: 0.55;
-      }
-
-      /* active 更清楚 */
-      .toggle button.active {
-        opacity: 1;
-      }
-
-      /* optional: active 背景也帶一點淡淡色 */
-      .toggle button.happy.active {
-        background: rgba(11, 107, 58, 0.08);
-      }
-      .toggle button.sad.active {
-        background: rgba(122, 31, 61, 0.08);
+      .total-box {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 14px;
+        background: #f7f8fc;
+        border: 1px solid #eef0f6;
+        font-weight: 800;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
       }
     </style>
   </head>
+
   <body class="theme-happy">
     <div class="wrap">
       <div class="card theme-happy" id="formCard">
         <div class="pill" id="orderPill">訂單：讀取中…</div>
         <h1>訂購資料</h1>
 
-        <!-- ===== Toggle (喜事 / 喪事) ===== -->
+        <!-- Toggle -->
         <div class="toggle" role="tablist" aria-label="用途選擇">
           <button type="button" id="btnHappy" class="happy active">
             喜事用花
@@ -222,24 +272,23 @@
           </div>
         </div>
 
-        <!-- Switchable label -->
         <label id="nameLabel">收花人 / 主角姓名</label>
         <input id="deceasedName" required />
 
-        <!-- 喪事：告別式日期/地點 -->
-        <div class="row only-sad" id="sadDateLocationRow">
+        <!-- 喪事 -->
+        <div class="row only-sad">
           <div>
-            <label id="dateLabel">告別式日期</label>
+            <label>告別式日期</label>
             <input id="funeralDate" type="date" />
           </div>
           <div>
-            <label id="locLabel">告別式地點</label>
+            <label>告別式地點</label>
             <input id="funeralLocation" />
           </div>
         </div>
 
-        <!-- 喜事：送達日期/地點（你若不需要可刪掉這整段 only-happy） -->
-        <div class="row only-happy" id="happyDateLocationRow">
+        <!-- 喜事 -->
+        <div class="row only-happy">
           <div>
             <label>送達日期</label>
             <input id="deliveryDate" type="date" />
@@ -250,19 +299,18 @@
           </div>
         </div>
 
-        <div class="row">
-          <div>
-            <label>產品</label>
-            <input value="高架花籃" disabled />
-          </div>
-          <div>
-            <label>數量（對）</label>
-            <select id="qtyPairs">
-              <option value="1">1 對（NT$2000）</option>
-              <option value="2">2 對（NT$4000）</option>
-              <option value="3">3 對（NT$6000）</option>
-            </select>
-          </div>
+        <!-- ===== Products (dynamic items) ===== -->
+        <label>訂購品項</label>
+        <div id="items"></div>
+
+        <button type="button" class="add-more" id="addItemBtn">
+          <span class="plus">+</span>
+          訂購其他品項
+        </button>
+
+        <div class="total-box">
+          <span>合計</span>
+          <span id="grandTotal">NT$0</span>
         </div>
 
         <!-- ===== 祝賀目的 / 喪事題詞 ===== -->
@@ -272,7 +320,7 @@
         <label id="purposeOtherLabel">其他（自填）</label>
         <input
           id="purposeOther"
-          placeholder="如：開幕誌慶、榮陞誌喜、追思致意…"
+          placeholder="其他祝賀目的（自填）"
           autocomplete="off"
         />
 
@@ -319,53 +367,247 @@
       const LIFF_ID = "2008383838-vLABV8zo"; // 換成你的
       const params = new URLSearchParams(location.search);
       const orderId = params.get("orderId") || "";
-
       document.getElementById("orderPill").textContent = orderId
         ? `訂單：${orderId}`
         : "訂單：未帶入";
 
+      // ===== Products config =====
+      const PRODUCTS = [
+        { name: "精選高架花籃 (1500型)", price: 1500 },
+        { name: "莊重高架花籃 (2500型)", price: 2500 },
+        { name: "典雅高架花籃 (3500型)", price: 3500 },
+        { name: "豪華高架花籃 (4500型)", price: 4500 },
+        { name: "頂級尊榮巨型花籃 (18000型)", price: 18000 },
+      ];
+
+      const itemsEl = document.getElementById("items");
+      const addItemBtn = document.getElementById("addItemBtn");
+      const grandTotalEl = document.getElementById("grandTotal");
+
+      function formatNTD(n) {
+        const x = Number(n) || 0;
+        return "NT$" + x.toLocaleString("zh-TW");
+      }
+
+      function buildProductSelect() {
+        const sel = document.createElement("select");
+        sel.className = "product-select";
+        sel.required = true;
+
+        const opt0 = document.createElement("option");
+        opt0.value = "";
+        opt0.textContent = "請選擇品項";
+        opt0.disabled = true;
+        opt0.selected = true;
+        sel.appendChild(opt0);
+
+        PRODUCTS.forEach((p, idx) => {
+          const opt = document.createElement("option");
+          opt.value = String(idx);
+          opt.textContent = `${p.name}`;
+          sel.appendChild(opt);
+        });
+
+        return sel;
+      }
+
+      function buildQtySelect() {
+        const sel = document.createElement("select");
+        sel.className = "qty-select";
+        sel.required = true;
+
+        for (let i = 1; i <= 10; i++) {
+          const opt = document.createElement("option");
+          opt.value = String(i);
+          opt.textContent = `${i}`;
+          sel.appendChild(opt);
+        }
+        return sel;
+      }
+
+      function updateLineAndTotal() {
+        let grand = 0;
+
+        document.querySelectorAll(".item-line").forEach((line) => {
+          const pSel = line.querySelector(".product-select");
+          const qSel = line.querySelector(".qty-select");
+          const unitEl = line.querySelector(".unit-price");
+          const lineEl = line.querySelector(".line-total");
+
+          const pIdx = Number(pSel.value);
+          const qty = Number(qSel.value) || 1;
+
+          if (!Number.isFinite(pIdx) || !PRODUCTS[pIdx]) {
+            unitEl.textContent = "單價：—";
+            lineEl.textContent = "小計：—";
+            return;
+          }
+
+          const unit = PRODUCTS[pIdx].price;
+          const lineTotal = unit * qty;
+
+          unitEl.textContent = `單價：${formatNTD(unit)}`;
+          lineEl.textContent = `小計：${formatNTD(lineTotal)}`;
+
+          grand += lineTotal;
+        });
+
+        grandTotalEl.textContent = formatNTD(grand);
+      }
+
+      function addItem(prefillIndex = 0) {
+        const wrap = document.createElement("div");
+        wrap.className = "item-line";
+
+        const row = document.createElement("div");
+        row.className = "row";
+
+        const col1 = document.createElement("div");
+        const col2 = document.createElement("div");
+
+        const productLabel = document.createElement("label");
+        productLabel.textContent = "品項";
+        const productSelect = buildProductSelect();
+
+        const qtyLabel = document.createElement("label");
+        qtyLabel.textContent = "數量";
+        const qtySelect = buildQtySelect();
+
+        // remove button (可刪除，不想要就把這段跟事件移除)
+        const rm = document.createElement("button");
+        rm.type = "button";
+        rm.className = "item-remove";
+        rm.textContent = "✕";
+        rm.addEventListener("click", () => {
+          wrap.remove();
+          if (document.querySelectorAll(".item-line").length === 0) {
+            addItem(0);
+          }
+          updateLineAndTotal();
+        });
+
+        col1.appendChild(productLabel);
+        col1.appendChild(productSelect);
+        col2.appendChild(qtyLabel);
+        col2.appendChild(qtySelect);
+
+        row.appendChild(col1);
+        row.appendChild(col2);
+
+        const meta = document.createElement("div");
+        meta.className = "item-meta";
+        const unit = document.createElement("span");
+        unit.className = "unit-price";
+        unit.textContent = "單價：—";
+        const lineTotal = document.createElement("span");
+        lineTotal.className = "line-total";
+        lineTotal.textContent = "小計：—";
+        meta.appendChild(unit);
+        meta.appendChild(lineTotal);
+
+        wrap.appendChild(rm);
+        wrap.appendChild(row);
+        wrap.appendChild(meta);
+
+        // events
+        productSelect.addEventListener("change", updateLineAndTotal);
+        qtySelect.addEventListener("change", updateLineAndTotal);
+
+        itemsEl.appendChild(wrap);
+
+        // prefill default first row: pick first product
+        // 你如果想預設「不要先選」，就把這段註解掉
+        productSelect.value = String(prefillIndex);
+        updateLineAndTotal();
+      }
+
+      addItemBtn.addEventListener("click", () => addItem(0));
+
+      // init with 1 line item
+      addItem(0);
+
       // ===== Toggle logic =====
       const bodyEl = document.body;
       const cardEl = document.getElementById("formCard");
-
       const btnHappy = document.getElementById("btnHappy");
       const btnSad = document.getElementById("btnSad");
       const occasionTypeEl = document.getElementById("occasionType");
-
       const nameLabel = document.getElementById("nameLabel");
       const signText = document.getElementById("signText");
-
       const funeralDate = document.getElementById("funeralDate");
       const funeralLocation = document.getElementById("funeralLocation");
-
       const deliveryDate = document.getElementById("deliveryDate");
       const deliveryLocation = document.getElementById("deliveryLocation");
+
+      // ===== Purpose / Phrase options =====
+      const purposeLabel = document.getElementById("purposeLabel");
+      const purposeSelect = document.getElementById("purposeSelect");
+      const purposeOther = document.getElementById("purposeOther");
+
+      const PURPOSE_HAPPY = ["開幕誌慶", "喬遷誌慶", "榮陞誌喜", "新婚誌喜"];
+      const PURPOSE_SAD = ["音容宛在", "駕鶴西歸", "道範長存", "淑德永昭"];
+
+      function renderPurposeOptions(type) {
+        const isHappy = type === "happy";
+        purposeLabel.textContent = isHappy ? "祝賀目的" : "喪事題詞";
+        purposeOther.placeholder = isHappy
+          ? "其他祝賀目的（自填）"
+          : "其他喪事題詞（自填）";
+
+        const list = isHappy ? PURPOSE_HAPPY : PURPOSE_SAD;
+
+        purposeSelect.innerHTML = "";
+
+        const opt0 = document.createElement("option");
+        opt0.value = "";
+        opt0.textContent = isHappy ? "請選擇祝賀目的" : "請選擇喪事題詞";
+        opt0.disabled = true;
+        opt0.selected = true;
+        purposeSelect.appendChild(opt0);
+
+        for (const text of list) {
+          const opt = document.createElement("option");
+          opt.value = text;
+          opt.textContent = text;
+          purposeSelect.appendChild(opt);
+        }
+
+        const optOther = document.createElement("option");
+        optOther.value = "__other__";
+        optOther.textContent = "其他（自填）";
+        purposeSelect.appendChild(optOther);
+
+        purposeSelect.value = "";
+        purposeOther.value = "";
+        purposeOther.disabled = true;
+        purposeOther.required = false;
+      }
+
+      purposeSelect.addEventListener("change", () => {
+        const isOther = purposeSelect.value === "__other__";
+        purposeOther.disabled = !isOther;
+        purposeOther.required = isOther;
+        if (!isOther) purposeOther.value = "";
+      });
 
       function setOccasion(type) {
         const isHappy = type === "happy";
 
-        // theme
         bodyEl.classList.toggle("theme-happy", isHappy);
         bodyEl.classList.toggle("theme-sad", !isHappy);
-        cardEl.classList.toggle("theme-happy", isHappy);
         cardEl.classList.toggle("theme-sad", !isHappy);
 
-        // buttons
         btnHappy.classList.toggle("active", isHappy);
         btnSad.classList.toggle("active", !isHappy);
 
-        // hidden value
         occasionTypeEl.value = type;
 
-        // text differences
         nameLabel.textContent = isHappy ? "收花人 / 主角姓名" : "往生大德";
 
-        // placeholder differences
         signText.placeholder = isHappy
           ? "例：OO公司 敬賀 / OO董事長 OOOO 敬賀"
           : "例：OO公司 敬輓 / OO董事長 OOOO 敬輓";
 
-        // required rules
         if (funeralDate && funeralLocation) {
           funeralDate.required = !isHappy;
           funeralLocation.required = !isHappy;
@@ -383,121 +625,99 @@
             deliveryLocation.value = "";
           }
         }
+
         renderPurposeOptions(type);
       }
 
-      // ===== Purpose / Phrase options =====
-      const purposeLabel = document.getElementById("purposeLabel");
-      const purposeSelect = document.getElementById("purposeSelect");
-      const purposeOther = document.getElementById("purposeOther");
-      const purposeOtherLabel = document.getElementById("purposeOtherLabel");
-
-      // 喜事 4 個 + 其他
-      const PURPOSE_HAPPY = ["開幕誌慶", "喬遷誌慶", "榮陞誌喜", "新婚誌喜"];
-
-      // 喪事 4 個 + 其他（你要的喪事題詞可自行換字）
-      const PURPOSE_SAD = ["音容宛在", "駕鶴西歸", "道範長存", "淑德永昭"];
-
-      function renderPurposeOptions(type) {
-        const isHappy = type === "happy";
-
-        purposeLabel.textContent = isHappy ? "祝賀目的" : "喪事題詞";
-        purposeOther.placeholder = isHappy
-          ? "其他祝賀目的（自填）"
-          : "其他喪事題詞（自填）";
-
-        const list = isHappy ? PURPOSE_HAPPY : PURPOSE_SAD;
-
-        // reset options
-        purposeSelect.innerHTML = "";
-
-        // default placeholder option
-        const opt0 = document.createElement("option");
-        opt0.value = "";
-        opt0.textContent = isHappy ? "請選擇祝賀目的" : "請選擇喪事題詞";
-        opt0.disabled = true;
-        opt0.selected = true;
-        purposeSelect.appendChild(opt0);
-
-        // 4 fixed options
-        for (const text of list) {
-          const opt = document.createElement("option");
-          opt.value = text;
-          opt.textContent = text;
-          purposeSelect.appendChild(opt);
-        }
-
-        // other option
-        const optOther = document.createElement("option");
-        optOther.value = "__other__";
-        optOther.textContent = "其他（自填）";
-        purposeSelect.appendChild(optOther);
-
-        // reset other input each switch
-        purposeOther.value = "";
-        purposeOther.disabled = true;
-        purposeSelect.value = "";
-      }
-
-      // enable/disable other input depending on selection
-      purposeSelect.addEventListener("change", () => {
-        const isOther = purposeSelect.value === "__other__";
-        purposeOther.disabled = !isOther;
-        if (!isOther) purposeOther.value = "";
-        purposeOther.required = isOther;
-      });
-
       btnHappy.addEventListener("click", () => setOccasion("happy"));
       btnSad.addEventListener("click", () => setOccasion("sad"));
-
-      // default
       setOccasion("happy");
 
+      // ===== LIFF init & submit =====
       async function init() {
         await liff.init({ liffId: LIFF_ID });
         if (!liff.isLoggedIn()) liff.login();
       }
 
+      function collectItems() {
+        const lines = Array.from(document.querySelectorAll(".item-line"));
+        const items = [];
+
+        for (const line of lines) {
+          const pSel = line.querySelector(".product-select");
+          const qSel = line.querySelector(".qty-select");
+
+          const pIdx = Number(pSel.value);
+          const qty = Number(qSel.value) || 1;
+
+          if (!Number.isFinite(pIdx) || !PRODUCTS[pIdx]) continue;
+
+          const p = PRODUCTS[pIdx];
+          const lineTotal = p.price * qty;
+
+          items.push({
+            name: p.name,
+            unitPrice: p.price,
+            qty,
+            lineTotal,
+          });
+        }
+
+        return items;
+      }
+
       async function submit() {
         const profile = await liff.getProfile();
+
+        const items = collectItems();
+        if (items.length === 0) {
+          alert("請至少選擇一個訂購品項");
+          return;
+        }
+
+        const purposeText =
+          purposeSelect.value === "__other__"
+            ? purposeOther.value.trim()
+            : purposeSelect.value;
+
+        if (!purposeText) {
+          alert("請選擇祝賀目的 / 喪事題詞（或選其他自填）");
+          return;
+        }
 
         const data = {
           orderId,
           lineUserId: profile.userId,
 
-          occasionType: document.getElementById("occasionType").value,
+          occasionType: occasionTypeEl.value,
 
           buyerName: document.getElementById("buyerName").value.trim(),
           buyerPhone: document.getElementById("buyerPhone").value.trim(),
-
-          // NOTE: keep your original field id to avoid changing backend,
-          // but content is either 收花人/主角 or 往生大德
           deceasedName: document.getElementById("deceasedName").value.trim(),
 
-          funeralDate: document.getElementById("funeralDate")?.value || "",
-          funeralLocation:
-            document.getElementById("funeralLocation")?.value.trim() || "",
+          funeralDate: funeralDate?.value || "",
+          funeralLocation: funeralLocation?.value.trim() || "",
 
-          deliveryDate: document.getElementById("deliveryDate")?.value || "",
-          deliveryLocation:
-            document.getElementById("deliveryLocation")?.value.trim() || "",
+          deliveryDate: deliveryDate?.value || "",
+          deliveryLocation: deliveryLocation?.value.trim() || "",
 
-          product: "高架花籃",
-          qtyPairs: Number(document.getElementById("qtyPairs").value),
-          signText: document.getElementById("signText").value.trim(),
+          // NEW: dynamic items
+          items,
+          grandTotal: items.reduce(
+            (sum, it) => sum + (Number(it.lineTotal) || 0),
+            0
+          ),
+
+          signText: signText.value.trim(),
 
           needReceipt: document.getElementById("needReceipt").value,
           receiptTitle: document.getElementById("receiptTitle").value.trim(),
           receiptAddr: document.getElementById("receiptAddr").value.trim(),
           payMethod: document.getElementById("payMethod").value,
 
-          purposeSelect: document.getElementById("purposeSelect").value,
-          purposeOther: document.getElementById("purposeOther").value.trim(),
-
-          purposeText:
-            document.getElementById("purposeSelect").value === "__other__"
-              ? document.getElementById("purposeOther").value.trim()
-              : document.getElementById("purposeSelect").value,
+          purposeSelect: purposeSelect.value,
+          purposeOther: purposeOther.value.trim(),
+          purposeText,
         };
 
         const resp = await fetch("/api/checkout", {
