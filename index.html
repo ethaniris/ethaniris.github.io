@@ -195,7 +195,7 @@
     <div class="wrap">
       <div class="card theme-happy" id="formCard">
         <div class="pill" id="orderPill">訂單：讀取中…</div>
-        <h1>高架花籃訂購資料</h1>
+        <h1>訂購資料</h1>
 
         <!-- ===== Toggle (喜事 / 喪事) ===== -->
         <div class="toggle" role="tablist" aria-label="用途選擇">
@@ -264,6 +264,17 @@
             </select>
           </div>
         </div>
+
+        <!-- ===== 祝賀目的 / 喪事題詞 ===== -->
+        <label id="purposeLabel">祝賀目的</label>
+        <select id="purposeSelect" required></select>
+
+        <label id="purposeOtherLabel">其他（自填）</label>
+        <input
+          id="purposeOther"
+          placeholder="如：開幕誌慶、榮陞誌喜、追思致意…"
+          autocomplete="off"
+        />
 
         <label>下款（公司行號/稱謂+職稱+姓名）</label>
         <textarea
@@ -372,7 +383,69 @@
             deliveryLocation.value = "";
           }
         }
+        renderPurposeOptions(type);
       }
+
+      // ===== Purpose / Phrase options =====
+      const purposeLabel = document.getElementById("purposeLabel");
+      const purposeSelect = document.getElementById("purposeSelect");
+      const purposeOther = document.getElementById("purposeOther");
+      const purposeOtherLabel = document.getElementById("purposeOtherLabel");
+
+      // 喜事 4 個 + 其他
+      const PURPOSE_HAPPY = ["開幕誌慶", "喬遷誌慶", "榮陞誌喜", "新婚誌喜"];
+
+      // 喪事 4 個 + 其他（你要的喪事題詞可自行換字）
+      const PURPOSE_SAD = ["音容宛在", "駕鶴西歸", "道範長存", "淑德永昭"];
+
+      function renderPurposeOptions(type) {
+        const isHappy = type === "happy";
+
+        purposeLabel.textContent = isHappy ? "祝賀目的" : "喪事題詞";
+        purposeOther.placeholder = isHappy
+          ? "其他祝賀目的（自填）"
+          : "其他喪事題詞（自填）";
+
+        const list = isHappy ? PURPOSE_HAPPY : PURPOSE_SAD;
+
+        // reset options
+        purposeSelect.innerHTML = "";
+
+        // default placeholder option
+        const opt0 = document.createElement("option");
+        opt0.value = "";
+        opt0.textContent = isHappy ? "請選擇祝賀目的" : "請選擇喪事題詞";
+        opt0.disabled = true;
+        opt0.selected = true;
+        purposeSelect.appendChild(opt0);
+
+        // 4 fixed options
+        for (const text of list) {
+          const opt = document.createElement("option");
+          opt.value = text;
+          opt.textContent = text;
+          purposeSelect.appendChild(opt);
+        }
+
+        // other option
+        const optOther = document.createElement("option");
+        optOther.value = "__other__";
+        optOther.textContent = "其他（自填）";
+        purposeSelect.appendChild(optOther);
+
+        // reset other input each switch
+        purposeOther.value = "";
+        purposeOther.disabled = true;
+        purposeSelect.value = "";
+      }
+
+      // enable/disable other input depending on selection
+      purposeSelect.addEventListener("change", () => {
+        const isOther = purposeSelect.value === "__other__";
+        purposeOther.disabled = !isOther;
+        if (!isOther) purposeOther.value = "";
+        purposeOther.required = isOther;
+      });
 
       btnHappy.addEventListener("click", () => setOccasion("happy"));
       btnSad.addEventListener("click", () => setOccasion("sad"));
@@ -417,6 +490,14 @@
           receiptTitle: document.getElementById("receiptTitle").value.trim(),
           receiptAddr: document.getElementById("receiptAddr").value.trim(),
           payMethod: document.getElementById("payMethod").value,
+
+          purposeSelect: document.getElementById("purposeSelect").value,
+          purposeOther: document.getElementById("purposeOther").value.trim(),
+
+          purposeText:
+            document.getElementById("purposeSelect").value === "__other__"
+              ? document.getElementById("purposeOther").value.trim()
+              : document.getElementById("purposeSelect").value,
         };
 
         const resp = await fetch("/api/checkout", {
