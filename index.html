@@ -660,7 +660,9 @@
         if (!orderId) return;
 
         const resp = await fetch(
-          `/api/order-context?orderId=${encodeURIComponent(orderId)}`,
+          `https://line-flower-shop-f54f9c20b157.herokuapp.com/api/order-context?orderId=${encodeURIComponent(
+            orderId
+          )}`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
