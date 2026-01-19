@@ -330,6 +330,12 @@
           placeholder="例：OO公司 敬賀 / OO董事長 OOOO 敬賀"
         ></textarea>
 
+        <label>備註</label>
+        <textarea
+          id="remark"
+          placeholder="例如：特別注意事項、代寫卡片內容…（可留空）"
+        ></textarea>
+
         <div class="row">
           <div>
             <label>是否開立收據</label>
@@ -709,6 +715,7 @@
           ),
 
           signText: signText.value.trim(),
+          remark: document.getElementById("remark").value.trim(),
 
           needReceipt: document.getElementById("needReceipt").value,
           receiptTitle: document.getElementById("receiptTitle").value.trim(),
