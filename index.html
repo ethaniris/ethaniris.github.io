@@ -238,6 +238,143 @@
         justify-content: space-between;
         gap: 10px;
       }
+
+      /* LINE-like modal */
+      .line-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        z-index: 9999;
+      }
+
+      .line-modal {
+        width: min(420px, 100%);
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+          "Noto Sans TC", Arial, sans-serif;
+      }
+
+      .line-modal__header {
+        background: #06c755; /* LINE green */
+        color: #fff;
+        padding: 18px 16px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .line-modal__badge {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.22);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 18px;
+      }
+
+      .line-modal__title {
+        font-size: 18px;
+        font-weight: 800;
+        line-height: 1.1;
+      }
+
+      .line-modal__subtitle {
+        font-size: 13px;
+        opacity: 0.95;
+        margin-top: 3px;
+      }
+
+      .line-modal__body {
+        padding: 14px 16px 4px;
+      }
+
+      .line-card {
+        border: 1px solid #e9e9ee;
+        border-radius: 12px;
+        padding: 10px 12px;
+        background: #fafafb;
+      }
+
+      .line-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 0;
+        border-bottom: 1px dashed #e3e3ea;
+      }
+      .line-row:last-child {
+        border-bottom: none;
+      }
+
+      .line-label {
+        font-size: 12px;
+        color: #6b7280;
+        white-space: nowrap;
+      }
+
+      .line-value {
+        font-size: 13px;
+        color: #111827;
+        font-weight: 600;
+        text-align: right;
+        overflow-wrap: anywhere;
+      }
+
+      .line-msg {
+        margin: 12px 2px 8px;
+        font-size: 13px;
+        color: #374151;
+        line-height: 1.5;
+      }
+
+      .line-modal__footer {
+        padding: 12px 16px 16px;
+      }
+
+      .line-btn {
+        width: 100%;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .line-btn--primary {
+        background: #06c755;
+        color: #fff;
+      }
+
+      .line-btn--primary:active {
+        transform: translateY(1px);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .line-modal {
+          animation: pop 120ms ease-out;
+        }
+        @keyframes pop {
+          from {
+            transform: scale(0.98);
+            opacity: 0.6;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+      }
     </style>
   </head>
 
@@ -365,6 +502,55 @@
 
         <div class="muted">
           提醒：請勿在表單內填寫過多敏感個資。送出後可於聊天室收到訂單確認。
+        </div>
+      </div>
+    </div>
+
+    <!-- LINE-like Success Modal -->
+    <div id="lineModalBackdrop" class="line-backdrop" hidden>
+      <div
+        class="line-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="lineModalTitle"
+      >
+        <div class="line-modal__header">
+          <div class="line-modal__badge">✓</div>
+          <div>
+            <div id="lineModalTitle" class="line-modal__title">付款成功</div>
+            <div class="line-modal__subtitle">感謝您的訂購</div>
+          </div>
+        </div>
+
+        <div class="line-modal__body">
+          <div class="line-card">
+            <div class="line-row">
+              <div class="line-label">訂單編號</div>
+              <div id="lineModalOrderId" class="line-value">—</div>
+            </div>
+            <div class="line-row">
+              <div class="line-label">總金額</div>
+              <div id="lineModalTotal" class="line-value">—</div>
+            </div>
+            <div class="line-row">
+              <div class="line-label">配送日期</div>
+              <div id="lineModalDeliveryDate" class="line-value">—</div>
+            </div>
+            <div class="line-row">
+              <div class="line-label">配送地點</div>
+              <div id="lineModalDeliveryLoc" class="line-value">—</div>
+            </div>
+          </div>
+
+          <div id="lineModalMsg" class="line-msg">
+            已成功付款，感謝您的訂購！
+          </div>
+        </div>
+
+        <div class="line-modal__footer">
+          <button id="lineModalCloseBtn" class="line-btn line-btn--primary">
+            回到 LINE
+          </button>
         </div>
       </div>
     </div>
@@ -709,80 +895,148 @@
         return items;
       }
 
-      async function submit() {
-        const profile = await liff.getProfile();
+      function formatMoney(n) {
+        const num = Number(n) || 0;
+        return `NT$ ${num.toLocaleString("zh-TW")}`;
+      }
 
-        const items = collectItems();
-        if (items.length === 0) {
-          alert("請至少選擇一個訂購品項");
-          return;
-        }
+      function showLineSuccessModal({
+        orderId,
+        grandTotal,
+        deliveryDate,
+        deliveryLocation,
+        message,
+      }) {
+        return new Promise((resolve) => {
+          const backdrop = document.getElementById("lineModalBackdrop");
+          const closeBtn = document.getElementById("lineModalCloseBtn");
 
-        const purposeText =
-          purposeSelect.value === "__other__"
-            ? purposeOther.value.trim()
-            : purposeSelect.value;
+          document.getElementById("lineModalOrderId").textContent =
+            orderId || "—";
+          document.getElementById("lineModalTotal").textContent =
+            formatMoney(grandTotal);
+          document.getElementById("lineModalDeliveryDate").textContent =
+            deliveryDate || "—";
+          document.getElementById("lineModalDeliveryLoc").textContent =
+            deliveryLocation || "—";
+          document.getElementById("lineModalMsg").textContent =
+            message || "已成功付款，感謝您的訂購！";
 
-        if (!purposeText) {
-          alert("請選擇祝賀目的 / 喪事題詞（或選其他自填）");
-          return;
-        }
+          backdrop.hidden = false;
 
-        const data = {
-          orderId,
-          lineUserId: profile.userId,
+          const cleanup = () => {
+            backdrop.hidden = true;
+            closeBtn.removeEventListener("click", onClose);
+            resolve();
+          };
 
-          occasionType: occasionTypeEl.value,
+          const onClose = () => cleanup();
 
-          buyerName: document.getElementById("buyerName").value.trim(),
-          buyerPhone: document.getElementById("buyerPhone").value.trim(),
-          deceasedName: document.getElementById("deceasedName").value.trim(),
-
-          funeralDate: funeralDate?.value || "",
-          funeralLocation: funeralLocation?.value.trim() || "",
-
-          deliveryDate: deliveryDate?.value || "",
-          deliveryLocation: deliveryLocation?.value.trim() || "",
-
-          // NEW: dynamic items
-          items,
-          grandTotal: items.reduce(
-            (sum, it) => sum + (Number(it.lineTotal) || 0),
-            0
-          ),
-
-          signText: signText.value.trim(),
-          remark: document.getElementById("remark").value.trim(),
-
-          needReceipt: document.getElementById("needReceipt").value,
-          receiptTitle: document.getElementById("receiptTitle").value.trim(),
-          receiptAddr: document.getElementById("receiptAddr").value.trim(),
-          payMethod: document.getElementById("payMethod").value,
-
-          purposeSelect: purposeSelect.value,
-          purposeOther: purposeOther.value.trim(),
-          purposeText,
-        };
-
-        const API_BASE = "https://line-flower-shop-f54f9c20b157.herokuapp.com"; // <-- change me
-
-        const resp = await fetch(`${API_BASE}/api/checkout`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+          closeBtn.addEventListener("click", onClose);
         });
+      }
 
-        if (!resp.ok) {
-          alert("送出失敗，請稍後再試");
-          return;
-        }
+      async function submit() {
+        const btn = document.getElementById("submitBtn");
+        btn && (btn.disabled = true);
 
-        const result = await resp.json();
-        if (result.nextUrl) {
-          location.href = result.nextUrl;
-        } else {
-          alert(result.message || "已送出");
-          if (liff.isInClient()) liff.closeWindow();
+        try {
+          await liff.ready;
+
+          if (!liff.isLoggedIn()) {
+            liff.login();
+            return;
+          }
+
+          const profile = await liff.getProfile();
+
+          const items = collectItems();
+          if (items.length === 0) {
+            alert("請至少選擇一個訂購品項");
+            return;
+          }
+
+          const purposeText =
+            purposeSelect.value === "__other__"
+              ? purposeOther.value.trim()
+              : purposeSelect.value;
+
+          if (!purposeText) {
+            alert("請選擇祝賀目的 / 喪事題詞（或選其他自填）");
+            return;
+          }
+
+          const data = {
+            orderId,
+            lineUserId: profile.userId,
+
+            occasionType: occasionTypeEl.value,
+
+            buyerName: document.getElementById("buyerName").value.trim(),
+            buyerPhone: document.getElementById("buyerPhone").value.trim(),
+            deceasedName: document.getElementById("deceasedName").value.trim(),
+
+            funeralDate: funeralDate?.value || "",
+            funeralLocation: funeralLocation?.value.trim() || "",
+
+            deliveryDate: deliveryDate?.value || "",
+            deliveryLocation: deliveryLocation?.value.trim() || "",
+
+            items,
+            grandTotal: items.reduce(
+              (sum, it) => sum + (Number(it.lineTotal) || 0),
+              0
+            ),
+
+            signText: signText.value.trim(),
+            remark: document.getElementById("remark").value.trim(),
+
+            needReceipt: document.getElementById("needReceipt").value,
+            receiptTitle: document.getElementById("receiptTitle").value.trim(),
+            receiptAddr: document.getElementById("receiptAddr").value.trim(),
+            payMethod: document.getElementById("payMethod").value,
+
+            purposeSelect: purposeSelect.value,
+            purposeOther: purposeOther.value.trim(),
+            purposeText,
+          };
+
+          const API_BASE =
+            "https://line-flower-shop-f54f9c20b157.herokuapp.com";
+
+          const resp = await fetch(`${API_BASE}/api/checkout`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          if (!resp.ok) {
+            // ✅ 盡量把後端回傳錯誤顯示出來，方便你 debug
+            const errText = await resp.text().catch(() => "");
+            alert(`送出失敗：${resp.status}\n${errText || "請稍後再試"}`);
+            return;
+          }
+
+          const result = await resp.json().catch(() => ({}));
+
+          await showLineSuccessModal({
+            orderId: data.orderId,
+            grandTotal: data.grandTotal,
+            deliveryDate: data.deliveryDate,
+            deliveryLocation: data.deliveryLocation,
+            message: result.message || "已成功付款，感謝您的訂購！",
+          });
+
+          if (liff.isInClient()) {
+            liff.closeWindow();
+          } else {
+            location.href = "https://YOUR_GITHUB_PAGES_OR_HOME_URL";
+          }
+        } catch (e) {
+          console.error(e);
+          alert("發生未知錯誤，請稍後再試");
+        } finally {
+          btn && (btn.disabled = false);
         }
       }
 
