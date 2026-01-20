@@ -963,6 +963,15 @@
         return items;
       }
 
+      function getQueryParam(name) {
+        return new URLSearchParams(location.search).get(name);
+      }
+
+      async function showOrderLockedAndExit() {
+        alert("訂單已成立，若需更改或有其他問題請聯繫客服。");
+        if (liff.isInClient()) liff.closeWindow();
+      }
+
       function formatMoney(n) {
         const num = Number(n) || 0;
         return `NT$ ${num.toLocaleString("zh-TW")}`;
@@ -1136,6 +1145,50 @@
       });
 
       init().catch((err) => alert("LIFF 初始化失敗：" + err));
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        await liff.ready;
+
+        // 沒登入就先登入（不然拿不到 userId）
+        if (!liff.isLoggedIn()) {
+          liff.login();
+          return;
+        }
+
+        const orderId = getQueryParam("orderId");
+        if (!orderId) return; // 沒 orderId 就照正常頁
+
+        const profile = await liff.getProfile();
+
+        const API_BASE = "https://line-flower-shop-f54f9c20b157.herokuapp.com";
+
+        try {
+          const resp = await fetch(
+            `${API_BASE}/api/order-status?orderId=${encodeURIComponent(
+              orderId
+            )}&lineUserId=${encodeURIComponent(profile.userId)}`
+          );
+
+          if (!resp.ok) return; // 查不到就讓使用者繼續（或你要顯示錯誤也行）
+
+          const result = await resp.json();
+
+          // ✅ 已提交/已鎖：阻止使用者修改
+          if (result.status === "submitted" || result.locked) {
+            // 可選：把表單 disable/隱藏（避免他還能填）
+            const form = document.getElementById("orderForm"); // 你如果有 form 容器
+            if (form) form.style.display = "none";
+
+            await showOrderLockedAndExit();
+            return;
+          }
+
+          // draft 就正常顯示表單
+        } catch (e) {
+          console.error("order-status check failed", e);
+          // 出錯也讓他繼續填（或你要阻擋都可以）
+        }
+      });
     </script>
   </body>
 </html>
