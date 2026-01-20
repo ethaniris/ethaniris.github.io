@@ -764,7 +764,9 @@
           purposeText,
         };
 
-        const resp = await fetch("/api/checkout", {
+        const API_BASE = "https://line-flower-shop-f54f9c20b157.herokuapp.com"; // <-- change me
+
+        const resp = await fetch(`${API_BASE}/api/checkout`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
