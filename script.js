@@ -51,12 +51,53 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
+            document.body.classList.remove('nav-open');
+            const header = document.querySelector('.site-header');
+            if (header) {
+                header.classList.remove('open');
+                const toggle = header.querySelector('.nav-toggle');
+                if (toggle) {
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            }
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
         }
     });
+});
+
+// ===== Mobile Navigation Toggle =====
+const navToggle = document.querySelector('.nav-toggle');
+const siteHeader = document.querySelector('.site-header');
+const navOverlay = document.querySelector('.nav-overlay');
+
+function closeNav() {
+    if (!siteHeader) return;
+    siteHeader.classList.remove('open');
+    document.body.classList.remove('nav-open');
+    if (navToggle) {
+        navToggle.setAttribute('aria-expanded', 'false');
+    }
+}
+
+if (navToggle && siteHeader) {
+    navToggle.addEventListener('click', () => {
+        const isOpen = siteHeader.classList.toggle('open');
+        document.body.classList.toggle('nav-open', isOpen);
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+}
+
+if (navOverlay) {
+    navOverlay.addEventListener('click', closeNav);
+}
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        closeNav();
+    }
 });
 
 // ===== Parallax Effect for Hero Section =====

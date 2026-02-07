@@ -42,6 +42,10 @@ body {
     overflow-x: hidden;
 }
 
+body.nav-open {
+    overflow: hidden;
+}
+
 section {
     scroll-margin-top: 100px;
 }
@@ -145,6 +149,60 @@ section {
 .nav-cta:focus {
     transform: translateY(-2px);
     box-shadow: 0 15px 35px rgba(212, 175, 55, 0.45);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.nav-toggle {
+    display: none;
+    border: none;
+    background: transparent;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-white);
+    transition: var(--transition-smooth);
+}
+
+.site-header.open .nav-toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.site-header.open .nav-toggle span:nth-child(2) {
+    opacity: 0;
+}
+
+.site-header.open .nav-toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition-smooth);
+}
+
+.site-header.open .nav-overlay {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* ===== Hero Section ===== */
@@ -1402,26 +1460,46 @@ section {
         display: none;
     }
 
-    .nav-links {
-        flex: 1;
-        overflow-x: auto;
-        white-space: nowrap;
-        gap: 0.75rem;
-        scrollbar-width: none;
+    .nav-toggle {
+        display: inline-flex;
     }
 
-    .nav-links::-webkit-scrollbar {
-        display: none;
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: min(82vw, 320px);
+        background: rgba(10, 10, 10, 0.95);
+        border-left: 1px solid rgba(212, 175, 55, 0.2);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 90px var(--spacing-md) var(--spacing-md);
+        gap: var(--spacing-md);
+        transform: translateX(100%);
+        transition: var(--transition-smooth);
+        z-index: 1001;
+    }
+
+    .site-header.open .nav-menu {
+        transform: translateX(0);
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.9rem;
+        width: 100%;
     }
 
     .nav-links a {
-        font-size: 0.82rem;
+        font-size: 1rem;
     }
 
     .nav-cta {
-        padding: 0.5rem 0.9rem;
-        font-size: 0.85rem;
-        white-space: nowrap;
+        width: 100%;
+        text-align: center;
+        padding: 0.65rem 1rem;
     }
 }
 
