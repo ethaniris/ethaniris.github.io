@@ -100,6 +100,20 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+document.addEventListener('click', (event) => {
+    if (!siteHeader || !siteHeader.classList.contains('open')) {
+        return;
+    }
+    const target = event.target;
+    if (target instanceof Element) {
+        const isToggle = target.closest('.nav-toggle');
+        const isMenu = target.closest('.nav-menu');
+        if (!isToggle && !isMenu) {
+            closeNav();
+        }
+    }
+});
+
 // ===== Parallax Effect for Hero Section =====
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;

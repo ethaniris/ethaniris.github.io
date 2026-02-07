@@ -160,35 +160,31 @@ section {
 .nav-toggle {
     display: none;
     border: none;
-    background: transparent;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
+    background: rgba(26, 26, 26, 0.9);
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 0.4rem;
     cursor: pointer;
     transition: var(--transition-smooth);
+    color: var(--color-white);
+    border: 1px solid rgba(212, 175, 55, 0.25);
 }
 
-.nav-toggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: var(--color-white);
+.nav-toggle-label {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+}
+
+.nav-toggle-icon {
+    fill: var(--color-gold);
     transition: var(--transition-smooth);
 }
 
-.site-header.open .nav-toggle span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-
-.site-header.open .nav-toggle span:nth-child(2) {
-    opacity: 0;
-}
-
-.site-header.open .nav-toggle span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
+.site-header.open .nav-toggle {
+    background: rgba(212, 175, 55, 0.2);
 }
 
 .nav-overlay {
@@ -198,6 +194,7 @@ section {
     opacity: 0;
     pointer-events: none;
     transition: var(--transition-smooth);
+    z-index: 998;
 }
 
 .site-header.open .nav-overlay {
