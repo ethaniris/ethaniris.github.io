@@ -977,6 +977,20 @@
         transition: all 0.4s;
         display: inline-block;
       }
+      .stat-val.changed {
+        color: var(--cyan);
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
+      }
+      .stat-delta {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 10px;
+        color: var(--cyan);
+        font-weight: 700;
+        display: block;
+        line-height: 1;
+        margin-bottom: 2px;
+        min-height: 14px;
+      }
 
       .stat-val.flash {
         color: var(--cyan);
@@ -1490,7 +1504,7 @@
           <div class="logo-sub">MOTORSPORT GARAGE</div>
         </div>
         <div class="hud-sep"></div>
-        <span class="hud-car-name">Subaru BRZ '22</span>
+        <span class="hud-car-name">GR YARIS</span>
         <span class="hud-badge" id="hud-meta">FR · 228 PS · 1270 kg</span>
         <div class="hud-right">
           <div class="hud-credits">
@@ -1590,7 +1604,7 @@
           </div>
           <div class="stats-model-row">
             <div>
-              <div class="stats-model-name">Subaru BRZ '22</div>
+              <div class="stats-model-name">GR YARIS</div>
               <div class="stats-model-eng">ENGINE · FA24F-S</div>
             </div>
           </div>
@@ -1619,6 +1633,7 @@
               ></div>
             </div>
             <div class="stat-val-block">
+              <span class="stat-delta" id="sv-displacement-delta"></span>
               <span class="stat-val" id="sv-displacement">2387</span>
               <span class="stat-unit">cc</span>
             </div>
@@ -1651,6 +1666,7 @@
               ></div>
             </div>
             <div class="stat-val-block">
+              <span class="stat-delta" id="sv-weight-delta"></span>
               <span class="stat-val" id="sv-weight">1270</span>
               <span class="stat-unit">kg</span>
             </div>
@@ -1666,6 +1682,7 @@
               ></div>
             </div>
             <div class="stat-val-block">
+              <span class="stat-delta" id="sv-power-delta"></span>
               <span class="stat-val" id="sv-power">228</span>
               <span class="stat-unit">PS</span>
             </div>
@@ -1681,6 +1698,7 @@
               ></div>
             </div>
             <div class="stat-val-block">
+              <span class="stat-delta" id="sv-torque-delta"></span>
               <span class="stat-val" id="sv-torque">249</span>
               <span class="stat-unit">N·m</span>
             </div>
@@ -1699,6 +1717,7 @@
               ></div>
             </div>
             <div class="stat-val-block">
+              <span class="stat-delta" id="sv-ratio-delta"></span>
               <span class="stat-val" id="sv-ratio">5.57</span>
               <span class="stat-unit">kg/PS</span>
             </div>
@@ -1877,6 +1896,15 @@
         power: 228,
         torque: 249,
         pp: 489,
+      };
+
+      const DEMO_MODE = true;
+      const DEMO_BOOST = {
+        displacement: 320,
+        weight: -18,
+        power: 42,
+        torque: 34,
+        pp: 50,
       };
 
       const CATS = {
@@ -2058,6 +2086,14 @@
           if (p.mods.displacement) s.displacement += p.mods.displacement;
           if (p.mods.pp) s.pp += p.mods.pp;
         }
+        if (DEMO_MODE) {
+          s.displacement += DEMO_BOOST.displacement;
+          s.weight += DEMO_BOOST.weight;
+          s.power += DEMO_BOOST.power;
+          s.torque += DEMO_BOOST.torque;
+          s.pp += DEMO_BOOST.pp;
+        }
+
         s.ratio = (s.weight / s.power).toFixed(2);
         return s;
       }
@@ -2065,10 +2101,29 @@
       /* ══════════════════════════════
          RENDER STATS
       ══════════════════════════════ */
-      function setStatVal(id, val, animate) {
+      function setStatVal(id, val, animate, delta = 0) {
         const el = document.getElementById("sv-" + id);
+        const deltaEl = document.getElementById("sv-" + id + "-delta");
         if (!el) return;
+
         el.textContent = val;
+
+        if (deltaEl) {
+          if (delta > 0) {
+            deltaEl.textContent = `+${delta}`;
+          } else if (delta < 0) {
+            deltaEl.textContent = `${delta}`;
+          } else {
+            deltaEl.textContent = "";
+          }
+        }
+
+        if (delta !== 0) {
+          el.classList.add("changed");
+        } else {
+          el.classList.remove("changed");
+        }
+
         if (animate) {
           el.classList.remove("flash");
           void el.offsetWidth;
@@ -2083,28 +2138,33 @@
         setStatVal(
           "displacement",
           s.displacement,
-          animate && prevStats && s.displacement !== prevStats.displacement
+          animate && prevStats && s.displacement !== prevStats.displacement,
+          s.displacement - BASE.displacement
         );
-        setStatVal("drivetrain", s.drivetrain, false);
+        setStatVal("drivetrain", s.drivetrain, false, 0);
         setStatVal(
           "weight",
           s.weight,
-          animate && prevStats && s.weight !== prevStats.weight
+          animate && prevStats && s.weight !== prevStats.weight,
+          s.weight - BASE.weight
         );
         setStatVal(
           "power",
           s.power,
-          animate && prevStats && s.power !== prevStats.power
+          animate && prevStats && s.power !== prevStats.power,
+          s.power - BASE.power
         );
         setStatVal(
           "torque",
           s.torque,
-          animate && prevStats && s.torque !== prevStats.torque
+          animate && prevStats && s.torque !== prevStats.torque,
+          s.torque - BASE.torque
         );
         setStatVal(
           "ratio",
           s.ratio,
-          animate && prevStats && s.ratio !== prevStats.ratio
+          animate && prevStats && s.ratio !== prevStats.ratio,
+          (s.ratio - BASE.ratio).toFixed(2)
         );
 
         // Bars
@@ -2338,7 +2398,7 @@
         const s = computeStats();
         document.getElementById(
           "garage-sub"
-        ).innerHTML = `您的 <strong style="color:#e8192c">Subaru BRZ '22</strong> 客製化配置已儲存至車庫。<br><br>
+        ).innerHTML = `您的 <strong style="color:#e8192c">GR YARIS</strong> 客製化配置已儲存至車庫。<br><br>
           性能評分 <strong style="color:#f5c842">PP ${s.pp}</strong> ・ 最大馬力 <strong style="color:#f5c842">${s.power} PS</strong><br>
           車身重量 <strong style="color:#f5c842">${s.weight} kg</strong> ・ 重量馬力比 <strong style="color:#f5c842">${s.ratio} kg/PS</strong>`;
         document.getElementById("garage-bg").classList.add("open");
