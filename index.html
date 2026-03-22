@@ -489,6 +489,8 @@
         color: var(--red);
         line-height: 0.9;
         text-shadow: 0 0 30px rgba(232, 25, 44, 0.5);
+        z-index: 7;
+        position: relative;
       }
 
       .hero-corner-unit {
@@ -1593,6 +1595,8 @@
         }
         .hero-stage {
           height: 300px;
+          transform: scale(0.8);
+          transform-origin: center;
         }
         .hero-model {
           font-size: 28px;
@@ -1606,6 +1610,9 @@
         .cat-btn {
           font-size: 12px;
           padding: 8px 12px;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
         }
         .parts-grid {
           grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
