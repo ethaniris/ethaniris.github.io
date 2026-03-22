@@ -51,6 +51,69 @@
       }
 
       /* ═══════════════════════════════════════
+   LOADING SCREEN
+═══════════════════════════════════════ */
+      #loading-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        transition: opacity 1s ease-out;
+      }
+
+      #loading-screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .loading-content {
+        text-align: center;
+        color: var(--white);
+      }
+
+      .loading-text {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 32px;
+        letter-spacing: 0.08em;
+        color: var(--cyan);
+        text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+        margin-bottom: 20px;
+        opacity: 0;
+        animation: text-fade-in 0.5s ease-out forwards;
+      }
+
+      .loading-progress {
+        width: 200px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1px;
+        overflow: hidden;
+        margin: 0 auto;
+      }
+
+      .loading-progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--cyan), var(--red));
+        width: 0%;
+        transition: width 2s ease-out;
+      }
+
+      @keyframes text-fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ═══════════════════════════════════════
    CANVAS BACKGROUND
 ═══════════════════════════════════════ */
       #bg-canvas {
@@ -1494,6 +1557,16 @@
     </style>
   </head>
   <body>
+    <!-- LOADING SCREEN -->
+    <div id="loading-screen">
+      <div class="loading-content">
+        <div class="loading-text" id="loading-text">動力模組同步中</div>
+        <div class="loading-progress">
+          <div class="loading-progress-bar" id="loading-progress-bar"></div>
+        </div>
+      </div>
+    </div>
+
     <canvas id="bg-canvas"></canvas>
 
     <div id="app">
@@ -2442,6 +2515,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script>
+      /* ══════════════════════════════
+   LOADING SEQUENCE
+══════════════════════════════ */
+      const loadingMessages = [
+        "動力模組同步中",
+        "性能資料載入中",
+        "底盤與動力設定初始化",
+        "GR YARIS 即將登場...",
+      ];
+
+      let currentMessageIndex = 0;
+      const loadingText = document.getElementById("loading-text");
+      const loadingProgressBar = document.getElementById(
+        "loading-progress-bar"
+      );
+      const loadingScreen = document.getElementById("loading-screen");
+
+      function updateLoadingMessage() {
+        loadingText.style.opacity = 0;
+        setTimeout(() => {
+          loadingText.textContent = loadingMessages[currentMessageIndex];
+          loadingText.style.opacity = 1;
+          loadingProgressBar.style.width = `${
+            ((currentMessageIndex + 1) / loadingMessages.length) * 100
+          }%`;
+          currentMessageIndex++;
+          if (currentMessageIndex < loadingMessages.length) {
+            setTimeout(updateLoadingMessage, 2000); // 2 seconds per message
+          } else {
+            setTimeout(() => {
+              loadingScreen.classList.add("hidden");
+              setTimeout(() => {
+                loadingScreen.style.display = "none";
+              }, 1000); // Fade out duration
+            }, 2000); // Wait 2 seconds after last message
+          }
+        }, 500); // Fade out/in transition
+      }
+
+      // Start loading sequence when DOM is loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        updateLoadingMessage();
+      });
+
       const car3D = {
         scene: null,
         camera: null,
