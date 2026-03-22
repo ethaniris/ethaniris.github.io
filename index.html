@@ -1554,6 +1554,180 @@
           border-top: 1px solid rgba(232, 25, 44, 0.2);
         }
       }
+
+      @media (max-width: 600px) {
+        html,
+        body {
+          overflow: auto;
+        }
+        #app {
+          display: flex;
+          flex-direction: column;
+          height: auto;
+          min-height: 100vh;
+        }
+        .hud-bar {
+          padding: 0 12px;
+        }
+        .logo-main {
+          font-size: 18px;
+        }
+        .logo-sub {
+          font-size: 7px;
+        }
+        .hud-car-name {
+          font-size: 16px;
+        }
+        .hud-badge {
+          font-size: 8px;
+          padding: 2px 6px;
+        }
+        .hud-credits {
+          font-size: 10px;
+        }
+        .hud-credits strong {
+          font-size: 14px;
+        }
+        .left-col {
+          order: 1;
+        }
+        .hero-stage {
+          height: 300px;
+        }
+        .hero-model {
+          font-size: 28px;
+        }
+        .hero-specs {
+          font-size: 10px;
+        }
+        .config-panel {
+          padding: 16px;
+        }
+        .cat-btn {
+          font-size: 12px;
+          padding: 8px 12px;
+        }
+        .parts-grid {
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          gap: 8px;
+        }
+        .part-card {
+          border-radius: 2px;
+        }
+        .pc-img {
+          height: 80px;
+        }
+        .pc-name {
+          font-size: 11px;
+        }
+        .pc-desc {
+          font-size: 10px;
+        }
+        .pc-price {
+          font-size: 10px;
+        }
+        .pc-mods {
+          gap: 4px;
+        }
+        .mod-chip {
+          font-size: 9px;
+          padding: 3px 6px;
+        }
+        .stats-col {
+          order: 2;
+          border-top: 1px solid rgba(232, 25, 44, 0.2);
+          padding: 16px;
+        }
+        .stats-thumb {
+          flex-direction: column;
+          gap: 12px;
+        }
+        .stats-car-visual img {
+          width: 120px;
+          height: 80px;
+        }
+        .stats-model-name {
+          font-size: 16px;
+        }
+        .stats-model-eng {
+          font-size: 10px;
+        }
+        .pp-meter {
+          text-align: center;
+        }
+        .pp-big {
+          font-size: 24px;
+        }
+        .pp-delta {
+          font-size: 10px;
+        }
+        .stats-list {
+          margin-top: 16px;
+        }
+        .stat-lbl {
+          font-size: 11px;
+          min-width: 60px;
+        }
+        .stat-val {
+          font-size: 18px;
+        }
+        .stat-unit {
+          font-size: 9px;
+        }
+        .summary-block {
+          padding: 12px 0;
+        }
+        .summary-ttl {
+          font-size: 8px;
+        }
+        .sum-cat {
+          font-size: 10px;
+        }
+        .sum-part {
+          font-size: 12px;
+        }
+        .cta-block {
+          padding: 12px 0 20px;
+        }
+        .modal-box {
+          width: 90vw;
+          max-width: 90vw;
+        }
+        .modal-visual {
+          height: 160px;
+        }
+        .modal-part-title {
+          font-size: 22px;
+        }
+        .modal-part-desc {
+          font-size: 11px;
+        }
+        .modal-chips {
+          gap: 4px;
+        }
+        .modal-chip {
+          font-size: 9px;
+          padding: 4px 8px;
+        }
+        .modal-actions {
+          flex-direction: column;
+          gap: 8px;
+        }
+        .modal-cancel,
+        .modal-confirm {
+          width: 100%;
+        }
+        .garage-box {
+          width: 90vw;
+          padding: 24px 20px;
+        }
+        .garage-title {
+          font-size: 24px;
+        }
+        .garage-sub {
+          font-size: 11px;
+        }
+      }
     </style>
   </head>
   <body>
