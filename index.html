@@ -253,6 +253,13 @@
         );
       }
 
+      .hero-text {
+        position: absolute;
+        top: 18px;
+        left: 28px;
+        z-index: 3;
+      }
+
       /* Speed lines animated */
       .speed-lines {
         position: absolute;
@@ -285,6 +292,7 @@
         right: 0;
         height: 90px;
         background: linear-gradient(transparent, rgba(0, 10, 20, 0.8));
+        z-index: 5;
       }
 
       .hero-floor::before {
@@ -303,6 +311,7 @@
           transparent
         );
         box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+        z-index: 6;
       }
 
       /* Scanlines */
@@ -322,11 +331,13 @@
       /* Car container */
       .car-stage-inner {
         position: absolute;
-        bottom: 15px;
+        top: 30%;
         left: 50%;
-        transform: translateX(-50%);
-        width: min(820px, 92%);
+        transform: translate(-50%, -50%);
+        width: min(900px, 80%);
+        height: 360px;
         animation: car-float 7s ease-in-out infinite;
+        z-index: 1;
       }
 
       @keyframes car-float {
@@ -341,17 +352,17 @@
 
       .car-glow-under {
         position: absolute;
-        bottom: -8px;
+        bottom: -20px;
         left: 50%;
         transform: translateX(-50%);
-        width: 55%;
-        height: 20px;
+        width: 65%;
+        height: 60px;
         background: radial-gradient(
           ellipse,
           rgba(0, 229, 255, 0.35) 0%,
           transparent 70%
         );
-        filter: blur(8px);
+        filter: blur(12px);
         animation: glow-pulse 7s ease-in-out infinite;
       }
 
@@ -1476,12 +1487,11 @@
 
           <div class="car-stage-inner">
             <div class="car-glow-under"></div>
-            <!-- GRYaris CAR IMAGE -->
-            <img
-              src="assets/images/GRYaris.png"
-              alt="GRYaris"
-              style="width: 100%; display: block"
-            />
+            <!-- 3D Car Viewer Canvas -->
+            <canvas
+              id="car-3d-canvas"
+              style="width: 100%; height: 100%; display: block"
+            ></canvas>
           </div>
           <!-- car-stage-inner -->
         </div>
@@ -2285,4 +2295,205 @@
       renderParts();
       renderStats(false);
     </script>
+
+    <!-- 3D Model Viewer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+      const car3D = {
+        scene: null,
+        camera: null,
+        renderer: null,
+        model: null,
+        rotationX: 0,
+        rotationY: 0,
+        targetRotationX: 0,
+        targetRotationY: 0,
+        isDragging: false,
+        animateLogged: false,
+
+        init() {
+          const canvas = document.getElementById("car-3d-canvas");
+          if (!canvas) {
+            return;
+          }
+
+          const width = canvas.parentElement.clientWidth;
+          const height = canvas.parentElement.clientHeight;
+
+          this.scene = new THREE.Scene();
+          this.scene.background = new THREE.Color(0x04060a);
+          // this.scene.fog = new THREE.Fog(0x04060a, 500, 3000);
+
+          this.camera = new THREE.PerspectiveCamera(
+            55,
+            width / height,
+            0.1,
+            10000
+          );
+          this.camera.position.set(0, 10, 25);
+          this.camera.lookAt(0, 0, 0);
+
+          this.renderer = new THREE.WebGLRenderer({
+            canvas,
+            antialias: true,
+            alpha: true,
+          });
+          this.renderer.setSize(width, height);
+          this.renderer.setPixelRatio(window.devicePixelRatio);
+          this.renderer.shadowMap.enabled = true;
+
+          const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
+          this.scene.add(ambientLight);
+
+          const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
+          keyLight.position.set(120, 100, 100);
+          keyLight.castShadow = true;
+          keyLight.shadow.mapSize.width = 2048;
+          keyLight.shadow.mapSize.height = 2048;
+          this.scene.add(keyLight);
+
+          const rimLight = new THREE.DirectionalLight(0x88ccff, 0.4);
+          rimLight.position.set(-100, 50, -150);
+          this.scene.add(rimLight);
+
+          const fillLight = new THREE.DirectionalLight(0xffffcc, 0.35);
+          fillLight.position.set(-80, 60, 80);
+          this.scene.add(fillLight);
+
+          this.loadModel();
+          this.animate();
+          this.setupControls(canvas);
+          window.addEventListener("resize", () => this.onWindowResize());
+        },
+
+        setupControls(canvas) {
+          let clientX = 0,
+            clientY = 0;
+
+          canvas.addEventListener("mousedown", (e) => {
+            this.isDragging = true;
+            clientX = e.clientX;
+            clientY = e.clientY;
+          });
+
+          canvas.addEventListener("mousemove", (e) => {
+            if (this.isDragging) {
+              this.targetRotationY += (e.clientX - clientX) * 0.006;
+              this.targetRotationX += (e.clientY - clientY) * 0.006;
+              clientX = e.clientX;
+              clientY = e.clientY;
+            }
+          });
+
+          canvas.addEventListener("mouseup", () => {
+            this.isDragging = false;
+          });
+
+          canvas.addEventListener("mouseleave", () => {
+            this.isDragging = false;
+          });
+
+          canvas.addEventListener("touchstart", (e) => {
+            this.isDragging = true;
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+          });
+
+          canvas.addEventListener("touchmove", (e) => {
+            if (this.isDragging && e.touches.length > 0) {
+              this.targetRotationY += (e.touches[0].clientX - clientX) * 0.006;
+              this.targetRotationX += (e.touches[0].clientY - clientY) * 0.006;
+              clientX = e.touches[0].clientX;
+              clientY = e.touches[0].clientY;
+              e.preventDefault();
+            }
+          });
+
+          canvas.addEventListener("touchend", () => {
+            this.isDragging = false;
+          });
+        },
+
+        loadModel() {
+          if (!THREE.GLTFLoader) {
+            setTimeout(() => this.loadModel(), 100);
+            return;
+          }
+
+          const loader = new THREE.GLTFLoader();
+          loader.load(
+            "assets/images/2021_toyota_gr_yaris.glb",
+            (gltf) => {
+              this.model = gltf.scene;
+              this.model.scale.set(600, 600, 600);
+              this.model.position.set(0, 0, 0);
+              this.model.rotation.x = -Math.PI / 2; // Rotate to stand upright
+
+              this.model.traverse((child) => {
+                if (child.isMesh) {
+                  child.castShadow = true;
+                  child.receiveShadow = true;
+                }
+              });
+
+              this.scene.add(this.model);
+              console.log("✓ 3D Yaris Model loaded successfully");
+
+              // Debug bounding box
+              const box = new THREE.Box3().setFromObject(this.model);
+              console.log("Model bounding box min:", box.min, "max:", box.max);
+            },
+            (progress) => {},
+            (error) => {
+              console.error("Error loading GLB model:", error);
+            }
+          );
+        },
+
+        animate() {
+          requestAnimationFrame(() => this.animate());
+
+          if (this.model) {
+            this.rotationX += (this.targetRotationX - this.rotationX) * 0.1;
+            this.rotationY += (this.targetRotationY - this.rotationY) * 0.1;
+
+            this.model.rotation.x = this.rotationX;
+            this.model.rotation.y = this.rotationY;
+
+            if (!this.isDragging) {
+              this.targetRotationY += 0.0015;
+            }
+          }
+
+          this.renderer.render(this.scene, this.camera);
+        },
+
+        onWindowResize() {
+          const canvas = document.getElementById("car-3d-canvas");
+          if (canvas && this.camera && this.renderer) {
+            const width = canvas.parentElement.clientWidth;
+            const height = canvas.parentElement.clientHeight;
+            this.camera.aspect = width / height;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(width, height);
+          }
+        },
+      };
+
+      function initWhenReady() {
+        if (typeof THREE !== "undefined" && THREE.GLTFLoader) {
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", () => car3D.init());
+          } else {
+            car3D.init();
+          }
+        } else {
+          setTimeout(initWhenReady, 50);
+        }
+      }
+
+      initWhenReady();
+    </script>
+  </body>
 </html>
