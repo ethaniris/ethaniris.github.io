@@ -2723,14 +2723,14 @@
           }%`;
           currentMessageIndex++;
           if (currentMessageIndex < loadingMessages.length) {
-            setTimeout(updateLoadingMessage, 2000); // 2 seconds per message
+            setTimeout(updateLoadingMessage, 1000); // 1 second per message
           } else {
             setTimeout(() => {
               loadingScreen.classList.add("hidden");
               setTimeout(() => {
                 loadingScreen.style.display = "none";
               }, 1000); // Fade out duration
-            }, 2000); // Wait 2 seconds after last message
+            }, 1000); // Wait 1 second after last message
           }
         }, 500); // Fade out/in transition
       }
