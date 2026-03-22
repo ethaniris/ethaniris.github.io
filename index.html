@@ -942,9 +942,9 @@
 
       .stat-lbl {
         font-family: "Noto Sans TC", sans-serif;
-        font-size: 11px;
+        font-size: 13px;
         color: var(--grey);
-        min-width: 64px;
+        min-width: 72px;
         flex-shrink: 0;
       }
 
@@ -971,7 +971,7 @@
 
       .stat-val {
         font-family: "Bebas Neue", sans-serif;
-        font-size: 17px;
+        font-size: 22px;
         letter-spacing: 0.04em;
         color: var(--white);
         transition: all 0.4s;
@@ -995,11 +995,11 @@
 
       .stat-unit {
         font-family: "Barlow Condensed", sans-serif;
-        font-size: 9px;
+        font-size: 11px;
         font-weight: 600;
         letter-spacing: 0.1em;
         color: var(--grey2);
-        margin-left: 1px;
+        margin-left: 2px;
       }
 
       .stat-prev {
@@ -1035,12 +1035,12 @@
       }
 
       .sum-cat {
-        font-size: 10px;
+        font-size: 12px;
         color: var(--grey);
         letter-spacing: 0.06em;
       }
       .sum-part {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 700;
         letter-spacing: 0.05em;
         color: var(--white);
@@ -1140,8 +1140,8 @@
         position: fixed;
         inset: 0;
         z-index: 500;
-        background: rgba(0, 0, 0, 0.85);
-        backdrop-filter: blur(8px);
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(2px);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1163,13 +1163,50 @@
         border-radius: 4px;
         overflow: hidden;
         transform: scale(0.92) translateY(24px);
-        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8),
-          0 0 0 1px rgba(255, 255, 255, 0.04), 0 0 60px rgba(232, 25, 44, 0.08);
+        opacity: 0;
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.25s;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.45),
+          0 0 0 1px rgba(255, 255, 255, 0.04), 0 0 40px rgba(0, 229, 255, 0.12);
       }
 
       .modal-bg.open .modal-box {
         transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+
+      @keyframes modal-img-pop {
+        0% {
+          opacity: 0;
+          transform: scale(0.75) rotate(-5deg);
+        }
+        70% {
+          opacity: 1;
+          transform: scale(1.05) rotate(2deg);
+        }
+        100% {
+          transform: scale(1) rotate(0);
+        }
+      }
+
+      .modal-visual.wheel-mode #modal-img {
+        animation: modal-img-pop 0.45s ease-out;
+        box-shadow: 0 12px 28px rgba(0, 255, 255, 0.2),
+          0 0 38px rgba(0, 0, 0, 0.4), inset 0 0 32px rgba(0, 229, 255, 0.2);
+        border-radius: 50%;
+      }
+
+      .modal-visual.wheel-mode {
+        background: #04060a;
+      }
+
+      .modal-visual.wheel-mode::before,
+      .modal-visual.wheel-mode::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: transparent;
+        pointer-events: none;
       }
 
       .modal-visual {
@@ -1689,6 +1726,19 @@
     <div class="modal-bg" id="modal-bg" onclick="bgClose(event,'modal-bg')">
       <div class="modal-box">
         <div class="modal-visual" id="modal-vis">
+          <img
+            id="modal-img"
+            src=""
+            alt=""
+            style="
+              max-width: 70%;
+              max-height: 70%;
+              object-fit: contain;
+              position: relative;
+              z-index: 1;
+              display: none;
+            "
+          />
           <span id="modal-emoji" style="position: relative; z-index: 1"
             >⚙️</span
           >
@@ -1726,8 +1776,8 @@
 
     <script>
       /* ══════════════════════════════
-   CANVAS BACKGROUND — speed particles
-══════════════════════════════ */
+         CANVAS BACKGROUND — speed particles
+      ══════════════════════════════ */
       const canvas = document.getElementById("bg-canvas");
       const ctx = canvas.getContext("2d");
       let W,
@@ -1785,8 +1835,8 @@
       });
 
       /* ══════════════════════════════
-   PP SEGS
-══════════════════════════════ */
+         PP SEGS
+      ══════════════════════════════ */
       function buildPPSegs() {
         const c = document.getElementById("pp-segs");
         c.innerHTML = "";
@@ -1818,8 +1868,8 @@
       updatePPBar(489);
 
       /* ══════════════════════════════
-   DATA
-══════════════════════════════ */
+         DATA
+      ══════════════════════════════ */
       const BASE = {
         displacement: 2387,
         drivetrain: "FR",
@@ -1985,8 +2035,8 @@
       };
 
       /* ══════════════════════════════
-   STATE
-══════════════════════════════ */
+         STATE
+      ══════════════════════════════ */
       let sel = {
         wheels: "w0",
         suspension: "s0",
@@ -2013,8 +2063,8 @@
       }
 
       /* ══════════════════════════════
-   RENDER STATS
-══════════════════════════════ */
+         RENDER STATS
+      ══════════════════════════════ */
       function setStatVal(id, val, animate) {
         const el = document.getElementById("sv-" + id);
         if (!el) return;
@@ -2097,8 +2147,8 @@
       }
 
       /* ══════════════════════════════
-   SUMMARY
-══════════════════════════════ */
+         SUMMARY
+      ══════════════════════════════ */
       function renderSummary() {
         const el = document.getElementById("sum-list");
         el.innerHTML = Object.entries(sel)
@@ -2106,16 +2156,18 @@
             const p = CATS[cat].parts.find((x) => x.id === id);
             const def = p?.isDefault;
             return `<div class="sum-row">
-      <span class="sum-cat">${CATS[cat].label}</span>
-      <span class="sum-part ${def ? "default" : ""}">${p?.name || "—"}</span>
-    </div>`;
+            <span class="sum-cat">${CATS[cat].label}</span>
+            <span class="sum-part ${def ? "default" : ""}">${
+              p?.name || "—"
+            }</span>
+          </div>`;
           })
           .join("");
       }
 
       /* ══════════════════════════════
-   PARTS GRID
-══════════════════════════════ */
+         PARTS GRID
+      ══════════════════════════════ */
       function renderParts() {
         const grid = document.getElementById("parts-grid");
         const parts = CATS[curCat].parts;
@@ -2149,31 +2201,40 @@
               })
               .join("");
 
+            const imgContent =
+              curCat === "wheels"
+                ? `<img src="assets/images/wheel${
+                    parseInt(p.id.slice(1)) + 1
+                  }.jpeg" alt="${
+                    p.name
+                  }" style="width:85%; height:85%; object-fit:contain;">`
+                : `<span class="pc-emoji" style="font-size:50px">${p.emoji}</span>`;
+
             return `<div class="part-card ${
               isSelected ? "selected" : ""
             }" onclick="openModal('${curCat}','${p.id}')">
-      <div class="pc-img">
-        <span class="pc-emoji" style="font-size:50px">${p.emoji}</span>
-        <div class="pc-check">✓</div>
-      </div>
-      <div class="pc-body">
-        <div class="pc-name">${p.name}</div>
-        <div class="pc-desc">${p.desc}</div>
-        <div class="pc-footer">
-          <span class="pc-price">${
-            p.price === 0 ? "— 預設 —" : "Cr. " + p.price.toLocaleString()
-          }</span>
-          <div class="pc-mods">${modChips}</div>
-        </div>
-      </div>
-    </div>`;
+            <div class="pc-img">
+              ${imgContent}
+              <div class="pc-check">✓</div>
+            </div>
+            <div class="pc-body">
+              <div class="pc-name">${p.name}</div>
+              <div class="pc-desc">${p.desc}</div>
+              <div class="pc-footer">
+                <span class="pc-price">${
+                  p.price === 0 ? "— 預設 —" : "Cr. " + p.price.toLocaleString()
+                }</span>
+                <div class="pc-mods">${modChips}</div>
+              </div>
+            </div>
+          </div>`;
           })
           .join("");
       }
 
       /* ══════════════════════════════
-   CATEGORY SWITCH
-══════════════════════════════ */
+         CATEGORY SWITCH
+      ══════════════════════════════ */
       function switchCat(cat) {
         curCat = cat;
         document
@@ -2183,13 +2244,33 @@
       }
 
       /* ══════════════════════════════
-   MODAL
-══════════════════════════════ */
+         MODAL
+      ══════════════════════════════ */
       function openModal(cat, id) {
         const p = CATS[cat].parts.find((x) => x.id === id);
         pending = { cat, id };
 
-        document.getElementById("modal-emoji").textContent = p.emoji;
+        const modalEmoji = document.getElementById("modal-emoji");
+        const modalImg = document.getElementById("modal-img");
+        const modalVis = document.getElementById("modal-vis");
+
+        if (cat === "wheels") {
+          modalVis.classList.add("wheel-mode");
+          modalImg.src = `assets/images/wheel${
+            parseInt(p.id.slice(1)) + 1
+          }.jpeg`;
+          modalImg.alt = p.name;
+          modalImg.style.display = "block";
+          modalEmoji.style.display = "none";
+        } else {
+          modalVis.classList.remove("wheel-mode");
+          modalImg.src = "";
+          modalImg.alt = "";
+          modalImg.style.display = "none";
+          modalEmoji.style.display = "inline";
+          modalEmoji.textContent = p.emoji;
+        }
+
         document.getElementById("modal-price").textContent =
           p.price === 0 ? "— 原廠配置 —" : "Cr. " + p.price.toLocaleString();
         document.getElementById("modal-title").textContent = p.name;
@@ -2251,15 +2332,15 @@
       }
 
       /* ══════════════════════════════
-   GARAGE
-══════════════════════════════ */
+         GARAGE
+      ══════════════════════════════ */
       function showGarage() {
         const s = computeStats();
         document.getElementById(
           "garage-sub"
         ).innerHTML = `您的 <strong style="color:#e8192c">Subaru BRZ '22</strong> 客製化配置已儲存至車庫。<br><br>
-    性能評分 <strong style="color:#f5c842">PP ${s.pp}</strong> ・ 最大馬力 <strong style="color:#f5c842">${s.power} PS</strong><br>
-    車身重量 <strong style="color:#f5c842">${s.weight} kg</strong> ・ 重量馬力比 <strong style="color:#f5c842">${s.ratio} kg/PS</strong>`;
+          性能評分 <strong style="color:#f5c842">PP ${s.pp}</strong> ・ 最大馬力 <strong style="color:#f5c842">${s.power} PS</strong><br>
+          車身重量 <strong style="color:#f5c842">${s.weight} kg</strong> ・ 重量馬力比 <strong style="color:#f5c842">${s.ratio} kg/PS</strong>`;
         document.getElementById("garage-bg").classList.add("open");
       }
       function closeGarage() {
@@ -2267,8 +2348,8 @@
       }
 
       /* ══════════════════════════════
-   RESET
-══════════════════════════════ */
+         RESET
+      ══════════════════════════════ */
       function doReset() {
         sel = { wheels: "w0", suspension: "s0", engine: "e0", interior: "i0" };
         prevStats = computeStats();
@@ -2278,8 +2359,8 @@
       }
 
       /* ══════════════════════════════
-   TOAST
-══════════════════════════════ */
+         TOAST
+      ══════════════════════════════ */
       let toastTimer;
       function showToast(msg) {
         const t = document.getElementById("toast");
@@ -2290,8 +2371,8 @@
       }
 
       /* ══════════════════════════════
-   INIT
-══════════════════════════════ */
+         INIT
+      ══════════════════════════════ */
       prevStats = computeStats();
       renderParts();
       renderStats(false);
