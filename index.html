@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APEX MOTORSPORT — GARAGE CONFIGURATOR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Barlow:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --ink: #04060a;
+        --deep: #070d14;
+        --panel: #0a1220;
+        --card: #0d1828;
+        --card2: #111f30;
+        --red: #e8192c;
+        --red-dim: #7a0f17;
+        --orange: #ff6b1a;
+        --gold: #f5c842;
+        --gold-dim: #7a6210;
+        --cyan: #00e5ff;
+        --cyan-dim: #005f6a;
+        --white: #f0f4f8;
+        --grey: #6a7a8a;
+        --grey2: #3a4a5a;
+        --border: rgba(255, 255, 255, 0.05);
+        --border2: rgba(255, 255, 255, 0.09);
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        background: var(--ink);
+        color: var(--white);
+        font-family: "Barlow", sans-serif;
+        cursor: crosshair;
+        position: relative;
+      }
+
+      /* ═══════════════════════════════════════
+   CANVAS BACKGROUND
+═══════════════════════════════════════ */
+      #bg-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* ═══════════════════════════════════════
+   MASTER LAYOUT
+═══════════════════════════════════════ */
+      #app {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        grid-template-rows: 56px 1fr;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      /* ═══════════════════════════════════════
+   TOPBAR — RACE HUD
+═══════════════════════════════════════ */
+      .hud-bar {
+        grid-column: 1/-1;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        gap: 0;
+        background: rgba(4, 6, 10, 0.96);
+        border-bottom: 1px solid rgba(232, 25, 44, 0.4);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hud-bar::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--red),
+          var(--orange),
+          var(--red),
+          transparent
+        );
+        animation: hud-scan 4s linear infinite;
+      }
+
+      @keyframes hud-scan {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .logo-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-right: 20px;
+        border-right: 1px solid var(--border2);
+      }
+
+      .logo-main {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        letter-spacing: 0.12em;
+        color: var(--white);
+        line-height: 1;
+      }
+
+      .logo-sub {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.4em;
+        color: var(--red);
+        margin-top: 1px;
+      }
+
+      .hud-sep {
+        width: 1px;
+        height: 32px;
+        background: var(--border2);
+        margin: 0 16px;
+      }
+
+      .hud-car-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 20px;
+        letter-spacing: 0.08em;
+        color: var(--white);
+        margin-right: 10px;
+      }
+
+      .hud-badge {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border2);
+        padding: 3px 9px;
+        border-radius: 2px;
+        margin-right: 6px;
+      }
+
+      .hud-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-left: auto;
+      }
+
+      .pp-chip {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(232, 25, 44, 0.1);
+        border: 1px solid rgba(232, 25, 44, 0.35);
+        padding: 4px 14px;
+        border-radius: 2px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .pp-chip::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(232, 25, 44, 0.1),
+          transparent
+        );
+      }
+
+      .pp-label-top {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        color: var(--red);
+        line-height: 1;
+      }
+      .pp-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 20px;
+        letter-spacing: 0.05em;
+        color: var(--white);
+        line-height: 1;
+      }
+
+      .hud-credits {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: var(--grey);
+      }
+      .hud-credits strong {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.05em;
+        color: var(--gold);
+      }
+
+      /* ═══════════════════════════════════════
+   LEFT — HERO + CONFIG
+═══════════════════════════════════════ */
+      .left-col {
+        grid-column: 1;
+        grid-row: 2;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* HERO STAGE */
+      .hero-stage {
+        flex: 0 0 auto;
+        height: 52%;
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(
+          ellipse 80% 70% at 50% 90%,
+          #0d1e35 0%,
+          var(--ink) 65%
+        );
+      }
+
+      /* Speed lines animated */
+      .speed-lines {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          175deg,
+          transparent 0px,
+          transparent 60px,
+          rgba(0, 229, 255, 0.012) 60px,
+          rgba(0, 229, 255, 0.012) 61px
+        );
+        animation: speed-drift 3s linear infinite;
+      }
+
+      @keyframes speed-drift {
+        0% {
+          transform: translateX(-30px);
+        }
+        100% {
+          transform: translateX(30px);
+        }
+      }
+
+      /* Dramatic floor */
+      .hero-floor {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 90px;
+        background: linear-gradient(transparent, rgba(0, 10, 20, 0.8));
+      }
+
+      .hero-floor::before {
+        content: "";
+        position: absolute;
+        bottom: 20px;
+        left: 5%;
+        right: 5%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 229, 255, 0.5),
+          rgba(232, 25, 44, 0.4),
+          rgba(0, 229, 255, 0.5),
+          transparent
+        );
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+      }
+
+      /* Scanlines */
+      .scanlines {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, 0.06) 2px,
+          rgba(0, 0, 0, 0.06) 4px
+        );
+      }
+
+      /* Car container */
+      .car-stage-inner {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(820px, 92%);
+        animation: car-float 7s ease-in-out infinite;
+      }
+
+      @keyframes car-float {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-10px);
+        }
+      }
+
+      .car-glow-under {
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 55%;
+        height: 20px;
+        background: radial-gradient(
+          ellipse,
+          rgba(0, 229, 255, 0.35) 0%,
+          transparent 70%
+        );
+        filter: blur(8px);
+        animation: glow-pulse 7s ease-in-out infinite;
+      }
+
+      @keyframes glow-pulse {
+        0%,
+        100% {
+          opacity: 0.8;
+          transform: translateX(-50%) scaleX(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: translateX(-50%) scaleX(0.8);
+        }
+      }
+
+      /* Hero text */
+      .hero-text {
+        position: absolute;
+        top: 18px;
+        left: 28px;
+      }
+
+      .hero-brand {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.5em;
+        color: var(--red);
+        text-transform: uppercase;
+      }
+
+      .hero-model {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 64px;
+        letter-spacing: 0.04em;
+        color: var(--white);
+        line-height: 0.88;
+        text-shadow: 0 0 60px rgba(0, 229, 255, 0.15);
+      }
+
+      .hero-trim {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        color: rgba(245, 200, 66, 0.8);
+        margin-top: 4px;
+      }
+
+      .hero-corner-stat {
+        position: absolute;
+        top: 18px;
+        right: 28px;
+        text-align: right;
+      }
+
+      .hero-corner-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 52px;
+        letter-spacing: 0.04em;
+        color: var(--red);
+        line-height: 0.9;
+        text-shadow: 0 0 30px rgba(232, 25, 44, 0.5);
+      }
+
+      .hero-corner-unit {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        color: var(--grey);
+      }
+
+      /* Red diagonal accent bar */
+      .hero-accent-bar {
+        position: absolute;
+        bottom: 60px;
+        left: -20px;
+        width: 260px;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--red),
+          var(--orange),
+          transparent
+        );
+        transform: skewX(-15deg);
+        box-shadow: 0 0 12px rgba(232, 25, 44, 0.5);
+      }
+
+      /* ── CONFIG AREA ── */
+      .config-area {
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(
+          180deg,
+          var(--deep) 0%,
+          rgba(7, 13, 20, 0.97) 100%
+        );
+        border-top: 1px solid rgba(0, 229, 255, 0.12);
+      }
+
+      /* Category Nav */
+      .cat-nav {
+        display: flex;
+        align-items: stretch;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+        background: rgba(4, 6, 10, 0.7);
+      }
+
+      .cat-btn {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 8px;
+        cursor: pointer;
+        border: none;
+        background: none;
+        outline: none;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: var(--grey);
+        border-right: 1px solid var(--border);
+        transition: all 0.25s;
+        position: relative;
+        overflow: hidden;
+        gap: 6px;
+      }
+
+      .cat-btn:last-child {
+        border-right: none;
+      }
+
+      .cat-btn::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--red);
+        transform: scaleX(0);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .cat-btn:hover {
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .cat-btn.active {
+        color: var(--white);
+        background: rgba(232, 25, 44, 0.06);
+      }
+      .cat-btn.active::after {
+        transform: scaleX(1);
+      }
+
+      .cat-btn-icon {
+        font-size: 16px;
+        line-height: 1;
+        display: none;
+      }
+      .cat-btn-text {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        line-height: 1.2;
+      }
+      .cat-btn-cn {
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      /* Parts scroll */
+      .parts-scroll {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 14px 16px 16px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--red-dim) transparent;
+      }
+      .parts-scroll::-webkit-scrollbar {
+        width: 3px;
+      }
+      .parts-scroll::-webkit-scrollbar-thumb {
+        background: var(--red-dim);
+        border-radius: 2px;
+      }
+
+      .parts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+        gap: 10px;
+      }
+
+      /* PART CARD */
+      .part-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .part-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.08),
+          transparent
+        );
+      }
+
+      .part-card:hover {
+        background: var(--card2);
+        border-color: rgba(0, 229, 255, 0.25);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(0, 229, 255, 0.1);
+      }
+
+      .part-card.selected {
+        border-color: var(--red);
+        background: rgba(232, 25, 44, 0.07);
+        box-shadow: 0 0 0 1px rgba(232, 25, 44, 0.2),
+          0 8px 24px rgba(232, 25, 44, 0.15);
+      }
+
+      .part-card.selected::before {
+        background: linear-gradient(
+          90deg,
+          var(--red),
+          var(--orange),
+          transparent
+        );
+        height: 2px;
+      }
+
+      /* Card image zone */
+      .pc-img {
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(
+          ellipse at 50% 80%,
+          rgba(20, 40, 70, 0.6) 0%,
+          transparent 70%
+        );
+        position: relative;
+        overflow: hidden;
+        font-size: 52px;
+      }
+
+      .pc-img::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 30px;
+        background: linear-gradient(transparent, var(--card));
+        transition: background 0.2s;
+      }
+
+      .part-card:hover .pc-img::after {
+        background: linear-gradient(transparent, var(--card2));
+      }
+      .part-card.selected .pc-img::after {
+        background: linear-gradient(transparent, rgba(232, 25, 44, 0.07));
+      }
+
+      .pc-emoji {
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        z-index: 1;
+        filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+      }
+      .part-card:hover .pc-emoji {
+        transform: scale(1.12) translateY(-4px);
+      }
+
+      /* Selected checkmark */
+      .pc-check {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 20px;
+        height: 20px;
+        background: var(--red);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        z-index: 2;
+      }
+      .part-card.selected .pc-check {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .pc-body {
+        padding: 10px 12px 12px;
+      }
+
+      .pc-name {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: var(--white);
+        margin-bottom: 3px;
+        line-height: 1.2;
+      }
+
+      .pc-desc {
+        font-size: 10px;
+        color: var(--grey);
+        line-height: 1.45;
+        margin-bottom: 8px;
+      }
+
+      .pc-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid var(--border);
+        padding-top: 8px;
+      }
+
+      .pc-price {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        color: var(--gold);
+      }
+
+      .pc-mods {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+      }
+
+      .mod-chip {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        padding: 2px 5px;
+        border-radius: 1px;
+      }
+
+      .mod-good {
+        color: #2ecc8a;
+        background: rgba(46, 204, 138, 0.1);
+        border: 1px solid rgba(46, 204, 138, 0.2);
+      }
+      .mod-bad {
+        color: #e84040;
+        background: rgba(232, 64, 64, 0.1);
+        border: 1px solid rgba(232, 64, 64, 0.2);
+      }
+
+      /* ═══════════════════════════════════════
+   RIGHT STATS PANEL
+═══════════════════════════════════════ */
+      .stats-col {
+        grid-column: 2;
+        grid-row: 2;
+        background: rgba(7, 13, 20, 0.97);
+        border-left: 1px solid rgba(232, 25, 44, 0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Top accent */
+      .stats-col::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--red),
+          transparent
+        );
+      }
+
+      /* Car thumb */
+      .stats-thumb {
+        padding: 16px 18px 0;
+        flex-shrink: 0;
+        position: relative;
+      }
+
+      .stats-car-visual {
+        width: 100%;
+        height: 110px;
+        background: radial-gradient(
+          ellipse at 50% 80%,
+          #0d1e35 0%,
+          rgba(4, 6, 10, 0) 70%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 72px;
+        position: relative;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7));
+      }
+
+      .stats-car-visual::after {
+        content: "";
+        position: absolute;
+        bottom: 5px;
+        left: 20%;
+        right: 20%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(232, 25, 44, 0.4),
+          transparent
+        );
+      }
+
+      .stats-model-row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 8px 0 12px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .stats-model-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 18px;
+        letter-spacing: 0.08em;
+        color: var(--white);
+        line-height: 1;
+      }
+
+      .stats-model-eng {
+        font-size: 9px;
+        color: var(--grey);
+        letter-spacing: 0.1em;
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 600;
+        margin-top: 2px;
+      }
+
+      /* PP METER */
+      .pp-meter {
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+
+      .pp-meter-top {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+
+      .pp-big {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 40px;
+        letter-spacing: 0.05em;
+        color: var(--white);
+        line-height: 1;
+        transition: all 0.4s ease;
+      }
+
+      .pp-big span {
+        color: var(--red);
+        font-size: 22px;
+        margin-right: 2px;
+      }
+
+      .pp-delta {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--grey);
+      }
+
+      /* Segmented PP bar */
+      .pp-segs {
+        display: flex;
+        gap: 2px;
+        height: 5px;
+      }
+
+      .pp-seg {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 1px;
+        transition: background 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .pp-seg.lit {
+        background: var(--red);
+        box-shadow: 0 0 6px rgba(232, 25, 44, 0.5);
+      }
+
+      .pp-seg.lit-mid {
+        background: var(--orange);
+        box-shadow: 0 0 6px rgba(255, 107, 26, 0.5);
+      }
+      .pp-seg.lit-hi {
+        background: var(--gold);
+        box-shadow: 0 0 6px rgba(245, 200, 66, 0.5);
+      }
+
+      /* STATS LIST */
+      .stats-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0 18px;
+        scrollbar-width: none;
+      }
+      .stats-list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .stats-section-header {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.35em;
+        color: rgba(232, 25, 44, 0.6);
+        padding: 10px 0 4px;
+        text-transform: uppercase;
+      }
+
+      .stat-row {
+        display: flex;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        gap: 6px;
+      }
+
+      .stat-row:last-child {
+        border-bottom: none;
+      }
+
+      .stat-lbl {
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 11px;
+        color: var(--grey);
+        min-width: 64px;
+        flex-shrink: 0;
+      }
+
+      .stat-bar-track {
+        flex: 1;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 1px;
+        overflow: hidden;
+      }
+
+      .stat-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--red), var(--orange));
+        border-radius: 1px;
+        transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .stat-val-block {
+        text-align: right;
+        min-width: 80px;
+        flex-shrink: 0;
+      }
+
+      .stat-val {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 17px;
+        letter-spacing: 0.04em;
+        color: var(--white);
+        transition: all 0.4s;
+        display: inline-block;
+      }
+
+      .stat-val.flash {
+        color: var(--cyan);
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+        animation: val-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      }
+
+      @keyframes val-pop {
+        0% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .stat-unit {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        color: var(--grey2);
+        margin-left: 1px;
+      }
+
+      .stat-prev {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 10px;
+        color: var(--grey2);
+        text-decoration: line-through;
+        margin-right: 4px;
+      }
+
+      /* SUMMARY */
+      .summary-block {
+        padding: 12px 18px;
+        border-top: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+
+      .summary-ttl {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.35em;
+        color: rgba(232, 25, 44, 0.6);
+        margin-bottom: 8px;
+      }
+
+      .sum-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4px 0;
+        font-family: "Barlow Condensed", sans-serif;
+      }
+
+      .sum-cat {
+        font-size: 10px;
+        color: var(--grey);
+        letter-spacing: 0.06em;
+      }
+      .sum-part {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: var(--white);
+        text-align: right;
+        max-width: 170px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .sum-part.default {
+        color: var(--grey2);
+      }
+
+      /* CTA */
+      .cta-block {
+        padding: 12px 18px 16px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 13px 16px;
+        background: linear-gradient(
+          135deg,
+          var(--red) 0%,
+          #c01020 50%,
+          #a00c18 100%
+        );
+        border: none;
+        border-radius: 2px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.2em;
+        color: var(--white);
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.15),
+          transparent
+        );
+        transition: left 0.4s;
+      }
+
+      .btn-primary:hover::before {
+        left: 100%;
+      }
+      .btn-primary:hover {
+        box-shadow: 0 0 30px rgba(232, 25, 44, 0.5);
+        transform: translateY(-1px);
+      }
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        width: 100%;
+        padding: 9px;
+        background: transparent;
+        border: 1px solid var(--border2);
+        border-radius: 2px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        color: var(--grey);
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: uppercase;
+      }
+
+      .btn-secondary:hover {
+        border-color: rgba(255, 255, 255, 0.18);
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      /* ═══════════════════════════════════════
+   MODAL
+═══════════════════════════════════════ */
+      .modal-bg {
+        position: fixed;
+        inset: 0;
+        z-index: 500;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s;
+      }
+
+      .modal-bg.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .modal-box {
+        width: 480px;
+        max-width: 92vw;
+        background: linear-gradient(165deg, #0d1828 0%, #070d14 100%);
+        border: 1px solid rgba(232, 25, 44, 0.25);
+        border-radius: 4px;
+        overflow: hidden;
+        transform: scale(0.92) translateY(24px);
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8),
+          0 0 0 1px rgba(255, 255, 255, 0.04), 0 0 60px rgba(232, 25, 44, 0.08);
+      }
+
+      .modal-bg.open .modal-box {
+        transform: scale(1) translateY(0);
+      }
+
+      .modal-visual {
+        height: 210px;
+        background: radial-gradient(
+          ellipse at 50% 80%,
+          #0d1e35 0%,
+          #04060a 70%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 100px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .modal-visual::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          175deg,
+          transparent 0,
+          transparent 28px,
+          rgba(0, 229, 255, 0.02) 28px,
+          rgba(0, 229, 255, 0.02) 29px
+        );
+      }
+
+      .modal-visual::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: linear-gradient(transparent, #0d1828);
+      }
+
+      .modal-price-badge {
+        position: absolute;
+        bottom: 14px;
+        right: 18px;
+        z-index: 2;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 20px;
+        letter-spacing: 0.08em;
+        color: var(--gold);
+        text-shadow: 0 0 20px rgba(245, 200, 66, 0.4);
+      }
+
+      .modal-body {
+        padding: 22px 24px 24px;
+      }
+
+      .modal-part-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 26px;
+        letter-spacing: 0.08em;
+        color: var(--white);
+        margin-bottom: 5px;
+      }
+
+      .modal-part-desc {
+        font-size: 12px;
+        color: var(--grey);
+        line-height: 1.6;
+        font-family: "Barlow", sans-serif;
+        font-weight: 300;
+        margin-bottom: 18px;
+      }
+
+      .modal-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 20px;
+      }
+
+      .modal-chip {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        padding: 5px 10px;
+        border-radius: 2px;
+      }
+
+      .mchip-good {
+        color: #2ecc8a;
+        background: rgba(46, 204, 138, 0.08);
+        border: 1px solid rgba(46, 204, 138, 0.25);
+      }
+      .mchip-bad {
+        color: #e84040;
+        background: rgba(232, 64, 64, 0.08);
+        border: 1px solid rgba(232, 64, 64, 0.25);
+      }
+      .mchip-neutral {
+        color: var(--grey);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border2);
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .modal-cancel {
+        flex: 1;
+        padding: 12px;
+        background: transparent;
+        border: 1px solid var(--border2);
+        border-radius: 2px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        color: var(--grey);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .modal-cancel:hover {
+        border-color: rgba(255, 255, 255, 0.18);
+        color: var(--white);
+      }
+
+      .modal-confirm {
+        flex: 2;
+        padding: 12px;
+        background: linear-gradient(135deg, var(--red), #a00c18);
+        border: none;
+        border-radius: 2px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.2em;
+        color: var(--white);
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .modal-confirm::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.18),
+          transparent
+        );
+        transition: left 0.4s;
+      }
+      .modal-confirm:hover::before {
+        left: 100%;
+      }
+      .modal-confirm:hover {
+        box-shadow: 0 0 24px rgba(232, 25, 44, 0.5);
+      }
+      .modal-confirm:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .modal-confirm:disabled::before {
+        display: none;
+      }
+
+      /* ═══════════════════════════════════════
+   TOAST
+═══════════════════════════════════════ */
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(70px);
+        background: rgba(232, 25, 44, 0.95);
+        padding: 10px 22px;
+        border-radius: 2px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 15px;
+        letter-spacing: 0.2em;
+        color: var(--white);
+        z-index: 999;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: 0 8px 32px rgba(232, 25, 44, 0.4);
+        white-space: nowrap;
+      }
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* ═══════════════════════════════════════
+   GARAGE SUCCESS MODAL
+═══════════════════════════════════════ */
+      .garage-box {
+        width: 380px;
+        max-width: 90vw;
+        background: linear-gradient(165deg, #0d1828, #070d14);
+        border: 1px solid rgba(232, 25, 44, 0.3);
+        border-radius: 4px;
+        padding: 40px 32px;
+        text-align: center;
+        transform: scale(0.92) translateY(24px);
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+      }
+      .modal-bg.open .garage-box {
+        transform: scale(1) translateY(0);
+      }
+
+      .garage-icon {
+        font-size: 48px;
+        margin-bottom: 12px;
+      }
+      .garage-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 28px;
+        letter-spacing: 0.15em;
+        color: var(--red);
+        margin-bottom: 8px;
+      }
+      .garage-sub {
+        font-family: "Barlow", sans-serif;
+        font-size: 12px;
+        font-weight: 300;
+        color: var(--grey);
+        line-height: 1.7;
+        margin-bottom: 24px;
+      }
+      .garage-close {
+        padding: 12px 36px;
+        background: linear-gradient(135deg, var(--red), #a00c18);
+        border: none;
+        border-radius: 2px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 15px;
+        letter-spacing: 0.2em;
+        color: var(--white);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .garage-close:hover {
+        box-shadow: 0 0 24px rgba(232, 25, 44, 0.5);
+      }
+
+      /* Responsive */
+      @media (max-width: 860px) {
+        #app {
+          grid-template-columns: 1fr;
+          grid-template-rows: 56px 1fr 400px;
+        }
+        .hero-stage {
+          height: 42%;
+        }
+        .hero-model {
+          font-size: 40px;
+        }
+        .stats-col {
+          grid-column: 1;
+          grid-row: 3;
+          border-left: none;
+          border-top: 1px solid rgba(232, 25, 44, 0.2);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div id="app">
+      <!-- ── HUD BAR ── -->
+      <header class="hud-bar">
+        <div class="logo-block">
+          <div class="logo-main">APEX</div>
+          <div class="logo-sub">MOTORSPORT GARAGE</div>
+        </div>
+        <div class="hud-sep"></div>
+        <span class="hud-car-name">Subaru BRZ '22</span>
+        <span class="hud-badge" id="hud-meta">FR · 228 PS · 1270 kg</span>
+        <div class="hud-right">
+          <div class="hud-credits">
+            CREDITS <strong id="hud-credits">2,450,000</strong>
+          </div>
+          <div class="pp-chip">
+            <div class="pp-label-top">PP</div>
+            <div class="pp-num" id="hud-pp">489</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ── LEFT COLUMN ── -->
+      <div class="left-col">
+        <!-- HERO STAGE -->
+        <div class="hero-stage">
+          <div class="speed-lines"></div>
+          <div class="scanlines"></div>
+          <div class="hero-floor"></div>
+          <div class="hero-accent-bar"></div>
+
+          <div class="hero-text">
+            <div class="hero-brand">SUBARU MOTORSPORT</div>
+            <div class="hero-model">BRZ<br />GR4</div>
+            <div class="hero-trim">APEX EDITION · 2022</div>
+          </div>
+
+          <div class="hero-corner-stat">
+            <div class="hero-corner-num" id="hero-hp">228</div>
+            <div class="hero-corner-unit">HORSEPOWER</div>
+          </div>
+
+          <div class="car-stage-inner">
+            <div class="car-glow-under"></div>
+            <!-- GRYaris CAR IMAGE -->
+            <img
+              src="assets/images/GRYaris.png"
+              alt="GRYaris"
+              style="width: 100%; display: block"
+            />
+          </div>
+          <!-- car-stage-inner -->
+        </div>
+        <!-- hero-stage -->
+
+        <!-- CONFIG AREA -->
+        <div class="config-area">
+          <nav class="cat-nav" id="cat-nav">
+            <button
+              class="cat-btn active"
+              data-cat="wheels"
+              onclick="switchCat('wheels')"
+            >
+              <span class="cat-btn-text">WHEELS</span>
+              <span class="cat-btn-cn">輪框</span>
+            </button>
+            <button
+              class="cat-btn"
+              data-cat="suspension"
+              onclick="switchCat('suspension')"
+            >
+              <span class="cat-btn-text">SUSPENSION</span>
+              <span class="cat-btn-cn">底盤懸吊</span>
+            </button>
+            <button
+              class="cat-btn"
+              data-cat="engine"
+              onclick="switchCat('engine')"
+            >
+              <span class="cat-btn-text">ENGINE</span>
+              <span class="cat-btn-cn">引擎動力</span>
+            </button>
+            <button
+              class="cat-btn"
+              data-cat="interior"
+              onclick="switchCat('interior')"
+            >
+              <span class="cat-btn-text">INTERIOR</span>
+              <span class="cat-btn-cn">內裝套件</span>
+            </button>
+          </nav>
+          <div class="parts-scroll">
+            <div class="parts-grid" id="parts-grid"></div>
+          </div>
+        </div>
+      </div>
+      <!-- left-col -->
+
+      <!-- ── STATS COLUMN ── -->
+      <aside class="stats-col">
+        <div class="stats-thumb">
+          <div class="stats-car-visual">
+            <img
+              src="assets/images/yaris_small.png"
+              alt="Yaris"
+              style="width: 100%; height: 100%; object-fit: contain"
+            />
+          </div>
+          <div class="stats-model-row">
+            <div>
+              <div class="stats-model-name">Subaru BRZ '22</div>
+              <div class="stats-model-eng">ENGINE · FA24F-S</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pp-meter">
+          <div class="pp-meter-top">
+            <div class="pp-big">
+              <span>PP</span><span id="pp-val">489</span>
+            </div>
+            <div class="pp-delta" id="pp-delta-txt">基礎配置</div>
+          </div>
+          <div class="pp-segs" id="pp-segs"></div>
+        </div>
+
+        <div class="stats-list">
+          <div class="stats-section-header">PERFORMANCE SPECS</div>
+
+          <div class="stat-row">
+            <span class="stat-lbl">排氣量</span>
+            <div class="stat-bar-track">
+              <div
+                class="stat-bar-fill"
+                id="bar-displacement"
+                style="width: 45%"
+              ></div>
+            </div>
+            <div class="stat-val-block">
+              <span class="stat-val" id="sv-displacement">2387</span>
+              <span class="stat-unit">cc</span>
+            </div>
+          </div>
+
+          <div class="stat-row">
+            <span class="stat-lbl">傳動方式</span>
+            <div class="stat-bar-track">
+              <div
+                class="stat-bar-fill"
+                id="bar-drivetrain"
+                style="width: 60%"
+              ></div>
+            </div>
+            <div class="stat-val-block">
+              <span class="stat-val" id="sv-drivetrain">FR</span>
+            </div>
+          </div>
+
+          <div class="stat-row">
+            <span class="stat-lbl">車身重量</span>
+            <div class="stat-bar-track">
+              <div
+                class="stat-bar-fill"
+                id="bar-weight"
+                style="
+                  width: 55%;
+                  background: linear-gradient(90deg, #4080e0, #60a0ff);
+                "
+              ></div>
+            </div>
+            <div class="stat-val-block">
+              <span class="stat-val" id="sv-weight">1270</span>
+              <span class="stat-unit">kg</span>
+            </div>
+          </div>
+
+          <div class="stat-row">
+            <span class="stat-lbl">最大馬力</span>
+            <div class="stat-bar-track">
+              <div
+                class="stat-bar-fill"
+                id="bar-power"
+                style="width: 34%"
+              ></div>
+            </div>
+            <div class="stat-val-block">
+              <span class="stat-val" id="sv-power">228</span>
+              <span class="stat-unit">PS</span>
+            </div>
+          </div>
+
+          <div class="stat-row">
+            <span class="stat-lbl">最大扭力</span>
+            <div class="stat-bar-track">
+              <div
+                class="stat-bar-fill"
+                id="bar-torque"
+                style="width: 38%"
+              ></div>
+            </div>
+            <div class="stat-val-block">
+              <span class="stat-val" id="sv-torque">249</span>
+              <span class="stat-unit">N·m</span>
+            </div>
+          </div>
+
+          <div class="stat-row">
+            <span class="stat-lbl">重量馬力比</span>
+            <div class="stat-bar-track">
+              <div
+                class="stat-bar-fill"
+                id="bar-ratio"
+                style="
+                  width: 48%;
+                  background: linear-gradient(90deg, var(--gold), #ffa020);
+                "
+              ></div>
+            </div>
+            <div class="stat-val-block">
+              <span class="stat-val" id="sv-ratio">5.57</span>
+              <span class="stat-unit">kg/PS</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-block">
+          <div class="summary-ttl">SELECTED PARTS</div>
+          <div id="sum-list"></div>
+        </div>
+
+        <div class="cta-block">
+          <button class="btn-primary" onclick="showGarage()">
+            🏁 &nbsp;加入我的車庫
+          </button>
+          <button class="btn-secondary" onclick="doReset()">
+            ↺ &nbsp;重置為原廠配置
+          </button>
+        </div>
+      </aside>
+    </div>
+    <!-- #app -->
+
+    <!-- PART DETAIL MODAL -->
+    <div class="modal-bg" id="modal-bg" onclick="bgClose(event,'modal-bg')">
+      <div class="modal-box">
+        <div class="modal-visual" id="modal-vis">
+          <span id="modal-emoji" style="position: relative; z-index: 1"
+            >⚙️</span
+          >
+          <div class="modal-price-badge" id="modal-price">Cr. 0</div>
+        </div>
+        <div class="modal-body">
+          <div class="modal-part-title" id="modal-title">PART NAME</div>
+          <div class="modal-part-desc" id="modal-desc">Description</div>
+          <div class="modal-chips" id="modal-chips"></div>
+          <div class="modal-actions">
+            <button class="modal-cancel" onclick="closeMod()">取消</button>
+            <button
+              class="modal-confirm"
+              id="mod-confirm"
+              onclick="confirmPart()"
+            >
+              裝備零件
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GARAGE MODAL -->
+    <div class="modal-bg" id="garage-bg" onclick="bgClose(event,'garage-bg')">
+      <div class="garage-box">
+        <div class="garage-icon">🏁</div>
+        <div class="garage-title">已加入車庫</div>
+        <div class="garage-sub" id="garage-sub">配置已成功儲存。</div>
+        <button class="garage-close" onclick="closeGarage()">確認</button>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">零件已裝備</div>
+
+    <script>
+      /* ══════════════════════════════
+   CANVAS BACKGROUND — speed particles
+══════════════════════════════ */
+      const canvas = document.getElementById("bg-canvas");
+      const ctx = canvas.getContext("2d");
+      let W,
+        H,
+        particles = [],
+        animFrame;
+
+      function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+
+      function Particle() {
+        this.reset = function () {
+          this.x = Math.random() * W;
+          this.y = Math.random() * H;
+          this.len = 40 + Math.random() * 180;
+          this.speed = 1.5 + Math.random() * 4;
+          this.alpha = 0.02 + Math.random() * 0.06;
+          this.w = 0.3 + Math.random() * 0.8;
+          this.color =
+            Math.random() > 0.7
+              ? `rgba(0,229,255,${this.alpha})`
+              : `rgba(232,25,44,${this.alpha})`;
+        };
+        this.reset();
+      }
+
+      function initParticles() {
+        particles = [];
+        for (let i = 0; i < 55; i++) particles.push(new Particle());
+      }
+
+      function drawBg() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach((p) => {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.x - p.len, p.y);
+          ctx.strokeStyle = p.color;
+          ctx.lineWidth = p.w;
+          ctx.stroke();
+          p.x += p.speed;
+          if (p.x - p.len > W) p.reset(), (p.x = -p.len);
+        });
+        animFrame = requestAnimationFrame(drawBg);
+      }
+
+      resize();
+      initParticles();
+      drawBg();
+      window.addEventListener("resize", () => {
+        resize();
+        initParticles();
+      });
+
+      /* ══════════════════════════════
+   PP SEGS
+══════════════════════════════ */
+      function buildPPSegs() {
+        const c = document.getElementById("pp-segs");
+        c.innerHTML = "";
+        for (let i = 0; i < 24; i++) {
+          const d = document.createElement("div");
+          d.className = "pp-seg";
+          d.id = "ppseg-" + i;
+          c.appendChild(d);
+        }
+      }
+
+      buildPPSegs();
+
+      function updatePPBar(pp) {
+        const max = 800,
+          segs = 24;
+        const lit = Math.round((pp / max) * segs);
+        for (let i = 0; i < segs; i++) {
+          const el = document.getElementById("ppseg-" + i);
+          el.classList.remove("lit", "lit-mid", "lit-hi");
+          if (i < lit) {
+            if (i < 10) el.classList.add("lit");
+            else if (i < 18) el.classList.add("lit-mid");
+            else el.classList.add("lit-hi");
+          }
+        }
+      }
+
+      updatePPBar(489);
+
+      /* ══════════════════════════════
+   DATA
+══════════════════════════════ */
+      const BASE = {
+        displacement: 2387,
+        drivetrain: "FR",
+        weight: 1270,
+        power: 228,
+        torque: 249,
+        pp: 489,
+      };
+
+      const CATS = {
+        wheels: {
+          label: "輪框",
+          parts: [
+            {
+              id: "w0",
+              name: '原廠 17" 鋁合金輪框',
+              desc: "原廠 FA24 搭配 17 吋鑄造鋁合金輪框，適合日常通勤與輕度操駕。",
+              emoji: "⚙️",
+              price: 0,
+              isDefault: true,
+              mods: {},
+            },
+            {
+              id: "w1",
+              name: 'BBS CH-R 鍛造 18"',
+              desc: "BBS 輕量鍛造單片式輪框，德國工藝，強化剛性同時大幅減重。",
+              emoji: "🔩",
+              price: 88000,
+              mods: { weight: -20, pp: 9 },
+            },
+            {
+              id: "w2",
+              name: 'Rays Volk TE37 競技 18"',
+              desc: "傳奇競技輪框，Rays 六輻鍛造結構，GT 賽場認證規格。",
+              emoji: "💿",
+              price: 152000,
+              mods: { weight: -32, pp: 17 },
+            },
+            {
+              id: "w3",
+              name: '碳纖維 CFRP 輪框 19"',
+              desc: "全碳纖維輕量化輪框，FIA 認可材質，賽道極致輕量化解決方案。",
+              emoji: "🌀",
+              price: 338000,
+              mods: { weight: -48, power: 3, torque: 2, pp: 26 },
+            },
+          ],
+        },
+        suspension: {
+          label: "底盤懸吊",
+          parts: [
+            {
+              id: "s0",
+              name: "原廠懸吊系統",
+              desc: "原廠麥弗遜 / 雙A臂懸吊配置，均衡舒適性與運動性能。",
+              emoji: "🔧",
+              price: 0,
+              isDefault: true,
+              mods: {},
+            },
+            {
+              id: "s1",
+              name: "Bilstein B8 運動避震",
+              desc: "Bilstein 德國製造 B8 競技避震，車高降低 20mm，剛性全面升級。",
+              emoji: "⛏️",
+              price: 64000,
+              mods: { weight: -6, pp: 14 },
+            },
+            {
+              id: "s2",
+              name: "KW V3 可調式總成",
+              desc: "KW Variant 3 全段可調，高低壓阻獨立調整，完美適配賽道與街道。",
+              emoji: "🛠️",
+              price: 128000,
+              mods: { weight: -10, pp: 22 },
+            },
+            {
+              id: "s3",
+              name: "Öhlins TTX 賽車懸吊",
+              desc: "Öhlins 頂規賽車用 TTX 懸吊，F1 / WRC 供應商同款技術規格。",
+              emoji: "⚒️",
+              price: 258000,
+              mods: { weight: -15, power: 2, pp: 35 },
+            },
+          ],
+        },
+        engine: {
+          label: "引擎動力",
+          parts: [
+            {
+              id: "e0",
+              name: "原廠 FA24F 引擎",
+              desc: "水平對臥四缸自然進氣，頂置雙凸輪軸，原廠 228 PS 輸出。",
+              emoji: "🔋",
+              price: 0,
+              isDefault: true,
+              mods: {},
+            },
+            {
+              id: "e1",
+              name: "HKS 冷空氣進氣套件",
+              desc: "高流量冷空氣進氣 + 強化節氣門，低轉域扭力與高轉域馬力同步提升。",
+              emoji: "💨",
+              price: 38000,
+              mods: { power: 16, torque: 13, pp: 20 },
+            },
+            {
+              id: "e2",
+              name: "Ti 鈦合金排氣系統",
+              desc: "輕量鈦合金全段排氣，增益排氣效率，特徵性中高頻排氣音浪。",
+              emoji: "🔥",
+              price: 98000,
+              mods: { power: 24, torque: 19, weight: -8, pp: 30 },
+            },
+            {
+              id: "e3",
+              name: "HKS GT 機械增壓套件",
+              desc: "HKS GT8270 Roots 增壓系統，全域大幅增強動力輸出，質感澎湃。",
+              emoji: "⚡",
+              price: 398000,
+              mods: { power: 88, torque: 102, pp: 94 },
+            },
+          ],
+        },
+        interior: {
+          label: "內裝精品套件",
+          parts: [
+            {
+              id: "i0",
+              name: "原廠標準內裝",
+              desc: "原廠皮質包覆座椅、儀表板與門板，舒適耐用。",
+              emoji: "🪑",
+              price: 0,
+              isDefault: true,
+              mods: {},
+            },
+            {
+              id: "i1",
+              name: "Recaro RS-G 桶型座椅",
+              desc: "頂級 Recaro 全桶型賽車座椅，高側向支撐，FIA 認可安全規格。",
+              emoji: "💺",
+              price: 82000,
+              mods: { weight: -16, pp: 7 },
+            },
+            {
+              id: "i2",
+              name: "碳纖維輕量化套件",
+              desc: "儀表板、門板、中控全碳纖維替換，大幅削減車艙重量。",
+              emoji: "🏎️",
+              price: 162000,
+              mods: { weight: -38, pp: 14 },
+            },
+            {
+              id: "i3",
+              name: "GT 全賽車化改裝套件",
+              desc: "ST-45 滾籠 + Sabelt 五點安全帶 + 全碳纖維車艙，戰鬥機規格。",
+              emoji: "🏁",
+              price: 295000,
+              mods: { weight: -60, power: 5, pp: 25 },
+            },
+          ],
+        },
+      };
+
+      /* ══════════════════════════════
+   STATE
+══════════════════════════════ */
+      let sel = {
+        wheels: "w0",
+        suspension: "s0",
+        engine: "e0",
+        interior: "i0",
+      };
+      let curCat = "wheels";
+      let pending = null;
+      let prevStats = null;
+
+      function computeStats() {
+        const s = { ...BASE };
+        for (const [cat, id] of Object.entries(sel)) {
+          const p = CATS[cat].parts.find((x) => x.id === id);
+          if (!p?.mods) continue;
+          if (p.mods.weight) s.weight += p.mods.weight;
+          if (p.mods.power) s.power += p.mods.power;
+          if (p.mods.torque) s.torque += p.mods.torque;
+          if (p.mods.displacement) s.displacement += p.mods.displacement;
+          if (p.mods.pp) s.pp += p.mods.pp;
+        }
+        s.ratio = (s.weight / s.power).toFixed(2);
+        return s;
+      }
+
+      /* ══════════════════════════════
+   RENDER STATS
+══════════════════════════════ */
+      function setStatVal(id, val, animate) {
+        const el = document.getElementById("sv-" + id);
+        if (!el) return;
+        el.textContent = val;
+        if (animate) {
+          el.classList.remove("flash");
+          void el.offsetWidth;
+          el.classList.add("flash");
+          setTimeout(() => el.classList.remove("flash"), 600);
+        }
+      }
+
+      function renderStats(animate) {
+        const s = computeStats();
+
+        setStatVal(
+          "displacement",
+          s.displacement,
+          animate && prevStats && s.displacement !== prevStats.displacement
+        );
+        setStatVal("drivetrain", s.drivetrain, false);
+        setStatVal(
+          "weight",
+          s.weight,
+          animate && prevStats && s.weight !== prevStats.weight
+        );
+        setStatVal(
+          "power",
+          s.power,
+          animate && prevStats && s.power !== prevStats.power
+        );
+        setStatVal(
+          "torque",
+          s.torque,
+          animate && prevStats && s.torque !== prevStats.torque
+        );
+        setStatVal(
+          "ratio",
+          s.ratio,
+          animate && prevStats && s.ratio !== prevStats.ratio
+        );
+
+        // Bars
+        document.getElementById("bar-displacement").style.width =
+          Math.min((s.displacement / 5000) * 100, 100) + "%";
+        document.getElementById("bar-weight").style.width =
+          Math.min((s.weight / 1800) * 100, 100) + "%";
+        document.getElementById("bar-power").style.width =
+          Math.min((s.power / 700) * 100, 100) + "%";
+        document.getElementById("bar-torque").style.width =
+          Math.min((s.torque / 700) * 100, 100) + "%";
+        document.getElementById("bar-ratio").style.width =
+          Math.min(((10 - s.ratio + 1) / 9) * 100, 100) + "%";
+
+        // PP
+        const ppEl = document.getElementById("pp-val");
+        ppEl.textContent = s.pp;
+        if (animate && prevStats && s.pp !== prevStats.pp) {
+          ppEl.classList.remove("flash");
+          void ppEl.offsetWidth;
+          ppEl.classList.add("flash");
+          setTimeout(() => ppEl.classList.remove("flash"), 600);
+        }
+        updatePPBar(s.pp);
+
+        // Delta text
+        const delta = prevStats ? s.pp - prevStats.pp : 0;
+        document.getElementById("pp-delta-txt").textContent =
+          delta > 0 ? `+${delta} 進化` : delta < 0 ? `${delta} PP` : "基礎配置";
+
+        // HUD
+        document.getElementById(
+          "hud-meta"
+        ).textContent = `${s.drivetrain} · ${s.power} PS · ${s.weight} kg`;
+        document.getElementById("hud-pp").textContent = s.pp;
+        document.getElementById("hero-hp").textContent = s.power;
+
+        renderSummary();
+        prevStats = { ...s };
+      }
+
+      /* ══════════════════════════════
+   SUMMARY
+══════════════════════════════ */
+      function renderSummary() {
+        const el = document.getElementById("sum-list");
+        el.innerHTML = Object.entries(sel)
+          .map(([cat, id]) => {
+            const p = CATS[cat].parts.find((x) => x.id === id);
+            const def = p?.isDefault;
+            return `<div class="sum-row">
+      <span class="sum-cat">${CATS[cat].label}</span>
+      <span class="sum-part ${def ? "default" : ""}">${p?.name || "—"}</span>
+    </div>`;
+          })
+          .join("");
+      }
+
+      /* ══════════════════════════════
+   PARTS GRID
+══════════════════════════════ */
+      function renderParts() {
+        const grid = document.getElementById("parts-grid");
+        const parts = CATS[curCat].parts;
+        const labels = {
+          weight: "車重",
+          power: "馬力",
+          torque: "扭力",
+          displacement: "排氣量",
+          pp: "PP",
+        };
+        const units = {
+          weight: "kg",
+          power: "PS",
+          torque: "N·m",
+          displacement: "cc",
+          pp: "",
+        };
+
+        grid.innerHTML = parts
+          .map((p) => {
+            const isSelected = sel[curCat] === p.id;
+            const modChips = Object.entries(p.mods)
+              .filter(([k, v]) => k !== "pp" && v !== 0)
+              .slice(0, 3)
+              .map(([k, v]) => {
+                const good = k === "weight" ? v < 0 : v > 0;
+                const sign = v > 0 ? "+" : "";
+                return `<span class="mod-chip ${
+                  good ? "mod-good" : "mod-bad"
+                }">${sign}${v}${units[k]}</span>`;
+              })
+              .join("");
+
+            return `<div class="part-card ${
+              isSelected ? "selected" : ""
+            }" onclick="openModal('${curCat}','${p.id}')">
+      <div class="pc-img">
+        <span class="pc-emoji" style="font-size:50px">${p.emoji}</span>
+        <div class="pc-check">✓</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-desc">${p.desc}</div>
+        <div class="pc-footer">
+          <span class="pc-price">${
+            p.price === 0 ? "— 預設 —" : "Cr. " + p.price.toLocaleString()
+          }</span>
+          <div class="pc-mods">${modChips}</div>
+        </div>
+      </div>
+    </div>`;
+          })
+          .join("");
+      }
+
+      /* ══════════════════════════════
+   CATEGORY SWITCH
+══════════════════════════════ */
+      function switchCat(cat) {
+        curCat = cat;
+        document
+          .querySelectorAll(".cat-btn")
+          .forEach((b) => b.classList.toggle("active", b.dataset.cat === cat));
+        renderParts();
+      }
+
+      /* ══════════════════════════════
+   MODAL
+══════════════════════════════ */
+      function openModal(cat, id) {
+        const p = CATS[cat].parts.find((x) => x.id === id);
+        pending = { cat, id };
+
+        document.getElementById("modal-emoji").textContent = p.emoji;
+        document.getElementById("modal-price").textContent =
+          p.price === 0 ? "— 原廠配置 —" : "Cr. " + p.price.toLocaleString();
+        document.getElementById("modal-title").textContent = p.name;
+        document.getElementById("modal-desc").textContent = p.desc;
+
+        const labels = {
+          weight: "車身重量",
+          power: "最大馬力",
+          torque: "最大扭力",
+          displacement: "排氣量",
+          pp: "性能提升",
+        };
+        const units = {
+          weight: "kg",
+          power: "PS",
+          torque: "N·m",
+          displacement: "cc",
+          pp: "",
+        };
+
+        const chips = Object.entries(p.mods).map(([k, v]) => {
+          const good = k === "weight" ? v < 0 : v > 0;
+          const sign = v > 0 ? "+" : "";
+          const cls = good ? "mchip-good" : "mchip-bad";
+          return `<div class="modal-chip ${cls}">${
+            labels[k] || k
+          }：${sign}${v}${units[k]}</div>`;
+        });
+
+        if (!chips.length)
+          chips.push(
+            '<div class="modal-chip mchip-neutral">無性能數值變更</div>'
+          );
+        document.getElementById("modal-chips").innerHTML = chips.join("");
+
+        const already = sel[cat] === id;
+        const btn = document.getElementById("mod-confirm");
+        btn.textContent = already ? "✓ 已裝備中" : "裝備零件";
+        btn.disabled = already;
+
+        document.getElementById("modal-bg").classList.add("open");
+      }
+
+      function closeMod() {
+        document.getElementById("modal-bg").classList.remove("open");
+      }
+      function bgClose(e, id) {
+        if (e.target.id === id)
+          document.getElementById(id).classList.remove("open");
+      }
+
+      function confirmPart() {
+        if (!pending) return;
+        sel[pending.cat] = pending.id;
+        closeMod();
+        renderParts();
+        renderStats(true);
+        showToast("零件已成功裝備！");
+      }
+
+      /* ══════════════════════════════
+   GARAGE
+══════════════════════════════ */
+      function showGarage() {
+        const s = computeStats();
+        document.getElementById(
+          "garage-sub"
+        ).innerHTML = `您的 <strong style="color:#e8192c">Subaru BRZ '22</strong> 客製化配置已儲存至車庫。<br><br>
+    性能評分 <strong style="color:#f5c842">PP ${s.pp}</strong> ・ 最大馬力 <strong style="color:#f5c842">${s.power} PS</strong><br>
+    車身重量 <strong style="color:#f5c842">${s.weight} kg</strong> ・ 重量馬力比 <strong style="color:#f5c842">${s.ratio} kg/PS</strong>`;
+        document.getElementById("garage-bg").classList.add("open");
+      }
+      function closeGarage() {
+        document.getElementById("garage-bg").classList.remove("open");
+      }
+
+      /* ══════════════════════════════
+   RESET
+══════════════════════════════ */
+      function doReset() {
+        sel = { wheels: "w0", suspension: "s0", engine: "e0", interior: "i0" };
+        prevStats = computeStats();
+        renderParts();
+        renderStats(false);
+        showToast("配置已重置為原廠設定");
+      }
+
+      /* ══════════════════════════════
+   TOAST
+══════════════════════════════ */
+      let toastTimer;
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+      }
+
+      /* ══════════════════════════════
+   INIT
+══════════════════════════════ */
+      prevStats = computeStats();
+      renderParts();
+      renderStats(false);
+    </script>
+</html>
