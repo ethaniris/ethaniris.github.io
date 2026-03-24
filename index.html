@@ -151,6 +151,313 @@
         overflow: hidden;
       }
 
+      .tech-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        backdrop-filter: blur(10px);
+        background: rgba(0, 0, 0, 0.85);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 800;
+      }
+
+      .tech-overlay.open {
+        display: flex;
+      }
+
+      .tech-panel {
+        width: min(840px, 96vw);
+        max-height: 90vh;
+        overflow-y: auto;
+        border: 2px solid rgba(0, 229, 255, 0.7);
+        border-radius: 16px;
+        background: linear-gradient(
+          145deg,
+          rgba(8, 18, 28, 0.96),
+          rgba(4, 8, 16, 0.95)
+        );
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6),
+          0 0 95px rgba(0, 229, 255, 0.26);
+        padding: 24px;
+        color: #d5f8ff;
+        font-family: "Barlow Condensed", sans-serif;
+      }
+
+      .tech-panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        gap: 12px;
+      }
+
+      .tech-panel-header h2 {
+        color: #00d6ff;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 30px;
+        letter-spacing: 0.15em;
+      }
+
+      .tech-close {
+        background: linear-gradient(135deg, #00d6ff, #0096ff);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        color: #fff;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 20px;
+        box-shadow: 0 6px 20px rgba(0, 170, 255, 0.5),
+          0 0 14px rgba(0, 240, 255, 0.35);
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      .tech-close:hover {
+        transform: scale(1.08);
+        box-shadow: 0 8px 24px rgba(0, 190, 255, 0.6),
+          0 0 21px rgba(0, 240, 255, 0.45);
+      }
+
+      .tech-main-btn {
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+        z-index: 10;
+        padding: 14px 22px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 15px;
+        letter-spacing: 0.16em;
+        color: white;
+        background: linear-gradient(130deg, #00d6ff, #12a3ff, #2348c2);
+        border: 1px solid rgba(0, 229, 255, 0.8);
+        border-radius: 14px;
+        transform: skewX(-12deg);
+        box-shadow: 0 12px 40px rgba(0, 229, 255, 0.5),
+          0 0 80px rgba(0, 229, 255, 0.3);
+        cursor: pointer;
+      }
+
+      .tech-main-btn:hover {
+        transform: skewX(-12deg) scale(1.05);
+      }
+
+      .tech-hint {
+        position: absolute;
+        bottom: 85px;
+        right: 24px;
+        z-index: 20;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: #00ffff;
+        letter-spacing: 0.12em;
+        text-align: right;
+        text-shadow: 0 0 16px rgba(0, 255, 255, 0.9),
+          0 0 32px rgba(0, 255, 255, 0.5);
+        text-transform: uppercase;
+        line-height: 1.4;
+      }
+
+      .tech-description {
+        margin: 0 0 16px;
+        color: #a3e9ff;
+        font-size: 16px;
+      }
+
+      .tech-question {
+        margin-bottom: 16px;
+        font-size: 18px;
+      }
+
+      .tech-question h3 {
+        margin-bottom: 10px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        color: #00e5ff;
+        text-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+      }
+
+      .tech-choice {
+        width: calc(100% - 2px);
+        padding: 12px 14px;
+        margin: 10px 0;
+        border-radius: 14px;
+        border: 2px solid rgba(0, 220, 255, 0.5);
+        background: linear-gradient(
+          120deg,
+          rgba(2, 18, 37, 0.95),
+          rgba(7, 28, 48, 0.95)
+        );
+        color: #e3f9ff;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: left;
+        line-height: 1.5;
+        cursor: pointer;
+        transition: 0.15s ease;
+        box-shadow: 0 4px 16px rgba(0, 170, 255, 0.3);
+      }
+
+      .tech-choice:hover,
+      .tech-choice.selected {
+        background: linear-gradient(
+          120deg,
+          rgba(0, 214, 255, 0.24),
+          rgba(0, 170, 255, 0.31)
+        );
+        border-color: rgba(0, 245, 255, 0.95);
+        transform: translateX(4px);
+      }
+
+      .tech-question .choice:hover,
+      .tech-question .choice.selected {
+        background: rgba(0, 216, 255, 0.28);
+        border-color: rgba(0, 216, 255, 0.8);
+        box-shadow: 0 0 15px rgba(0, 216, 255, 0.4);
+      }
+
+      .tech-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .tech-result {
+        margin-top: 18px;
+        font-family: "Bebas Neue", sans-serif;
+        color: #99ffff;
+      }
+
+      /* DIAGNOSIS RESULT STYLES */
+      .diagnosis-card {
+        margin-top: 20px;
+        padding: 20px;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 86, 120, 0.3),
+          rgba(0, 55, 80, 0.3)
+        );
+        border: 2px solid rgba(0, 229, 255, 0.6);
+        border-radius: 12px;
+        text-align: center;
+      }
+
+      .diagnosis-tier {
+        font-size: 13px;
+        font-family: "Barlow Condensed", sans-serif;
+        color: #00d6ff;
+        letter-spacing: 0.15em;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      .diagnosis-title {
+        font-size: 32px;
+        font-family: "Bebas Neue", sans-serif;
+        color: #f0f4f8;
+        letter-spacing: 0.12em;
+        margin-bottom: 20px;
+        text-shadow: 0 0 16px rgba(0, 229, 255, 0.4);
+        line-height: 1.3;
+      }
+
+      .diagnosis-parts {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        border-radius: 8px;
+        padding: 18px;
+        margin-bottom: 18px;
+        text-align: left;
+      }
+
+      .parts-label {
+        font-size: 12px;
+        color: #00e5ff;
+        font-family: "Barlow Condensed", sans-serif;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      .parts-list {
+        font-size: 17px;
+        color: #d5f8ff;
+        line-height: 1.8;
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .diagnosis-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .stat-box {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        border-radius: 8px;
+        padding: 14px;
+      }
+
+      .stat-box-label {
+        font-size: 12px;
+        color: #00d6ff;
+        font-family: "Barlow Condensed", sans-serif;
+        letter-spacing: 0.15em;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .stat-box-value {
+        font-size: 22px;
+        font-family: "Bebas Neue", sans-serif;
+        color: #f5c842;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+      }
+
+      .price-tag {
+        font-size: 28px;
+        color: #2ecc8a;
+        font-family: "Bebas Neue", sans-serif;
+        letter-spacing: 0.15em;
+        margin-bottom: 20px;
+        font-weight: 700;
+        text-shadow: 0 0 12px rgba(46, 204, 138, 0.4);
+      }
+
+      .confirm-btn-diagnosis {
+        width: 100%;
+        padding: 14px 16px;
+        background: linear-gradient(130deg, #00d6ff, #12a3ff, #2348c2);
+        border: 2px solid rgba(0, 229, 255, 0.9);
+        border-radius: 10px;
+        color: white;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 15px;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+      }
+
+      .confirm-btn-diagnosis:hover {
+        background: linear-gradient(130deg, #12a3ff, #2348c2, #00d6ff);
+        box-shadow: 0 0 30px rgba(0, 229, 255, 0.6);
+        transform: scale(1.02);
+      }
+
       .hud-bar::before {
         content: "";
         position: absolute;
@@ -308,7 +615,7 @@
         flex: 0 0 auto;
         height: 52%;
         position: relative;
-        overflow: hidden;
+        overflow: visible;
         background: radial-gradient(
           ellipse 80% 70% at 50% 90%,
           #0d1e35 0%,
@@ -1814,6 +2121,16 @@
             ></canvas>
           </div>
           <!-- car-stage-inner -->
+
+          <!-- TECH DIAGNOSIS BUTTON -->
+          <div class="tech-hint">不確定挑選什麼配備？</div>
+          <button
+            id="tech-main-btn"
+            class="tech-main-btn"
+            onclick="openTechMode()"
+          >
+            立即診斷適合你的暴力鴨
+          </button>
         </div>
         <!-- hero-stage -->
 
@@ -2008,6 +2325,18 @@
       </aside>
     </div>
     <!-- #app -->
+
+    <div id="tech-mode-overlay" class="tech-overlay">
+      <div class="tech-panel">
+        <div class="tech-panel-header">
+          <h2>GR YARIS 使用習慣</h2>
+          <button class="tech-close" onclick="closeTechMode()">×</button>
+        </div>
+
+        <div id="tech-question-list"></div>
+        <div id="tech-result" class="tech-result"></div>
+      </div>
+    </div>
 
     <!-- PART DETAIL MODAL -->
     <div class="modal-bg" id="modal-bg" onclick="bgClose(event,'modal-bg')">
@@ -2579,6 +2908,306 @@
         t.classList.add("show");
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+      }
+
+      const techQuestions = [
+        {
+          id: "q1",
+          text: "Q1：【情境確認】這台車在你生活中的「角色」佔比最重的是？",
+          choices: [
+            {
+              label: "A",
+              text: "靈魂通勤者：平日上下班、市區代步，週末偶爾去山上吹吹風。",
+            },
+            {
+              label: "B",
+              text: "假日獵人：它平時安靜待在車庫，出門就是要去跑山路或賽道。",
+            },
+          ],
+        },
+        {
+          id: "q2",
+          text: "Q2：【乘客考量】你的副駕或後座，是否經常載著「非車友」的重要人士？",
+          choices: [
+            {
+              label: "A",
+              text: "是的，我必須考慮他們的舒適度與路感，不能太顛簸或太吵。",
+            },
+            {
+              label: "B",
+              text: "我通常是一個人開，或者乘客也是熱血玩家，操控與回饋高於一切。",
+            },
+          ],
+        },
+        {
+          id: "q3",
+          text: "Q3：【操駕頻率】你一年大約會去「麗寶」或「大鵬灣」這類國際賽道幾次？",
+          choices: [
+            { label: "A", text: "0 - 1 次：主要以山路巡航和街頭視覺為主。" },
+            {
+              label: "B",
+              text: "3 次以上：我是認真在刷單圈數據，追求每一秒的進步。",
+            },
+          ],
+        },
+        {
+          id: "q4",
+          text: "Q4：【操駕風格】在攻克連續彎道時，你更傾向於哪種風格？",
+          choices: [
+            {
+              label: "A",
+              text: "流暢導向：喜歡平穩、精準的入彎感，不喜歡過於暴力的動態。",
+            },
+            {
+              label: "B",
+              text: "暴力導向：喜歡晚煞車、重灌油門，享受與車身剛性抗衡的極限感。",
+            },
+          ],
+        },
+        {
+          id: "q5",
+          text: "Q5：【外觀價值觀】當你把車停好後回頭看它，你希望它的氣場是？",
+          choices: [
+            {
+              label: "A",
+              text: "低調鋼砲：原廠基礎上加一點質感，懂的人自然懂。",
+            },
+            {
+              label: "B",
+              text: "賽道廠車：誇張的寬體、巨型尾翼，必須在 100 公尺外就讓人感到威壓。",
+            },
+          ],
+        },
+        {
+          id: "q6",
+          text: "Q6：【改裝決策】對於這台二代鴨，你的預算投入哲學是？",
+          choices: [
+            {
+              label: "A",
+              text: "精準投資：解決最困擾我的痛點（如過熱、側傾）就好。",
+            },
+            {
+              label: "B",
+              text: "全領域制霸：我有攻頂焦慮，只要有最好的，我就不想用次好的。",
+            },
+          ],
+        },
+      ];
+
+      const techState = {
+        current: 0,
+        answers: {},
+      };
+
+      function openTechMode() {
+        document.getElementById("tech-mode-overlay").classList.add("open");
+        document.getElementById("app").style.filter = "blur(1.2px)";
+        techState.current = 0;
+        techState.answers = {};
+        document.getElementById("tech-result").innerHTML = "";
+        renderTechQuestion();
+      }
+
+      function closeTechMode() {
+        document.getElementById("tech-mode-overlay").classList.remove("open");
+        document.getElementById("app").style.filter = "";
+      }
+
+      function renderTechQuestion() {
+        const container = document.getElementById("tech-question-list");
+        const q = techQuestions[techState.current];
+        if (!q) {
+          container.innerHTML = "";
+          return;
+        }
+
+        container.innerHTML = `<div class=\"tech-question active\"><h3>${
+          q.text
+        }</h3>${q.choices
+          .map(
+            (c) =>
+              `<button class=\"tech-choice\" onclick=\"selectTechChoice('${q.id}','${c.label}')\">${c.label}. ${c.text}</button>`
+          )
+          .join("")}<\/div>`;
+
+        const existing = techState.answers[q.id];
+        if (existing) {
+          const all = container.querySelectorAll(".tech-choice");
+          all.forEach((el) => {
+            if (el.textContent.startsWith(existing + ".")) {
+              el.classList.add("selected");
+            }
+          });
+        }
+      }
+
+      function selectTechChoice(questionId, answer) {
+        techState.answers[questionId] = answer;
+        const currentIndex = techState.current;
+        if (currentIndex < techQuestions.length - 1) {
+          techState.current++;
+          renderTechQuestion();
+        } else {
+          finalizeTechDiagnosis();
+        }
+      }
+
+      function techNext() {
+        // 保留兼容，但現在不需要 NEXT 按鈕
+        if (techState.current < techQuestions.length - 1) {
+          techState.current++;
+          renderTechQuestion();
+        } else {
+          finalizeTechDiagnosis();
+        }
+      }
+
+      function finalizeTechDiagnosis() {
+        const scoreB = Object.values(techState.answers).filter(
+          (v) => v === "B"
+        ).length;
+
+        // Diagnosis configurations based on B answers
+        const configs = {
+          0: {
+            tier: "COMFORT CLASS",
+            title: "【1. 街道紳士版】",
+            parts: "RSR Best*i + TOM'S 雙出排氣管 + CUSCO 減震拉桿",
+            price: "$148,000",
+            stats: { Comfort: "★★★★★", Handling: "+15" },
+            selParts: {
+              wheels: "w1",
+              suspension: "s1",
+              engine: "e1",
+              interior: "i1",
+            },
+          },
+          1: {
+            tier: "COMFORT CLASS",
+            title: "【1. 街道紳士版】",
+            parts: "RSR Best*i + TOM'S 雙出排氣管 + CUSCO 減震拉桿",
+            price: "$148,000",
+            stats: { Comfort: "★★★★★", Handling: "+15" },
+            selParts: {
+              wheels: "w1",
+              suspension: "s1",
+              engine: "e1",
+              interior: "i1",
+            },
+          },
+          2: {
+            tier: "HANDLING CLASS",
+            title: "【2. 山道攻堅版】",
+            parts: "ARAGOSTA TYPE-S + RAYS TE37 SAGA + CUSCO 防傾桿",
+            price: "$225,000",
+            stats: { Handling: "★★★★★", Response: "★★★★" },
+            selParts: {
+              wheels: "w2",
+              suspension: "s2",
+              engine: "e2",
+              interior: "i2",
+            },
+          },
+          3: {
+            tier: "THERMAL CLASS",
+            title: "【4. 熱管理優化版】",
+            parts: "HKS 冷卻雙塔 + Result Japan 散熱引擎蓋",
+            price: "$163,600",
+            stats: { Temp_Drop: "-18°C", Reliability: "★★★★★" },
+            selParts: {
+              wheels: "w2",
+              suspension: "s2",
+              engine: "e2",
+              interior: "i2",
+            },
+          },
+          4: {
+            tier: "RACE CLASS",
+            title: "【3. 賽道競技版】",
+            parts: "ENDLESS 6POT + TEIN MONO RACING + HKS 鈦排氣",
+            price: "$358,000",
+            stats: { Braking: "★★★★★", Lap_Time: "-3.0s" },
+            selParts: {
+              wheels: "w3",
+              suspension: "s3",
+              engine: "e3",
+              interior: "i3",
+            },
+          },
+          5: {
+            tier: "🏆 ULTIMATE TIER",
+            title: "【究極攻頂版】",
+            parts: "上述所有頂規零件【一鍵同步全上】",
+            price: "$1,318,600",
+            stats: { PP_Value: "720+", Dominance: "全領域制霸" },
+            selParts: {
+              wheels: "w3",
+              suspension: "s3",
+              engine: "e3",
+              interior: "i3",
+            },
+          },
+          6: {
+            tier: "🏆 ULTIMATE TIER",
+            title: "【究極攻頂版】",
+            parts: "上述所有頂規零件【一鍵同步全上】",
+            price: "$1,318,600",
+            stats: { PP_Value: "720+", Dominance: "全領域制霸" },
+            selParts: {
+              wheels: "w3",
+              suspension: "s3",
+              engine: "e3",
+              interior: "i3",
+            },
+          },
+        };
+
+        const config = configs[scoreB] || configs[3];
+        const { tier, title, parts, price, stats, selParts } = config;
+
+        // Apply parts
+        sel = { ...sel, ...selParts };
+        renderParts();
+        renderStats(true);
+
+        // Build result HTML
+        const statsHtml = Object.entries(stats)
+          .map(
+            ([label, value]) => `
+            <div class="stat-box">
+              <div class="stat-box-label">${label}</div>
+              <div class="stat-box-value">${value}</div>
+            </div>
+          `
+          )
+          .join("");
+
+        const resultHtml = `
+          <div class="diagnosis-card">
+            <div class="diagnosis-tier">${tier}</div>
+            <div class="diagnosis-title">${title}</div>
+            
+            <div class="diagnosis-parts">
+              <div class="parts-label">核心推薦配套</div>
+              <div class="parts-list">${parts}</div>
+            </div>
+
+            <div class="price-tag">${price}</div>
+
+            <div class="diagnosis-stats">
+              ${statsHtml}
+            </div>
+
+            <button class="confirm-btn-diagnosis" onclick="confirmTechDiagnosis()">使用建議配置</button>
+          </div>
+        `;
+
+        document.getElementById("tech-result").innerHTML = resultHtml;
+        showToast(`診斷結果：${title}`);
+      }
+
+      function confirmTechDiagnosis() {
+        closeTechMode();
       }
 
       /* ══════════════════════════════
