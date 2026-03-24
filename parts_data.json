@@ -1,0 +1,3441 @@
+{
+  "meta": {
+    "source_file": "items.xlsx",
+    "note": "Extracted from Excel. mods are placeholders and should be filled for live stat changes."
+  },
+  "categories": {
+    "wheels": {
+      "label": "輪框",
+      "parts": [
+        {
+          "id": "w0",
+          "name": "RAYS G025 SZ EDITION",
+          "desc": "改變J值與ET值影響極限胎寬與輪距，鍛造輕量化大幅降低簧下荷重，提升轉向靈敏度｜規格：18x8J, 18x8.5J, 18x9.5J, 19x8.5J, 19x9.5J, 19x10J (共8種GR YARIS對應規格)｜單位：只",
+          "emoji": "⚙️",
+          "price": {
+            "display": "¥113,000 ~ ¥126,000",
+            "currency": "JPY",
+            "min": 113000,
+            "max": 126000,
+            "raw": "¥113,000 ~ ¥126,000"
+          },
+          "spec": "18x8J, 18x8.5J, 18x9.5J, 19x8.5J, 19x9.5J, 19x10J (共8種GR YARIS對應規格)",
+          "unit": "只",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "輪框"
+        },
+        {
+          "id": "w1",
+          "name": "RAYS TE37 SAGA S-plus 30TH MACHINING Ver.",
+          "desc": "提升輪圈高剛性以應付賽道激烈抗扭曲，影響接地面積與底盤動態回饋｜規格：18x8J, 18x8.5J, 18x9.5J, 18x10J, 18x10.5J (共8種GR YARIS對應規格)｜單位：只",
+          "emoji": "⚙️",
+          "price": {
+            "display": "¥108,000 ~ ¥117,000",
+            "currency": "JPY",
+            "min": 108000,
+            "max": 117000,
+            "raw": "¥108,000 ~ ¥117,000"
+          },
+          "spec": "18x8J, 18x8.5J, 18x9.5J, 18x10J, 18x10.5J (共8種GR YARIS對應規格)",
+          "unit": "只",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "輪框"
+        },
+        {
+          "id": "w2",
+          "name": "RAYS TE37 SAGA S-plus 30TH STICKER Ver.",
+          "desc": "極致輕量化與輪距外擴，大幅提升底盤極限與視覺張力｜規格：18x8J ~ 20x12J (共31種GR YARIS對應規格)｜單位：只",
+          "emoji": "⚙️",
+          "price": {
+            "display": "¥97,000 ~ ¥158,000",
+            "currency": "JPY",
+            "min": 97000,
+            "max": 158000,
+            "raw": "¥97,000 ~ ¥158,000"
+          },
+          "spec": "18x8J ~ 20x12J (共31種GR YARIS對應規格)",
+          "unit": "只",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "輪框"
+        },
+        {
+          "id": "w3",
+          "name": "RAYS TE37 SAGA S-plus TIME ATTACK EDITION",
+          "desc": "賽道設定專用輕量化規格，減少旋轉慣性，提升加速與煞車效能｜規格：18x8J, 18x8.5J, 18x9J, 18x9.5J (共9種GR YARIS對應規格)｜單位：只",
+          "emoji": "⚙️",
+          "price": {
+            "display": "¥100,000 ~ ¥103,000",
+            "currency": "JPY",
+            "min": 100000,
+            "max": 103000,
+            "raw": "¥100,000 ~ ¥103,000"
+          },
+          "spec": "18x8J, 18x8.5J, 18x9J, 18x9.5J (共9種GR YARIS對應規格)",
+          "unit": "只",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "輪框"
+        }
+      ]
+    },
+    "suspension": {
+      "label": "底盤懸吊",
+      "parts": [
+        {
+          "id": "s0",
+          "name": "CUSCO TYPE-OS 引擎室拉桿 2024- 小改款後車",
+          "desc": "連結避震器塔頂，強化車頭抗扭曲剛性，提升轉向精準度｜規格：2024- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$4,680",
+            "currency": "NTD",
+            "min": 4680,
+            "max": 4680,
+            "raw": "NT$4,680"
+          },
+          "spec": "2024- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s1",
+          "name": "CUSCO TYPE-OS 引擎室拉桿 2021-",
+          "desc": "連結避震器塔頂，強化車頭抗扭曲剛性，提升轉向精準度｜規格：2021- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$4,680",
+            "currency": "NTD",
+            "min": 4680,
+            "max": 4680,
+            "raw": "NT$4,680"
+          },
+          "spec": "2021- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s2",
+          "name": "CUSCO 強化變速箱腳",
+          "desc": "減少激烈換檔時變速箱的晃動，使動力傳遞更直接｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$6,180",
+            "currency": "NTD",
+            "min": 6180,
+            "max": 6180,
+            "raw": "NT$6,180"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s3",
+          "name": "CUSCO 金屬油門踏板",
+          "desc": "改變踏板踩踏面積與摩擦力，便於跟趾動作操作｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$2,160",
+            "currency": "NTD",
+            "min": 2160,
+            "max": 2160,
+            "raw": "NT$2,160"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s4",
+          "name": "CUSCO 拖車勾",
+          "desc": "賽道安全規範必備，不影響日常操控但提供拖救著力點｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$4,950",
+            "currency": "NTD",
+            "min": 4950,
+            "max": 4950,
+            "raw": "NT$4,950"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s5",
+          "name": "CUSCO S-MCB1000 後上減震拉桿組 2021-",
+          "desc": "結合拉桿剛性與微震動吸收，提升車尾穩定性與行路質感｜規格：2021- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$20,500",
+            "currency": "NTD",
+            "min": 20500,
+            "max": 20500,
+            "raw": "NT$20,500"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s6",
+          "name": "CUSCO S-MCB1000 引擎室減震拉桿組 2021-2023",
+          "desc": "吸收車體微小變形與震動，提升轉向線性度｜規格：2021-2023 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$20,500",
+            "currency": "NTD",
+            "min": 20500,
+            "max": 20500,
+            "raw": "NT$20,500"
+          },
+          "spec": "2021-2023 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s7",
+          "name": "CUSCO S-MCB1000 引擎室減震拉桿組 2024-",
+          "desc": "吸收車體微小變形與震動，提升轉向線性度｜規格：2024- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$20,500",
+            "currency": "NTD",
+            "min": 20500,
+            "max": 20500,
+            "raw": "NT$20,500"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s8",
+          "name": "CUSCO 加大煞車導管 2021-2024",
+          "desc": "強制撞風冷卻煞車系統，降低激烈操駕時的煞車熱衰竭機率｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$20,800",
+            "currency": "NTD",
+            "min": 20800,
+            "max": 20800,
+            "raw": "NT$20,800"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s9",
+          "name": "CUSCO 可調李仔串(後) 2024-",
+          "desc": "修正降低車高後的防傾桿幾何角度，恢復防傾桿正常作動力｜規格：2024- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$9,000",
+            "currency": "NTD",
+            "min": 9000,
+            "max": 9000,
+            "raw": "NT$9,000"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s10",
+          "name": "CUSCO 前下四點式拉桿 2021-",
+          "desc": "強化底盤副車架與車體連結，大幅減少彎中底盤變形｜規格：2021- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$12,500",
+            "currency": "NTD",
+            "min": 12500,
+            "max": 12500,
+            "raw": "NT$12,500"
+          },
+          "spec": "2021- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s11",
+          "name": "CUSCO Type-AL CARBON 後上拉桿(圓形)",
+          "desc": "強化車尾避震器塔頂剛性，提升車尾跟進性｜規格：2021- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$8,000",
+            "currency": "NTD",
+            "min": 8000,
+            "max": 8000,
+            "raw": "NT$8,000"
+          },
+          "spec": "2021- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s12",
+          "name": "CUSCO Type-AL CARBON 後上拉桿 2021-",
+          "desc": "碳纖維輕量化並強化車尾剛性，提升過彎極限｜規格：2021- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$6,000",
+            "currency": "NTD",
+            "min": 6000,
+            "max": 6000,
+            "raw": "NT$6,000"
+          },
+          "spec": "2021- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s13",
+          "name": "CUSCO Type-AL CARBON 引擎室拉桿",
+          "desc": "碳纖維材質減輕車頭重量，同時強化轉向指向性｜規格：2021-2024 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$6,000",
+            "currency": "NTD",
+            "min": 6000,
+            "max": 6000,
+            "raw": "NT$6,000"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s14",
+          "name": "CUSCO SPORT S 運動型避震器 2021-",
+          "desc": "競技取向阻尼與彈簧設定，顯著降低車高與過彎側傾｜規格：2021- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$69,000",
+            "currency": "NTD",
+            "min": 69000,
+            "max": 69000,
+            "raw": "NT$69,000"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s15",
+          "name": "CUSCO STREET ZERO A 避震器(含上座)",
+          "desc": "街道/競技雙棲，阻尼可調優化日常舒適與激烈操駕支撐性｜規格：2021- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$63,000",
+            "currency": "NTD",
+            "min": 63000,
+            "max": 63000,
+            "raw": "NT$63,000"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s16",
+          "name": "CUSCO STREET ZERO A 避震器 2021-",
+          "desc": "街道/競技雙棲，改變車高並提升避震反應速度｜規格：2021- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$47,600",
+            "currency": "NTD",
+            "min": 47600,
+            "max": 47600,
+            "raw": "NT$47,600"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s17",
+          "name": "CUSCO 後保桿內鐵拉桿 2021-",
+          "desc": "強化後保桿內部結構剛性，減少車尾扭曲｜規格：2021- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$4,200",
+            "currency": "NTD",
+            "min": 4200,
+            "max": 4200,
+            "raw": "NT$4,200"
+          },
+          "spec": "2021- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s18",
+          "name": "CUSCO 底盤前中下拉桿 2021-",
+          "desc": "強化底盤中段剛性，提升整體車身扎實度｜規格：2021- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$7,500",
+            "currency": "NTD",
+            "min": 7500,
+            "max": 7500,
+            "raw": "NT$7,500"
+          },
+          "spec": "2021- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s19",
+          "name": "CUSCO 底盤前下拉桿 2021-",
+          "desc": "強化前副車架剛性，提升煞車與轉向時的前輪穩定性｜規格：2021- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$7,500",
+            "currency": "NTD",
+            "min": 7500,
+            "max": 7500,
+            "raw": "NT$7,500"
+          },
+          "spec": "2021- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s20",
+          "name": "CUSCO TYPE-OS 後上拉桿 2021-",
+          "desc": "強化車尾剛性，抑制尾部扭曲形變｜規格：2021- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$4,500",
+            "currency": "NTD",
+            "min": 4500,
+            "max": 4500,
+            "raw": "NT$4,500"
+          },
+          "spec": "2021- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s21",
+          "name": "CUSCO 防傾桿 2021-",
+          "desc": "加粗管徑增加抗扭力，直接抑制過彎時的車身側傾｜規格：2021- 專用｜單位：件/組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$11,000 ~ NT$22,400",
+            "currency": "NTD",
+            "min": 11000,
+            "max": 22400,
+            "raw": "NT$11,000 ~ NT$22,400"
+          },
+          "spec": "2021- 專用",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s22",
+          "name": "CUSCO 車椅腳架拉桿 2021-",
+          "desc": "連結車內座椅鎖點，強化車室中央縱向剛性｜規格：2021- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$5,700",
+            "currency": "NTD",
+            "min": 5700,
+            "max": 5700,
+            "raw": "NT$5,700"
+          },
+          "spec": "2021- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s23",
+          "name": "CUSCO Type-ALC OS CARBON 引擎室拉桿",
+          "desc": "碳纖維與金屬複合，極致輕量化並提升車頭剛性｜規格：2024- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$7,200",
+            "currency": "NTD",
+            "min": 7200,
+            "max": 7200,
+            "raw": "NT$7,200"
+          },
+          "spec": "2024- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s24",
+          "name": "RSR Ti2000 短彈簧組 2024- 小改款後車",
+          "desc": "鈦合金材質輕量化，降低車高重心並維持良好路感｜規格：2024- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$15,999",
+            "currency": "NTD",
+            "min": 15999,
+            "max": 15999,
+            "raw": "NT$15,999"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s25",
+          "name": "RSR Best*I 避震器 2024- 小改款後車",
+          "desc": "高階阻尼設定，優化碎震處理與彎道支撐力｜規格：2024- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$51,800",
+            "currency": "NTD",
+            "min": 51800,
+            "max": 51800,
+            "raw": "NT$51,800"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s26",
+          "name": "RSR Ti2000 短彈簧組 2021-2024",
+          "desc": "鈦合金材質輕量化，降低車身重心減少起步抬頭｜規格：2021-2024 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$15,999",
+            "currency": "NTD",
+            "min": 15999,
+            "max": 15999,
+            "raw": "NT$15,999"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s27",
+          "name": "RSR Sports*i 避震器 2024- 小改款後車",
+          "desc": "運動化阻尼調校，提升激烈操駕時的四輪貼地性｜規格：2024- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$54,800",
+            "currency": "NTD",
+            "min": 54800,
+            "max": 54800,
+            "raw": "NT$54,800"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s28",
+          "name": "RSR Best*I 避震器 2021-",
+          "desc": "高階阻尼設定，兼顧街道舒適與彎道操控｜規格：2021- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$51,800",
+            "currency": "NTD",
+            "min": 51800,
+            "max": 51800,
+            "raw": "NT$51,800"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s29",
+          "name": "TANABE FUNTORIDE 短彈簧 2021-2024",
+          "desc": "降低車身重心，縮短懸吊行程以減少車身側傾｜規格：2021-2024 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$10,800",
+            "currency": "NTD",
+            "min": 10800,
+            "max": 10800,
+            "raw": "NT$10,800"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s30",
+          "name": "TANABE FUNTORIDE 避震器 2021-2024",
+          "desc": "專屬阻尼設定，提升操控極限與路感回饋｜規格：2021-2024 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$46,800",
+            "currency": "NTD",
+            "min": 46800,
+            "max": 46800,
+            "raw": "NT$46,800"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s31",
+          "name": "TANABE FUNTORIDE 避震器 2024- 小改款後車",
+          "desc": "專屬阻尼設定，提升操控極限與路感回饋｜規格：2024- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$49,800",
+            "currency": "NTD",
+            "min": 49800,
+            "max": 49800,
+            "raw": "NT$49,800"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s32",
+          "name": "TANABE 後上拉桿 PLUS 2024- 小改款後車",
+          "desc": "強化後避震塔頂剛性，提升車尾循跡性｜規格：2024- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$5,700",
+            "currency": "NTD",
+            "min": 5700,
+            "max": 5700,
+            "raw": "NT$5,700"
+          },
+          "spec": "2024- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s33",
+          "name": "TANABE 引擎室拉桿 PLUS 2024- 小改款後車",
+          "desc": "強化前避震塔頂剛性，提升轉向靈敏度｜規格：2024- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$6,800",
+            "currency": "NTD",
+            "min": 6800,
+            "max": 6800,
+            "raw": "NT$6,800"
+          },
+          "spec": "2024- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s34",
+          "name": "TANABE FUNTORIDE 短彈簧 2024- 小改款後車",
+          "desc": "降低重心減少側傾，外觀更具低趴運動感｜規格：2024- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$10,800",
+            "currency": "NTD",
+            "min": 10800,
+            "max": 10800,
+            "raw": "NT$10,800"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s35",
+          "name": "TANABE 防傾桿 2021-",
+          "desc": "加大防傾桿管徑，抑制彎中側傾而不影響直線舒適度｜規格：2021- 專用｜單位：件/組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$9,000 ~ NT$17,600",
+            "currency": "NTD",
+            "min": 9000,
+            "max": 17600,
+            "raw": "NT$9,000 ~ NT$17,600"
+          },
+          "spec": "2021- 專用",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s36",
+          "name": "TANABE 後上拉桿 PLUS 2021-2024",
+          "desc": "強化車尾整體剛性，減少底盤扭曲變形｜規格：2021-2024 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$5,700",
+            "currency": "NTD",
+            "min": 5700,
+            "max": 5700,
+            "raw": "NT$5,700"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s37",
+          "name": "TANABE 引擎室拉桿 PLUS 2021-2024",
+          "desc": "強化車頭剛性，路感傳遞更清晰｜規格：2021-2024 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$4,900",
+            "currency": "NTD",
+            "min": 4900,
+            "max": 4900,
+            "raw": "NT$4,900"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s38",
+          "name": "TANABE 底盤後下拉桿 小改款前後全適用",
+          "desc": "連結後副車架，確保後輪傾角與束角於過彎時的穩定｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$3,800",
+            "currency": "NTD",
+            "min": 3800,
+            "max": 3800,
+            "raw": "NT$3,800"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s39",
+          "name": "TANABE 底盤前下拉桿 2021-",
+          "desc": "強化前輪懸吊鎖點剛性，提升轉向精準度｜規格：2021- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$10,800",
+            "currency": "NTD",
+            "min": 10800,
+            "max": 10800,
+            "raw": "NT$10,800"
+          },
+          "spec": "2021- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s40",
+          "name": "TEIN MONO RACING 避震器組 2024-",
+          "desc": "單筒式賽道設定，極致反應速度與抗熱衰阻尼｜規格：2024- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$68,999",
+            "currency": "NTD",
+            "min": 68999,
+            "max": 68999,
+            "raw": "NT$68,999"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s41",
+          "name": "TEIN FLEX Z 避震器組 2024- 小改款後車",
+          "desc": "複筒式街道設定，兼具降車高視覺與乘坐舒適度｜規格：2024- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$47,999",
+            "currency": "NTD",
+            "min": 47999,
+            "max": 47999,
+            "raw": "NT$47,999"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s42",
+          "name": "TEIN FLEX Z 避震器組 2021-",
+          "desc": "複筒式街道設定，高低軟硬可調以優化操控｜規格：2021- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$43,999",
+            "currency": "NTD",
+            "min": 43999,
+            "max": 43999,
+            "raw": "NT$43,999"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s43",
+          "name": "TEIN MONO RACING 避震器組 2021-2024",
+          "desc": "單筒競技級阻尼，大幅提升賽道過彎抗側傾極限｜規格：2021-2024 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$60,800",
+            "currency": "NTD",
+            "min": 60800,
+            "max": 60800,
+            "raw": "NT$60,800"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s44",
+          "name": "KW V3 避震器 2021-2024",
+          "desc": "壓縮與回彈阻尼雙向獨立可調，精準控制每一輪跳動與貼地性｜規格：2021-2024 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$92,000",
+            "currency": "NTD",
+            "min": 92000,
+            "max": 92000,
+            "raw": "NT$92,000"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s45",
+          "name": "ARAGOSTA TYPE-S 避震器 2024-",
+          "desc": "頂級鍛造筒身與高精度阻尼，提供極致操控與路感｜規格：2024- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$117,800",
+            "currency": "NTD",
+            "min": 117800,
+            "max": 117800,
+            "raw": "NT$117,800"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s46",
+          "name": "ARAGOSTA TYPE-S 避震器 2021-2023",
+          "desc": "頂級鍛造筒身與高精度阻尼，提供極致操控與路感｜規格：2021-2023 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$117,000",
+            "currency": "NTD",
+            "min": 117000,
+            "max": 117000,
+            "raw": "NT$117,000"
+          },
+          "spec": "2021-2023 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s47",
+          "name": "OHLINS 避震器組 2021-",
+          "desc": "DFV雙流向閥門技術，兼顧賽道極限貼地性與街道吸震舒適性｜規格：2021- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$112,000",
+            "currency": "NTD",
+            "min": 112000,
+            "max": 112000,
+            "raw": "NT$112,000"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s48",
+          "name": "HKS HIPERMAX S 避震器",
+          "desc": "單筒式阻尼優化，抑制多餘彈跳並提升過彎支撐性｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$65,000",
+            "currency": "NTD",
+            "min": 65000,
+            "max": 65000,
+            "raw": "NT$65,000"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s49",
+          "name": "HKS HIPERMAX R 避震器",
+          "desc": "競技專用高磅數彈簧與強阻尼，專為降低單圈秒數設計｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$93,800",
+            "currency": "NTD",
+            "min": 93800,
+            "max": 93800,
+            "raw": "NT$93,800"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s50",
+          "name": "SARD x AISIN 液壓減震拉桿 2021-",
+          "desc": "結合阻尼技術的拉桿，吸收車體多餘震動與變形，優化行路質感｜規格：2021- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$42,000",
+            "currency": "NTD",
+            "min": 42000,
+            "max": 42000,
+            "raw": "NT$42,000"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s51",
+          "name": "GR (TOYOTA) 液壓減震拉桿",
+          "desc": "原廠御用阻尼拉桿，平穩車身動態並減少底盤扭曲碎震｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$40,500",
+            "currency": "NTD",
+            "min": 40500,
+            "max": 40500,
+            "raw": "NT$40,500"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s52",
+          "name": "KANSAI SERVICE 引擎室拉桿 小改款後車",
+          "desc": "強化避震器塔頂，提升車頭剛性與轉向明確感｜規格：小改後專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$7,500",
+            "currency": "NTD",
+            "min": 7500,
+            "max": 7500,
+            "raw": "NT$7,500"
+          },
+          "spec": "小改後專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s53",
+          "name": "KANSAI SERVICE 引擎室拉桿",
+          "desc": "強化避震器塔頂，提升車頭剛性與轉向明確感｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$7,500",
+            "currency": "NTD",
+            "min": 7500,
+            "max": 7500,
+            "raw": "NT$7,500"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s54",
+          "name": "LAILE BEATRUSH 引擎室拉桿 2024-",
+          "desc": "增加車體前段抗扭曲力，使轉向動態更為俐落｜規格：2024- 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$7,980",
+            "currency": "NTD",
+            "min": 7980,
+            "max": 7980,
+            "raw": "NT$7,980"
+          },
+          "spec": "2024- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s55",
+          "name": "LAILE BEATRUSH 後車廂底板拉桿",
+          "desc": "強化車尾底盤剛性，減少激烈過彎時車尾形變｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$7,200",
+            "currency": "NTD",
+            "min": 7200,
+            "max": 7200,
+            "raw": "NT$7,200"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s56",
+          "name": "LAILE BEATRUSH 前下兩點拉桿",
+          "desc": "連結前副車架，確保前輪定位角度於受力時的穩定｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$8,000",
+            "currency": "NTD",
+            "min": 8000,
+            "max": 8000,
+            "raw": "NT$8,000"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s57",
+          "name": "LAILE BEATRUSH 前保桿內拉桿",
+          "desc": "強化車頭水箱架周邊剛性，減少車頭受力變形｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$8,800",
+            "currency": "NTD",
+            "min": 8800,
+            "max": 8800,
+            "raw": "NT$8,800"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s58",
+          "name": "LAILE BEATRUSH 引擎室拉桿",
+          "desc": "增加避震塔連接剛性，提升方向盤路感回饋｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$8,800",
+            "currency": "NTD",
+            "min": 8800,
+            "max": 8800,
+            "raw": "NT$8,800"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s59",
+          "name": "LAILE BEATRUSH 後車廂上拉桿",
+          "desc": "強化C柱與後輪拱間的剛性，提升車尾跟進動態｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$7,600",
+            "currency": "NTD",
+            "min": 7600,
+            "max": 7600,
+            "raw": "NT$7,600"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s60",
+          "name": "OKUYAMA CARBING 鈦合金引擎室拉桿 2021-2024",
+          "desc": "鈦合金極致輕量化與超高剛性，完美抑制車頭形變｜規格：2021-2024 專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$32,000",
+            "currency": "NTD",
+            "min": 32000,
+            "max": 32000,
+            "raw": "NT$32,000"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s61",
+          "name": "TOM'S 底盤前中下拉桿",
+          "desc": "補強底盤中段大面積結構，提升車身整體扎實度｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$10,500",
+            "currency": "NTD",
+            "min": 10500,
+            "max": 10500,
+            "raw": "NT$10,500"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s62",
+          "name": "TOM'S 底盤前下拉桿",
+          "desc": "強化前副車架，提升前輪轉向指向性｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$11,500",
+            "currency": "NTD",
+            "min": 11500,
+            "max": 11500,
+            "raw": "NT$11,500"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s63",
+          "name": "SPOON SPORTS 底盤襯套",
+          "desc": "填補副車架螺絲孔隙，消除底盤游隙，路感與轉向更為直接｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$5,800 ~ NT$11,600",
+            "currency": "NTD",
+            "min": 5800,
+            "max": 11600,
+            "raw": "NT$5,800 ~ NT$11,600"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s64",
+          "name": "ENDLESS 6POT LIGHT & S4R 前後卡鉗組",
+          "desc": "活塞加大與碟盤升級，極致提升制動力與散熱，應付高強度賽道｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$207,900",
+            "currency": "NTD",
+            "min": 207900,
+            "max": 207900,
+            "raw": "NT$207,900"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s65",
+          "name": "ENDLESS CC-Rg 來令片",
+          "desc": "競技級高溫摩擦係數，確保連續重煞不熱衰竭｜規格：專用對應｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$8,500 ~ NT$16,800",
+            "currency": "NTD",
+            "min": 8500,
+            "max": 16800,
+            "raw": "NT$8,500 ~ NT$16,800"
+          },
+          "spec": "專用對應",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s66",
+          "name": "ENDLESS SWIVEL RACING 金屬煞車油管",
+          "desc": "減少油管膨脹率，煞車踏板踩踏感更硬挺扎實｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$12,000",
+            "currency": "NTD",
+            "min": 12000,
+            "max": 12000,
+            "raw": "NT$12,000"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s67",
+          "name": "ENDLESS SWIVEL STEEL 金屬煞車油管",
+          "desc": "強化煞車油壓傳遞效率，提升煞車反應速度｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$8,100",
+            "currency": "NTD",
+            "min": 8100,
+            "max": 8100,
+            "raw": "NT$8,100"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s68",
+          "name": "ENDLESS MX72 PLUS 來令片 2021-",
+          "desc": "兼顧街道低溫與賽道高溫的高階來令片，強化初期咬合力｜規格：2021- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$7,800 ~ NT$15,000",
+            "currency": "NTD",
+            "min": 7800,
+            "max": 15000,
+            "raw": "NT$7,800 ~ NT$15,000"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s69",
+          "name": "PROJECT MU HC+ 來令片",
+          "desc": "寬廣的溫度工作範圍，提供線性的優異煞車力道｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$7,500 ~ NT$14,800",
+            "currency": "NTD",
+            "min": 7500,
+            "max": 14800,
+            "raw": "NT$7,500 ~ NT$14,800"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s70",
+          "name": "PROJECT MU PMU 金屬煞車油管",
+          "desc": "鐵氟龍內管與金屬網防膨脹設計，提升煞車腳感直線性｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$11,000",
+            "currency": "NTD",
+            "min": 11000,
+            "max": 11000,
+            "raw": "NT$11,000"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s71",
+          "name": "DIXCEL Z type 來令片",
+          "desc": "全方位域超高摩擦力，適合賽道與激烈山道操駕｜規格：專用對應｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$8,000 ~ NT$16,000",
+            "currency": "NTD",
+            "min": 8000,
+            "max": 16000,
+            "raw": "NT$8,000 ~ NT$16,000"
+          },
+          "spec": "專用對應",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s72",
+          "name": "DIXCEL S type 來令片",
+          "desc": "強化運動性能，比原廠更耐溫且煞車粉塵較易清潔｜規格：專用對應｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$4,799 ~ NT$10,000",
+            "currency": "NTD",
+            "min": 4799,
+            "max": 10000,
+            "raw": "NT$4,799 ~ NT$10,000"
+          },
+          "spec": "專用對應",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s73",
+          "name": "DIXCEL M type 來令片",
+          "desc": "超低粉塵設計，維持制動力的同時保持輪框清潔｜規格：專用對應｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$4,999 ~ NT$9,400",
+            "currency": "NTD",
+            "min": 4999,
+            "max": 9400,
+            "raw": "NT$4,999 ~ NT$9,400"
+          },
+          "spec": "專用對應",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s74",
+          "name": "A'PEXi N1 煞車導管",
+          "desc": "改善煞車系統撞風散熱效率，降低卡鉗與碟盤工作溫度｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$14,800",
+            "currency": "NTD",
+            "min": 14800,
+            "max": 14800,
+            "raw": "NT$14,800"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s75",
+          "name": "EXEDY RACING S METAL 離合器組 2021-",
+          "desc": "金屬摩擦材質大幅提高接合力矩，防止大馬力改裝後打滑｜規格：2021- 專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$25,800",
+            "currency": "NTD",
+            "min": 25800,
+            "max": 25800,
+            "raw": "NT$25,800"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s76",
+          "name": "Forge MOTORSPORT 快排",
+          "desc": "縮短排檔行程，使換檔動作更快速明確，提升操駕戰鬥感｜規格：專車專用｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$3,200",
+            "currency": "NTD",
+            "min": 3200,
+            "max": 3200,
+            "raw": "NT$3,200"
+          },
+          "spec": "專車專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s77",
+          "name": "BRIDE XL-TYPE / FO-TYPE 腳架滑槽",
+          "desc": "專用賽車椅滑軌，降低乘坐重心，提升駕駛包覆與路感傳遞｜規格：專車專用｜單位：組",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$8,000 ~ NT$9,760",
+            "currency": "NTD",
+            "min": 8000,
+            "max": 9760,
+            "raw": "NT$8,000 ~ NT$9,760"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        },
+        {
+          "id": "s78",
+          "name": "BRIDE 側邊安全氣囊消除電阻 原廠接頭型",
+          "desc": "改裝賽車椅必備，消除儀表板安全氣囊故障燈號｜規格：專用對應｜單位：件",
+          "emoji": "🔧",
+          "price": {
+            "display": "NT$1,080",
+            "currency": "NTD",
+            "min": 1080,
+            "max": 1080,
+            "raw": "NT$1,080"
+          },
+          "spec": "專用對應",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "底盤懸吊"
+        }
+      ]
+    },
+    "engine": {
+      "label": "引擎動力",
+      "parts": [
+        {
+          "id": "e0",
+          "name": "HKS SUPER TURBO URBAN MATTE EDITION 排氣管 小改後",
+          "desc": "降低排氣回壓，優化增壓反應與高轉馬力，特殊消光塗層｜規格：小改後專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$75,000",
+            "currency": "NTD",
+            "min": 75000,
+            "max": 75000,
+            "raw": "NT$75,000"
+          },
+          "spec": "小改後專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e1",
+          "name": "HKS SUPER TURBO 排氣管 2024-",
+          "desc": "管徑最佳化降低排氣阻力，提升渦輪排氣效率與聲浪｜規格：2024- 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$69,800",
+            "currency": "NTD",
+            "min": 69800,
+            "max": 69800,
+            "raw": "NT$69,800"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e2",
+          "name": "HKS METAL CATALYZER 觸媒段 2024-",
+          "desc": "高流量金屬觸媒大幅降低排氣阻力，解鎖渦輪全速域馬力封印｜規格：2024- 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$130,000",
+            "currency": "NTD",
+            "min": 130000,
+            "max": 130000,
+            "raw": "NT$130,000"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e3",
+          "name": "HKS OIL COOLER KIT BLACK 油冷",
+          "desc": "加大散熱排與機油總量，防止高轉激烈操駕機油過熱劣化｜規格：專屬套件｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$54,800",
+            "currency": "NTD",
+            "min": 54800,
+            "max": 54800,
+            "raw": "NT$54,800"
+          },
+          "spec": "專屬套件",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e4",
+          "name": "HKS INTERCOOLER KIT 中冷 2024- 自排專用",
+          "desc": "加大撞風冷卻容積，大幅降低進氣溫度，提升空氣含氧量與馬力｜規格：2024- 自排專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$79,900",
+            "currency": "NTD",
+            "min": 79900,
+            "max": 79900,
+            "raw": "NT$79,900"
+          },
+          "spec": "2024- 自排專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e5",
+          "name": "HKS SUPER TURBO URBAN MATTE EDITION 排氣管 小改前",
+          "desc": "降低排氣回壓，提升渦輪反應，渾厚低沉聲浪｜規格：小改前專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$75,000",
+            "currency": "NTD",
+            "min": 75000,
+            "max": 75000,
+            "raw": "NT$75,000"
+          },
+          "spec": "小改前專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e6",
+          "name": "HKS CARBON 進氣組",
+          "desc": "碳纖維隔熱集氣箱確保吸入冷空氣，提升進氣量與油門反應｜規格：專屬套件｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$59,990",
+            "currency": "NTD",
+            "min": 59990,
+            "max": 59990,
+            "raw": "NT$59,990"
+          },
+          "spec": "專屬套件",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e7",
+          "name": "HKS 汽缸頭強化螺絲 2021-",
+          "desc": "提高汽缸頭迫緊極限，應付重度改裝高增壓打高爆發力｜規格：2021- 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "依經銷報價",
+            "currency": null,
+            "min": 0,
+            "max": 0,
+            "raw": "依經銷報價"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e8",
+          "name": "HKS SUPER TURBO Ti 鈦金屬排氣管 2021-",
+          "desc": "鈦金屬極致輕量化減輕車尾荷重，優化排氣效能與高頻聲浪｜規格：2021- 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "依經銷報價",
+            "currency": null,
+            "min": 0,
+            "max": 0,
+            "raw": "依經銷報價"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e9",
+          "name": "HKS INTERCOOLER KIT 中冷 2021-2024",
+          "desc": "強化進氣冷卻效率，防止高溫引發引擎爆震退點火退馬力｜規格：2021-2024 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$60,000",
+            "currency": "NTD",
+            "min": 60000,
+            "max": 60000,
+            "raw": "NT$60,000"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e10",
+          "name": "HKS SUPER TURBO 排氣管 2021-2024",
+          "desc": "提升排氣流速，減少渦輪遲滯，增加最大馬力輸出｜規格：2021-2024 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$63,000",
+            "currency": "NTD",
+            "min": 63000,
+            "max": 63000,
+            "raw": "NT$63,000"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e11",
+          "name": "HKS SUPER FIRE RACING 火星塞(9號) 50003-MR45HLZ",
+          "desc": "提高冷熱值極限，確保高增壓環境下點火精準不失火｜規格：專用對應｜單位：顆",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$1,100",
+            "currency": "NTD",
+            "min": 1100,
+            "max": 1100,
+            "raw": "NT$1,100"
+          },
+          "spec": "專用對應",
+          "unit": "顆",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e12",
+          "name": "HKS SUPER AIR FILTER 空氣濾芯 70017-AT130 2021-",
+          "desc": "降低吸氣阻力，提升進氣流速，增加引擎加速輕快感｜規格：2021- 原廠交換型｜單位：片",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$1,300",
+            "currency": "NTD",
+            "min": 1300,
+            "max": 1300,
+            "raw": "NT$1,300"
+          },
+          "spec": "2021- 原廠交換型",
+          "unit": "片",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e13",
+          "name": "HKS SQV4 洩壓閥 2021-",
+          "desc": "保護渦輪葉片，釋放收油門時的進氣管內高壓，獨特洩壓聲浪｜規格：2021- 專屬套件｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$20,000",
+            "currency": "NTD",
+            "min": 20000,
+            "max": 20000,
+            "raw": "NT$20,000"
+          },
+          "spec": "2021- 專屬套件",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e14",
+          "name": "HKS LEGAMAX Premium 排氣管",
+          "desc": "優化排氣流暢度，提供精緻排氣聲浪與適度馬力提升｜規格：專用對應｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$52,000",
+            "currency": "NTD",
+            "min": 52000,
+            "max": 52000,
+            "raw": "NT$52,000"
+          },
+          "spec": "專用對應",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e15",
+          "name": "HKS Hi-Power SPEC-L II 排氣管",
+          "desc": "輕量化管身設計，提升排氣效率與運動化聲浪表現｜規格：專用對應｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$56,400",
+            "currency": "NTD",
+            "min": 56400,
+            "max": 56400,
+            "raw": "NT$56,400"
+          },
+          "spec": "專用對應",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e16",
+          "name": "TRUST GReddy Comfort Sports GTS 排氣管",
+          "desc": "提升排氣順暢度，強調中尾段馬力延伸與渾厚排氣聲｜規格：專用對應｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$72,000",
+            "currency": "NTD",
+            "min": 72000,
+            "max": 72000,
+            "raw": "NT$72,000"
+          },
+          "spec": "專用對應",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e17",
+          "name": "TRUST GReddy 機油芯",
+          "desc": "強化機油過濾面積與流量，確保引擎機油潤滑潔淨｜規格：專用對應｜單位：顆",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$550",
+            "currency": "NTD",
+            "min": 550,
+            "max": 550,
+            "raw": "NT$550"
+          },
+          "spec": "專用對應",
+          "unit": "顆",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e18",
+          "name": "FUJITSUBO A-RM 排氣管 2024-",
+          "desc": "競技取向管徑設計，極致降低排氣阻力，釋放最大馬力｜規格：2024- 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$134,800",
+            "currency": "NTD",
+            "min": 134800,
+            "max": 134800,
+            "raw": "NT$134,800"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e19",
+          "name": "FUJITSUBO 排氣管專用 鈦色/CARBON 尾飾管",
+          "desc": "改變排氣尾飾管外觀材質，提升車尾競技視覺｜規格：專用對應｜單位：件",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$5,400 ~ NT$6,980",
+            "currency": "NTD",
+            "min": 5400,
+            "max": 6980,
+            "raw": "NT$5,400 ~ NT$6,980"
+          },
+          "spec": "專用對應",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e20",
+          "name": "FUJITSUBO A-RM 排氣管 2021-2024 小改前",
+          "desc": "提升排氣效能與聲浪，減輕排氣管重量｜規格：2021-2024 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$80,000",
+            "currency": "NTD",
+            "min": 80000,
+            "max": 80000,
+            "raw": "NT$80,000"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e21",
+          "name": "FUJITSUBO A-R 排氣管 2021-2024",
+          "desc": "兼顧街道低轉扭力與高轉馬力延伸，聲浪低沉不共鳴｜規格：2021-2024 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$35,800",
+            "currency": "NTD",
+            "min": 35800,
+            "max": 35800,
+            "raw": "NT$35,800"
+          },
+          "spec": "2021-2024 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e22",
+          "name": "FUJITSUBO A-R 排氣管 2024-",
+          "desc": "兼顧街道低轉扭力與高轉馬力延伸，聲浪低沉不共鳴｜規格：2024- 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$49,800",
+            "currency": "NTD",
+            "min": 49800,
+            "max": 49800,
+            "raw": "NT$49,800"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e23",
+          "name": "GANADOR 排氣管 2024-",
+          "desc": "特殊尾桶設計提升排氣效能，同時兼顧燃油經濟性與聲浪｜規格：2024- 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$59,900",
+            "currency": "NTD",
+            "min": 59900,
+            "max": 59900,
+            "raw": "NT$59,900"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e24",
+          "name": "KAKIMOTO 柿本改 CLASS KR 排氣管 2024-",
+          "desc": "符合嚴格噪音法規下最大化排氣效率，特殊鈦合金燒色尾飾管｜規格：2024- 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$54,600",
+            "currency": "NTD",
+            "min": 54600,
+            "max": 54600,
+            "raw": "NT$54,600"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e25",
+          "name": "GruppeM RAM AIR SYSTEM CARBON 進氣組 (各年份對應)",
+          "desc": "碳纖維集氣箱與撞風導管，強制導入冷空氣大幅增加馬力｜規格：各年份專屬套件｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$45,000 ~ NT$53,400",
+            "currency": "NTD",
+            "min": 45000,
+            "max": 53400,
+            "raw": "NT$45,000 ~ NT$53,400"
+          },
+          "spec": "各年份專屬套件",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e26",
+          "name": "K&N / BMC / PIPERCROSS / SPRINT FILTER 高流量空氣濾芯",
+          "desc": "改變濾紙孔徑與材質，提高引擎單位時間進氣量，加速更敏捷｜規格：原廠交換型｜單位：片",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$2,200 ~ NT$4,200",
+            "currency": "NTD",
+            "min": 2200,
+            "max": 4200,
+            "raw": "NT$2,200 ~ NT$4,200"
+          },
+          "spec": "原廠交換型",
+          "unit": "片",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e27",
+          "name": "BLITZ CARBON 進氣組 2024-",
+          "desc": "碳纖維導風罩隔熱，配合香菇頭濾芯提升極致吸氣量｜規格：2024- 專屬套件｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$69,900",
+            "currency": "NTD",
+            "min": 69900,
+            "max": 69900,
+            "raw": "NT$69,900"
+          },
+          "spec": "2024- 專屬套件",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e28",
+          "name": "TOM'S 雙出排氣管 2024-",
+          "desc": "優化排氣聲浪與外觀霸氣度，提升引擎換氣效率｜規格：2024- 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$72,900",
+            "currency": "NTD",
+            "min": 72900,
+            "max": 72900,
+            "raw": "NT$72,900"
+          },
+          "spec": "2024- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e29",
+          "name": "TOM'S POWER BOX(動力盒)",
+          "desc": "隨插即用修改ECU增壓訊號，安全範圍內直接提升渦輪增壓值與馬力｜規格：專用電腦盒｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$13,900",
+            "currency": "NTD",
+            "min": 13900,
+            "max": 13900,
+            "raw": "NT$13,900"
+          },
+          "spec": "專用電腦盒",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e30",
+          "name": "SARD Ti-Z 排氣管 2021-",
+          "desc": "全鈦合金打造極致輕量化，高頻爆裂聲浪與極致排氣效率｜規格：2021- 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$108,000",
+            "currency": "NTD",
+            "min": 108000,
+            "max": 108000,
+            "raw": "NT$108,000"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e31",
+          "name": "CUSCO / OKADA PROJECTS 直接點火系統",
+          "desc": "強化點火線圈電壓，使油氣燃燒更完全，提升全速域扭力反應｜規格：專車專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$20,500 ~ NT$29,900",
+            "currency": "NTD",
+            "min": 20500,
+            "max": 29900,
+            "raw": "NT$20,500 ~ NT$29,900"
+          },
+          "spec": "專車專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e32",
+          "name": "CUSCO 廢油回收桶 2021-",
+          "desc": "分離並收集引擎曲軸箱廢油氣，防止進氣系統積碳影響馬力｜規格：2021- 專屬套件｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$4,560",
+            "currency": "NTD",
+            "min": 4560,
+            "max": 4560,
+            "raw": "NT$4,560"
+          },
+          "spec": "2021- 專屬套件",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e33",
+          "name": "CUSCO 加大差速器油底殼 2021-",
+          "desc": "增加差速器油量與散熱鰭片面積，降低LSD激烈作動時的高溫｜規格：2021- 專用｜單位：件",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$26,000",
+            "currency": "NTD",
+            "min": 26000,
+            "max": 26000,
+            "raw": "NT$26,000"
+          },
+          "spec": "2021- 專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e34",
+          "name": "LAILE BEATRUSH 進氣組",
+          "desc": "香菇頭設計與隔熱擋板，大幅提升進氣撞風效率｜規格：專屬套件｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$36,800",
+            "currency": "NTD",
+            "min": 36800,
+            "max": 36800,
+            "raw": "NT$36,800"
+          },
+          "spec": "專屬套件",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e35",
+          "name": "DRL 鋁合金水箱 2021-",
+          "desc": "加厚鋁合金水箱本體，增加冷卻液容量，強化極限操駕散熱效能｜規格：2021- 專用｜單位：組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$56,000",
+            "currency": "NTD",
+            "min": 56000,
+            "max": 56000,
+            "raw": "NT$56,000"
+          },
+          "spec": "2021- 專用",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        },
+        {
+          "id": "e36",
+          "name": "GR PARTS 冷風進氣導管 / 中冷冷卻水噴水桶",
+          "desc": "強制將車頭冷空氣導向進氣口；水噴系統降低進氣高溫，保護引擎｜規格：專用部件｜單位：件/組",
+          "emoji": "🔥",
+          "price": {
+            "display": "NT$2,999 ~ NT$9,990",
+            "currency": "NTD",
+            "min": 2999,
+            "max": 9990,
+            "raw": "NT$2,999 ~ NT$9,990"
+          },
+          "spec": "專用部件",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "引擎動力"
+        }
+      ]
+    },
+    "interior": {
+      "label": "內裝精品套件",
+      "parts": [
+        {
+          "id": "i0",
+          "name": "HKS 刺繡皮革方向盤 / x NARDI 聯名三輻式方向盤",
+          "desc": "縮小方向盤盤徑與改變握感材質，提升轉向手感與車室戰鬥氣息｜規格：專用對應｜單位：把",
+          "emoji": "🪑",
+          "price": {
+            "display": "NT$24,500 ~ NT$32,000",
+            "currency": "NTD",
+            "min": 24500,
+            "max": 32000,
+            "raw": "NT$24,500 ~ NT$32,000"
+          },
+          "spec": "專用對應",
+          "unit": "把",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "內裝/精品配件"
+        },
+        {
+          "id": "i1",
+          "name": "TOM'S / HKS / GR / TRUST GReddy 排檔頭 / 機油蓋 / 啟動按鈕",
+          "desc": "改變排檔重量與握感使入檔更確實；碳纖維/金屬材質點綴內外質感｜規格：專屬配件｜單位：件",
+          "emoji": "🪑",
+          "price": {
+            "display": "NT$599 ~ NT$5,980",
+            "currency": "NTD",
+            "min": 599,
+            "max": 5980,
+            "raw": "NT$599 ~ NT$5,980"
+          },
+          "spec": "專屬配件",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "內裝/精品配件"
+        },
+        {
+          "id": "i2",
+          "name": "TOM'S CARBON / 皮革 SMART KEY 智慧型鑰匙皮套",
+          "desc": "保護原廠感應鑰匙，增添碳纖維或真皮高雅觸感｜規格：專屬配件｜單位：件",
+          "emoji": "🪑",
+          "price": {
+            "display": "NT$2,680",
+            "currency": "NTD",
+            "min": 2680,
+            "max": 2680,
+            "raw": "NT$2,680"
+          },
+          "spec": "專屬配件",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "內裝/精品配件"
+        },
+        {
+          "id": "i3",
+          "name": "REAL / TOM'S CARBON 方向盤",
+          "desc": "碳纖維與真皮拼接，指叉凹槽設計提升操駕握感與內裝質感｜規格：專用對應｜單位：把",
+          "emoji": "🪑",
+          "price": {
+            "display": "NT$18,000 ~ NT$29,800",
+            "currency": "NTD",
+            "min": 18000,
+            "max": 29800,
+            "raw": "NT$18,000 ~ NT$29,800"
+          },
+          "spec": "專用對應",
+          "unit": "把",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "內裝/精品配件"
+        },
+        {
+          "id": "i4",
+          "name": "DENSO / MLITFILTER 綠魔俠 高階冷氣濾芯 (包含PM2.5防護)",
+          "desc": "高效過濾車外粉塵與PM2.5，維持車室內冷氣空氣清新｜規格：專用規格/交換型｜單位：片",
+          "emoji": "🪑",
+          "price": {
+            "display": "NT$385 ~ NT$1,090",
+            "currency": "NTD",
+            "min": 385,
+            "max": 1090,
+            "raw": "NT$385 ~ NT$1,090"
+          },
+          "spec": "專用規格/交換型",
+          "unit": "片",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "內裝/精品配件"
+        },
+        {
+          "id": "i5",
+          "name": "HYPER REV 專門誌 汽車改裝聖經 VOL.285 (GR YARIS/COROLLA)",
+          "desc": "提供超過數百項日本最新改裝資訊與技術參數參考｜規格：日文雜誌｜單位：本",
+          "emoji": "🪑",
+          "price": {
+            "display": "NT$1,099",
+            "currency": "NTD",
+            "min": 1099,
+            "max": 1099,
+            "raw": "NT$1,099"
+          },
+          "spec": "日文雜誌",
+          "unit": "本",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "內裝/精品配件"
+        },
+        {
+          "id": "i6",
+          "name": "TOYOTA原廠 補漆筆 / 靜電貼紙 / 高低音警告喇叭 / 門碗片",
+          "desc": "修補漆面、減少車體靜電干擾空氣力學，升級喇叭警示音色及防刮｜規格：專屬配件｜單位：件/組",
+          "emoji": "🪑",
+          "price": {
+            "display": "NT$149 ~ NT$2,450",
+            "currency": "NTD",
+            "min": 149,
+            "max": 2450,
+            "raw": "NT$149 ~ NT$2,450"
+          },
+          "spec": "專屬配件",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "內裝/精品配件"
+        }
+      ]
+    },
+    "exterior_aero": {
+      "label": "外觀空力",
+      "parts": [
+        {
+          "id": "a0",
+          "name": "Result Japan 空力套件組 / CARBON 引擎蓋 / GT尾翼 / 葉子板散熱孔等",
+          "desc": "碳纖維輕量化與大面積擾流設計，增加高速下壓力與煞車/引擎散熱｜規格：專車各部位專用｜單位：件/組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$9,600 ~ NT$79,800",
+            "currency": "NTD",
+            "min": 9600,
+            "max": 79800,
+            "raw": "NT$9,600 ~ NT$79,800"
+          },
+          "spec": "專車各部位專用",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a1",
+          "name": "GARAGE VARY GT 尾翼 / 前下巴",
+          "desc": "延伸車身氣流線條，增加車頭下壓與車尾穩定力｜規格：專車各部位專用｜單位：件",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$25,200 ~ NT$54,000",
+            "currency": "NTD",
+            "min": 25200,
+            "max": 54000,
+            "raw": "NT$25,200 ~ NT$54,000"
+          },
+          "spec": "專車各部位專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a2",
+          "name": "KANSAI SERVICE 引擎蓋 / C柱定風翼 / 尾翼 / 側裙 / 前下巴",
+          "desc": "碳纖維開孔引擎蓋加速散熱，全車定風翼穩定高速巡航氣流｜規格：專車各部位專用｜單位：件",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$9,600 ~ NT$64,800",
+            "currency": "NTD",
+            "min": 9600,
+            "max": 64800,
+            "raw": "NT$9,600 ~ NT$64,800"
+          },
+          "spec": "專車各部位專用",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a3",
+          "name": "VARIS ARISING-1 / 2 空力套件 / 碳纖引擎蓋 / GT-WING 尾翼",
+          "desc": "頂級空氣力學設計，產生巨大下壓力，碳纖材質極致輕量與視覺張力｜規格：專屬套件｜單位：件/組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$12,900 ~ NT$126,000",
+            "currency": "NTD",
+            "min": 12900,
+            "max": 126000,
+            "raw": "NT$12,900 ~ NT$126,000"
+          },
+          "spec": "專屬套件",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a4",
+          "name": "TOM'S 空力套件組 / 尾翼 / 廣角後視鏡",
+          "desc": "結合原廠線條的導流設計，降低風阻係數，後視鏡增加視野安全｜規格：專車各部位專用｜單位：件/組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$3,680 ~ NT$108,850",
+            "currency": "NTD",
+            "min": 3680,
+            "max": 108850,
+            "raw": "NT$3,680 ~ NT$108,850"
+          },
+          "spec": "專車各部位專用",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a5",
+          "name": "AIMGAIN SPORT 空力套件組 / 尾門尾翼 / 車頂尾翼",
+          "desc": "日系VIP與競技風結合，梳理車頂亂流並增加車體層次感｜規格：專車各部位專用｜單位：件/組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$26,600 ~ NT$68,400",
+            "currency": "NTD",
+            "min": 26600,
+            "max": 68400,
+            "raw": "NT$26,600 ~ NT$68,400"
+          },
+          "spec": "專車各部位專用",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a6",
+          "name": "SARD GT-WING / GT1 空力套件 / 前下巴",
+          "desc": "源自GT賽事空力數據，大幅提升前輪循跡性與後軸高速穩定度｜規格：專車各部位專用｜單位：件/組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$46,800 ~ NT$106,800",
+            "currency": "NTD",
+            "min": 46800,
+            "max": 106800,
+            "raw": "NT$46,800 ~ NT$106,800"
+          },
+          "spec": "專車各部位專用",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a7",
+          "name": "Grazio&Co 車頂左右小翼",
+          "desc": "微調車頂兩側渦流，減少車尾真空帶阻力｜規格：專用對應｜單位：組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$16,800",
+            "currency": "NTD",
+            "min": 16800,
+            "max": 16800,
+            "raw": "NT$16,800"
+          },
+          "spec": "專用對應",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a8",
+          "name": "HKS 輪拱 / Body Kit TYPE-S 空力套件 / CARBON 尾翼 / 引擎上蓋",
+          "desc": "寬體視覺與輪拱散熱優化，碳纖維部件點綴引擎室與車體競技感｜規格：專屬套件｜單位：件/組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$19,800 ~ NT$105,000",
+            "currency": "NTD",
+            "min": 19800,
+            "max": 105000,
+            "raw": "NT$19,800 ~ NT$105,000"
+          },
+          "spec": "專屬套件",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a9",
+          "name": "Gazoo Racing x GROW Design 空力套件 / DRY CARBON 尾翼",
+          "desc": "御用認證空力數據，無損安裝並顯著強化空氣力學效應｜規格：小改後專用｜單位：件/組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$29,990 ~ NT$69,990",
+            "currency": "NTD",
+            "min": 29990,
+            "max": 69990,
+            "raw": "NT$29,990 ~ NT$69,990"
+          },
+          "spec": "小改後專用",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a10",
+          "name": "KUHL KRUISE KR-GRYRR 空力套件 / 車頂尾翼 / 尾門尾翼",
+          "desc": "獨特切割線條導流，強化車身下半部亂流排除，增添霸氣｜規格：專車各部位專用｜單位：件/組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$17,600 ~ NT$118,800",
+            "currency": "NTD",
+            "min": 17600,
+            "max": 118800,
+            "raw": "NT$17,600 ~ NT$118,800"
+          },
+          "spec": "專車各部位專用",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a11",
+          "name": "GR (TOYOTA原廠) 車側條紋拉花 / 晴雨窗 / 引擎下護板 / 定風翼",
+          "desc": "原廠部品密合度最高，防護底盤、車內通風並增添賽車視覺塗裝｜規格：專車各部位專用｜單位：件/組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$5,800 ~ NT$110,000",
+            "currency": "NTD",
+            "min": 5800,
+            "max": 110000,
+            "raw": "NT$5,800 ~ NT$110,000"
+          },
+          "spec": "專車各部位專用",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a12",
+          "name": "C-WEST CARBON GT 尾翼 / 空力套件組",
+          "desc": "賽道淬鍊的空力外型，有效降低升力系數｜規格：專屬套件｜單位：件/組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$22,500 ~ NT$88,000",
+            "currency": "NTD",
+            "min": 22500,
+            "max": 88000,
+            "raw": "NT$22,500 ~ NT$88,000"
+          },
+          "spec": "專屬套件",
+          "unit": "件/組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a13",
+          "name": "VOLTEX 空力套件組",
+          "desc": "專攻單圈測時的極致下壓力外觀套件，大幅增加過彎極限｜規格：專屬套件｜單位：組",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$35,000 ~ NT$60,200",
+            "currency": "NTD",
+            "min": 35000,
+            "max": 60200,
+            "raw": "NT$35,000 ~ NT$60,200"
+          },
+          "spec": "專屬套件",
+          "unit": "組",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        },
+        {
+          "id": "a14",
+          "name": "LAILE BEATRUSH 鋁合金引擎下護板",
+          "desc": "取代原廠塑膠護板，保護油底殼免受跳石擊破，平整化車底氣流｜規格：專用對應｜單位：件",
+          "emoji": "🛞",
+          "price": {
+            "display": "NT$9,800",
+            "currency": "NTD",
+            "min": 9800,
+            "max": 9800,
+            "raw": "NT$9,800"
+          },
+          "spec": "專用對應",
+          "unit": "件",
+          "isDefault": false,
+          "mods": {
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
+            "displacement": 0,
+            "pp": 0
+          },
+          "sourceCategory": "外觀空力"
+        }
+      ]
+    }
+  }
+}
