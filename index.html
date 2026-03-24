@@ -2698,40 +2698,41 @@
           fillLight.position.set(-80, 60, 80);
           this.scene.add(fillLight);
 
-          // Ground plane + cooler reflection + subtle center glow
+          // Ground plane reset to solid black (no visible effect)
           const groundGeo = new THREE.PlaneGeometry(2000, 2000);
-          const groundMat = new THREE.MeshPhysicalMaterial({
-            color: 0x0b1e34,
-            roughness: 0.3,
-            metalness: 0.25,
-            clearcoat: 0.18,
-            clearcoatRoughness: 0.25,
-            emissive: 0x05224a,
-            emissiveIntensity: 0.14,
+          const groundMat = new THREE.MeshStandardMaterial({
+            color: 0x000000,
+            roughness: 1,
+            metalness: 0,
+            emissive: 0x000000,
+            emissiveIntensity: 0,
           });
           const ground = new THREE.Mesh(groundGeo, groundMat);
           ground.rotation.x = -Math.PI / 2;
-          ground.position.y = 0.25; // +5 from base level
+          ground.position.y = 0.25;
           ground.receiveShadow = true;
           this.scene.add(ground);
 
-          const grid = new THREE.GridHelper(1800, 80, 0x0b2337, 0x0b2337);
-          grid.position.y = 4.247;
-          grid.material.transparent = true;
-          grid.material.opacity = 0.28;
-          this.scene.add(grid);
+          // Hide grid helper fully for clean black ground
+          // (keep Ring/Center glow only)
+          // const grid = new THREE.GridHelper(1800, 80, 0x0b2337, 0x0b2337);
+          // grid.position.y = 4.247;
+          // grid.material.transparent = true;
+          // grid.material.opacity = 0.28;
+          // this.scene.add(grid);
 
-          // Add glow ring and center halo to make it cooler
+          // Add glow ring and center halo only
           const ringGeo = new THREE.RingGeometry(12, 28, 96);
           const ringMat = new THREE.MeshBasicMaterial({
             color: 0x00d6ff,
             transparent: true,
-            opacity: 0.14,
+            opacity: 0.16,
             side: THREE.DoubleSide,
+            blending: THREE.AdditiveBlending,
           });
           const ring = new THREE.Mesh(ringGeo, ringMat);
           ring.rotation.x = -Math.PI / 2;
-          ring.position.y = 4.255;
+          ring.position.y = 0.27;
           this.scene.add(ring);
 
           const centerGeo = new THREE.CircleGeometry(9, 64);
@@ -2740,11 +2741,21 @@
             transparent: true,
             opacity: 0.08,
             side: THREE.DoubleSide,
+            blending: THREE.AdditiveBlending,
           });
           const center = new THREE.Mesh(centerGeo, centerMat);
           center.rotation.x = -Math.PI / 2;
-          center.position.y = 4.256;
+          center.position.y = 0.271;
           this.scene.add(center);
+
+          // Soft animated pulse on the ring and center glow
+          const pulseData = { ring, center };
+          this.animateGlow = function () {
+            const t = (Date.now() * 0.002) % Math.PI;
+            const pulse = 0.8 + 0.2 * Math.sin(t);
+            pulseData.ring.material.opacity = 0.08 + 0.08 * pulse;
+            pulseData.center.material.opacity = 0.04 + 0.04 * pulse;
+          };
 
           // Subtle spot lighting for dramatic cool effect
           const rimSpot = new THREE.SpotLight(
@@ -2881,6 +2892,10 @@
             if (!this.isDragging) {
               this.targetRotationY += 0.0015;
             }
+          }
+
+          if (typeof this.animateGlow === "function") {
+            this.animateGlow();
           }
 
           this.renderer.render(this.scene, this.camera);
