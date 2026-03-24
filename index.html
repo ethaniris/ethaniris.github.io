@@ -499,6 +499,7 @@
         font-weight: 700;
         letter-spacing: 0.2em;
         color: var(--grey);
+        z-index: 7;
       }
 
       /* Red diagonal accent bar */
@@ -767,8 +768,8 @@
       }
 
       .pc-desc {
-        font-size: 10px;
-        color: var(--grey);
+        font-size: 11px;
+        color: var(--white);
         line-height: 1.45;
         margin-bottom: 8px;
       }
@@ -812,6 +813,19 @@
         color: #e84040;
         background: rgba(232, 64, 64, 0.1);
         border: 1px solid rgba(232, 64, 64, 0.2);
+      }
+
+      .pc-spec {
+        font-size: 9px;
+        color: var(--cyan);
+        line-height: 1.4;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .pc-unit {
+        display: none;
       }
 
       /* ═══════════════════════════════════════
@@ -2150,6 +2164,7 @@
         power: 228,
         torque: 249,
         pp: 489,
+        ratio: (1270 / 228).toFixed(2),
       };
 
       const DEMO_MODE = true;
@@ -2161,170 +2176,47 @@
         pp: 50,
       };
 
-      const CATS = {
-        wheels: {
-          label: "輪框",
-          parts: [
-            {
-              id: "w0",
-              name: '原廠 17" 鋁合金輪框',
-              desc: "原廠 FA24 搭配 17 吋鑄造鋁合金輪框，適合日常通勤與輕度操駕。",
-              emoji: "⚙️",
-              price: 0,
-              isDefault: true,
-              mods: {},
-            },
-            {
-              id: "w1",
-              name: 'BBS CH-R 鍛造 18"',
-              desc: "BBS 輕量鍛造單片式輪框，德國工藝，強化剛性同時大幅減重。",
-              emoji: "🔩",
-              price: 88000,
-              mods: { weight: -20, pp: 9 },
-            },
-            {
-              id: "w2",
-              name: 'Rays Volk TE37 競技 18"',
-              desc: "傳奇競技輪框，Rays 六輻鍛造結構，GT 賽場認證規格。",
-              emoji: "💿",
-              price: 152000,
-              mods: { weight: -32, pp: 17 },
-            },
-            {
-              id: "w3",
-              name: '碳纖維 CFRP 輪框 19"',
-              desc: "全碳纖維輕量化輪框，FIA 認可材質，賽道極致輕量化解決方案。",
-              emoji: "🌀",
-              price: 338000,
-              mods: { weight: -48, power: 3, torque: 2, pp: 26 },
-            },
-          ],
-        },
-        suspension: {
-          label: "底盤懸吊",
-          parts: [
-            {
-              id: "s0",
-              name: "原廠懸吊系統",
-              desc: "原廠麥弗遜 / 雙A臂懸吊配置，均衡舒適性與運動性能。",
-              emoji: "🔧",
-              price: 0,
-              isDefault: true,
-              mods: {},
-            },
-            {
-              id: "s1",
-              name: "Bilstein B8 運動避震",
-              desc: "Bilstein 德國製造 B8 競技避震，車高降低 20mm，剛性全面升級。",
-              emoji: "⛏️",
-              price: 64000,
-              mods: { weight: -6, pp: 14 },
-            },
-            {
-              id: "s2",
-              name: "KW V3 可調式總成",
-              desc: "KW Variant 3 全段可調，高低壓阻獨立調整，完美適配賽道與街道。",
-              emoji: "🛠️",
-              price: 128000,
-              mods: { weight: -10, pp: 22 },
-            },
-            {
-              id: "s3",
-              name: "Öhlins TTX 賽車懸吊",
-              desc: "Öhlins 頂規賽車用 TTX 懸吊，F1 / WRC 供應商同款技術規格。",
-              emoji: "⚒️",
-              price: 258000,
-              mods: { weight: -15, power: 2, pp: 35 },
-            },
-          ],
-        },
-        engine: {
-          label: "引擎動力",
-          parts: [
-            {
-              id: "e0",
-              name: "原廠 FA24F 引擎",
-              desc: "水平對臥四缸自然進氣，頂置雙凸輪軸，原廠 228 PS 輸出。",
-              emoji: "🔋",
-              price: 0,
-              isDefault: true,
-              mods: {},
-            },
-            {
-              id: "e1",
-              name: "HKS 冷空氣進氣套件",
-              desc: "高流量冷空氣進氣 + 強化節氣門，低轉域扭力與高轉域馬力同步提升。",
-              emoji: "💨",
-              price: 38000,
-              mods: { power: 16, torque: 13, pp: 20 },
-            },
-            {
-              id: "e2",
-              name: "Ti 鈦合金排氣系統",
-              desc: "輕量鈦合金全段排氣，增益排氣效率，特徵性中高頻排氣音浪。",
-              emoji: "🔥",
-              price: 98000,
-              mods: { power: 24, torque: 19, weight: -8, pp: 30 },
-            },
-            {
-              id: "e3",
-              name: "HKS GT 機械增壓套件",
-              desc: "HKS GT8270 Roots 增壓系統，全域大幅增強動力輸出，質感澎湃。",
-              emoji: "⚡",
-              price: 398000,
-              mods: { power: 88, torque: 102, pp: 94 },
-            },
-          ],
-        },
-        interior: {
-          label: "內裝精品套件",
-          parts: [
-            {
-              id: "i0",
-              name: "原廠標準內裝",
-              desc: "原廠皮質包覆座椅、儀表板與門板，舒適耐用。",
-              emoji: "🪑",
-              price: 0,
-              isDefault: true,
-              mods: {},
-            },
-            {
-              id: "i1",
-              name: "Recaro RS-G 桶型座椅",
-              desc: "頂級 Recaro 全桶型賽車座椅，高側向支撐，FIA 認可安全規格。",
-              emoji: "💺",
-              price: 82000,
-              mods: { weight: -16, pp: 7 },
-            },
-            {
-              id: "i2",
-              name: "碳纖維輕量化套件",
-              desc: "儀表板、門板、中控全碳纖維替換，大幅削減車艙重量。",
-              emoji: "🏎️",
-              price: 162000,
-              mods: { weight: -38, pp: 14 },
-            },
-            {
-              id: "i3",
-              name: "GT 全賽車化改裝套件",
-              desc: "ST-45 滾籠 + Sabelt 五點安全帶 + 全碳纖維車艙，戰鬥機規格。",
-              emoji: "🏁",
-              price: 295000,
-              mods: { weight: -60, power: 5, pp: 25 },
-            },
-          ],
-        },
-      };
+      let CATS = {};
+
+      // Load parts data from JSON
+      fetch("parts_data.json")
+        .then((response) => response.json())
+        .then((data) => {
+          CATS = data.categories;
+          // Adjust price to number (use min if range, else single value)
+          for (const cat in CATS) {
+            for (const part of CATS[cat].parts) {
+              if (part.price.min !== undefined) {
+                part.price = part.price.min;
+              } else {
+                part.price = 0; // or some default
+              }
+              // Ensure mods has all fields
+              part.mods = part.mods || {};
+            }
+          }
+          // Initialize sel with default parts
+          sel = {};
+          for (const cat in CATS) {
+            const defaultPart =
+              CATS[cat].parts.find((p) => p.isDefault) || CATS[cat].parts[0];
+            sel[cat] = defaultPart.id;
+          }
+          // Initialize after loading
+          initApp();
+        })
+        .catch((error) => console.error("Error loading parts data:", error));
+
+      function initApp() {
+        renderStats(false);
+        renderParts();
+        renderSummary();
+      }
 
       /* ══════════════════════════════
          STATE
       ══════════════════════════════ */
-      let sel = {
-        wheels: "w0",
-        suspension: "s0",
-        engine: "e0",
-        interior: "i0",
-      };
+      let sel = {};
       let curCat = "wheels";
       let pending = null;
       let prevStats = null;
@@ -2334,11 +2226,15 @@
         for (const [cat, id] of Object.entries(sel)) {
           const p = CATS[cat].parts.find((x) => x.id === id);
           if (!p?.mods) continue;
-          if (p.mods.weight) s.weight += p.mods.weight;
-          if (p.mods.power) s.power += p.mods.power;
-          if (p.mods.torque) s.torque += p.mods.torque;
-          if (p.mods.displacement) s.displacement += p.mods.displacement;
-          if (p.mods.pp) s.pp += p.mods.pp;
+          if (p.mods.weight !== undefined && p.mods.weight !== 0)
+            s.weight += p.mods.weight;
+          if (p.mods.power !== undefined && p.mods.power !== 0)
+            s.power += p.mods.power;
+          if (p.mods.torque !== undefined && p.mods.torque !== 0)
+            s.torque += p.mods.torque;
+          if (p.mods.displacement !== undefined && p.mods.displacement !== 0)
+            s.displacement += p.mods.displacement;
+          if (p.mods.pp !== undefined && p.mods.pp !== 0) s.pp += p.mods.pp;
         }
         if (DEMO_MODE) {
           s.displacement += DEMO_BOOST.displacement;
@@ -2518,8 +2414,8 @@
             const imgContent =
               curCat === "wheels"
                 ? `<img src="assets/images/wheel${
-                    parseInt(p.id.slice(1)) + 1
-                  }.jpeg" alt="${
+                    (parseInt(p.id.slice(1)) % 4) + 1
+                  }.png" alt="${
                     p.name
                   }" style="width:85%; height:85%; object-fit:contain;">`
                 : `<span class="pc-emoji" style="font-size:50px">${p.emoji}</span>`;
@@ -2533,6 +2429,7 @@
             </div>
             <div class="pc-body">
               <div class="pc-name">${p.name}</div>
+              ${p.spec ? `<div class="pc-spec">${p.spec}</div>` : ""}
               <div class="pc-desc">${p.desc}</div>
               <div class="pc-footer">
                 <span class="pc-price">${
@@ -2572,7 +2469,7 @@
           modalVis.classList.add("wheel-mode");
           modalImg.src = `assets/images/wheel${
             parseInt(p.id.slice(1)) + 1
-          }.jpeg`;
+          }.png`;
           modalImg.alt = p.name;
           modalImg.style.display = "block";
           modalEmoji.style.display = "none";
@@ -2801,6 +2698,85 @@
           fillLight.position.set(-80, 60, 80);
           this.scene.add(fillLight);
 
+          // Ground plane + cooler reflection + subtle center glow
+          const groundGeo = new THREE.PlaneGeometry(2000, 2000);
+          const groundMat = new THREE.MeshPhysicalMaterial({
+            color: 0x0b1e34,
+            roughness: 0.3,
+            metalness: 0.25,
+            clearcoat: 0.18,
+            clearcoatRoughness: 0.25,
+            emissive: 0x05224a,
+            emissiveIntensity: 0.14,
+          });
+          const ground = new THREE.Mesh(groundGeo, groundMat);
+          ground.rotation.x = -Math.PI / 2;
+          ground.position.y = 0.25; // +5 from base level
+          ground.receiveShadow = true;
+          this.scene.add(ground);
+
+          const grid = new THREE.GridHelper(1800, 80, 0x0b2337, 0x0b2337);
+          grid.position.y = 4.247;
+          grid.material.transparent = true;
+          grid.material.opacity = 0.28;
+          this.scene.add(grid);
+
+          // Add glow ring and center halo to make it cooler
+          const ringGeo = new THREE.RingGeometry(12, 28, 96);
+          const ringMat = new THREE.MeshBasicMaterial({
+            color: 0x00d6ff,
+            transparent: true,
+            opacity: 0.14,
+            side: THREE.DoubleSide,
+          });
+          const ring = new THREE.Mesh(ringGeo, ringMat);
+          ring.rotation.x = -Math.PI / 2;
+          ring.position.y = 4.255;
+          this.scene.add(ring);
+
+          const centerGeo = new THREE.CircleGeometry(9, 64);
+          const centerMat = new THREE.MeshBasicMaterial({
+            color: 0x00d6ff,
+            transparent: true,
+            opacity: 0.08,
+            side: THREE.DoubleSide,
+          });
+          const center = new THREE.Mesh(centerGeo, centerMat);
+          center.rotation.x = -Math.PI / 2;
+          center.position.y = 4.256;
+          this.scene.add(center);
+
+          // Subtle spot lighting for dramatic cool effect
+          const rimSpot = new THREE.SpotLight(
+            0x8ae5ff,
+            0.8,
+            0,
+            Math.PI * 0.28,
+            0.15,
+            1
+          );
+          rimSpot.position.set(-40, 80, -40);
+          rimSpot.target.position.set(0, 0, 0);
+          rimSpot.castShadow = true;
+          rimSpot.shadow.mapSize.width = 2048;
+          rimSpot.shadow.mapSize.height = 2048;
+          this.scene.add(rimSpot);
+          this.scene.add(rimSpot.target);
+
+          const warmSpot = new THREE.SpotLight(
+            0xffbe6a,
+            0.3,
+            0,
+            Math.PI * 0.33,
+            0.25,
+            1
+          );
+          warmSpot.position.set(50, 70, 60);
+          warmSpot.target.position.set(0, 0, 0);
+          warmSpot.castShadow = false;
+          this.scene.add(warmSpot);
+          this.scene.add(warmSpot.target);
+
           this.loadModel();
           this.animate();
           this.setupControls(canvas);
@@ -2868,7 +2844,8 @@
               this.model = gltf.scene;
               this.model.scale.set(600, 600, 600);
               this.model.position.set(0, 0, 0);
-              this.model.rotation.x = -Math.PI / 2; // Rotate to stand upright
+              this.model.rotation.x = -Math.PI / 2;
+              // Rotate to stand upright
 
               this.model.traverse((child) => {
                 if (child.isMesh) {
