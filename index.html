@@ -3480,7 +3480,7 @@
 
           canvas.addEventListener("mousemove", (e) => {
             if (this.isDragging) {
-              this.targetRotationY += (e.clientX - clientX) * 0.006;
+              this.targetRotationY -= (e.clientX - clientX) * 0.006;
               this.targetRotationX += (e.clientY - clientY) * 0.006;
               clientX = e.clientX;
               clientY = e.clientY;
@@ -3503,7 +3503,7 @@
 
           canvas.addEventListener("touchmove", (e) => {
             if (this.isDragging && e.touches.length > 0) {
-              this.targetRotationY += (e.touches[0].clientX - clientX) * 0.006;
+              this.targetRotationY -= (e.touches[0].clientX - clientX) * 0.006;
               this.targetRotationX += (e.touches[0].clientY - clientY) * 0.006;
               clientX = e.touches[0].clientX;
               clientY = e.touches[0].clientY;
