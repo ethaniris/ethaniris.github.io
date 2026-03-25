@@ -3301,7 +3301,6 @@
 
     <!-- 3D Model Viewer -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script>
       /* ══════════════════════════════
    LOADING SEQUENCE
@@ -3378,7 +3377,7 @@
             0.1,
             10000
           );
-          this.camera.position.set(0, 10, 25);
+          this.camera.position.set(0, 0, 35);
           this.camera.lookAt(0, 0, 0);
 
           this.renderer = new THREE.WebGLRenderer({
@@ -3407,21 +3406,6 @@
           fillLight.position.set(-80, 60, 80);
           this.scene.add(fillLight);
 
-          // Ground plane reset to solid black (no visible effect)
-          const groundGeo = new THREE.PlaneGeometry(2000, 2000);
-          const groundMat = new THREE.MeshStandardMaterial({
-            color: 0x000000,
-            roughness: 1,
-            metalness: 0,
-            emissive: 0x000000,
-            emissiveIntensity: 0,
-          });
-          const ground = new THREE.Mesh(groundGeo, groundMat);
-          ground.rotation.x = -Math.PI / 2;
-          ground.position.y = 0.25;
-          ground.receiveShadow = true;
-          this.scene.add(ground);
-
           // Hide grid helper fully for clean black ground
           // (keep Ring/Center glow only)
           // const grid = new THREE.GridHelper(1800, 80, 0x0b2337, 0x0b2337);
@@ -3429,42 +3413,6 @@
           // grid.material.transparent = true;
           // grid.material.opacity = 0.28;
           // this.scene.add(grid);
-
-          // Add glow ring and center halo only
-          const ringGeo = new THREE.RingGeometry(12, 28, 96);
-          const ringMat = new THREE.MeshBasicMaterial({
-            color: 0x00d6ff,
-            transparent: true,
-            opacity: 0.16,
-            side: THREE.DoubleSide,
-            blending: THREE.AdditiveBlending,
-          });
-          const ring = new THREE.Mesh(ringGeo, ringMat);
-          ring.rotation.x = -Math.PI / 2;
-          ring.position.y = 0.27;
-          this.scene.add(ring);
-
-          const centerGeo = new THREE.CircleGeometry(9, 64);
-          const centerMat = new THREE.MeshBasicMaterial({
-            color: 0x00d6ff,
-            transparent: true,
-            opacity: 0.08,
-            side: THREE.DoubleSide,
-            blending: THREE.AdditiveBlending,
-          });
-          const center = new THREE.Mesh(centerGeo, centerMat);
-          center.rotation.x = -Math.PI / 2;
-          center.position.y = 0.271;
-          this.scene.add(center);
-
-          // Soft animated pulse on the ring and center glow
-          const pulseData = { ring, center };
-          this.animateGlow = function () {
-            const t = (Date.now() * 0.002) % Math.PI;
-            const pulse = 0.8 + 0.2 * Math.sin(t);
-            pulseData.ring.material.opacity = 0.08 + 0.08 * pulse;
-            pulseData.center.material.opacity = 0.04 + 0.04 * pulse;
-          };
 
           // Subtle spot lighting for dramatic cool effect
           const rimSpot = new THREE.SpotLight(
@@ -3507,13 +3455,13 @@
 
           if (leftBtn) {
             leftBtn.addEventListener("click", () => {
-              this.targetRotationY -= Math.PI / 9; // 20 degrees left
+              this.targetRotationY += Math.PI / 9; // 20 degrees left
             });
           }
 
           if (rightBtn) {
             rightBtn.addEventListener("click", () => {
-              this.targetRotationY += Math.PI / 9; // 20 degrees right
+              this.targetRotationY -= Math.PI / 9; // 20 degrees right
             });
           }
 
@@ -3569,39 +3517,54 @@
         },
 
         loadModel() {
-          if (!THREE.GLTFLoader) {
-            setTimeout(() => this.loadModel(), 100);
-            return;
+          // Create plane geometry for 360 images
+          const geometry = new THREE.PlaneGeometry(70, 24); // 1180x400 aspect ratio (~2.95:1), much larger
+          const material = new THREE.MeshBasicMaterial({
+            transparent: true,
+            alphaTest: 0.1,
+            magFilter: THREE.LinearFilter,
+            minFilter: THREE.LinearFilter
+          });
+          this.model = new THREE.Mesh(geometry, material);
+          this.model.position.set(0, 0, 0);
+          
+          // Preload all 360 images
+          this.carImages = [];
+          this.imageTextures = [];
+          const totalImages = 61;
+          
+          for (let i = 1; i <= totalImages; i++) {
+            const imgIndex = i.toString().padStart(2, '0');
+            const imgPath = `assets/images/car_360_images/car_${imgIndex}.png`;
+            this.carImages.push(imgPath);
           }
-
-          const loader = new THREE.GLTFLoader();
-          loader.load(
-            "assets/images/2021_toyota_gr_yaris.glb",
-            (gltf) => {
-              this.model = gltf.scene;
-              this.model.scale.set(600, 600, 600);
-              this.model.position.set(0, 0, 0);
-              this.model.rotation.x = 0;
-              this.model.rotation.y = 0;
-              this.model.rotation.z = 0;
-
-              this.model.traverse((child) => {
-                if (child.isMesh) {
-                  child.castShadow = false;
-                  child.receiveShadow = false;
+          
+          // Load first image to initialize
+          const textureLoader = new THREE.TextureLoader();
+          textureLoader.load(
+            this.carImages[0],
+            (texture) => {
+              material.map = texture;
+              texture.magFilter = THREE.LinearFilter;
+              texture.minFilter = THREE.LinearFilter;
+              material.needsUpdate = true;
+              this.scene.add(this.model);
+              console.log("✓ 360 Car Images loaded successfully");
+              
+              // Preload remaining images
+              this.carImages.forEach((imgPath, index) => {
+                if (index > 0) {
+                  textureLoader.load(imgPath, (tex) => {
+                    this.imageTextures[index] = tex;
+                  });
+                } else {
+                  this.imageTextures[0] = texture;
                 }
               });
-
-              this.scene.add(this.model);
-              console.log("✓ 3D Yaris Model loaded successfully");
-
-              // Debug bounding box
-              const box = new THREE.Box3().setFromObject(this.model);
-              console.log("Model bounding box min:", box.min, "max:", box.max);
             },
             (progress) => {},
             (error) => {
-              console.error("Error loading GLB model:", error);
+              console.error("Error loading car images:", error);
             }
           );
         },
@@ -3616,8 +3579,23 @@
             // 鎖定 X 軸旋轉為 0，只允許 Y 軸旋轉（平行轉）
             this.rotationX = 0;
 
-            this.model.rotation.x = this.rotationX;
-            this.model.rotation.y = this.rotationY;
+            // For image-based rotation, update texture based on Y rotation
+            if (this.imageTextures && this.imageTextures.length > 0) {
+              // Normalize rotation to 0-2π range
+              let normalizedRotation = this.rotationY % (Math.PI * 2);
+              if (normalizedRotation < 0) normalizedRotation += Math.PI * 2;
+              
+              // Map rotation to image index (61 images for 360 degrees)
+              const totalImages = 61;
+              const imageIndex = Math.floor((normalizedRotation / (Math.PI * 2)) * totalImages) % totalImages;
+              
+              // Update texture if different
+              if (this.currentImageIndex !== imageIndex && this.imageTextures[imageIndex]) {
+                this.model.material.map = this.imageTextures[imageIndex];
+                this.model.material.needsUpdate = true;
+                this.currentImageIndex = imageIndex;
+              }
+            }
           }
 
           if (typeof this.animateGlow === "function") {
@@ -3640,7 +3618,7 @@
       };
 
       function initWhenReady() {
-        if (typeof THREE !== "undefined" && THREE.GLTFLoader) {
+        if (typeof THREE !== "undefined") {
           if (document.readyState === "loading") {
             document.addEventListener("DOMContentLoaded", () => car3D.init());
           } else {
