@@ -701,16 +701,28 @@
       /* Car container */
       .car-stage-inner {
         position: absolute;
-        top: 10%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: min(900px, 80%);
         height: 360px;
-        animation: car-float 7s ease-in-out infinite;
         z-index: 1;
       }
 
-      @keyframes car-float {
+      @media (max-width: 1024px) {
+        .car-stage-inner {
+          top: 45%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .car-stage-inner {
+          top: 44%;
+        }
+      }
+
+      /* car-stage 取消上下浮動 */
+      /* @keyframes car-float {
         0%,
         100% {
           transform: translateX(-50%) translateY(0);
@@ -718,7 +730,7 @@
         50% {
           transform: translateX(-50%) translateY(-10px);
         }
-      }
+      } */
 
       .car-glow-under {
         position: absolute;
