@@ -733,7 +733,7 @@
           transparent 70%
         );
         filter: blur(12px);
-        animation: glow-pulse 7s ease-in-out infinite;
+        /* 移除脈動動畫 */
       }
 
       @keyframes glow-pulse {
@@ -746,6 +746,42 @@
           opacity: 0.4;
           transform: translateX(-50%) scaleX(0.8);
         }
+      }
+
+      .rotate-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        background: rgba(3, 10, 18, 0.88);
+        color: #fff;
+        font-size: 24px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 0 18px rgba(0, 205, 255, 0.45);
+        transition: all 0.15s ease;
+        z-index: 10;
+      }
+
+      .rotate-btn-left {
+        left: 12px;
+      }
+
+      .rotate-btn-right {
+        right: 12px;
+      }
+
+      .rotate-btn:hover {
+        transform: translateY(-50%) scale(1.08);
+        background: rgba(0, 209, 255, 0.9);
+        box-shadow: 0 0 24px rgba(0, 205, 255, 0.65);
+      }
+
+      .rotate-btn:active {
+        transform: translateY(-50%) scale(0.95);
       }
 
       /* Hero text */
@@ -2119,6 +2155,10 @@
               id="car-3d-canvas"
               style="width: 100%; height: 100%; display: block"
             ></canvas>
+
+            <!-- Left/Right Rotation Controls -->
+            <button id="rotate-left" class="rotate-btn rotate-btn-left" aria-label="Rotate left">◀</button>
+            <button id="rotate-right" class="rotate-btn rotate-btn-right" aria-label="Rotate right">▶</button>
           </div>
           <!-- car-stage-inner -->
 
@@ -3307,20 +3347,19 @@
           });
           this.renderer.setSize(width, height);
           this.renderer.setPixelRatio(window.devicePixelRatio);
-          this.renderer.shadowMap.enabled = true;
+          this.renderer.shadowMap.enabled = false;
 
           const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
           this.scene.add(ambientLight);
 
           const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
           keyLight.position.set(120, 100, 100);
-          keyLight.castShadow = true;
-          keyLight.shadow.mapSize.width = 2048;
-          keyLight.shadow.mapSize.height = 2048;
+          keyLight.castShadow = false;
           this.scene.add(keyLight);
 
           const rimLight = new THREE.DirectionalLight(0x88ccff, 0.4);
           rimLight.position.set(-100, 50, -150);
+          rimLight.castShadow = false;
           this.scene.add(rimLight);
 
           const fillLight = new THREE.DirectionalLight(0xffffcc, 0.35);
@@ -3420,6 +3459,23 @@
           this.loadModel();
           this.animate();
           this.setupControls(canvas);
+
+          // Setup rotation buttons
+          const leftBtn = document.getElementById("rotate-left");
+          const rightBtn = document.getElementById("rotate-right");
+
+          if (leftBtn) {
+            leftBtn.addEventListener("click", () => {
+              this.targetRotationY -= Math.PI / 9; // 20 degrees left
+            });
+          }
+
+          if (rightBtn) {
+            rightBtn.addEventListener("click", () => {
+              this.targetRotationY += Math.PI / 9; // 20 degrees right
+            });
+          }
+
           window.addEventListener("resize", () => this.onWindowResize());
         },
 
@@ -3484,13 +3540,14 @@
               this.model = gltf.scene;
               this.model.scale.set(600, 600, 600);
               this.model.position.set(0, 0, 0);
-              this.model.rotation.x = -Math.PI / 2;
-              // Rotate to stand upright
+              this.model.rotation.x = 0;
+              this.model.rotation.y = 0;
+              this.model.rotation.z = 0;
 
               this.model.traverse((child) => {
                 if (child.isMesh) {
-                  child.castShadow = true;
-                  child.receiveShadow = true;
+                  child.castShadow = false;
+                  child.receiveShadow = false;
                 }
               });
 
@@ -3515,16 +3572,15 @@
             this.rotationX += (this.targetRotationX - this.rotationX) * 0.1;
             this.rotationY += (this.targetRotationY - this.rotationY) * 0.1;
 
+            // 鎖定 X 軸旋轉為 0，只允許 Y 軸旋轉（平行轉）
+            this.rotationX = 0;
+
             this.model.rotation.x = this.rotationX;
             this.model.rotation.y = this.rotationY;
-
-            if (!this.isDragging) {
-              this.targetRotationY += 0.0015;
-            }
           }
 
           if (typeof this.animateGlow === "function") {
-            this.animateGlow();
+            // 禁用脈動光暈動畫
           }
 
           this.renderer.render(this.scene, this.camera);
