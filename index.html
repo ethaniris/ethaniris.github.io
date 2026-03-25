@@ -709,15 +709,44 @@
         z-index: 1;
       }
 
+      @media (max-width: 1200px) {
+        .car-stage-inner {
+          width: min(700px, 90%);
+          height: 305px;
+          top: 48%;
+        }
+      }
+
       @media (max-width: 1024px) {
         .car-stage-inner {
-          top: 45%;
+          width: 92%;
+          height: 280px;
+          top: 46%;
         }
       }
 
       @media (max-width: 768px) {
         .car-stage-inner {
+          width: 95%;
+          height: 220px;
           top: 44%;
+        }
+
+        .tech-hint {
+          font-size: 10px;
+          margin-bottom: 8px;
+        }
+
+        .tech-main-btn {
+          font-size: 11px;
+          padding: 8px 12px;
+          max-width: 220px;
+        }
+
+        .rotate-btn {
+          width: 42px;
+          height: 42px;
+          font-size: 18px;
         }
       }
 
