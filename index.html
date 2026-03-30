@@ -1242,6 +1242,38 @@
         );
       }
 
+      .stats-col.fx-boost {
+        animation: stats-boost 0.55s ease-out;
+      }
+
+      .stats-col.fx-drop {
+        animation: stats-drop 0.55s ease-out;
+      }
+
+      @keyframes stats-boost {
+        0% {
+          box-shadow: inset 0 0 0 rgba(0, 229, 255, 0);
+        }
+        35% {
+          box-shadow: inset 0 0 90px rgba(0, 229, 255, 0.16);
+        }
+        100% {
+          box-shadow: inset 0 0 0 rgba(0, 229, 255, 0);
+        }
+      }
+
+      @keyframes stats-drop {
+        0% {
+          box-shadow: inset 0 0 0 rgba(255, 107, 26, 0);
+        }
+        35% {
+          box-shadow: inset 0 0 90px rgba(255, 107, 26, 0.13);
+        }
+        100% {
+          box-shadow: inset 0 0 0 rgba(255, 107, 26, 0);
+        }
+      }
+
       /* Car thumb */
       .stats-thumb {
         padding: 16px 18px 0;
@@ -1310,6 +1342,8 @@
         padding: 14px 18px;
         border-bottom: 1px solid var(--border);
         flex-shrink: 0;
+        position: relative;
+        overflow: hidden;
       }
 
       .pp-meter-top {
@@ -1336,10 +1370,105 @@
 
       .pp-delta {
         font-family: "Barlow Condensed", sans-serif;
-        font-size: 13px;
-        font-weight: 700;
+        font-size: 15px;
+        font-weight: 800;
         letter-spacing: 0.08em;
         color: var(--grey);
+      }
+
+      .pp-delta.up {
+        color: #54ff9a;
+        text-shadow: 0 0 10px rgba(84, 255, 154, 0.45);
+      }
+
+      .pp-delta.down {
+        color: #ff5e6b;
+        text-shadow: 0 0 10px rgba(255, 94, 107, 0.45);
+      }
+
+      .pp-delta.neutral {
+        color: var(--grey);
+        text-shadow: none;
+      }
+
+      .pp-meter.pp-impact {
+        animation: pp-hit 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .pp-meter.pp-down {
+        animation: pp-down 0.45s ease-out;
+      }
+
+      @keyframes pp-hit {
+        0% {
+          transform: scale(1);
+          filter: brightness(1);
+        }
+        45% {
+          transform: scale(1.02);
+          filter: brightness(1.2);
+        }
+        100% {
+          transform: scale(1);
+          filter: brightness(1);
+        }
+      }
+
+      @keyframes pp-down {
+        0% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-2px);
+        }
+        50% {
+          transform: translateX(2px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      .pp-burst {
+        position: absolute;
+        right: 18px;
+        top: 10px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        pointer-events: none;
+        z-index: 4;
+        animation: pp-burst 0.9s ease-out forwards;
+      }
+
+      .pp-burst.up {
+        color: #54ff9a;
+        border: 1px solid rgba(84, 255, 154, 0.55);
+        background: rgba(8, 35, 22, 0.9);
+      }
+
+      .pp-burst.down {
+        color: #ff5e6b;
+        border: 1px solid rgba(255, 94, 107, 0.55);
+        background: rgba(35, 8, 12, 0.9);
+      }
+
+      @keyframes pp-burst {
+        0% {
+          opacity: 0;
+          transform: translateY(6px) scale(0.9);
+        }
+        22% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-20px) scale(1.05);
+        }
       }
 
       /* Segmented PP bar */
@@ -1397,10 +1526,52 @@
         padding: 8px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         gap: 6px;
+        position: relative;
+        overflow: hidden;
       }
 
       .stat-row:last-child {
         border-bottom: none;
+      }
+
+      .stat-row::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -35%;
+        width: 30%;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0),
+          rgba(0, 229, 255, 0.35),
+          rgba(255, 255, 255, 0)
+        );
+        transform: skewX(-18deg);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .stat-row.stat-row-impact::after {
+        animation: stat-sweep 0.62s ease-out;
+      }
+
+      .stat-row.stat-row-impact .stat-bar-fill {
+        filter: brightness(1.18);
+      }
+
+      @keyframes stat-sweep {
+        0% {
+          left: -35%;
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        100% {
+          left: 120%;
+          opacity: 0;
+        }
       }
 
       .stat-lbl {
@@ -1442,24 +1613,60 @@
         transition: all 0.4s;
         display: inline-block;
       }
-      .stat-val.changed {
-        color: var(--cyan);
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
+
+      .stat-val.changed-good {
+        color: #54ff9a;
+        text-shadow: 0 0 10px rgba(84, 255, 154, 0.55);
       }
+
+      .stat-val.changed-bad {
+        color: #ff5e6b;
+        text-shadow: 0 0 10px rgba(255, 94, 107, 0.55);
+      }
+
       .stat-delta {
         font-family: "Barlow Condensed", sans-serif;
-        font-size: 10px;
-        color: var(--cyan);
-        font-weight: 700;
+        font-size: 14px;
+        font-weight: 800;
         display: block;
         line-height: 1;
         margin-bottom: 2px;
-        min-height: 14px;
+        min-height: 18px;
+        letter-spacing: 0.08em;
       }
 
-      .stat-val.flash {
-        color: var(--cyan);
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+      .stat-delta.stat-good {
+        color: #54ff9a;
+      }
+
+      .stat-delta.stat-bad {
+        color: #ff5e6b;
+      }
+
+      .stat-delta.delta-pop {
+        animation: delta-pop 0.48s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      @keyframes delta-pop {
+        0% {
+          transform: translateY(5px) scale(0.9);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+      }
+
+      .stat-val.flash-good {
+        color: #54ff9a;
+        text-shadow: 0 0 10px rgba(84, 255, 154, 0.55);
+        animation: val-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      }
+
+      .stat-val.flash-bad {
+        color: #ff5e6b;
+        text-shadow: 0 0 10px rgba(255, 94, 107, 0.55);
         animation: val-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
       }
 
@@ -2066,7 +2273,7 @@
           font-size: 24px;
         }
         .pp-delta {
-          font-size: 10px;
+          font-size: 12px;
         }
         .stats-list {
           margin-top: 16px;
@@ -2633,6 +2840,81 @@
       let pending = null;
       let prevStats = null;
 
+      function isBeneficialDelta(stat, delta) {
+        if (delta === 0) return true;
+        if (stat === "weight" || stat === "ratio") return delta < 0;
+        return delta > 0;
+      }
+
+      function formatAnimatedNumber(value, decimals = 0) {
+        if (decimals > 0) return Number(value).toFixed(decimals);
+        return String(Math.round(Number(value)));
+      }
+
+      function animateNumericValue(el, from, to, decimals = 0, duration = 620) {
+        if (!el) return;
+        if (!Number.isFinite(from) || !Number.isFinite(to)) {
+          el.textContent = formatAnimatedNumber(to, decimals);
+          return;
+        }
+
+        const start = performance.now();
+        const diff = to - from;
+        if (Math.abs(diff) < 0.001) {
+          el.textContent = formatAnimatedNumber(to, decimals);
+          return;
+        }
+
+        const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+        const tick = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = easeOutCubic(progress);
+          const current = from + diff * eased;
+          el.textContent = formatAnimatedNumber(current, decimals);
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+
+        requestAnimationFrame(tick);
+      }
+
+      function spawnPPBurst(delta) {
+        if (!delta) return;
+        const meter = document.querySelector(".pp-meter");
+        if (!meter) return;
+
+        const burst = document.createElement("div");
+        burst.className = `pp-burst ${delta > 0 ? "up" : "down"}`;
+        burst.textContent = delta > 0 ? `PP +${delta}` : `PP ${delta}`;
+        meter.appendChild(burst);
+        burst.addEventListener("animationend", () => burst.remove());
+      }
+
+      function triggerGameFeedback(ppDelta) {
+        const statsCol = document.querySelector(".stats-col");
+        const meter = document.querySelector(".pp-meter");
+
+        if (statsCol) {
+          statsCol.classList.remove("fx-boost", "fx-drop");
+          void statsCol.offsetWidth;
+          statsCol.classList.add(ppDelta > 0 ? "fx-boost" : "fx-drop");
+          setTimeout(() => {
+            statsCol.classList.remove("fx-boost", "fx-drop");
+          }, 620);
+        }
+
+        if (meter) {
+          meter.classList.remove("pp-impact", "pp-down");
+          void meter.offsetWidth;
+          meter.classList.add(ppDelta > 0 ? "pp-impact" : "pp-down");
+          setTimeout(() => {
+            meter.classList.remove("pp-impact", "pp-down");
+          }, 620);
+        }
+
+        spawnPPBurst(ppDelta);
+      }
+
       function computeStats() {
         const s = { ...BASE };
         for (const [cat, id] of Object.entries(sel)) {
@@ -2663,14 +2945,35 @@
       /* ══════════════════════════════
          RENDER STATS
       ══════════════════════════════ */
-      function setStatVal(id, val, animate, delta = 0) {
+      function setStatVal(id, val, animate, delta = 0, prevValue = null) {
         const el = document.getElementById("sv-" + id);
         const deltaEl = document.getElementById("sv-" + id + "-delta");
         if (!el) return;
 
-        el.textContent = val;
+        const row = el.closest(".stat-row");
+        const isNumeric = id !== "drivetrain" && !Number.isNaN(Number(val));
+        const decimals = id === "ratio" ? 2 : 0;
+
+        if (
+          isNumeric &&
+          animate &&
+          prevValue !== null &&
+          prevValue !== undefined &&
+          !Number.isNaN(Number(prevValue))
+        ) {
+          animateNumericValue(
+            el,
+            Number(prevValue),
+            Number(val),
+            decimals,
+            700
+          );
+        } else {
+          el.textContent = isNumeric ? formatAnimatedNumber(val, decimals) : val;
+        }
 
         if (deltaEl) {
+          deltaEl.classList.remove("stat-good", "stat-bad", "delta-pop");
           if (delta > 0) {
             deltaEl.textContent = `+${delta}`;
           } else if (delta < 0) {
@@ -2678,19 +2981,39 @@
           } else {
             deltaEl.textContent = "";
           }
+
+          if (delta !== 0) {
+            const good = isBeneficialDelta(id, delta);
+            deltaEl.classList.add(good ? "stat-good" : "stat-bad");
+            if (animate) {
+              void deltaEl.offsetWidth;
+              deltaEl.classList.add("delta-pop");
+            }
+          }
         }
 
+        el.classList.remove("changed-good", "changed-bad");
         if (delta !== 0) {
-          el.classList.add("changed");
-        } else {
-          el.classList.remove("changed");
+          const good = isBeneficialDelta(id, delta);
+          el.classList.add(good ? "changed-good" : "changed-bad");
         }
 
-        if (animate) {
-          el.classList.remove("flash");
+        if (animate && delta !== 0) {
+          const good = isBeneficialDelta(id, delta);
+          el.classList.remove("flash-good", "flash-bad");
           void el.offsetWidth;
-          el.classList.add("flash");
-          setTimeout(() => el.classList.remove("flash"), 600);
+          el.classList.add(good ? "flash-good" : "flash-bad");
+          setTimeout(
+            () => el.classList.remove("flash-good", "flash-bad"),
+            600
+          );
+        }
+
+        if (row && animate && delta !== 0) {
+          row.classList.remove("stat-row-impact");
+          void row.offsetWidth;
+          row.classList.add("stat-row-impact");
+          setTimeout(() => row.classList.remove("stat-row-impact"), 700);
         }
       }
 
@@ -2701,32 +3024,37 @@
           "displacement",
           s.displacement,
           animate && prevStats && s.displacement !== prevStats.displacement,
-          s.displacement - BASE.displacement
+          s.displacement - BASE.displacement,
+          prevStats ? prevStats.displacement : null
         );
         setStatVal("drivetrain", s.drivetrain, false, 0);
         setStatVal(
           "weight",
           s.weight,
           animate && prevStats && s.weight !== prevStats.weight,
-          s.weight - BASE.weight
+          s.weight - BASE.weight,
+          prevStats ? prevStats.weight : null
         );
         setStatVal(
           "power",
           s.power,
           animate && prevStats && s.power !== prevStats.power,
-          s.power - BASE.power
+          s.power - BASE.power,
+          prevStats ? prevStats.power : null
         );
         setStatVal(
           "torque",
           s.torque,
           animate && prevStats && s.torque !== prevStats.torque,
-          s.torque - BASE.torque
+          s.torque - BASE.torque,
+          prevStats ? prevStats.torque : null
         );
         setStatVal(
           "ratio",
           s.ratio,
           animate && prevStats && s.ratio !== prevStats.ratio,
-          (s.ratio - BASE.ratio).toFixed(2)
+          Number((s.ratio - BASE.ratio).toFixed(2)),
+          prevStats ? Number(prevStats.ratio) : null
         );
 
         // Bars
@@ -2743,19 +3071,33 @@
 
         // PP
         const ppEl = document.getElementById("pp-val");
-        ppEl.textContent = s.pp;
+
         if (animate && prevStats && s.pp !== prevStats.pp) {
+          animateNumericValue(ppEl, prevStats.pp, s.pp, 0, 760);
           ppEl.classList.remove("flash");
           void ppEl.offsetWidth;
           ppEl.classList.add("flash");
           setTimeout(() => ppEl.classList.remove("flash"), 600);
+        } else {
+          ppEl.textContent = s.pp;
         }
         updatePPBar(s.pp);
 
         // Delta text
         const delta = prevStats ? s.pp - prevStats.pp : 0;
-        document.getElementById("pp-delta-txt").textContent =
-          delta > 0 ? `+${delta} 進化` : delta < 0 ? `${delta} PP` : "基礎配置";
+        const ppDeltaEl = document.getElementById("pp-delta-txt");
+        ppDeltaEl.classList.remove("up", "down", "neutral");
+        ppDeltaEl.textContent =
+          delta > 0
+            ? `+${delta} PP ・ ${
+                delta >= 18 ? "超級進化" : delta >= 10 ? "高能進化" : "性能進化"
+              }`
+            : delta < 0
+            ? `${delta} PP ・ 重新調校`
+            : "基礎配置";
+        ppDeltaEl.classList.add(
+          delta > 0 ? "up" : delta < 0 ? "down" : "neutral"
+        );
 
         // HUD
         document.getElementById(
@@ -2763,6 +3105,10 @@
         ).textContent = `${s.drivetrain} · ${s.power} PS · ${s.weight} kg`;
         document.getElementById("hud-pp").textContent = s.pp;
         document.getElementById("hero-hp").textContent = s.power;
+
+        if (animate && prevStats && delta !== 0) {
+          triggerGameFeedback(delta);
+        }
 
         renderSummary();
         prevStats = { ...s };
@@ -2947,11 +3293,20 @@
 
       function confirmPart() {
         if (!pending) return;
+        const before = computeStats();
         sel[pending.cat] = pending.id;
+        const after = computeStats();
+        const deltaPP = after.pp - before.pp;
         closeMod();
         renderParts();
         renderStats(true);
-        showToast("零件已成功裝備！");
+        if (deltaPP > 0) {
+          showToast(`零件已成功裝備！PP +${deltaPP}`);
+        } else if (deltaPP < 0) {
+          showToast(`零件已成功裝備！PP ${deltaPP}`);
+        } else {
+          showToast("零件已成功裝備！性能配置已更新");
+        }
       }
 
       /* ══════════════════════════════
