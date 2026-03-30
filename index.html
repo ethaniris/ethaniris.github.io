@@ -722,6 +722,7 @@
           height: 42px;
           font-size: 18px;
         }
+
       }
 
       /* car-stage 取消上下浮動 */
@@ -797,6 +798,76 @@
 
       .rotate-btn:active {
         transform: translateY(-50%) scale(0.95);
+      }
+
+      .car-color-switch {
+        position: absolute;
+        left: 50%;
+        bottom: 34px;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 14;
+      }
+
+      .car-color-btn {
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        border: none;
+        background: transparent;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.18s ease;
+      }
+
+      .car-color-btn:hover {
+        transform: scale(1.08);
+      }
+
+      .car-color-btn.active {
+        transform: scale(1.08);
+      }
+
+      .car-color-swatch {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        display: block;
+        border: 1px solid rgba(230, 238, 248, 0.55);
+        box-shadow: 0 0 0 1px rgba(6, 10, 16, 0.6);
+        transition: box-shadow 0.18s ease, border-color 0.18s ease;
+      }
+
+      .car-color-btn.active .car-color-swatch {
+        border-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.45),
+          0 0 18px rgba(0, 229, 255, 0.35);
+      }
+
+      .car-color-swatch.black {
+        background: linear-gradient(145deg, #222a36, #04070f);
+      }
+
+      .car-color-swatch.white {
+        background: linear-gradient(145deg, #f8fbff, #c4ced8);
+      }
+
+      .car-color-swatch.red {
+        background: linear-gradient(145deg, #ff5d5d, #a11414);
+      }
+
+      @media (max-width: 768px) {
+        .car-color-switch {
+          bottom: 20px;
+          gap: 8px;
+        }
+
+        .car-color-btn {
+          width: 22px;
+          height: 22px;
+        }
       }
 
       /* Hero text */
@@ -2401,6 +2472,41 @@
           </div>
           <!-- car-stage-inner -->
 
+          <div
+            class="car-color-switch"
+            id="car-color-switch"
+            role="radiogroup"
+            aria-label="Select car color"
+          >
+            <button
+              type="button"
+              class="car-color-btn active"
+              data-color="black"
+              aria-pressed="true"
+              onclick="setCarColor('black')"
+            >
+              <span class="car-color-swatch black"></span>
+            </button>
+            <button
+              type="button"
+              class="car-color-btn"
+              data-color="white"
+              aria-pressed="false"
+              onclick="setCarColor('white')"
+            >
+              <span class="car-color-swatch white"></span>
+            </button>
+            <button
+              type="button"
+              class="car-color-btn"
+              data-color="red"
+              aria-pressed="false"
+              onclick="setCarColor('red')"
+            >
+              <span class="car-color-swatch red"></span>
+            </button>
+          </div>
+
           <!-- TECH DIAGNOSIS BUTTON -->
           <div class="tech-hint">不確定挑選什麼配備？</div>
           <button
@@ -3783,6 +3889,11 @@
         targetRotationY: 0,
         isDragging: false,
         animateLogged: false,
+        totalImages: 61,
+        currentColor: "black",
+        currentImageFolder: "assets/images/car_360_images",
+        imageLoadToken: 0,
+        textureLoader: null,
 
         init() {
           const canvas = document.getElementById("car-3d-canvas");
@@ -3942,6 +4053,100 @@
           });
         },
 
+        getImageIndexFromRotation() {
+          let normalizedRotation = this.rotationY % (Math.PI * 2);
+          if (normalizedRotation < 0) normalizedRotation += Math.PI * 2;
+          return (
+            Math.floor((normalizedRotation / (Math.PI * 2)) * this.totalImages) %
+            this.totalImages
+          );
+        },
+
+        getCarImageList(folder) {
+          const images = [];
+          for (let i = 1; i <= this.totalImages; i++) {
+            const imgIndex = i.toString().padStart(2, "0");
+            images.push(`${folder}/car_${imgIndex}.png`);
+          }
+          return images;
+        },
+
+        updateColorSwitchUI() {
+          document.querySelectorAll(".car-color-btn").forEach((btn) => {
+            const isActive = btn.dataset.color === this.currentColor;
+            btn.classList.toggle("active", isActive);
+            btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+          });
+        },
+
+        loadImageSet(folder) {
+          if (!this.model || !this.textureLoader) return;
+          const carImages = this.getCarImageList(folder);
+          const priorityIndex = this.getImageIndexFromRotation();
+          const loadOrder = [
+            priorityIndex,
+            ...Array.from({ length: this.totalImages }, (_, i) => i).filter(
+              (i) => i !== priorityIndex
+            ),
+          ];
+          const requestToken = ++this.imageLoadToken;
+
+          this.currentImageFolder = folder;
+          this.carImages = carImages;
+          this.imageTextures = new Array(this.totalImages);
+          this.currentImageIndex = -1;
+
+          const primeIndex = loadOrder[0];
+          this.textureLoader.load(
+            carImages[primeIndex],
+            (primeTexture) => {
+              if (requestToken !== this.imageLoadToken) return;
+              primeTexture.magFilter = THREE.LinearFilter;
+              primeTexture.minFilter = THREE.LinearFilter;
+
+              this.imageTextures[primeIndex] = primeTexture;
+              this.model.material.map = primeTexture;
+              this.model.material.needsUpdate = true;
+              this.currentImageIndex = primeIndex;
+
+              loadOrder.slice(1).forEach((index) => {
+                this.textureLoader.load(
+                  carImages[index],
+                  (tex) => {
+                    if (requestToken !== this.imageLoadToken) return;
+                    tex.magFilter = THREE.LinearFilter;
+                    tex.minFilter = THREE.LinearFilter;
+                    this.imageTextures[index] = tex;
+                  },
+                  undefined,
+                  () => {}
+                );
+              });
+            },
+            undefined,
+            (error) => {
+              console.error(`Error loading car images from ${folder}:`, error);
+              if (folder !== "assets/images/car_360_images") {
+                this.switchColor("black");
+              }
+            }
+          );
+        },
+
+        switchColor(color) {
+          const allowedColors = {
+            black: "assets/images/car_360_images",
+            white: "assets/images/car_360_images_white",
+            red: "assets/images/car_360_images_red",
+          };
+          this.currentColor = allowedColors[color] ? color : "black";
+          this.updateColorSwitchUI();
+          if (!this.model || !this.textureLoader) return;
+
+          const folder = allowedColors[this.currentColor];
+          this.loadImageSet(folder);
+        },
+
         loadModel() {
           // Create plane geometry for 360 images
           const geometry = new THREE.PlaneGeometry(100, 34); // 1180x400 aspect ratio (~2.95:1), much larger
@@ -3949,50 +4154,14 @@
             transparent: true,
             alphaTest: 0.1,
             magFilter: THREE.LinearFilter,
-            minFilter: THREE.LinearFilter
+            minFilter: THREE.LinearFilter,
           });
           this.model = new THREE.Mesh(geometry, material);
           this.model.position.set(0, 0, 0);
-          
-          // Preload all 360 images
-          this.carImages = [];
-          this.imageTextures = [];
-          const totalImages = 61;
-          
-          for (let i = 1; i <= totalImages; i++) {
-            const imgIndex = i.toString().padStart(2, '0');
-            const imgPath = `assets/images/car_360_images/car_${imgIndex}.png`;
-            this.carImages.push(imgPath);
-          }
-          
-          // Load first image to initialize
-          const textureLoader = new THREE.TextureLoader();
-          textureLoader.load(
-            this.carImages[0],
-            (texture) => {
-              material.map = texture;
-              texture.magFilter = THREE.LinearFilter;
-              texture.minFilter = THREE.LinearFilter;
-              material.needsUpdate = true;
-              this.scene.add(this.model);
-              console.log("✓ 360 Car Images loaded successfully");
-              
-              // Preload remaining images
-              this.carImages.forEach((imgPath, index) => {
-                if (index > 0) {
-                  textureLoader.load(imgPath, (tex) => {
-                    this.imageTextures[index] = tex;
-                  });
-                } else {
-                  this.imageTextures[0] = texture;
-                }
-              });
-            },
-            (progress) => {},
-            (error) => {
-              console.error("Error loading car images:", error);
-            }
-          );
+          this.scene.add(this.model);
+
+          this.textureLoader = new THREE.TextureLoader();
+          this.switchColor(this.currentColor);
         },
 
         animate() {
@@ -4007,14 +4176,8 @@
 
             // For image-based rotation, update texture based on Y rotation
             if (this.imageTextures && this.imageTextures.length > 0) {
-              // Normalize rotation to 0-2π range
-              let normalizedRotation = this.rotationY % (Math.PI * 2);
-              if (normalizedRotation < 0) normalizedRotation += Math.PI * 2;
-              
-              // Map rotation to image index (61 images for 360 degrees)
-              const totalImages = 61;
-              const imageIndex = Math.floor((normalizedRotation / (Math.PI * 2)) * totalImages) % totalImages;
-              
+              const imageIndex = this.getImageIndexFromRotation();
+
               // Update texture if different
               if (this.currentImageIndex !== imageIndex && this.imageTextures[imageIndex]) {
                 this.model.material.map = this.imageTextures[imageIndex];
@@ -4042,6 +4205,11 @@
           }
         },
       };
+
+      function setCarColor(color) {
+        if (!car3D || typeof car3D.switchColor !== "function") return;
+        car3D.switchColor(color);
+      }
 
       function initWhenReady() {
         if (typeof THREE !== "undefined") {
