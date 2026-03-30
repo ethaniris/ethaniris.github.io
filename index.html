@@ -3141,6 +3141,55 @@
         metaEl.textContent = `已選 ${Object.keys(sel).length} 項 · GR YARIS`;
       }
 
+      const CATEGORY_IMAGE_POOLS = {
+        suspension: [
+          encodeURI("assets/images/suspension_images/cusco_type_os.png"),
+          encodeURI("assets/images/suspension_images/cusco_防傾桿.png"),
+        ],
+        engine: [
+          encodeURI("assets/images/engine_images/hks_super_fire_racing.png"),
+          encodeURI("assets/images/engine_images/k&n_sprint_filter.png"),
+          encodeURI("assets/images/engine_images/toms_power_box.png"),
+        ],
+        interior: [
+          encodeURI("assets/images/aero_images/gr_toyoya_parts.png"),
+          encodeURI("assets/images/aero_images/laile_beatrush.png"),
+          encodeURI("assets/images/aero_images/grazio&co.png"),
+        ],
+        aero: [
+          encodeURI("assets/images/aero_images/gr_toyoya_parts.png"),
+          encodeURI("assets/images/aero_images/laile_beatrush.png"),
+          encodeURI("assets/images/aero_images/grazio&co.png"),
+        ],
+      };
+
+      function resolvePartImage(cat, part) {
+        if (!part) return null;
+        const name = String(part.name || "").toLowerCase();
+        const pool = CATEGORY_IMAGE_POOLS[cat];
+        if (!pool || !pool.length) return null;
+
+        if (cat === "suspension") {
+          if (name.includes("type-os")) return pool[0];
+          if (name.includes("防傾桿")) return pool[1];
+        }
+
+        if (cat === "engine") {
+          if (name.includes("super fire racing")) return pool[0];
+          if (name.includes("k&n") || name.includes("sprint filter")) return pool[1];
+          if ((name.includes("tom's") || name.includes("toms")) && name.includes("power box")) return pool[2];
+        }
+
+        if (cat === "interior" || cat === "aero") {
+          if (name.includes("gr") && name.includes("toyota")) return pool[0];
+          if (name.includes("laile") || name.includes("beatrush")) return pool[1];
+          if (name.includes("grazio")) return pool[2];
+        }
+
+        const idx = Number.parseInt(String(part.id || "").replace(/\D/g, ""), 10);
+        return pool[(Number.isNaN(idx) ? 0 : idx) % pool.length];
+      }
+
       /* ══════════════════════════════
          PARTS GRID
       ══════════════════════════════ */
@@ -3177,6 +3226,7 @@
               })
               .join("");
 
+            const resolvedImg = resolvePartImage(curCat, p);
             const imgContent =
               curCat === "wheels"
                 ? `<img src="assets/images/wheel${
@@ -3184,6 +3234,8 @@
                   }.png" alt="${
                     p.name
                   }" style="width:85%; height:85%; object-fit:contain;">`
+                : resolvedImg
+                ? `<img src="${resolvedImg}" alt="${p.name}" style="width:85%; height:85%; object-fit:contain;">`
                 : `<span class="pc-emoji" style="font-size:50px">${p.emoji}</span>`;
 
             return `<div class="part-card ${
@@ -3240,12 +3292,21 @@
           modalImg.style.display = "block";
           modalEmoji.style.display = "none";
         } else {
+          const resolvedImg = resolvePartImage(cat, p);
+          if (resolvedImg) {
+          modalVis.classList.remove("wheel-mode");
+          modalImg.src = resolvedImg;
+          modalImg.alt = p.name;
+          modalImg.style.display = "block";
+          modalEmoji.style.display = "none";
+          } else {
           modalVis.classList.remove("wheel-mode");
           modalImg.src = "";
           modalImg.alt = "";
           modalImg.style.display = "none";
           modalEmoji.style.display = "inline";
           modalEmoji.textContent = p.emoji;
+          }
         }
 
         document.getElementById("modal-price").textContent =
