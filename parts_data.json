@@ -23,11 +23,11 @@
           "unit": "只",
           "isDefault": true,
           "mods": {
-            "weight": 0,
+            "weight": -8,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 0
+            "pp": 6
           },
           "sourceCategory": "輪框"
         },
@@ -47,11 +47,11 @@
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -9,
             "power": 0,
-            "torque": 0,
+            "torque": 1,
             "displacement": 0,
-            "pp": 0
+            "pp": 7
           },
           "sourceCategory": "輪框"
         },
@@ -71,11 +71,11 @@
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -7,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 0
+            "pp": 5
           },
           "sourceCategory": "輪框"
         },
@@ -95,11 +95,11 @@
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -6,
             "power": 0,
-            "torque": 0,
+            "torque": 1,
             "displacement": 0,
-            "pp": 0
+            "pp": 5
           },
           "sourceCategory": "輪框"
         },
@@ -119,11 +119,11 @@
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -10,
             "power": 0,
-            "torque": 0,
+            "torque": 1,
             "displacement": 0,
-            "pp": 0
+            "pp": 8
           },
           "sourceCategory": "輪框"
         },
@@ -143,11 +143,11 @@
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -9,
             "power": 0,
-            "torque": 0,
+            "torque": 2,
             "displacement": 0,
-            "pp": 0
+            "pp": 8
           },
           "sourceCategory": "輪框"
         },
@@ -167,11 +167,11 @@
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -11,
             "power": 0,
-            "torque": 0,
+            "torque": 2,
             "displacement": 0,
-            "pp": 0
+            "pp": 9
           },
           "sourceCategory": "輪框"
         },
@@ -191,11 +191,11 @@
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -12,
             "power": 0,
-            "torque": 0,
+            "torque": 2,
             "displacement": 0,
-            "pp": 0
+            "pp": 10
           },
           "sourceCategory": "輪框"
         }
@@ -220,11 +220,11 @@
           "unit": "件",
           "isDefault": true,
           "mods": {
-            "weight": 0,
+            "weight": 1,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 0
+            "pp": 3
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -244,11 +244,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": 2,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 0
+            "pp": 5
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -268,11 +268,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -3,
             "power": 0,
-            "torque": 0,
+            "torque": 1,
             "displacement": 0,
-            "pp": 0
+            "pp": 4
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -292,11 +292,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -5,
             "power": 0,
-            "torque": 0,
+            "torque": 2,
             "displacement": 0,
-            "pp": 0
+            "pp": 7
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -316,11 +316,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -6,
             "power": 0,
-            "torque": 0,
+            "torque": 2,
             "displacement": 0,
-            "pp": 0
+            "pp": 8
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -340,11 +340,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -7,
             "power": 0,
-            "torque": 0,
+            "torque": 3,
             "displacement": 0,
-            "pp": 0
+            "pp": 9
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -364,11 +364,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -8,
             "power": 0,
-            "torque": 0,
+            "torque": 3,
             "displacement": 0,
-            "pp": 0
+            "pp": 10
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -388,11 +388,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -2,
             "power": 0,
-            "torque": 0,
+            "torque": 2,
             "displacement": 0,
-            "pp": 0
+            "pp": 4
           },
           "sourceCategory": "底盤懸吊"
         }
@@ -418,10 +418,10 @@
           "isDefault": true,
           "mods": {
             "weight": 0,
-            "power": 0,
-            "torque": 0,
+            "power": 4,
+            "torque": 5,
             "displacement": 0,
-            "pp": 0
+            "pp": 6
           },
           "sourceCategory": "引擎動力"
         },
@@ -441,11 +441,11 @@
           "unit": "件",
           "isDefault": false,
           "mods": {
-            "weight": 0,
-            "power": 0,
-            "torque": 0,
+            "weight": -1,
+            "power": 6,
+            "torque": 8,
             "displacement": 0,
-            "pp": 0
+            "pp": 8
           },
           "sourceCategory": "引擎動力"
         },
@@ -465,11 +465,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
-            "power": 0,
-            "torque": 0,
+            "weight": 1,
+            "power": 15,
+            "torque": 16,
             "displacement": 0,
-            "pp": 0
+            "pp": 16
           },
           "sourceCategory": "引擎動力"
         },
@@ -489,11 +489,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
-            "power": 0,
-            "torque": 0,
+            "weight": -3,
+            "power": 12,
+            "torque": 10,
             "displacement": 0,
-            "pp": 0
+            "pp": 14
           },
           "sourceCategory": "引擎動力"
         },
@@ -513,11 +513,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
-            "power": 0,
-            "torque": 0,
+            "weight": -4,
+            "power": 20,
+            "torque": 18,
             "displacement": 0,
-            "pp": 0
+            "pp": 20
           },
           "sourceCategory": "引擎動力"
         },
@@ -537,11 +537,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
-            "power": 0,
-            "torque": 0,
+            "weight": -2,
+            "power": 16,
+            "torque": 14,
             "displacement": 0,
-            "pp": 0
+            "pp": 17
           },
           "sourceCategory": "引擎動力"
         },
@@ -561,11 +561,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
-            "power": 0,
-            "torque": 0,
+            "weight": -5,
+            "power": 24,
+            "torque": 20,
             "displacement": 0,
-            "pp": 0
+            "pp": 24
           },
           "sourceCategory": "引擎動力"
         },
@@ -585,11 +585,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
-            "power": 0,
-            "torque": 0,
+            "weight": 3,
+            "power": 18,
+            "torque": 12,
             "displacement": 0,
-            "pp": 0
+            "pp": 18
           },
           "sourceCategory": "引擎動力"
         }
@@ -618,7 +618,7 @@
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 0
+            "pp": 1
           },
           "sourceCategory": "外觀空力"
         },
@@ -638,11 +638,11 @@
           "unit": "件",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -2,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 0
+            "pp": 2
           },
           "sourceCategory": "外觀空力"
         },
@@ -662,11 +662,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -1,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 0
+            "pp": 2
           },
           "sourceCategory": "外觀空力"
         },
@@ -686,11 +686,11 @@
           "unit": "件/組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -1,
             "power": 0,
-            "torque": 0,
+            "torque": 1,
             "displacement": 0,
-            "pp": 0
+            "pp": 3
           },
           "sourceCategory": "外觀空力"
         },
@@ -710,11 +710,11 @@
           "unit": "件",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -8,
             "power": 0,
-            "torque": 0,
+            "torque": 1,
             "displacement": 0,
-            "pp": 0
+            "pp": 6
           },
           "sourceCategory": "外觀空力"
         },
@@ -734,11 +734,11 @@
           "unit": "件/組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -6,
             "power": 0,
-            "torque": 0,
+            "torque": 1,
             "displacement": 0,
-            "pp": 0
+            "pp": 5
           },
           "sourceCategory": "外觀空力"
         },
@@ -758,11 +758,11 @@
           "unit": "件/組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -4,
             "power": 0,
-            "torque": 0,
+            "torque": 2,
             "displacement": 0,
-            "pp": 0
+            "pp": 5
           },
           "sourceCategory": "外觀空力"
         },
@@ -782,11 +782,11 @@
           "unit": "件/組",
           "isDefault": false,
           "mods": {
-            "weight": 0,
+            "weight": -10,
             "power": 0,
-            "torque": 0,
+            "torque": 2,
             "displacement": 0,
-            "pp": 0
+            "pp": 8
           },
           "sourceCategory": "外觀空力"
         }
