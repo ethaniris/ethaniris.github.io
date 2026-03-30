@@ -71,8 +71,49 @@
       }
 
       .loading-content {
+        position: relative;
+        z-index: 2;
         text-align: center;
         color: var(--white);
+      }
+
+      .loading-video-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .loading-video-layer video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.78;
+        filter: saturate(1.04) brightness(0.84) contrast(1.05);
+        transform: scale(1.02);
+        animation: loading-video-fade-in 0.9s ease-out forwards;
+      }
+
+      .loading-video-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(4, 6, 10, 0.34),
+          rgba(4, 6, 10, 0.54)
+        );
+      }
+
+      @keyframes loading-video-fade-in {
+        from {
+          opacity: 0;
+          transform: scale(1.05);
+        }
+        to {
+          opacity: 0.78;
+          transform: scale(1.02);
+        }
       }
 
       .loading-text {
@@ -2411,6 +2452,12 @@
   <body>
     <!-- LOADING SCREEN -->
     <div id="loading-screen">
+      <div class="loading-video-layer" aria-hidden="true">
+        <video id="loading-bg-video" autoplay muted loop playsinline preload="auto">
+          <source src="assets/video/light.mp4" type="video/mp4" />
+        </video>
+        <div class="loading-video-overlay"></div>
+      </div>
       <div class="loading-content">
         <div class="loading-text" id="loading-text">動力模組同步中</div>
         <div class="loading-progress">
@@ -3850,6 +3897,7 @@
         "loading-progress-bar"
       );
       const loadingScreen = document.getElementById("loading-screen");
+      const loadingBgVideo = document.getElementById("loading-bg-video");
 
       function updateLoadingMessage() {
         loadingText.style.opacity = 0;
@@ -3867,6 +3915,10 @@
               loadingScreen.classList.add("hidden");
               setTimeout(() => {
                 loadingScreen.style.display = "none";
+                if (loadingBgVideo) {
+                  loadingBgVideo.pause();
+                  loadingBgVideo.currentTime = 0;
+                }
               }, 1000); // Fade out duration
             }, 1000); // Wait 1 second after last message
           }
@@ -3875,7 +3927,13 @@
 
       // Start loading sequence when DOM is loaded
       document.addEventListener("DOMContentLoaded", () => {
-        updateLoadingMessage();
+        if (loadingBgVideo) {
+          const playPromise = loadingBgVideo.play();
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(() => {});
+          }
+        }
+        setTimeout(updateLoadingMessage, 1000);
       });
 
       const car3D = {
