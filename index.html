@@ -2247,8 +2247,8 @@
               data-cat="interior"
               onclick="switchCat('interior')"
             >
-              <span class="cat-btn-text">INTERIOR</span>
-              <span class="cat-btn-cn">內裝套件</span>
+              <span class="cat-btn-text">AERO</span>
+              <span class="cat-btn-cn">外觀空力</span>
             </button>
           </nav>
           <div class="parts-scroll">
@@ -2878,7 +2878,7 @@
         if (cat === "wheels") {
           modalVis.classList.add("wheel-mode");
           modalImg.src = `assets/images/wheel${
-            parseInt(p.id.slice(1)) + 1
+            (parseInt(p.id.slice(1)) % 4) + 1
           }.png`;
           modalImg.alt = p.name;
           modalImg.style.display = "block";
