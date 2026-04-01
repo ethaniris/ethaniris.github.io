@@ -1399,14 +1399,13 @@
         }
       }
 
-      /* CART PANEL */
+      /* CART DRAWER */
       .stats-thumb {
-        padding: 16px 18px 8px;
-        flex: 0 0 40%;
-        min-height: 0;
+        padding: 8px 18px 6px;
+        flex-shrink: 0;
       }
 
-      .cart-panel {
+      .cart-drawer {
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 10px;
         background: linear-gradient(
@@ -1416,7 +1415,148 @@
         );
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
         overflow: hidden;
-        height: 100%;
+      }
+
+      .cart-drawer-toggle {
+        width: 100%;
+        border: none;
+        background: rgba(255, 255, 255, 0.02);
+        color: #eaf2ff;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: left;
+      }
+
+      .cart-drawer-cue {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 229, 255, 0.14);
+        box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.3);
+        flex-shrink: 0;
+      }
+
+      .cart-drawer-cue::before {
+        content: "▲";
+        font-size: 9px;
+        color: #5cefff;
+        animation: drawer-cue 1.1s ease-in-out infinite;
+        transform-origin: center;
+      }
+
+      @keyframes drawer-cue {
+        0%,
+        100% {
+          transform: translateY(1px);
+          opacity: 0.75;
+        }
+        50% {
+          transform: translateY(-1px);
+          opacity: 1;
+        }
+      }
+
+      .cart-drawer.open .cart-drawer-cue::before {
+        transform: rotate(180deg);
+        animation: none;
+      }
+
+      .cart-drawer-title {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        color: #f3f7ff;
+      }
+
+      .cart-drawer-hint {
+        margin-left: auto;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 10px;
+        color: rgba(223, 230, 242, 0.72);
+      }
+
+      .cart-preview-row {
+        display: grid;
+        grid-template-columns: 78px 1fr auto;
+        align-items: start;
+        gap: 8px;
+        padding: 9px 12px 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        max-height: 64px;
+        opacity: 1;
+        overflow: hidden;
+        transition: max-height 0.24s ease, opacity 0.2s ease,
+          padding 0.24s ease, border-color 0.24s ease;
+      }
+
+      .cart-preview-cat {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: rgba(217, 226, 241, 0.84);
+      }
+
+      .cart-preview-main {
+        min-width: 0;
+      }
+
+      .cart-preview-name {
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        color: #f8fbff;
+        line-height: 1.25;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .cart-preview-state {
+        margin-top: 2px;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 10px;
+        color: rgba(223, 230, 242, 0.72);
+      }
+
+      .cart-preview-price {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 17px;
+        letter-spacing: 0.05em;
+        color: #f5c842;
+        white-space: nowrap;
+      }
+
+      .cart-drawer-content {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.34s ease, opacity 0.24s ease;
+      }
+
+      .cart-drawer.open .cart-preview-row {
+        max-height: 0;
+        opacity: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-bottom-color: transparent;
+      }
+
+      .cart-drawer.open .cart-drawer-content {
+        max-height: 420px;
+        opacity: 1;
+      }
+
+      .cart-panel {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
         display: flex;
         flex-direction: column;
         min-height: 0;
@@ -2611,29 +2751,64 @@
         );
       }
 
-      body[data-theme="light"] .cart-panel {
+      body[data-theme="light"] .cart-drawer {
         border: 1px solid rgba(18, 40, 66, 0.12);
         background: linear-gradient(180deg, #ffffff 0%, #f6f9fd 100%);
         box-shadow: 0 10px 24px rgba(24, 40, 58, 0.09);
+      }
+
+      body[data-theme="light"] .cart-drawer-toggle {
+        background: rgba(16, 40, 66, 0.04);
+        border-bottom: 1px solid rgba(18, 40, 66, 0.1);
+        color: #112032;
+      }
+
+      body[data-theme="light"] .cart-drawer-cue {
+        background: rgba(31, 135, 171, 0.14);
+        box-shadow: 0 0 0 1px rgba(31, 135, 171, 0.28);
+      }
+
+      body[data-theme="light"] .cart-drawer-cue::before {
+        color: #1f87ab;
+      }
+
+      body[data-theme="light"] .cart-drawer-title {
+        color: #112032;
+      }
+
+      body[data-theme="light"] .cart-drawer-hint {
+        color: #607189;
+      }
+
+      body[data-theme="light"] .cart-preview-row {
+        border-bottom: 1px solid rgba(18, 40, 66, 0.08);
       }
 
       body[data-theme="light"] .cart-head {
         border-bottom: 1px solid rgba(18, 40, 66, 0.1);
       }
 
+      body[data-theme="light"] .cart-panel {
+        border-top: 1px solid rgba(18, 40, 66, 0.1);
+      }
+
       body[data-theme="light"] .cart-title,
-      body[data-theme="light"] .cart-name {
+      body[data-theme="light"] .cart-name,
+      body[data-theme="light"] .cart-preview-name {
         color: #112032;
       }
 
       body[data-theme="light"] .cart-meta,
       body[data-theme="light"] .cart-state,
-      body[data-theme="light"] .cart-cat {
+      body[data-theme="light"] .cart-cat,
+      body[data-theme="light"] .cart-preview-cat,
+      body[data-theme="light"] .cart-preview-state {
         color: #607189;
       }
 
       body[data-theme="light"] .cart-total,
-      body[data-theme="light"] .cart-price {
+      body[data-theme="light"] .cart-price,
+      body[data-theme="light"] .cart-preview-price {
         color: #8a630c;
       }
 
@@ -3120,8 +3295,35 @@
           padding: 16px;
         }
         .stats-thumb {
-          padding: 12px 0 10px;
+          padding: 10px 0 8px;
           flex: 0 0 auto;
+        }
+        .cart-drawer-toggle {
+          padding: 7px 10px;
+          gap: 7px;
+        }
+        .cart-drawer-title {
+          font-size: 11px;
+        }
+        .cart-drawer-hint {
+          font-size: 9px;
+        }
+        .cart-preview-row {
+          grid-template-columns: 66px 1fr auto;
+          gap: 6px;
+          padding: 8px 10px 9px;
+        }
+        .cart-preview-cat {
+          font-size: 10px;
+        }
+        .cart-preview-name {
+          font-size: 11px;
+        }
+        .cart-preview-price {
+          font-size: 15px;
+        }
+        .cart-drawer.open .cart-drawer-content {
+          max-height: 280px;
         }
         .cart-head {
           padding: 10px 12px 9px;
@@ -3504,22 +3706,52 @@
         </div>
 
         <div class="stats-thumb">
-          <div class="cart-panel">
-            <div class="cart-head">
-              <div>
-                <div class="cart-title">SHOPPING CART</div>
-                <div class="cart-meta" id="cart-meta">已選 4 項</div>
-              </div>
-              <div class="cart-total" id="cart-total">Cr. 0</div>
-            </div>
-            <div class="cart-list" id="cart-list">
-              <div class="cart-item">
-                <div class="cart-cat">載入中</div>
-                <div class="cart-main">
-                  <div class="cart-name">讀取商品資料...</div>
-                  <div class="cart-state">請稍候</div>
+          <div class="cart-drawer" id="cart-drawer">
+            <button
+              class="cart-drawer-toggle"
+              id="cart-drawer-toggle"
+              type="button"
+              onclick="toggleCartDrawer()"
+              aria-expanded="false"
+              aria-controls="cart-drawer-content"
+            >
+              <span class="cart-drawer-cue" aria-hidden="true"></span>
+              <span class="cart-drawer-title">SHOPPING CART</span>
+              <span class="cart-drawer-hint" id="cart-drawer-hint"
+                >點擊展開</span
+              >
+            </button>
+            <div class="cart-preview-row" id="cart-preview-row">
+              <div class="cart-preview-cat" id="cart-preview-cat">載入中</div>
+              <div class="cart-preview-main">
+                <div class="cart-preview-name" id="cart-preview-name">
+                  讀取商品資料...
                 </div>
-                <div class="cart-price">—</div>
+                <div class="cart-preview-state" id="cart-preview-state">
+                  請稍候
+                </div>
+              </div>
+              <div class="cart-preview-price" id="cart-preview-price">—</div>
+            </div>
+            <div class="cart-drawer-content" id="cart-drawer-content">
+              <div class="cart-panel">
+                <div class="cart-head">
+                  <div>
+                    <div class="cart-title">SHOPPING CART</div>
+                    <div class="cart-meta" id="cart-meta">已選 4 項</div>
+                  </div>
+                  <div class="cart-total" id="cart-total">Cr. 0</div>
+                </div>
+                <div class="cart-list" id="cart-list">
+                  <div class="cart-item">
+                    <div class="cart-cat">載入中</div>
+                    <div class="cart-main">
+                      <div class="cart-name">讀取商品資料...</div>
+                      <div class="cart-state">請稍候</div>
+                    </div>
+                    <div class="cart-price">—</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -4093,42 +4325,107 @@
       /* ══════════════════════════════
          CART SUMMARY
       ══════════════════════════════ */
+      let isCartDrawerOpen = false;
+
+      function setCartDrawer(open) {
+        const drawer = document.getElementById("cart-drawer");
+        const toggleBtn = document.getElementById("cart-drawer-toggle");
+        const hintEl = document.getElementById("cart-drawer-hint");
+        if (!drawer || !toggleBtn) return;
+
+        isCartDrawerOpen = Boolean(open);
+        drawer.classList.toggle("open", isCartDrawerOpen);
+        toggleBtn.setAttribute("aria-expanded", isCartDrawerOpen ? "true" : "false");
+        if (hintEl) {
+          hintEl.textContent = isCartDrawerOpen ? "點擊收合" : "點擊展開";
+        }
+      }
+
+      function toggleCartDrawer() {
+        setCartDrawer(!isCartDrawerOpen);
+      }
+
+      function getCartCategoryLabel(cat, category) {
+        if (cat === "interior" || cat === "aero") return "外觀空力";
+        if (category && category.label) {
+          if (String(category.label).toUpperCase() === "AERO") return "外觀空力";
+          return category.label;
+        }
+        return cat;
+      }
+
       function renderSummary() {
         const listEl = document.getElementById("cart-list");
         const totalEl = document.getElementById("cart-total");
         const metaEl = document.getElementById("cart-meta");
-        if (!listEl || !totalEl || !metaEl) return;
+        const previewCatEl = document.getElementById("cart-preview-cat");
+        const previewNameEl = document.getElementById("cart-preview-name");
+        const previewStateEl = document.getElementById("cart-preview-state");
+        const previewPriceEl = document.getElementById("cart-preview-price");
+        if (
+          !listEl ||
+          !totalEl ||
+          !metaEl ||
+          !previewCatEl ||
+          !previewNameEl ||
+          !previewStateEl ||
+          !previewPriceEl
+        )
+          return;
 
         let total = 0;
-        const rows = Object.entries(sel)
+        const items = Object.entries(sel)
           .map(([cat, id]) => {
             const category = CATS[cat];
-            if (!category) return "";
+            if (!category) return null;
 
             const part = category.parts.find((x) => x.id === id);
-            if (!part) return "";
+            if (!part) return null;
 
             const isDefault = Boolean(part.isDefault);
             const price = Number(part.price) || 0;
+            const priceText = price > 0 ? "Cr. " + price.toLocaleString() : "—";
+            const stateText = isDefault ? "預設配置" : "已裝備";
+            const categoryLabel = getCartCategoryLabel(cat, category);
             total += price;
 
-            return `<div class="cart-item ${isDefault ? "default" : ""}">
-              <div class="cart-cat">${category.label}</div>
+            return {
+              categoryLabel,
+              name: part.name,
+              stateText,
+              priceText,
+              rowHtml: `<div class="cart-item ${isDefault ? "default" : ""}">
+              <div class="cart-cat">${categoryLabel}</div>
               <div class="cart-main">
                 <div class="cart-name">${part.name}</div>
-                <div class="cart-state">${isDefault ? "預設配置" : "已裝備"}</div>
+                <div class="cart-state">${stateText}</div>
               </div>
-              <div class="cart-price">${
-                price > 0 ? "Cr. " + price.toLocaleString() : "—"
-              }</div>
-            </div>`;
+              <div class="cart-price">${priceText}</div>
+            </div>`,
+            };
           })
-          .filter(Boolean)
+          .filter((item) => Boolean(item));
+
+        const rows = items
+          .map((item) => item.rowHtml)
           .join("");
 
         listEl.innerHTML = rows;
         totalEl.textContent = `Cr. ${total.toLocaleString()}`;
         metaEl.textContent = `已選 ${Object.keys(sel).length} 項 · GR YARIS`;
+
+        const preview = items[0];
+        if (preview) {
+          previewCatEl.textContent = preview.categoryLabel;
+          previewNameEl.textContent = preview.name;
+          previewStateEl.textContent = preview.stateText;
+          previewPriceEl.textContent = preview.priceText;
+        } else {
+          previewCatEl.textContent = "尚未選擇";
+          previewNameEl.textContent = "尚無配備資料";
+          previewStateEl.textContent = "請先選擇零件";
+          previewPriceEl.textContent = "—";
+        }
       }
 
       const CATEGORY_IMAGE_POOLS = {
@@ -4766,6 +5063,7 @@
 
       // Start loading sequence when DOM is loaded
       document.addEventListener("DOMContentLoaded", () => {
+        setCartDrawer(false);
         setTimeout(updateLoadingMessage, LOADING_MESSAGE_INTERVAL);
       });
 
