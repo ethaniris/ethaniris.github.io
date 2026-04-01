@@ -57,7 +57,7 @@
         position: fixed;
         inset: 0;
         z-index: 1000;
-        background: var(--ink);
+        background: #04060a;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -120,7 +120,7 @@
         font-family: "Bebas Neue", sans-serif;
         font-size: 32px;
         letter-spacing: 0.08em;
-        color: var(--cyan);
+        color: #00e5ff;
         text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
         margin-bottom: 20px;
         opacity: 0;
@@ -138,7 +138,7 @@
 
       .loading-progress-bar {
         height: 100%;
-        background: linear-gradient(90deg, var(--cyan), var(--red));
+        background: linear-gradient(90deg, #00e5ff, #e8192c);
         width: 0%;
         transition: width 2s ease-out;
       }
@@ -611,6 +611,68 @@
         box-shadow: 0 0 0 1px rgba(255, 107, 26, 0.28),
           0 0 16px rgba(255, 107, 26, 0.25);
         color: #ffffff;
+      }
+
+      .theme-toggle-btn {
+        position: relative;
+        width: 78px;
+        height: 34px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background: linear-gradient(
+          180deg,
+          rgba(18, 27, 40, 0.96) 0%,
+          rgba(10, 16, 24, 0.96) 100%
+        );
+        padding: 0 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: all 0.28s ease;
+        overflow: hidden;
+      }
+
+      .theme-toggle-btn:hover {
+        border-color: rgba(0, 229, 255, 0.56);
+        box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.22),
+          0 0 14px rgba(0, 229, 255, 0.2);
+      }
+
+      .theme-toggle-btn:focus-visible {
+        outline: 2px solid rgba(0, 229, 255, 0.58);
+        outline-offset: 2px;
+      }
+
+      .theme-toggle-btn .theme-ico {
+        font-size: 13px;
+        line-height: 1;
+        z-index: 2;
+        transition: color 0.25s ease, opacity 0.25s ease;
+      }
+
+      .theme-toggle-btn .theme-ico.moon {
+        color: rgba(227, 236, 247, 0.95);
+        opacity: 1;
+      }
+
+      .theme-toggle-btn .theme-ico.sun {
+        color: rgba(214, 226, 241, 0.58);
+        opacity: 0.65;
+      }
+
+      .theme-toggle-btn .theme-thumb {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: linear-gradient(160deg, #f4f9ff 0%, #bcd2ea 100%);
+        box-shadow: 0 3px 10px rgba(2, 8, 16, 0.45);
+        transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+          background 0.25s ease, box-shadow 0.25s ease;
+        z-index: 1;
       }
 
       /* ═══════════════════════════════════════
@@ -2239,6 +2301,659 @@
         box-shadow: 0 0 24px rgba(232, 25, 44, 0.5);
       }
 
+      body,
+      #bg-canvas,
+      #loading-screen,
+      .hud-bar,
+      .hero-stage,
+      .config-area,
+      .cat-nav,
+      .cat-btn,
+      .part-card,
+      .stats-col,
+      .cart-panel,
+      .pp-meter,
+      .modal-box,
+      .garage-box,
+      .tech-panel,
+      .hud-reset-btn,
+      .theme-toggle-btn {
+        transition: background-color 0.35s ease, color 0.35s ease,
+          border-color 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease,
+          opacity 0.35s ease;
+      }
+
+      body[data-theme="light"] {
+        --ink: #f4f6fa;
+        --deep: #ebeff5;
+        --panel: #ffffff;
+        --card: #ffffff;
+        --card2: #f3f7fc;
+        --red: #c73a46;
+        --red-dim: #9e5860;
+        --orange: #cf8a45;
+        --gold: #8a6724;
+        --gold-dim: #6a4f0f;
+        --cyan: #2f7e9f;
+        --cyan-dim: #8bb4c9;
+        --white: #1f2a3a;
+        --grey: #607188;
+        --grey2: #7e8ea3;
+        --border: rgba(21, 37, 56, 0.1);
+        --border2: rgba(21, 37, 56, 0.16);
+        background: linear-gradient(180deg, #f8fafd 0%, #eef2f7 100%);
+        color: var(--white);
+      }
+
+      body[data-theme="light"] #bg-canvas {
+        opacity: 0.24;
+        filter: saturate(0.55) brightness(1.05);
+      }
+
+      body[data-theme="light"] .hud-bar {
+        background: rgba(252, 254, 255, 0.93);
+        border-bottom: 1px solid rgba(16, 34, 54, 0.15);
+        box-shadow: 0 8px 20px rgba(50, 70, 95, 0.08);
+      }
+
+      body[data-theme="light"] .hud-bar::before {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(199, 58, 70, 0.68),
+          rgba(207, 138, 69, 0.58),
+          rgba(199, 58, 70, 0.68),
+          transparent
+        );
+        opacity: 0.78;
+      }
+
+      body[data-theme="light"] .logo-sub {
+        color: #b24a53;
+      }
+
+      body[data-theme="light"] .hud-badge {
+        color: rgba(23, 38, 56, 0.68);
+        background: rgba(16, 34, 54, 0.06);
+      }
+
+      body[data-theme="light"] .hud-reset-btn {
+        border-color: rgba(16, 34, 54, 0.2);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.95) 0%,
+          rgba(239, 245, 252, 0.96) 100%
+        );
+        color: #132033;
+      }
+
+      body[data-theme="light"] .hud-reset-btn:hover {
+        border-color: rgba(227, 135, 46, 0.7);
+        box-shadow: 0 0 0 1px rgba(227, 135, 46, 0.24),
+          0 0 12px rgba(227, 135, 46, 0.22);
+      }
+
+      body[data-theme="light"] .theme-toggle-btn {
+        border-color: rgba(16, 34, 54, 0.18);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.94) 0%,
+          rgba(235, 243, 252, 0.95) 100%
+        );
+      }
+
+      body[data-theme="light"] .theme-toggle-btn .theme-thumb {
+        transform: translateX(44px);
+        background: linear-gradient(160deg, #ffe7b4 0%, #ffcf70 100%);
+        box-shadow: 0 3px 10px rgba(139, 95, 8, 0.28);
+      }
+
+      body[data-theme="light"] .theme-toggle-btn .theme-ico.sun {
+        color: #b56f00;
+        opacity: 1;
+      }
+
+      body[data-theme="light"] .theme-toggle-btn .theme-ico.moon {
+        color: rgba(78, 93, 113, 0.58);
+        opacity: 0.62;
+      }
+
+      body[data-theme="light"] .hero-stage {
+        background: radial-gradient(
+          ellipse 80% 70% at 50% 90%,
+          #dce7f5 0%,
+          #edf2f8 65%
+        );
+      }
+
+      body[data-theme="light"] .hero-brand {
+        color: #b94a54;
+      }
+
+      body[data-theme="light"] .hero-model {
+        color: #132033;
+        text-shadow: 0 0 44px rgba(31, 135, 171, 0.16);
+      }
+
+      body[data-theme="light"] .hero-trim {
+        color: rgba(128, 104, 45, 0.9);
+      }
+
+      body[data-theme="light"] .hero-corner-num {
+        text-shadow: 0 0 24px rgba(204, 46, 58, 0.28);
+      }
+
+      body[data-theme="light"] .hero-corner-unit {
+        color: rgba(41, 58, 78, 0.78);
+      }
+
+      body[data-theme="light"] .hero-accent-bar {
+        background: linear-gradient(
+          90deg,
+          rgba(199, 58, 70, 0.85),
+          rgba(207, 138, 69, 0.75),
+          transparent
+        );
+        box-shadow: 0 0 10px rgba(183, 92, 72, 0.28);
+      }
+
+      body[data-theme="light"] .scanlines {
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(30, 50, 75, 0.03) 2px,
+          rgba(30, 50, 75, 0.03) 4px
+        );
+      }
+
+      body[data-theme="light"] .hero-floor {
+        background: linear-gradient(transparent, rgba(205, 218, 235, 0.75));
+      }
+
+      body[data-theme="light"] .hero-floor::before {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(31, 135, 171, 0.42),
+          rgba(204, 46, 58, 0.3),
+          rgba(31, 135, 171, 0.42),
+          transparent
+        );
+        box-shadow: 0 0 12px rgba(45, 108, 156, 0.2);
+      }
+
+      body[data-theme="light"] .rotate-btn {
+        border: 1px solid rgba(16, 34, 54, 0.2);
+        background: rgba(255, 255, 255, 0.88);
+        color: #122033;
+        box-shadow: 0 10px 24px rgba(26, 42, 60, 0.18);
+      }
+
+      body[data-theme="light"] .rotate-btn:hover {
+        background: #ffffff;
+        box-shadow: 0 12px 26px rgba(26, 42, 60, 0.22);
+      }
+
+      body[data-theme="light"] .car-color-swatch {
+        border-color: rgba(16, 34, 54, 0.35);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.7);
+      }
+
+      body[data-theme="light"] .car-color-btn.active .car-color-swatch {
+        box-shadow: 0 0 0 2px rgba(31, 135, 171, 0.35),
+          0 0 12px rgba(31, 135, 171, 0.26);
+      }
+
+      body[data-theme="light"] #car-3d-canvas {
+        background: transparent !important;
+      }
+
+      body[data-theme="light"] .car-glow-under {
+        background: radial-gradient(
+          ellipse,
+          rgba(90, 133, 177, 0.22) 0%,
+          transparent 72%
+        );
+      }
+
+      body[data-theme="light"] .config-area {
+        background: linear-gradient(180deg, #eef3fa 0%, #e7edf6 100%);
+        border-top: 1px solid rgba(18, 40, 66, 0.12);
+      }
+
+      body[data-theme="light"] .cat-nav {
+        background: rgba(255, 255, 255, 0.76);
+        border-bottom: 1px solid rgba(18, 40, 66, 0.1);
+      }
+
+      body[data-theme="light"] .cat-btn {
+        color: #607188;
+        border-right: 1px solid rgba(18, 40, 66, 0.1);
+      }
+
+      body[data-theme="light"] .cat-btn:hover {
+        color: #122033;
+        background: rgba(18, 40, 66, 0.06);
+      }
+
+      body[data-theme="light"] .cat-btn.active {
+        color: #101d2d;
+        background: rgba(204, 46, 58, 0.08);
+      }
+
+      body[data-theme="light"] .cat-btn::after {
+        background: #c73a46;
+      }
+
+      body[data-theme="light"] .parts-scroll {
+        scrollbar-color: rgba(167, 75, 84, 0.65) transparent;
+      }
+
+      body[data-theme="light"] .parts-scroll::-webkit-scrollbar-thumb {
+        background: rgba(167, 75, 84, 0.65);
+      }
+
+      body[data-theme="light"] .part-card {
+        background: #ffffff;
+        border: 1px solid rgba(18, 40, 66, 0.12);
+        box-shadow: 0 6px 16px rgba(28, 47, 67, 0.05);
+      }
+
+      body[data-theme="light"] .part-card::before {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(17, 35, 54, 0.08),
+          transparent
+        );
+      }
+
+      body[data-theme="light"] .part-card:hover {
+        background: #f7faff;
+        border-color: rgba(31, 135, 171, 0.36);
+        box-shadow: 0 12px 28px rgba(24, 40, 58, 0.12),
+          0 0 0 1px rgba(31, 135, 171, 0.14);
+      }
+
+      body[data-theme="light"] .part-card.selected {
+        background: rgba(204, 46, 58, 0.08);
+        box-shadow: 0 0 0 1px rgba(204, 46, 58, 0.24),
+          0 10px 22px rgba(204, 46, 58, 0.12);
+      }
+
+      body[data-theme="light"] .pc-img {
+        background: radial-gradient(
+          ellipse at 50% 80%,
+          rgba(149, 180, 216, 0.32) 0%,
+          transparent 70%
+        );
+      }
+
+      body[data-theme="light"] .pc-img::after {
+        background: linear-gradient(transparent, #ffffff);
+      }
+
+      body[data-theme="light"] .pc-name {
+        color: #112032;
+      }
+
+      body[data-theme="light"] .pc-spec {
+        color: #34485e;
+        border-bottom: 1px solid rgba(18, 40, 66, 0.1);
+      }
+
+      body[data-theme="light"] .pc-desc {
+        color: #607189;
+      }
+
+      body[data-theme="light"] .pc-price {
+        color: #8a630c;
+      }
+
+      body[data-theme="light"] .mod-good {
+        color: #1a9360;
+        background: rgba(26, 147, 96, 0.1);
+        border-color: rgba(26, 147, 96, 0.24);
+      }
+
+      body[data-theme="light"] .mod-bad {
+        color: #c64d52;
+        background: rgba(198, 77, 82, 0.1);
+        border-color: rgba(198, 77, 82, 0.24);
+      }
+
+      body[data-theme="light"] .stats-col {
+        background: rgba(245, 249, 253, 0.97);
+        border-left: 1px solid rgba(18, 40, 66, 0.13);
+      }
+
+      body[data-theme="light"] .stats-col::before {
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(199, 58, 70, 0.62),
+          transparent
+        );
+      }
+
+      body[data-theme="light"] .cart-panel {
+        border: 1px solid rgba(18, 40, 66, 0.12);
+        background: linear-gradient(180deg, #ffffff 0%, #f6f9fd 100%);
+        box-shadow: 0 10px 24px rgba(24, 40, 58, 0.09);
+      }
+
+      body[data-theme="light"] .cart-head {
+        border-bottom: 1px solid rgba(18, 40, 66, 0.1);
+      }
+
+      body[data-theme="light"] .cart-title,
+      body[data-theme="light"] .cart-name {
+        color: #112032;
+      }
+
+      body[data-theme="light"] .cart-meta,
+      body[data-theme="light"] .cart-state,
+      body[data-theme="light"] .cart-cat {
+        color: #607189;
+      }
+
+      body[data-theme="light"] .cart-total,
+      body[data-theme="light"] .cart-price {
+        color: #8a630c;
+      }
+
+      body[data-theme="light"] .cart-item {
+        border-bottom: 1px solid rgba(18, 40, 66, 0.08);
+      }
+
+      body[data-theme="light"] .pp-meter {
+        border-bottom: 1px solid rgba(18, 40, 66, 0.11);
+      }
+
+      body[data-theme="light"] .pp-big {
+        color: #112032;
+      }
+
+      body[data-theme="light"] .pp-delta {
+        color: #607189;
+      }
+
+      body[data-theme="light"] .pp-seg {
+        background: rgba(18, 40, 66, 0.12);
+      }
+
+      body[data-theme="light"] .pp-big span {
+        color: #ba434f;
+      }
+
+      body[data-theme="light"] .stat-delta.stat-good {
+        color: #0f8f58;
+        text-shadow: 0 0 8px rgba(15, 143, 88, 0.22);
+      }
+
+      body[data-theme="light"] .stat-delta.stat-bad {
+        color: #be474f;
+        text-shadow: 0 0 8px rgba(190, 71, 79, 0.2);
+      }
+
+      body[data-theme="light"] .stat-val.changed-good,
+      body[data-theme="light"] .stat-val.flash-good {
+        color: #0f8f58;
+        text-shadow: 0 0 8px rgba(15, 143, 88, 0.2);
+      }
+
+      body[data-theme="light"] .stat-val.changed-bad,
+      body[data-theme="light"] .stat-val.flash-bad {
+        color: #be474f;
+        text-shadow: 0 0 8px rgba(190, 71, 79, 0.2);
+      }
+
+      body[data-theme="light"] .stats-section-header {
+        color: rgba(186, 67, 79, 0.78);
+      }
+
+      body[data-theme="light"] .stat-row {
+        border-bottom: 1px solid rgba(18, 40, 66, 0.08);
+      }
+
+      body[data-theme="light"] .stat-lbl {
+        color: #162536;
+        text-shadow: none;
+      }
+
+      body[data-theme="light"] .stat-row::after {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0),
+          rgba(47, 126, 159, 0.24),
+          rgba(255, 255, 255, 0)
+        );
+      }
+
+      body[data-theme="light"] .stat-bar-track {
+        background: rgba(18, 40, 66, 0.13);
+      }
+
+      body[data-theme="light"] .stat-bar-fill {
+        background: linear-gradient(90deg, #c73a46, #cf8a45);
+      }
+
+      body[data-theme="light"] .stat-val {
+        color: #112032;
+      }
+
+      body[data-theme="light"] .stat-unit,
+      body[data-theme="light"] .stat-prev {
+        color: #6f8198;
+      }
+
+      body[data-theme="light"] .modal-bg {
+        background: rgba(27, 40, 58, 0.25);
+        backdrop-filter: blur(3px);
+      }
+
+      body[data-theme="light"] .modal-box,
+      body[data-theme="light"] .garage-box {
+        background: linear-gradient(165deg, #ffffff 0%, #edf3fa 100%);
+        border: 1px solid rgba(18, 40, 66, 0.14);
+        box-shadow: 0 32px 70px rgba(23, 40, 59, 0.22);
+      }
+
+      body[data-theme="light"] .modal-visual {
+        background: radial-gradient(
+          ellipse at 50% 80%,
+          #d7e6f8 0%,
+          #edf3fa 70%
+        );
+      }
+
+      body[data-theme="light"] .modal-visual::before {
+        background: repeating-linear-gradient(
+          175deg,
+          transparent 0,
+          transparent 28px,
+          rgba(31, 135, 171, 0.04) 28px,
+          rgba(31, 135, 171, 0.04) 29px
+        );
+      }
+
+      body[data-theme="light"] .modal-visual::after {
+        background: linear-gradient(transparent, #f7faff);
+      }
+
+      body[data-theme="light"] .modal-part-title {
+        color: #112032;
+      }
+
+      body[data-theme="light"] .modal-part-desc {
+        color: #586c84;
+      }
+
+      body[data-theme="light"] .modal-price-badge {
+        color: #8a6724;
+        text-shadow: 0 0 12px rgba(138, 103, 36, 0.24);
+      }
+
+      body[data-theme="light"] .modal-cancel {
+        border: 1px solid rgba(18, 40, 66, 0.22);
+        color: #566a82;
+      }
+
+      body[data-theme="light"] .modal-cancel:hover {
+        color: #122033;
+        border-color: rgba(18, 40, 66, 0.32);
+      }
+
+      body[data-theme="light"] .modal-confirm {
+        color: #f8fbff;
+        text-shadow: 0 1px 2px rgba(27, 11, 14, 0.32);
+      }
+
+      body[data-theme="light"] .toast {
+        color: #f8fbff;
+        text-shadow: 0 1px 2px rgba(27, 11, 14, 0.35);
+      }
+
+      body[data-theme="light"] .btn-primary {
+        color: #f8fbff;
+        text-shadow: 0 1px 2px rgba(33, 13, 16, 0.38);
+        background: linear-gradient(135deg, #bf3b47 0%, #a8313e 55%, #7f2430 100%);
+      }
+
+      body[data-theme="light"] .btn-primary:hover {
+        box-shadow: 0 0 24px rgba(191, 59, 71, 0.36);
+      }
+
+      body[data-theme="light"] .tech-overlay {
+        background: rgba(233, 240, 250, 0.72);
+      }
+
+      body[data-theme="light"] .tech-panel {
+        border: 1px solid rgba(31, 135, 171, 0.34);
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.98),
+          rgba(242, 247, 253, 0.96)
+        );
+        box-shadow: 0 18px 42px rgba(21, 39, 58, 0.17),
+          0 0 40px rgba(31, 135, 171, 0.14);
+        color: #1f3148;
+      }
+
+      body[data-theme="light"] .tech-panel-header h2 {
+        color: #155f8c;
+        text-shadow: 0 0 10px rgba(21, 95, 140, 0.16);
+      }
+
+      body[data-theme="light"] .tech-hint {
+        color: #2f7e9f;
+        text-shadow: 0 0 10px rgba(47, 126, 159, 0.24);
+      }
+
+      body[data-theme="light"] .tech-main-btn {
+        background: linear-gradient(130deg, #2f7e9f, #4b7399, #6a6b93);
+        border-color: rgba(47, 126, 159, 0.58);
+        box-shadow: 0 10px 28px rgba(60, 100, 145, 0.24);
+      }
+
+      body[data-theme="light"] .tech-main-btn:hover {
+        box-shadow: 0 12px 34px rgba(60, 100, 145, 0.3);
+      }
+
+      body[data-theme="light"] .tech-description,
+      body[data-theme="light"] .tech-question,
+      body[data-theme="light"] .tech-result {
+        color: #40566f;
+      }
+
+      body[data-theme="light"] .tech-question h3 {
+        color: #1a5f8a;
+        text-shadow: none;
+      }
+
+      body[data-theme="light"] .tech-choice {
+        border: 1px solid rgba(18, 40, 66, 0.14);
+        background: rgba(255, 255, 255, 0.8);
+        color: #17283d;
+      }
+
+      body[data-theme="light"] .tech-choice:hover,
+      body[data-theme="light"] .tech-choice.selected {
+        border-color: rgba(31, 135, 171, 0.52);
+        background: rgba(31, 135, 171, 0.1);
+      }
+
+      body[data-theme="light"] .diagnosis-card {
+        background: linear-gradient(145deg, #ffffff, #f3f7fc);
+        border: 1px solid rgba(47, 126, 159, 0.32);
+        box-shadow: 0 12px 32px rgba(25, 43, 63, 0.16);
+      }
+
+      body[data-theme="light"] .diagnosis-tier {
+        color: #7d5f69;
+      }
+
+      body[data-theme="light"] .diagnosis-title {
+        color: #1d2d42;
+        text-shadow: none;
+      }
+
+      body[data-theme="light"] .diagnosis-parts {
+        background: #f8fbff;
+        border: 1px solid rgba(21, 37, 56, 0.12);
+      }
+
+      body[data-theme="light"] .parts-label {
+        color: #2f7e9f;
+      }
+
+      body[data-theme="light"] .parts-list {
+        color: #364d67;
+      }
+
+      body[data-theme="light"] .stat-box {
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(21, 37, 56, 0.12);
+      }
+
+      body[data-theme="light"] .stat-box-label {
+        color: #5f748e;
+      }
+
+      body[data-theme="light"] .stat-box-value {
+        color: #8a6724;
+      }
+
+      body[data-theme="light"] .price-tag {
+        color: #0f8f58;
+        text-shadow: 0 0 10px rgba(15, 143, 88, 0.18);
+      }
+
+      body[data-theme="light"] .confirm-btn-diagnosis {
+        background: linear-gradient(130deg, #2f7e9f, #486f95, #5f6f92);
+        border-color: rgba(47, 126, 159, 0.6);
+        color: #f8fbff;
+        box-shadow: 0 8px 22px rgba(60, 100, 145, 0.24);
+      }
+
+      body[data-theme="light"] .confirm-btn-diagnosis:hover {
+        background: linear-gradient(130deg, #3a87a8, #5678a0, #6f7aa1);
+        box-shadow: 0 10px 26px rgba(60, 100, 145, 0.28);
+      }
+
+      body[data-theme="light"] .mchip-good {
+        color: #1a9360;
+        background: rgba(26, 147, 96, 0.12);
+        border-color: rgba(26, 147, 96, 0.28);
+      }
+
+      body[data-theme="light"] .mchip-bad {
+        color: #c64d52;
+        background: rgba(198, 77, 82, 0.12);
+        border-color: rgba(198, 77, 82, 0.28);
+      }
+
       /* Responsive */
       @media (max-width: 860px) {
         #app {
@@ -2294,6 +3009,18 @@
           padding: 0 10px;
           font-size: 10px;
           letter-spacing: 0.09em;
+        }
+        .theme-toggle-btn {
+          width: 66px;
+          height: 30px;
+          padding: 0 6px;
+        }
+        .theme-toggle-btn .theme-thumb {
+          width: 24px;
+          height: 24px;
+        }
+        body[data-theme="light"] .theme-toggle-btn .theme-thumb {
+          transform: translateX(35px);
         }
         .left-col {
           order: 1;
@@ -2476,9 +3203,22 @@
           <div class="logo-sub">MOTORSPORT GARAGE</div>
         </div>
         <div class="hud-sep"></div>
-        <span class="hud-car-name">GR YARIS</span>
-        <span class="hud-badge" id="hud-meta">FR · 228 PS · 1270 kg</span>
+        <span class="hud-car-name">TOYOTA GR YARIS</span>
+        <span class="hud-badge" id="hud-meta">4WD · 228 PS · 1270 kg</span>
         <div class="hud-right">
+          <button
+            id="theme-toggle-btn"
+            class="theme-toggle-btn"
+            type="button"
+            onclick="toggleTheme()"
+            aria-label="切換淺色模式"
+            aria-pressed="false"
+            title="Theme"
+          >
+            <span class="theme-ico moon">☾</span>
+            <span class="theme-ico sun">☀</span>
+            <span class="theme-thumb"></span>
+          </button>
           <button class="hud-reset-btn" onclick="doReset()">
             ↺ 重置為原廠配置
           </button>
@@ -2495,8 +3235,8 @@
           <div class="hero-accent-bar"></div>
 
           <div class="hero-text">
-            <div class="hero-brand">SUBARU MOTORSPORT</div>
-            <div class="hero-model">BRZ<br />GR4</div>
+            <div class="hero-brand">TOYOTA GAZOO RACING</div>
+            <div class="hero-model">TOYOTA<br />GR YARIS</div>
             <div class="hero-trim">APEX EDITION · 2022</div>
           </div>
 
@@ -2672,7 +3412,7 @@
               ></div>
             </div>
             <div class="stat-val-block">
-              <span class="stat-val" id="sv-drivetrain">FR</span>
+              <span class="stat-val" id="sv-drivetrain">4WD</span>
             </div>
           </div>
 
@@ -2824,6 +3564,60 @@
       /* ══════════════════════════════
          CANVAS BACKGROUND — speed particles
       ══════════════════════════════ */
+      const THEME_KEY = "yaris-ui-theme";
+
+      function applyTheme(theme) {
+        const nextTheme = theme === "light" ? "light" : "dark";
+        document.body.setAttribute("data-theme", nextTheme);
+        const toggleBtn = document.getElementById("theme-toggle-btn");
+        if (toggleBtn) {
+          toggleBtn.setAttribute("aria-pressed", nextTheme === "light" ? "true" : "false");
+          toggleBtn.setAttribute(
+            "aria-label",
+            nextTheme === "light" ? "切換深色模式" : "切換淺色模式"
+          );
+          toggleBtn.title = nextTheme === "light" ? "Light Mode" : "Dark Mode";
+        }
+        if (window.car3D && typeof window.car3D.applyTheme === "function") {
+          window.car3D.applyTheme(nextTheme);
+        }
+        window.dispatchEvent(
+          new CustomEvent("app-theme-change", { detail: { theme: nextTheme } })
+        );
+      }
+
+      function getStoredTheme() {
+        try {
+          return localStorage.getItem(THEME_KEY);
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function storeTheme(theme) {
+        try {
+          localStorage.setItem(THEME_KEY, theme);
+        } catch (e) {}
+      }
+
+      function initTheme() {
+        const savedTheme = getStoredTheme();
+        const prefersLight =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: light)").matches;
+        applyTheme(savedTheme || (prefersLight ? "light" : "dark"));
+      }
+
+      function toggleTheme() {
+        const currentTheme =
+          document.body.getAttribute("data-theme") === "light" ? "light" : "dark";
+        const nextTheme = currentTheme === "light" ? "dark" : "light";
+        applyTheme(nextTheme);
+        storeTheme(nextTheme);
+      }
+
+      initTheme();
+
       const canvas = document.getElementById("bg-canvas");
       const ctx = canvas.getContext("2d");
       let W,
@@ -2918,7 +3712,7 @@
       ══════════════════════════════ */
       const BASE = {
         displacement: 2387,
-        drivetrain: "FR",
+        drivetrain: "4WD",
         weight: 1270,
         power: 228,
         torque: 249,
@@ -3538,9 +4332,9 @@
         const s = computeStats();
         document.getElementById(
           "garage-sub"
-        ).innerHTML = `您的 <strong style="color:#e8192c">GR YARIS</strong> 客製化配置已儲存至車庫。<br><br>
-          性能評分 <strong style="color:#f5c842">PP ${s.pp}</strong> ・ 最大馬力 <strong style="color:#f5c842">${s.power} PS</strong><br>
-          車身重量 <strong style="color:#f5c842">${s.weight} kg</strong> ・ 重量馬力比 <strong style="color:#f5c842">${s.ratio} kg/PS</strong>`;
+        ).innerHTML = `您的 <strong style="color:var(--red)">GR YARIS</strong> 客製化配置已儲存至車庫。<br><br>
+          性能評分 <strong style="color:var(--gold)">PP ${s.pp}</strong> ・ 最大馬力 <strong style="color:var(--gold)">${s.power} PS</strong><br>
+          車身重量 <strong style="color:var(--gold)">${s.weight} kg</strong> ・ 重量馬力比 <strong style="color:var(--gold)">${s.ratio} kg/PS</strong>`;
         document.getElementById("garage-bg").classList.add("open");
       }
       function closeGarage() {
@@ -3953,6 +4747,18 @@
         imageLoadToken: 0,
         textureLoader: null,
 
+        applyTheme(theme) {
+          const nextTheme = theme === "light" ? "light" : "dark";
+          if (!this.scene || !this.renderer) return;
+          if (nextTheme === "light") {
+            this.scene.background = null;
+            this.renderer.setClearColor(0x000000, 0);
+          } else {
+            this.scene.background = new THREE.Color(0x04060a);
+            this.renderer.setClearColor(0x04060a, 1);
+          }
+        },
+
         init() {
           const canvas = document.getElementById("car-3d-canvas");
           if (!canvas) {
@@ -3963,7 +4769,6 @@
           const height = canvas.parentElement.clientHeight;
 
           this.scene = new THREE.Scene();
-          this.scene.background = new THREE.Color(0x04060a);
           // this.scene.fog = new THREE.Fog(0x04060a, 500, 3000);
 
           this.camera = new THREE.PerspectiveCamera(
@@ -3983,6 +4788,7 @@
           this.renderer.setSize(width, height);
           this.renderer.setPixelRatio(window.devicePixelRatio);
           this.renderer.shadowMap.enabled = false;
+          this.applyTheme(document.body.getAttribute("data-theme"));
 
           const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
           this.scene.add(ambientLight);
@@ -4263,6 +5069,11 @@
           }
         },
       };
+      window.car3D = car3D;
+
+      window.addEventListener("app-theme-change", (event) => {
+        car3D.applyTheme(event?.detail?.theme);
+      });
 
       function setCarColor(color) {
         if (!car3D || typeof car3D.switchColor !== "function") return;
