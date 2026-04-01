@@ -77,45 +77,6 @@
         color: var(--white);
       }
 
-      .loading-video-layer {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        overflow: hidden;
-        pointer-events: none;
-      }
-
-      .loading-video-layer video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.78;
-        filter: saturate(1.04) brightness(0.84) contrast(1.05);
-        transform: scale(1.02);
-        animation: loading-video-fade-in 0.9s ease-out forwards;
-      }
-
-      .loading-video-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(4, 6, 10, 0.34),
-          rgba(4, 6, 10, 0.54)
-        );
-      }
-
-      @keyframes loading-video-fade-in {
-        from {
-          opacity: 0;
-          transform: scale(1.05);
-        }
-        to {
-          opacity: 0.78;
-          transform: scale(1.02);
-        }
-      }
-
       .loading-text {
         font-family: "Bebas Neue", sans-serif;
         font-size: 32px;
@@ -535,20 +496,14 @@
       }
 
       .logo-main {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 22px;
-        letter-spacing: 0.12em;
+        font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei",
+          "Bebas Neue", sans-serif;
+        font-size: clamp(26px, 1.9vw, 34px);
+        font-weight: 900;
+        letter-spacing: 0.08em;
         color: var(--white);
         line-height: 1;
-      }
-
-      .logo-sub {
-        font-family: "Barlow Condensed", sans-serif;
-        font-size: 9px;
-        font-weight: 600;
-        letter-spacing: 0.4em;
-        color: var(--red);
-        margin-top: 1px;
+        white-space: nowrap;
       }
 
       .hud-sep {
@@ -615,22 +570,43 @@
 
       .theme-toggle-btn {
         position: relative;
-        width: 78px;
-        height: 34px;
+        width: 168px;
+        height: 38px;
         border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.22);
+        border: 1px solid rgba(255, 255, 255, 0.24);
         background: linear-gradient(
-          180deg,
-          rgba(18, 27, 40, 0.96) 0%,
-          rgba(10, 16, 24, 0.96) 100%
+          140deg,
+          rgba(6, 14, 24, 0.98) 0%,
+          rgba(13, 27, 44, 0.98) 100%
         );
-        padding: 0 8px;
-        display: inline-flex;
+        padding: 3px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         align-items: center;
-        justify-content: space-between;
         cursor: pointer;
-        transition: all 0.28s ease;
+        transition: border-color 0.24s ease, box-shadow 0.24s ease,
+          background 0.24s ease;
         overflow: hidden;
+      }
+
+      .theme-toggle-btn::before {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: calc(50% - 3px);
+        height: calc(100% - 6px);
+        border-radius: 999px;
+        background: linear-gradient(
+          145deg,
+          rgba(45, 74, 116, 0.94) 0%,
+          rgba(14, 32, 56, 0.96) 100%
+        );
+        box-shadow: 0 8px 16px rgba(1, 7, 16, 0.52),
+          inset 0 0 0 1px rgba(130, 170, 226, 0.24);
+        transition: transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1),
+          background 0.25s ease, box-shadow 0.25s ease;
+        z-index: 1;
       }
 
       .theme-toggle-btn:hover {
@@ -644,35 +620,35 @@
         outline-offset: 2px;
       }
 
-      .theme-toggle-btn .theme-ico {
+      .theme-label {
+        position: relative;
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        line-height: 1;
+        transition: color 0.24s ease, text-shadow 0.24s ease;
+      }
+
+      .theme-label-ico {
         font-size: 13px;
         line-height: 1;
-        z-index: 2;
-        transition: color 0.25s ease, opacity 0.25s ease;
       }
 
-      .theme-toggle-btn .theme-ico.moon {
-        color: rgba(227, 236, 247, 0.95);
-        opacity: 1;
+      .theme-toggle-btn .theme-label-dark {
+        color: #f3f7ff;
+        text-shadow: 0 0 10px rgba(130, 180, 255, 0.3);
       }
 
-      .theme-toggle-btn .theme-ico.sun {
-        color: rgba(214, 226, 241, 0.58);
-        opacity: 0.65;
-      }
-
-      .theme-toggle-btn .theme-thumb {
-        position: absolute;
-        top: 3px;
-        left: 3px;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: linear-gradient(160deg, #f4f9ff 0%, #bcd2ea 100%);
-        box-shadow: 0 3px 10px rgba(2, 8, 16, 0.45);
-        transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
-          background 0.25s ease, box-shadow 0.25s ease;
-        z-index: 1;
+      .theme-toggle-btn .theme-label-light {
+        color: rgba(182, 202, 228, 0.62);
       }
 
       /* ═══════════════════════════════════════
@@ -2368,10 +2344,6 @@
         opacity: 0.78;
       }
 
-      body[data-theme="light"] .logo-sub {
-        color: #b24a53;
-      }
-
       body[data-theme="light"] .hud-badge {
         color: rgba(23, 38, 56, 0.68);
         background: rgba(16, 34, 54, 0.06);
@@ -2394,28 +2366,30 @@
       }
 
       body[data-theme="light"] .theme-toggle-btn {
-        border-color: rgba(16, 34, 54, 0.18);
+        border-color: rgba(16, 34, 54, 0.22);
         background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.94) 0%,
-          rgba(235, 243, 252, 0.95) 100%
+          140deg,
+          rgba(248, 252, 255, 0.98) 0%,
+          rgba(228, 238, 250, 0.98) 100%
         );
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
       }
 
-      body[data-theme="light"] .theme-toggle-btn .theme-thumb {
-        transform: translateX(44px);
-        background: linear-gradient(160deg, #ffe7b4 0%, #ffcf70 100%);
-        box-shadow: 0 3px 10px rgba(139, 95, 8, 0.28);
+      body[data-theme="light"] .theme-toggle-btn::before {
+        transform: translateX(100%);
+        background: linear-gradient(145deg, #ffde86 0%, #ffb445 100%);
+        box-shadow: 0 8px 16px rgba(139, 95, 8, 0.26),
+          inset 0 0 0 1px rgba(255, 248, 214, 0.86);
       }
 
-      body[data-theme="light"] .theme-toggle-btn .theme-ico.sun {
-        color: #b56f00;
-        opacity: 1;
+      body[data-theme="light"] .theme-toggle-btn .theme-label-light {
+        color: #6e4702;
+        text-shadow: 0 0 12px rgba(255, 191, 76, 0.35);
       }
 
-      body[data-theme="light"] .theme-toggle-btn .theme-ico.moon {
-        color: rgba(78, 93, 113, 0.58);
-        opacity: 0.62;
+      body[data-theme="light"] .theme-toggle-btn .theme-label-dark {
+        color: rgba(78, 93, 113, 0.72);
+        text-shadow: none;
       }
 
       body[data-theme="light"] .hero-stage {
@@ -2668,23 +2642,53 @@
       }
 
       body[data-theme="light"] .pp-meter {
-        border-bottom: 1px solid rgba(18, 40, 66, 0.11);
+        border-bottom: 1px solid rgba(18, 40, 66, 0.18);
       }
 
       body[data-theme="light"] .pp-big {
-        color: #112032;
+        color: #10233e;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
       }
 
       body[data-theme="light"] .pp-delta {
         color: #607189;
       }
 
-      body[data-theme="light"] .pp-seg {
-        background: rgba(18, 40, 66, 0.12);
+      body[data-theme="light"] .pp-big span:first-child {
+        color: #6b7e97;
       }
 
-      body[data-theme="light"] .pp-big span {
-        color: #ba434f;
+      body[data-theme="light"] #pp-val {
+        color: #1a56d9;
+        text-shadow: 0 0 12px rgba(26, 86, 217, 0.28);
+      }
+
+      body[data-theme="light"] .pp-segs {
+        height: 6px;
+        gap: 3px;
+      }
+
+      body[data-theme="light"] .pp-seg {
+        background: #cfd9e8;
+        box-shadow: inset 0 0 0 1px rgba(72, 102, 138, 0.16);
+      }
+
+      body[data-theme="light"] .pp-seg.lit {
+        background: #2f67ff;
+        box-shadow: 0 0 0 1px rgba(47, 103, 255, 0.22),
+          0 0 10px rgba(47, 103, 255, 0.36);
+      }
+
+      body[data-theme="light"] .pp-seg.lit-mid {
+        background: #ff8a1f;
+        box-shadow: 0 0 0 1px rgba(255, 138, 31, 0.22),
+          0 0 10px rgba(255, 138, 31, 0.34);
+      }
+
+      body[data-theme="light"] .pp-seg.lit-hi {
+        background: #ef3b3b;
+        box-shadow: 0 0 0 1px rgba(239, 59, 59, 0.24),
+          0 0 10px rgba(239, 59, 59, 0.34);
       }
 
       body[data-theme="light"] .stat-delta.stat-good {
@@ -2989,10 +2993,8 @@
           padding: 0 12px;
         }
         .logo-main {
-          font-size: 18px;
-        }
-        .logo-sub {
-          font-size: 7px;
+          font-size: 22px;
+          letter-spacing: 0.06em;
         }
         .hud-car-name {
           font-size: 16px;
@@ -3011,16 +3013,16 @@
           letter-spacing: 0.09em;
         }
         .theme-toggle-btn {
-          width: 66px;
-          height: 30px;
-          padding: 0 6px;
+          width: 136px;
+          height: 32px;
         }
-        .theme-toggle-btn .theme-thumb {
-          width: 24px;
-          height: 24px;
+        .theme-label {
+          font-size: 9px;
+          gap: 4px;
+          letter-spacing: 0.08em;
         }
-        body[data-theme="light"] .theme-toggle-btn .theme-thumb {
-          transform: translateX(35px);
+        .theme-label-ico {
+          font-size: 10px;
         }
         .left-col {
           order: 1;
@@ -3179,12 +3181,6 @@
   <body>
     <!-- LOADING SCREEN -->
     <div id="loading-screen">
-      <div class="loading-video-layer" aria-hidden="true">
-        <video id="loading-bg-video" autoplay muted loop playsinline preload="auto">
-          <source src="assets/video/light.mp4" type="video/mp4" />
-        </video>
-        <div class="loading-video-overlay"></div>
-      </div>
       <div class="loading-content">
         <div class="loading-text" id="loading-text">動力模組同步中</div>
         <div class="loading-progress">
@@ -3199,8 +3195,7 @@
       <!-- ── HUD BAR ── -->
       <header class="hud-bar">
         <div class="logo-block">
-          <div class="logo-main">APEX</div>
-          <div class="logo-sub">MOTORSPORT GARAGE</div>
+          <div class="logo-main">暴力鴨專業汽車百貨</div>
         </div>
         <div class="hud-sep"></div>
         <span class="hud-car-name">TOYOTA GR YARIS</span>
@@ -3211,13 +3206,16 @@
             class="theme-toggle-btn"
             type="button"
             onclick="toggleTheme()"
-            aria-label="切換淺色模式"
+            aria-label="切換主題模式"
             aria-pressed="false"
-            title="Theme"
+            title="主題模式"
           >
-            <span class="theme-ico moon">☾</span>
-            <span class="theme-ico sun">☀</span>
-            <span class="theme-thumb"></span>
+            <span class="theme-label theme-label-dark"
+              ><span class="theme-label-ico">☾</span>黑夜模式</span
+            >
+            <span class="theme-label theme-label-light"
+              ><span class="theme-label-ico">☀</span>白天模式</span
+            >
           </button>
           <button class="hud-reset-btn" onclick="doReset()">
             ↺ 重置為原廠配置
@@ -3237,7 +3235,7 @@
           <div class="hero-text">
             <div class="hero-brand">TOYOTA GAZOO RACING</div>
             <div class="hero-model">TOYOTA<br />GR YARIS</div>
-            <div class="hero-trim">APEX EDITION · 2022</div>
+            <div class="hero-trim">MOTORSPORT GARAGE SINCE 2020</div>
           </div>
 
           <div class="hero-corner-stat">
@@ -3574,9 +3572,12 @@
           toggleBtn.setAttribute("aria-pressed", nextTheme === "light" ? "true" : "false");
           toggleBtn.setAttribute(
             "aria-label",
-            nextTheme === "light" ? "切換深色模式" : "切換淺色模式"
+            nextTheme === "light" ? "切換至黑夜模式" : "切換至白天模式"
           );
-          toggleBtn.title = nextTheme === "light" ? "Light Mode" : "Dark Mode";
+          toggleBtn.title =
+            nextTheme === "light"
+              ? "目前：白天模式（點擊切換黑夜）"
+              : "目前：黑夜模式（點擊切換白天）";
         }
         if (window.car3D && typeof window.car3D.applyTheme === "function") {
           window.car3D.applyTheme(nextTheme);
@@ -4686,12 +4687,18 @@
       ];
 
       let currentMessageIndex = 0;
+      const LOADING_SPEED_MULTIPLIER = 1.5;
+      const LOADING_MESSAGE_INTERVAL = Math.round(
+        1000 / LOADING_SPEED_MULTIPLIER
+      );
+      const LOADING_TRANSITION_DELAY = Math.round(
+        500 / LOADING_SPEED_MULTIPLIER
+      );
       const loadingText = document.getElementById("loading-text");
       const loadingProgressBar = document.getElementById(
         "loading-progress-bar"
       );
       const loadingScreen = document.getElementById("loading-screen");
-      const loadingBgVideo = document.getElementById("loading-bg-video");
 
       function updateLoadingMessage() {
         loadingText.style.opacity = 0;
@@ -4703,31 +4710,21 @@
           }%`;
           currentMessageIndex++;
           if (currentMessageIndex < loadingMessages.length) {
-            setTimeout(updateLoadingMessage, 1000); // 1 second per message
+            setTimeout(updateLoadingMessage, LOADING_MESSAGE_INTERVAL);
           } else {
             setTimeout(() => {
               loadingScreen.classList.add("hidden");
               setTimeout(() => {
                 loadingScreen.style.display = "none";
-                if (loadingBgVideo) {
-                  loadingBgVideo.pause();
-                  loadingBgVideo.currentTime = 0;
-                }
-              }, 1000); // Fade out duration
-            }, 1000); // Wait 1 second after last message
+              }, LOADING_MESSAGE_INTERVAL);
+            }, LOADING_MESSAGE_INTERVAL);
           }
-        }, 500); // Fade out/in transition
+        }, LOADING_TRANSITION_DELAY);
       }
 
       // Start loading sequence when DOM is loaded
       document.addEventListener("DOMContentLoaded", () => {
-        if (loadingBgVideo) {
-          const playPromise = loadingBgVideo.play();
-          if (playPromise && typeof playPromise.catch === "function") {
-            playPromise.catch(() => {});
-          }
-        }
-        setTimeout(updateLoadingMessage, 1000);
+        setTimeout(updateLoadingMessage, LOADING_MESSAGE_INTERVAL);
       });
 
       const car3D = {
