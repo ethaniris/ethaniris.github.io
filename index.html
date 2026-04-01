@@ -2651,7 +2651,33 @@
       }
 
       body[data-theme="light"] .pp-delta {
-        color: #607189;
+        color: #516780;
+        padding: 3px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(16, 40, 66, 0.12);
+        background: rgba(16, 40, 66, 0.06);
+        margin-top: 0;
+      }
+
+      body[data-theme="light"] .pp-delta.up {
+        color: #0d8e57;
+        border-color: rgba(13, 142, 87, 0.34);
+        background: rgba(13, 142, 87, 0.16);
+        text-shadow: 0 0 10px rgba(13, 142, 87, 0.24);
+      }
+
+      body[data-theme="light"] .pp-delta.down {
+        color: #c03f46;
+        border-color: rgba(192, 63, 70, 0.34);
+        background: rgba(192, 63, 70, 0.14);
+        text-shadow: 0 0 10px rgba(192, 63, 70, 0.22);
+      }
+
+      body[data-theme="light"] .pp-delta.neutral {
+        color: #516780;
+        border-color: rgba(16, 40, 66, 0.12);
+        background: rgba(16, 40, 66, 0.06);
+        text-shadow: none;
       }
 
       body[data-theme="light"] .pp-big span:first-child {
@@ -2689,6 +2715,20 @@
         background: #ef3b3b;
         box-shadow: 0 0 0 1px rgba(239, 59, 59, 0.24),
           0 0 10px rgba(239, 59, 59, 0.34);
+      }
+
+      body[data-theme="light"] .pp-burst.up {
+        color: #0d8e57;
+        border: 1px solid rgba(13, 142, 87, 0.36);
+        background: rgba(239, 252, 246, 0.94);
+        box-shadow: 0 8px 18px rgba(13, 142, 87, 0.16);
+      }
+
+      body[data-theme="light"] .pp-burst.down {
+        color: #c03f46;
+        border: 1px solid rgba(192, 63, 70, 0.34);
+        background: rgba(255, 242, 243, 0.96);
+        box-shadow: 0 8px 18px rgba(192, 63, 70, 0.14);
       }
 
       body[data-theme="light"] .stat-delta.stat-good {
@@ -3178,7 +3218,7 @@
       }
     </style>
   </head>
-  <body>
+  <body data-theme="light">
     <!-- LOADING SCREEN -->
     <div id="loading-screen">
       <div class="loading-content">
@@ -3603,10 +3643,12 @@
 
       function initTheme() {
         const savedTheme = getStoredTheme();
-        const prefersLight =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: light)").matches;
-        applyTheme(savedTheme || (prefersLight ? "light" : "dark"));
+        const initialTheme =
+          savedTheme === "light" || savedTheme === "dark" ? savedTheme : "light";
+        applyTheme(initialTheme);
+        if (!savedTheme) {
+          storeTheme("light");
+        }
       }
 
       function toggleTheme() {
