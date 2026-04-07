@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>APEX MOTORSPORT — GARAGE CONFIGURATOR</title>
+    <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Barlow:wght@300;400;500&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
@@ -4030,12 +4031,18 @@
               CATS[cat].parts.find((p) => p.isDefault) || CATS[cat].parts[0];
             sel[cat] = defaultPart.id;
           }
+          normalizeSelection();
           // Initialize after loading
           initApp();
         })
         .catch((error) => console.error("Error loading parts data:", error));
 
       function initApp() {
+        curCat = resolveCategoryKey(curCat);
+        if (!CATS[curCat]) {
+          curCat = resolveCategoryKey(Object.keys(CATS)[0] || "wheels");
+        }
+        syncCategoryNav();
         renderStats(false);
         renderParts();
         renderSummary();
@@ -4048,6 +4055,36 @@
       let curCat = "wheels";
       let pending = null;
       let prevStats = null;
+
+      function resolveCategoryKey(cat) {
+        if (CATS[cat]) return cat;
+        if (cat === "interior" && CATS.aero) return "aero";
+        if (cat === "aero" && CATS.interior) return "interior";
+        return cat;
+      }
+
+      function normalizeSelection() {
+        if (!sel || typeof sel !== "object") {
+          sel = {};
+          return;
+        }
+        const nextSel = {};
+        Object.entries(sel).forEach(([cat, id]) => {
+          const resolvedCat = resolveCategoryKey(cat);
+          const category = CATS[resolvedCat];
+          if (!category || !Array.isArray(category.parts)) return;
+          if (!category.parts.some((part) => part.id === id)) return;
+          nextSel[resolvedCat] = id;
+        });
+        sel = nextSel;
+      }
+
+      function syncCategoryNav() {
+        document.querySelectorAll(".cat-btn").forEach((btn) => {
+          const btnCat = resolveCategoryKey(btn.dataset.cat);
+          btn.classList.toggle("active", btnCat === curCat);
+        });
+      }
 
       function isBeneficialDelta(stat, delta) {
         if (delta === 0) return true;
@@ -4127,7 +4164,10 @@
       function computeStats() {
         const s = { ...BASE };
         for (const [cat, id] of Object.entries(sel)) {
-          const p = CATS[cat].parts.find((x) => x.id === id);
+          const resolvedCat = resolveCategoryKey(cat);
+          const category = CATS[resolvedCat];
+          if (!category || !Array.isArray(category.parts)) continue;
+          const p = category.parts.find((x) => x.id === id);
           if (!p?.mods) continue;
           if (p.mods.weight !== undefined && p.mods.weight !== 0)
             s.weight += p.mods.weight;
@@ -4376,7 +4416,8 @@
         let total = 0;
         const items = Object.entries(sel)
           .map(([cat, id]) => {
-            const category = CATS[cat];
+            const resolvedCat = resolveCategoryKey(cat);
+            const category = CATS[resolvedCat];
             if (!category) return null;
 
             const part = category.parts.find((x) => x.id === id);
@@ -4386,7 +4427,7 @@
             const price = Number(part.price) || 0;
             const priceText = price > 0 ? "Cr. " + price.toLocaleString() : "—";
             const stateText = isDefault ? "預設配置" : "已裝備";
-            const categoryLabel = getCartCategoryLabel(cat, category);
+            const categoryLabel = getCartCategoryLabel(resolvedCat, category);
             total += price;
 
             return {
@@ -4482,7 +4523,13 @@
       ══════════════════════════════ */
       function renderParts() {
         const grid = document.getElementById("parts-grid");
-        const parts = CATS[curCat].parts;
+        const category = CATS[resolveCategoryKey(curCat)];
+        if (!grid || !category || !Array.isArray(category.parts)) {
+          if (grid) grid.innerHTML = "";
+          return;
+        }
+        const parts = category.parts;
+        const selectedPartId = sel[curCat];
         const labels = {
           weight: "車重",
           power: "馬力",
@@ -4500,7 +4547,7 @@
 
         grid.innerHTML = parts
           .map((p) => {
-            const isSelected = sel[curCat] === p.id;
+            const isSelected = selectedPartId === p.id;
             const modChips = Object.entries(p.mods)
               .filter(([k, v]) => k !== "pp" && v !== 0)
               .slice(0, 3)
@@ -4552,10 +4599,10 @@
          CATEGORY SWITCH
       ══════════════════════════════ */
       function switchCat(cat) {
-        curCat = cat;
-        document
-          .querySelectorAll(".cat-btn")
-          .forEach((b) => b.classList.toggle("active", b.dataset.cat === cat));
+        const resolvedCat = resolveCategoryKey(cat);
+        if (!CATS[resolvedCat]) return;
+        curCat = resolvedCat;
+        syncCategoryNav();
         renderParts();
       }
 
@@ -4563,8 +4610,12 @@
          MODAL
       ══════════════════════════════ */
       function openModal(cat, id) {
-        const p = CATS[cat].parts.find((x) => x.id === id);
-        pending = { cat, id };
+        const resolvedCat = resolveCategoryKey(cat);
+        const category = CATS[resolvedCat];
+        if (!category || !Array.isArray(category.parts)) return;
+        const p = category.parts.find((x) => x.id === id);
+        if (!p) return;
+        pending = { cat: resolvedCat, id };
 
         const modalEmoji = document.getElementById("modal-emoji");
         const modalImg = document.getElementById("modal-img");
@@ -4651,6 +4702,7 @@
         if (!pending) return;
         const before = computeStats();
         sel[pending.cat] = pending.id;
+        normalizeSelection();
         const after = computeStats();
         const deltaPP = after.pp - before.pp;
         closeMod();
@@ -4685,7 +4737,22 @@
          RESET
       ══════════════════════════════ */
       function doReset() {
-        sel = { wheels: "w0", suspension: "s0", engine: "e0", interior: "i0" };
+        const nextSel = {};
+        Object.entries(CATS).forEach(([cat, category]) => {
+          if (!category || !Array.isArray(category.parts) || !category.parts.length) {
+            return;
+          }
+          const defaultPart =
+            category.parts.find((part) => part.isDefault) || category.parts[0];
+          nextSel[cat] = defaultPart.id;
+        });
+        sel = nextSel;
+        normalizeSelection();
+        curCat = resolveCategoryKey(curCat);
+        if (!CATS[curCat]) {
+          curCat = resolveCategoryKey(Object.keys(CATS)[0] || "wheels");
+        }
+        syncCategoryNav();
         prevStats = computeStats();
         renderParts();
         renderStats(false);
@@ -4961,6 +5028,7 @@
 
         // Apply parts
         sel = { ...sel, ...selParts };
+        normalizeSelection();
         renderParts();
         renderStats(true);
 
@@ -5354,8 +5422,6 @@
           const material = new THREE.MeshBasicMaterial({
             transparent: true,
             alphaTest: 0.1,
-            magFilter: THREE.LinearFilter,
-            minFilter: THREE.LinearFilter,
           });
           this.model = new THREE.Mesh(geometry, material);
           this.model.position.set(0, 0, 0);
