@@ -2116,7 +2116,7 @@
       }
 
       .modal-box {
-        width: 480px;
+        width: 560px;
         max-width: 92vw;
         background: linear-gradient(165deg, #0d1828 0%, #070d14 100%);
         border: 1px solid rgba(232, 25, 44, 0.25);
@@ -2170,7 +2170,7 @@
       }
 
       .modal-visual {
-        height: 210px;
+        height: 300px;
         background: radial-gradient(
           ellipse at 50% 80%,
           #0d1e35 0%,
@@ -2207,16 +2207,252 @@
         background: linear-gradient(transparent, #0d1828);
       }
 
+      .modal-image-stage {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+      }
+
+      .modal-main-img {
+        max-width: 84%;
+        max-height: 64%;
+        object-fit: contain;
+        border-radius: 10px;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.38);
+        cursor: zoom-in;
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      .modal-main-img:hover {
+        transform: scale(1.02);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.46);
+      }
+
+      .modal-image-empty {
+        position: relative;
+        z-index: 2;
+        font-size: 88px;
+        opacity: 0.86;
+      }
+
+      .modal-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        background: rgba(6, 12, 20, 0.75);
+        color: #ecf3ff;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 4;
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .modal-nav-btn:hover {
+        transform: translateY(-50%) scale(1.08);
+        border-color: rgba(0, 229, 255, 0.52);
+        background: rgba(12, 26, 44, 0.9);
+      }
+
+      .modal-nav-btn[disabled] {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .modal-nav-btn.prev {
+        left: 12px;
+      }
+
+      .modal-nav-btn.next {
+        right: 12px;
+      }
+
+      .modal-gallery-toolbar {
+        position: absolute;
+        top: 12px;
+        right: 14px;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .modal-image-counter {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        color: rgba(236, 243, 255, 0.82);
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: rgba(5, 12, 20, 0.55);
+      }
+
+      .modal-zoom-btn {
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        background: rgba(6, 12, 20, 0.7);
+        color: #f2f7ff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        padding: 4px 8px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: border-color 0.2s ease, background 0.2s ease;
+      }
+
+      .modal-zoom-btn:hover {
+        border-color: rgba(0, 229, 255, 0.52);
+        background: rgba(12, 26, 44, 0.9);
+      }
+
+      .modal-thumbs {
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        bottom: 12px;
+        z-index: 4;
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .modal-thumbs::-webkit-scrollbar {
+        display: none;
+      }
+
+      .modal-thumb {
+        width: 58px;
+        height: 42px;
+        flex: 0 0 auto;
+        border-radius: 7px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+        background: rgba(7, 14, 22, 0.75);
+        cursor: pointer;
+        padding: 0;
+        transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .modal-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .modal-thumb:hover {
+        transform: translateY(-1px);
+        border-color: rgba(0, 229, 255, 0.5);
+      }
+
+      .modal-thumb.active {
+        border-color: rgba(245, 200, 66, 0.82);
+        box-shadow: 0 0 0 1px rgba(245, 200, 66, 0.34);
+      }
+
       .modal-price-badge {
         position: absolute;
-        bottom: 14px;
-        right: 18px;
-        z-index: 2;
+        bottom: 68px;
+        left: 16px;
+        z-index: 4;
         font-family: "Bebas Neue", sans-serif;
         font-size: 20px;
         letter-spacing: 0.08em;
         color: var(--gold);
         text-shadow: 0 0 20px rgba(245, 200, 66, 0.4);
+      }
+
+      .img-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 700;
+        background: rgba(3, 6, 11, 0.92);
+        backdrop-filter: blur(2px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .img-lightbox.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .img-lightbox img {
+        max-width: min(92vw, 1400px);
+        max-height: 82vh;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.6);
+      }
+
+      .img-lightbox-close,
+      .img-lightbox-nav {
+        position: absolute;
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        background: rgba(8, 14, 22, 0.78);
+        color: #f2f7ff;
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      .img-lightbox-close {
+        top: 20px;
+        right: 24px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 24px;
+        line-height: 1;
+      }
+
+      .img-lightbox-nav {
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        font-size: 22px;
+      }
+
+      .img-lightbox-nav.prev {
+        left: 22px;
+      }
+
+      .img-lightbox-nav.next {
+        right: 22px;
+      }
+
+      .img-lightbox-nav[disabled] {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .img-lightbox-meta {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        color: rgba(236, 243, 255, 0.86);
+        background: rgba(6, 12, 20, 0.7);
+        padding: 4px 12px;
+        border-radius: 999px;
       }
 
       .modal-body {
@@ -3015,6 +3251,44 @@
         text-shadow: 0 0 12px rgba(138, 103, 36, 0.24);
       }
 
+      body[data-theme="light"] .modal-image-counter {
+        color: #3f5670;
+        background: rgba(255, 255, 255, 0.78);
+      }
+
+      body[data-theme="light"] .modal-nav-btn,
+      body[data-theme="light"] .modal-zoom-btn {
+        color: #16314b;
+        border-color: rgba(18, 40, 66, 0.24);
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      body[data-theme="light"] .modal-thumbs .modal-thumb {
+        background: rgba(255, 255, 255, 0.85);
+        border-color: rgba(18, 40, 66, 0.22);
+      }
+
+      body[data-theme="light"] .modal-thumb.active {
+        border-color: rgba(201, 99, 46, 0.82);
+        box-shadow: 0 0 0 1px rgba(201, 99, 46, 0.3);
+      }
+
+      body[data-theme="light"] .img-lightbox {
+        background: rgba(244, 249, 255, 0.9);
+      }
+
+      body[data-theme="light"] .img-lightbox-close,
+      body[data-theme="light"] .img-lightbox-nav {
+        color: #16314b;
+        border-color: rgba(18, 40, 66, 0.24);
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      body[data-theme="light"] .img-lightbox-meta {
+        color: #314a62;
+        background: rgba(255, 255, 255, 0.84);
+      }
+
       body[data-theme="light"] .modal-cancel {
         border: 1px solid rgba(18, 40, 66, 0.22);
         color: #566a82;
@@ -3385,7 +3659,52 @@
           max-width: 90vw;
         }
         .modal-visual {
-          height: 160px;
+          height: 230px;
+        }
+        .modal-nav-btn {
+          width: 30px;
+          height: 30px;
+          font-size: 16px;
+        }
+        .modal-gallery-toolbar {
+          top: 8px;
+          right: 10px;
+          gap: 6px;
+        }
+        .modal-image-counter {
+          font-size: 10px;
+          letter-spacing: 0.1em;
+        }
+        .modal-zoom-btn {
+          font-size: 9px;
+          padding: 3px 7px;
+        }
+        .modal-thumbs {
+          left: 10px;
+          right: 10px;
+          bottom: 8px;
+          gap: 6px;
+        }
+        .modal-thumb {
+          width: 50px;
+          height: 36px;
+        }
+        .modal-price-badge {
+          left: 10px;
+          bottom: 52px;
+          font-size: 17px;
+        }
+        .img-lightbox-nav {
+          width: 38px;
+          height: 38px;
+          font-size: 18px;
+        }
+        .img-lightbox-close {
+          top: 12px;
+          right: 14px;
+          width: 36px;
+          height: 36px;
+          font-size: 21px;
         }
         .modal-part-title {
           font-size: 22px;
@@ -3783,22 +4102,46 @@
     <div class="modal-bg" id="modal-bg" onclick="bgClose(event,'modal-bg')">
       <div class="modal-box">
         <div class="modal-visual" id="modal-vis">
-          <img
-            id="modal-img"
-            src=""
-            alt=""
-            style="
-              max-width: 70%;
-              max-height: 70%;
-              object-fit: contain;
-              position: relative;
-              z-index: 1;
-              display: none;
-            "
-          />
-          <span id="modal-emoji" style="position: relative; z-index: 1"
-            >⚙️</span
+          <div class="modal-image-stage">
+            <img
+              id="modal-img"
+              class="modal-main-img"
+              src=""
+              alt=""
+              onclick="openModalImageZoom(event)"
+            />
+            <span id="modal-emoji" class="modal-image-empty">⚙️</span>
+          </div>
+          <button
+            type="button"
+            class="modal-nav-btn prev"
+            id="modal-prev-btn"
+            onclick="modalPrevImage(event)"
+            aria-label="上一張圖片"
           >
+            ‹
+          </button>
+          <button
+            type="button"
+            class="modal-nav-btn next"
+            id="modal-next-btn"
+            onclick="modalNextImage(event)"
+            aria-label="下一張圖片"
+          >
+            ›
+          </button>
+          <div class="modal-gallery-toolbar">
+            <div class="modal-image-counter" id="modal-image-counter">1 / 1</div>
+            <button
+              type="button"
+              class="modal-zoom-btn"
+              id="modal-zoom-btn"
+              onclick="openModalImageZoom(event)"
+            >
+              大圖檢視
+            </button>
+          </div>
+          <div class="modal-thumbs" id="modal-thumbs"></div>
           <div class="modal-price-badge" id="modal-price">Cr. 0</div>
         </div>
         <div class="modal-body">
@@ -3817,6 +4160,37 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="img-lightbox" id="img-lightbox" onclick="closeImageLightbox(event)">
+      <button
+        type="button"
+        class="img-lightbox-close"
+        onclick="closeImageLightbox(event)"
+        aria-label="關閉大圖"
+      >
+        ×
+      </button>
+      <button
+        type="button"
+        class="img-lightbox-nav prev"
+        id="lightbox-prev-btn"
+        onclick="lightboxPrev(event)"
+        aria-label="上一張大圖"
+      >
+        ‹
+      </button>
+      <img id="img-lightbox-img" src="" alt="" />
+      <button
+        type="button"
+        class="img-lightbox-nav next"
+        id="lightbox-next-btn"
+        onclick="lightboxNext(event)"
+        aria-label="下一張大圖"
+      >
+        ›
+      </button>
+      <div class="img-lightbox-meta" id="img-lightbox-meta">1 / 1</div>
     </div>
 
     <!-- GARAGE MODAL -->
@@ -4055,6 +4429,9 @@
       let curCat = "wheels";
       let pending = null;
       let prevStats = null;
+      let modalGalleryImages = [];
+      let modalGalleryIndex = 0;
+      let modalGalleryPartName = "";
 
       function resolveCategoryKey(cat) {
         if (CATS[cat]) return cat;
@@ -4469,53 +4846,145 @@
         }
       }
 
-      const CATEGORY_IMAGE_POOLS = {
-        suspension: [
-          encodeURI("assets/images/suspension_images/cusco_type_os.png"),
-          encodeURI("assets/images/suspension_images/cusco_防傾桿.png"),
-        ],
-        engine: [
-          encodeURI("assets/images/engine_images/hks_super_fire_racing.png"),
-          encodeURI("assets/images/engine_images/k&n_sprint_filter.png"),
-          encodeURI("assets/images/engine_images/toms_power_box.png"),
-        ],
-        interior: [
-          encodeURI("assets/images/aero_images/gr_toyoya_parts.png"),
-          encodeURI("assets/images/aero_images/laile_beatrush.png"),
-          encodeURI("assets/images/aero_images/grazio&co.png"),
-        ],
-        aero: [
-          encodeURI("assets/images/aero_images/gr_toyoya_parts.png"),
-          encodeURI("assets/images/aero_images/laile_beatrush.png"),
-          encodeURI("assets/images/aero_images/grazio&co.png"),
-        ],
+      const PART_IMAGE_FALLBACK_MAP = {
+        suspension: {
+          s0: "assets/images/part_images/suspension/s0.jpg",
+          s1: "assets/images/part_images/suspension/s1.jpg",
+          s2: "assets/images/part_images/suspension/s2.jpg",
+          s3: "assets/images/part_images/suspension/s3.jpg",
+          s4: "assets/images/part_images/suspension/s4.jpg",
+          s5: "assets/images/part_images/suspension/s5.jpg",
+          s6: "assets/images/part_images/suspension/s6.jpg",
+          s7: "assets/images/part_images/suspension/s7.jpg",
+        },
+        engine: {
+          e0: "assets/images/part_images/engine/e0.jpg",
+          e1: "assets/images/part_images/engine/e1.jpg",
+          e2: "assets/images/part_images/engine/e2.jpg",
+          e3: "assets/images/part_images/engine/e3.jpg",
+          e4: "assets/images/part_images/engine/e4.jpg",
+          e5: "assets/images/part_images/engine/e5.jpg",
+          e6: "assets/images/part_images/engine/e6.jpg",
+          e7: "assets/images/part_images/engine/e7.jpg",
+        },
+        aero: {
+          i0: "assets/images/part_images/aero/i0.jpg",
+          i1: "assets/images/part_images/aero/i1.jpg",
+          i2: "assets/images/part_images/aero/i2.jpg",
+          i3: "assets/images/part_images/aero/i3.jpg",
+          i4: "assets/images/part_images/aero/i4.jpg",
+          i5: "assets/images/part_images/aero/i5.jpg",
+          i6: "assets/images/part_images/aero/i6.jpg",
+          i7: "assets/images/part_images/aero/i7.jpg",
+        },
       };
 
+      function buildPartGallery(partId, count) {
+        if (!count || count <= 0) return [];
+        return Array.from({ length: count }, (_, idx) => {
+          const fileNo = String(idx + 1).padStart(2, "0");
+          return `assets/images/part_gallery/${partId}/${fileNo}.jpg`;
+        });
+      }
+
+      const PART_IMAGE_GALLERY = {
+        suspension: {
+          s0: buildPartGallery("s0", 3),
+          s1: buildPartGallery("s1", 7),
+          s2: buildPartGallery("s2", 2),
+          s3: buildPartGallery("s3", 3),
+          s4: buildPartGallery("s4", 2),
+          s5: buildPartGallery("s5", 2),
+          s6: buildPartGallery("s6", 2),
+          s7: buildPartGallery("s7", 1),
+        },
+        engine: {
+          e0: buildPartGallery("e0", 1),
+          e1: buildPartGallery("e1", 1),
+          e2: buildPartGallery("e2", 1),
+          e3: buildPartGallery("e3", 2),
+          e4: buildPartGallery("e4", 3),
+          e5: buildPartGallery("e5", 2),
+          e6: buildPartGallery("e6", 3),
+          e7: buildPartGallery("e7", 2),
+        },
+        aero: {
+          i0: buildPartGallery("i0", 1),
+          i1: buildPartGallery("i1", 5),
+          i2: buildPartGallery("i2", 5),
+          i3: buildPartGallery("i3", 5),
+          i4: buildPartGallery("i4", 3),
+          i5: buildPartGallery("i5", 5),
+          i6: buildPartGallery("i6", 4),
+          i7: buildPartGallery("i7", 7),
+        },
+      };
+
+      PART_IMAGE_GALLERY.interior = PART_IMAGE_GALLERY.aero;
+      PART_IMAGE_FALLBACK_MAP.interior = PART_IMAGE_FALLBACK_MAP.aero;
+
+      function normalizeImagePath(path) {
+        if (!path) return null;
+        return encodeURI(String(path).trim());
+      }
+
+      function uniqueImageList(paths) {
+        const unique = [];
+        const seen = new Set();
+        (paths || []).forEach((path) => {
+          const normalized = normalizeImagePath(path);
+          if (!normalized || seen.has(normalized)) return;
+          seen.add(normalized);
+          unique.push(normalized);
+        });
+        return unique;
+      }
+
+      function getWheelImageGallery(part) {
+        const wheelId = Number.parseInt(String(part?.id || "").replace(/\D/g, ""), 10);
+        const first = (Number.isNaN(wheelId) ? 0 : wheelId) % 4;
+        return [`assets/images/wheel${first + 1}.png`];
+      }
+
+      function getPartGalleryImages(cat, part) {
+        if (!part) return [];
+        const resolvedCat = resolveCategoryKey(cat);
+        if (resolvedCat === "wheels") {
+          return uniqueImageList(getWheelImageGallery(part));
+        }
+
+        const imageCat = resolvedCat === "interior" ? "aero" : resolvedCat;
+        const galleryMap = PART_IMAGE_GALLERY[imageCat];
+        const fallbackMap = PART_IMAGE_FALLBACK_MAP[imageCat];
+        if (!galleryMap && !fallbackMap) return [];
+
+        const result = [];
+        if (galleryMap && part.id && Array.isArray(galleryMap[part.id])) {
+          result.push(...galleryMap[part.id]);
+        }
+
+        const grouped = uniqueImageList(result);
+        if (grouped.length) {
+          return grouped;
+        }
+
+        if (fallbackMap) {
+          if (part.id && fallbackMap[part.id]) {
+            return uniqueImageList([fallbackMap[part.id]]);
+          }
+          const pool = Object.values(fallbackMap);
+          const idx = Number.parseInt(String(part.id || "").replace(/\D/g, ""), 10);
+          if (pool.length) {
+            return uniqueImageList([pool[(Number.isNaN(idx) ? 0 : idx) % pool.length]]);
+          }
+        }
+
+        return [];
+      }
+
       function resolvePartImage(cat, part) {
-        if (!part) return null;
-        const name = String(part.name || "").toLowerCase();
-        const pool = CATEGORY_IMAGE_POOLS[cat];
-        if (!pool || !pool.length) return null;
-
-        if (cat === "suspension") {
-          if (name.includes("type-os")) return pool[0];
-          if (name.includes("防傾桿")) return pool[1];
-        }
-
-        if (cat === "engine") {
-          if (name.includes("super fire racing")) return pool[0];
-          if (name.includes("k&n") || name.includes("sprint filter")) return pool[1];
-          if ((name.includes("tom's") || name.includes("toms")) && name.includes("power box")) return pool[2];
-        }
-
-        if (cat === "interior" || cat === "aero") {
-          if (name.includes("gr") && name.includes("toyota")) return pool[0];
-          if (name.includes("laile") || name.includes("beatrush")) return pool[1];
-          if (name.includes("grazio")) return pool[2];
-        }
-
-        const idx = Number.parseInt(String(part.id || "").replace(/\D/g, ""), 10);
-        return pool[(Number.isNaN(idx) ? 0 : idx) % pool.length];
+        const gallery = getPartGalleryImages(cat, part);
+        return gallery.length ? gallery[0] : null;
       }
 
       /* ══════════════════════════════
@@ -4529,7 +4998,7 @@
           return;
         }
         const parts = category.parts;
-        const selectedPartId = sel[curCat];
+        const selectedPartId = sel[resolveCategoryKey(curCat)];
         const labels = {
           weight: "車重",
           power: "馬力",
@@ -4609,6 +5078,155 @@
       /* ══════════════════════════════
          MODAL
       ══════════════════════════════ */
+      function updateLightboxView() {
+        const lightboxImg = document.getElementById("img-lightbox-img");
+        const lightboxMeta = document.getElementById("img-lightbox-meta");
+        const prevBtn = document.getElementById("lightbox-prev-btn");
+        const nextBtn = document.getElementById("lightbox-next-btn");
+        if (!lightboxImg || !lightboxMeta || !prevBtn || !nextBtn) return;
+        if (!modalGalleryImages.length) return;
+
+        const currentSrc = modalGalleryImages[modalGalleryIndex];
+        lightboxImg.src = currentSrc;
+        lightboxImg.alt = `${modalGalleryPartName} ${modalGalleryIndex + 1}`;
+        lightboxMeta.textContent = `${modalGalleryPartName} ・ ${
+          modalGalleryIndex + 1
+        } / ${modalGalleryImages.length}`;
+        const canMove = modalGalleryImages.length > 1;
+        prevBtn.disabled = !canMove;
+        nextBtn.disabled = !canMove;
+      }
+
+      function renderModalThumbs() {
+        const thumbsEl = document.getElementById("modal-thumbs");
+        if (!thumbsEl) return;
+        thumbsEl.innerHTML = "";
+
+        if (!modalGalleryImages.length) {
+          thumbsEl.style.display = "none";
+          return;
+        }
+
+        thumbsEl.style.display = "flex";
+        modalGalleryImages.forEach((src, idx) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = `modal-thumb ${idx === modalGalleryIndex ? "active" : ""}`;
+          btn.setAttribute("aria-label", `查看第 ${idx + 1} 張圖片`);
+          btn.onclick = (event) => {
+            event.stopPropagation();
+            setModalImage(idx);
+          };
+
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = `${modalGalleryPartName} ${idx + 1}`;
+          img.loading = "lazy";
+          btn.appendChild(img);
+          thumbsEl.appendChild(btn);
+        });
+      }
+
+      function setModalImage(index) {
+        const modalEmoji = document.getElementById("modal-emoji");
+        const modalImg = document.getElementById("modal-img");
+        const counterEl = document.getElementById("modal-image-counter");
+        const prevBtn = document.getElementById("modal-prev-btn");
+        const nextBtn = document.getElementById("modal-next-btn");
+        const zoomBtn = document.getElementById("modal-zoom-btn");
+        if (!modalEmoji || !modalImg || !counterEl || !prevBtn || !nextBtn || !zoomBtn) {
+          return;
+        }
+
+        if (!modalGalleryImages.length) {
+          modalImg.src = "";
+          modalImg.alt = "";
+          modalImg.style.display = "none";
+          modalEmoji.style.display = "inline";
+          counterEl.textContent = "0 / 0";
+          prevBtn.disabled = true;
+          nextBtn.disabled = true;
+          zoomBtn.disabled = true;
+          renderModalThumbs();
+          return;
+        }
+
+        const total = modalGalleryImages.length;
+        modalGalleryIndex = ((index % total) + total) % total;
+        modalImg.src = modalGalleryImages[modalGalleryIndex];
+        modalImg.alt = `${modalGalleryPartName} ${modalGalleryIndex + 1}`;
+        modalImg.style.display = "block";
+        modalEmoji.style.display = "none";
+        counterEl.textContent = `${modalGalleryIndex + 1} / ${total}`;
+        const canMove = total > 1;
+        prevBtn.disabled = !canMove;
+        nextBtn.disabled = !canMove;
+        zoomBtn.disabled = false;
+        renderModalThumbs();
+
+        const lightbox = document.getElementById("img-lightbox");
+        if (lightbox && lightbox.classList.contains("open")) {
+          updateLightboxView();
+        }
+      }
+
+      function setModalGallery(images, partName, emoji = "⚙️") {
+        modalGalleryImages = uniqueImageList(images);
+        modalGalleryIndex = 0;
+        modalGalleryPartName = partName || "零件";
+        const modalEmoji = document.getElementById("modal-emoji");
+        if (modalEmoji) {
+          modalEmoji.textContent = emoji;
+        }
+        setModalImage(0);
+      }
+
+      function modalPrevImage(event) {
+        if (event) event.stopPropagation();
+        if (modalGalleryImages.length <= 1) return;
+        setModalImage(modalGalleryIndex - 1);
+      }
+
+      function modalNextImage(event) {
+        if (event) event.stopPropagation();
+        if (modalGalleryImages.length <= 1) return;
+        setModalImage(modalGalleryIndex + 1);
+      }
+
+      function openModalImageZoom(event) {
+        if (event) event.stopPropagation();
+        if (!modalGalleryImages.length) return;
+        const lightbox = document.getElementById("img-lightbox");
+        if (!lightbox) return;
+        lightbox.classList.add("open");
+        updateLightboxView();
+      }
+
+      function closeImageLightbox(event) {
+        if (event) {
+          const isOverlay = event.target && event.target.id === "img-lightbox";
+          const isClose =
+            event.currentTarget &&
+            event.currentTarget.classList &&
+            event.currentTarget.classList.contains("img-lightbox-close");
+          if (!isOverlay && !isClose) return;
+        }
+        const lightbox = document.getElementById("img-lightbox");
+        if (lightbox) lightbox.classList.remove("open");
+      }
+
+      function lightboxPrev(event) {
+        if (event) event.stopPropagation();
+        if (modalGalleryImages.length <= 1) return;
+        setModalImage(modalGalleryIndex - 1);
+      }
+
+      function lightboxNext(event) {
+        if (event) event.stopPropagation();
+        if (modalGalleryImages.length <= 1) return;
+        setModalImage(modalGalleryIndex + 1);
+      }
+
       function openModal(cat, id) {
         const resolvedCat = resolveCategoryKey(cat);
         const category = CATS[resolvedCat];
@@ -4617,35 +5235,14 @@
         if (!p) return;
         pending = { cat: resolvedCat, id };
 
-        const modalEmoji = document.getElementById("modal-emoji");
-        const modalImg = document.getElementById("modal-img");
         const modalVis = document.getElementById("modal-vis");
-
-        if (cat === "wheels") {
+        const partGallery = getPartGalleryImages(resolvedCat, p);
+        if (resolvedCat === "wheels") {
           modalVis.classList.add("wheel-mode");
-          modalImg.src = `assets/images/wheel${
-            (parseInt(p.id.slice(1)) % 4) + 1
-          }.png`;
-          modalImg.alt = p.name;
-          modalImg.style.display = "block";
-          modalEmoji.style.display = "none";
         } else {
-          const resolvedImg = resolvePartImage(cat, p);
-          if (resolvedImg) {
           modalVis.classList.remove("wheel-mode");
-          modalImg.src = resolvedImg;
-          modalImg.alt = p.name;
-          modalImg.style.display = "block";
-          modalEmoji.style.display = "none";
-          } else {
-          modalVis.classList.remove("wheel-mode");
-          modalImg.src = "";
-          modalImg.alt = "";
-          modalImg.style.display = "none";
-          modalEmoji.style.display = "inline";
-          modalEmoji.textContent = p.emoji;
-          }
         }
+        setModalGallery(partGallery, p.name, p.emoji);
 
         document.getElementById("modal-price").textContent =
           p.price === 0 ? "— 原廠配置 —" : "Cr. " + p.price.toLocaleString();
@@ -4682,7 +5279,7 @@
           );
         document.getElementById("modal-chips").innerHTML = chips.join("");
 
-        const already = sel[cat] === id;
+        const already = sel[resolvedCat] === id;
         const btn = document.getElementById("mod-confirm");
         btn.textContent = already ? "✓ 已裝備中" : "裝備零件";
         btn.disabled = already;
@@ -4692,10 +5289,18 @@
 
       function closeMod() {
         document.getElementById("modal-bg").classList.remove("open");
+        closeImageLightbox();
+        modalGalleryImages = [];
+        modalGalleryIndex = 0;
+        modalGalleryPartName = "";
       }
       function bgClose(e, id) {
-        if (e.target.id === id)
-          document.getElementById(id).classList.remove("open");
+        if (e.target.id !== id) return;
+        if (id === "modal-bg") {
+          closeMod();
+          return;
+        }
+        document.getElementById(id).classList.remove("open");
       }
 
       function confirmPart() {
@@ -4716,6 +5321,41 @@
           showToast("零件已成功裝備！性能配置已更新");
         }
       }
+
+      document.addEventListener("keydown", (event) => {
+        const modalBg = document.getElementById("modal-bg");
+        const lightbox = document.getElementById("img-lightbox");
+        const isModalOpen = modalBg && modalBg.classList.contains("open");
+        const isLightboxOpen = lightbox && lightbox.classList.contains("open");
+
+        if (event.key === "Escape") {
+          if (isLightboxOpen) {
+            closeImageLightbox();
+            return;
+          }
+          if (isModalOpen) {
+            closeMod();
+          }
+          return;
+        }
+
+        if (isLightboxOpen) {
+          if (event.key === "ArrowLeft") {
+            lightboxPrev();
+          } else if (event.key === "ArrowRight") {
+            lightboxNext();
+          }
+          return;
+        }
+
+        if (isModalOpen) {
+          if (event.key === "ArrowLeft") {
+            modalPrevImage();
+          } else if (event.key === "ArrowRight") {
+            modalNextImage();
+          }
+        }
+      });
 
       /* ══════════════════════════════
          GARAGE
