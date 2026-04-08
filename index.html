@@ -4847,6 +4847,16 @@
       }
 
       const PART_IMAGE_FALLBACK_MAP = {
+        wheels: {
+          w0: "assets/images/wheel1.png",
+          w1: "assets/images/wheel2.png",
+          w2: "assets/images/wheel3.png",
+          w3: "assets/images/wheel4.png",
+          w4: "assets/images/wheel1.png",
+          w5: "assets/images/wheel2.png",
+          w6: "assets/images/wheel3.png",
+          w7: "assets/images/wheel4.png",
+        },
         suspension: {
           s0: "assets/images/part_images/suspension/s0.jpg",
           s1: "assets/images/part_images/suspension/s1.jpg",
@@ -4888,6 +4898,16 @@
       }
 
       const PART_IMAGE_GALLERY = {
+        wheels: {
+          w0: buildPartGallery("w0", 1),
+          w1: buildPartGallery("w1", 2),
+          w2: buildPartGallery("w2", 1),
+          w3: buildPartGallery("w3", 1),
+          w4: buildPartGallery("w4", 7),
+          w5: buildPartGallery("w5", 2),
+          w6: buildPartGallery("w6", 2),
+          w7: buildPartGallery("w7", 1),
+        },
         suspension: {
           s0: buildPartGallery("s0", 3),
           s1: buildPartGallery("s1", 7),
@@ -4940,19 +4960,9 @@
         return unique;
       }
 
-      function getWheelImageGallery(part) {
-        const wheelId = Number.parseInt(String(part?.id || "").replace(/\D/g, ""), 10);
-        const first = (Number.isNaN(wheelId) ? 0 : wheelId) % 4;
-        return [`assets/images/wheel${first + 1}.png`];
-      }
-
       function getPartGalleryImages(cat, part) {
         if (!part) return [];
         const resolvedCat = resolveCategoryKey(cat);
-        if (resolvedCat === "wheels") {
-          return uniqueImageList(getWheelImageGallery(part));
-        }
-
         const imageCat = resolvedCat === "interior" ? "aero" : resolvedCat;
         const galleryMap = PART_IMAGE_GALLERY[imageCat];
         const fallbackMap = PART_IMAGE_FALLBACK_MAP[imageCat];
@@ -5030,16 +5040,9 @@
               .join("");
 
             const resolvedImg = resolvePartImage(curCat, p);
-            const imgContent =
-              curCat === "wheels"
-                ? `<img src="assets/images/wheel${
-                    (parseInt(p.id.slice(1)) % 4) + 1
-                  }.png" alt="${
-                    p.name
-                  }" style="width:85%; height:85%; object-fit:contain;">`
-                : resolvedImg
-                ? `<img src="${resolvedImg}" alt="${p.name}" style="width:85%; height:85%; object-fit:contain;">`
-                : `<span class="pc-emoji" style="font-size:50px">${p.emoji}</span>`;
+            const imgContent = resolvedImg
+              ? `<img src="${resolvedImg}" alt="${p.name}" style="width:85%; height:85%; object-fit:contain;">`
+              : `<span class="pc-emoji" style="font-size:50px">${p.emoji}</span>`;
 
             return `<div class="part-card ${
               isSelected ? "selected" : ""
