@@ -3761,7 +3761,7 @@
         </div>
         <div class="hud-sep"></div>
         <span class="hud-car-name">TOYOTA GR YARIS</span>
-        <span class="hud-badge" id="hud-meta">4WD · 228 PS · 1270 kg</span>
+        <span class="hud-badge" id="hud-meta">4wd · 285 PS · 1243 kg</span>
         <div class="hud-right">
           <button
             id="theme-toggle-btn"
@@ -3935,7 +3935,7 @@
             </div>
             <div class="stat-val-block">
               <span class="stat-delta" id="sv-displacement-delta"></span>
-              <span class="stat-val" id="sv-displacement">2387</span>
+              <span class="stat-val" id="sv-displacement">1618</span>
               <span class="stat-unit">cc</span>
             </div>
           </div>
@@ -3950,7 +3950,7 @@
               ></div>
             </div>
             <div class="stat-val-block">
-              <span class="stat-val" id="sv-drivetrain">4WD</span>
+              <span class="stat-val" id="sv-drivetrain">4wd</span>
             </div>
           </div>
 
@@ -3968,7 +3968,7 @@
             </div>
             <div class="stat-val-block">
               <span class="stat-delta" id="sv-weight-delta"></span>
-              <span class="stat-val" id="sv-weight">1270</span>
+              <span class="stat-val" id="sv-weight">1243</span>
               <span class="stat-unit">kg</span>
             </div>
           </div>
@@ -3984,7 +3984,7 @@
             </div>
             <div class="stat-val-block">
               <span class="stat-delta" id="sv-power-delta"></span>
-              <span class="stat-val" id="sv-power">228</span>
+              <span class="stat-val" id="sv-power">285</span>
               <span class="stat-unit">PS</span>
             </div>
           </div>
@@ -4000,7 +4000,7 @@
             </div>
             <div class="stat-val-block">
               <span class="stat-delta" id="sv-torque-delta"></span>
-              <span class="stat-val" id="sv-torque">249</span>
+              <span class="stat-val" id="sv-torque">285</span>
               <span class="stat-unit">N·m</span>
             </div>
           </div>
@@ -4019,7 +4019,7 @@
             </div>
             <div class="stat-val-block">
               <span class="stat-delta" id="sv-ratio-delta"></span>
-              <span class="stat-val" id="sv-ratio">5.57</span>
+              <span class="stat-val" id="sv-ratio">4.36</span>
               <span class="stat-unit">kg/PS</span>
             </div>
           </div>
@@ -4060,7 +4060,7 @@
                     <div class="cart-title">SHOPPING CART</div>
                     <div class="cart-meta" id="cart-meta">已選 4 項</div>
                   </div>
-                  <div class="cart-total" id="cart-total">Cr. 0</div>
+                  <div class="cart-total" id="cart-total">NT$0</div>
                 </div>
                 <div class="cart-list" id="cart-list">
                   <div class="cart-item">
@@ -4142,7 +4142,7 @@
             </button>
           </div>
           <div class="modal-thumbs" id="modal-thumbs"></div>
-          <div class="modal-price-badge" id="modal-price">Cr. 0</div>
+          <div class="modal-price-badge" id="modal-price">NT$0</div>
         </div>
         <div class="modal-body">
           <div class="modal-part-title" id="modal-title">PART NAME</div>
@@ -4361,16 +4361,16 @@
          DATA
       ══════════════════════════════ */
       const BASE = {
-        displacement: 2387,
-        drivetrain: "4WD",
-        weight: 1270,
-        power: 228,
-        torque: 249,
+        displacement: 1618,
+        drivetrain: "4wd",
+        weight: 1243,
+        power: 285,
+        torque: 285,
         pp: 489,
-        ratio: (1270 / 228).toFixed(2),
+        ratio: (1243 / 285).toFixed(2),
       };
 
-      const DEMO_MODE = true;
+      const DEMO_MODE = false;
       const DEMO_BOOST = {
         displacement: 320,
         weight: -18,
@@ -4379,6 +4379,115 @@
         pp: 50,
       };
 
+      function formatNTD(value) {
+        return `NT$${Number(value).toLocaleString("zh-TW")}`;
+      }
+
+      function normalizePriceObject(priceInput) {
+        const fallback = {
+          display: "—",
+          currency: "NTD",
+          min: 0,
+          max: 0,
+          raw: "",
+        };
+
+        if (priceInput === null || priceInput === undefined) return fallback;
+
+        if (typeof priceInput === "number") {
+          const num = Number(priceInput);
+          if (!Number.isFinite(num) || num <= 0) return fallback;
+          return {
+            display: formatNTD(num),
+            currency: "NTD",
+            min: num,
+            max: num,
+            raw: String(priceInput),
+          };
+        }
+
+        if (typeof priceInput === "string") {
+          const raw = priceInput.trim();
+          if (!raw || /TBC/i.test(raw)) {
+            return {
+              display: "TBC",
+              currency: "NTD",
+              min: 0,
+              max: 0,
+              raw,
+            };
+          }
+          const values = (raw.match(/\d[\d,]*/g) || [])
+            .map((n) => Number(n.replace(/,/g, "")))
+            .filter((n) => Number.isFinite(n));
+          if (!values.length) return fallback;
+          const min = values[0];
+          const max = values.length > 1 ? values[1] : values[0];
+          const display =
+            max > min
+              ? `${formatNTD(min)}～${formatNTD(max).replace("NT$", "")}`
+              : formatNTD(min);
+          return {
+            display,
+            currency: "NTD",
+            min,
+            max,
+            raw,
+          };
+        }
+
+        if (typeof priceInput === "object") {
+          const raw =
+            String(
+              priceInput.raw ?? priceInput.display ?? priceInput.min ?? ""
+            ).trim() || "";
+          const min = Number(priceInput.min);
+          const max = Number(priceInput.max);
+          const validMin = Number.isFinite(min) && min > 0 ? min : 0;
+          const validMax = Number.isFinite(max) && max >= validMin ? max : validMin;
+          const displayFromData = String(priceInput.display || "").trim();
+          const display = displayFromData
+            ? displayFromData
+            : validMax > validMin
+            ? `${formatNTD(validMin)}～${formatNTD(validMax).replace("NT$", "")}`
+            : validMin > 0
+            ? formatNTD(validMin)
+            : /TBC/i.test(raw)
+            ? "TBC"
+            : "—";
+
+          return {
+            display,
+            currency: "NTD",
+            min: validMin,
+            max: validMax,
+            raw,
+          };
+        }
+
+        return fallback;
+      }
+
+      function getPartPriceValue(part) {
+        const min = Number(part?.price?.min);
+        return Number.isFinite(min) ? min : 0;
+      }
+
+      function getPartPriceText(part) {
+        const display = String(part?.price?.display || "").trim();
+        if (display) return display;
+        const min = Number(part?.price?.min);
+        const max = Number(part?.price?.max);
+        if (Number.isFinite(min) && Number.isFinite(max) && max > min) {
+          return `${formatNTD(min)}～${formatNTD(max).replace("NT$", "")}`;
+        }
+        if (Number.isFinite(min) && min > 0) {
+          return formatNTD(min);
+        }
+        if (/TBC/i.test(String(part?.price?.raw || ""))) return "TBC";
+        return "—";
+      }
+
       let CATS = {};
 
       // Load parts data from JSON
@@ -4386,25 +4495,20 @@
         .then((response) => response.json())
         .then((data) => {
           CATS = data.categories;
-          // Adjust price to number (use min if range, else single value)
+          // Normalize price and mods shape
           for (const cat in CATS) {
             for (const part of CATS[cat].parts) {
-              if (part.price.min !== undefined) {
-                part.price = part.price.min;
-              } else {
-                part.price = 0; // or some default
-              }
-              // Ensure mods has all fields
+              part.price = normalizePriceObject(part.price);
               part.mods = part.mods || {};
+              part.mods.weight = Number(part.mods.weight) || 0;
+              part.mods.power = Number(part.mods.power) || 0;
+              part.mods.torque = Number(part.mods.torque) || 0;
+              part.mods.displacement = Number(part.mods.displacement) || 0;
+              part.mods.pp = Number(part.mods.pp) || 0;
             }
           }
-          // Initialize sel with default parts
+          // Initialize with no pre-selected parts
           sel = {};
-          for (const cat in CATS) {
-            const defaultPart =
-              CATS[cat].parts.find((p) => p.isDefault) || CATS[cat].parts[0];
-            sel[cat] = defaultPart.id;
-          }
           normalizeSelection();
           // Initialize after loading
           initApp();
@@ -4472,6 +4576,20 @@
       function formatAnimatedNumber(value, decimals = 0) {
         if (decimals > 0) return Number(value).toFixed(decimals);
         return String(Math.round(Number(value)));
+      }
+
+      function getStatDecimals(id) {
+        if (id === "ratio") return 2;
+        if (id === "weight") return 1;
+        return 0;
+      }
+
+      function normalizeByDecimals(value, decimals = 0) {
+        const num = Number(value);
+        if (!Number.isFinite(num)) return 0;
+        const factor = Math.pow(10, decimals);
+        const rounded = Math.round(num * factor) / factor;
+        return Object.is(rounded, -0) ? 0 : rounded;
       }
 
       function animateNumericValue(el, from, to, decimals = 0, duration = 620) {
@@ -4578,7 +4696,10 @@
 
         const row = el.closest(".stat-row");
         const isNumeric = id !== "drivetrain" && !Number.isNaN(Number(val));
-        const decimals = id === "ratio" ? 2 : 0;
+        const decimals = getStatDecimals(id);
+        const normalizedDelta = isNumeric
+          ? normalizeByDecimals(delta, decimals)
+          : delta;
 
         if (
           isNumeric &&
@@ -4600,16 +4721,22 @@
 
         if (deltaEl) {
           deltaEl.classList.remove("stat-good", "stat-bad", "delta-pop");
-          if (delta > 0) {
-            deltaEl.textContent = `+${delta}`;
-          } else if (delta < 0) {
-            deltaEl.textContent = `${delta}`;
+          if (normalizedDelta > 0) {
+            deltaEl.textContent = `+${formatAnimatedNumber(
+              normalizedDelta,
+              decimals
+            )}`;
+          } else if (normalizedDelta < 0) {
+            deltaEl.textContent = formatAnimatedNumber(
+              normalizedDelta,
+              decimals
+            );
           } else {
             deltaEl.textContent = "";
           }
 
-          if (delta !== 0) {
-            const good = isBeneficialDelta(id, delta);
+          if (normalizedDelta !== 0) {
+            const good = isBeneficialDelta(id, normalizedDelta);
             deltaEl.classList.add(good ? "stat-good" : "stat-bad");
             if (animate) {
               void deltaEl.offsetWidth;
@@ -4619,13 +4746,13 @@
         }
 
         el.classList.remove("changed-good", "changed-bad");
-        if (delta !== 0) {
-          const good = isBeneficialDelta(id, delta);
+        if (normalizedDelta !== 0) {
+          const good = isBeneficialDelta(id, normalizedDelta);
           el.classList.add(good ? "changed-good" : "changed-bad");
         }
 
-        if (animate && delta !== 0) {
-          const good = isBeneficialDelta(id, delta);
+        if (animate && normalizedDelta !== 0) {
+          const good = isBeneficialDelta(id, normalizedDelta);
           el.classList.remove("flash-good", "flash-bad");
           void el.offsetWidth;
           el.classList.add(good ? "flash-good" : "flash-bad");
@@ -4635,7 +4762,7 @@
           );
         }
 
-        if (row && animate && delta !== 0) {
+        if (row && animate && normalizedDelta !== 0) {
           row.classList.remove("stat-row-impact");
           void row.offsetWidth;
           row.classList.add("stat-row-impact");
@@ -4801,8 +4928,8 @@
             if (!part) return null;
 
             const isDefault = Boolean(part.isDefault);
-            const price = Number(part.price) || 0;
-            const priceText = price > 0 ? "Cr. " + price.toLocaleString() : "—";
+            const price = getPartPriceValue(part);
+            const priceText = getPartPriceText(part);
             const stateText = isDefault ? "預設配置" : "已裝備";
             const categoryLabel = getCartCategoryLabel(resolvedCat, category);
             total += price;
@@ -4829,7 +4956,7 @@
           .join("");
 
         listEl.innerHTML = rows;
-        totalEl.textContent = `Cr. ${total.toLocaleString()}`;
+        totalEl.textContent = formatNTD(total);
         metaEl.textContent = `已選 ${Object.keys(sel).length} 項 · GR YARIS`;
 
         const preview = items[0];
@@ -5056,9 +5183,7 @@
               ${p.spec ? `<div class="pc-spec">${p.spec}</div>` : ""}
               <div class="pc-desc">${p.desc}</div>
               <div class="pc-footer">
-                <span class="pc-price">${
-                  p.price === 0 ? "— 預設 —" : "Cr. " + p.price.toLocaleString()
-                }</span>
+                <span class="pc-price">${getPartPriceText(p)}</span>
                 <div class="pc-mods">${modChips}</div>
               </div>
             </div>
@@ -5247,8 +5372,7 @@
         }
         setModalGallery(partGallery, p.name, p.emoji);
 
-        document.getElementById("modal-price").textContent =
-          p.price === 0 ? "— 原廠配置 —" : "Cr. " + p.price.toLocaleString();
+        document.getElementById("modal-price").textContent = getPartPriceText(p);
         document.getElementById("modal-title").textContent = p.name;
         document.getElementById("modal-desc").textContent = p.desc;
 
@@ -5284,8 +5408,8 @@
 
         const already = sel[resolvedCat] === id;
         const btn = document.getElementById("mod-confirm");
-        btn.textContent = already ? "✓ 已裝備中" : "裝備零件";
-        btn.disabled = already;
+        btn.textContent = already ? "卸下裝備" : "裝備零件";
+        btn.disabled = false;
 
         document.getElementById("modal-bg").classList.add("open");
       }
@@ -5309,19 +5433,35 @@
       function confirmPart() {
         if (!pending) return;
         const before = computeStats();
-        sel[pending.cat] = pending.id;
+        const isRemoving = sel[pending.cat] === pending.id;
+        if (isRemoving) {
+          delete sel[pending.cat];
+        } else {
+          sel[pending.cat] = pending.id;
+        }
         normalizeSelection();
         const after = computeStats();
         const deltaPP = after.pp - before.pp;
+        const action = isRemoving ? "remove" : "equip";
         closeMod();
         renderParts();
         renderStats(true);
-        if (deltaPP > 0) {
-          showToast(`零件已成功裝備！PP +${deltaPP}`);
-        } else if (deltaPP < 0) {
-          showToast(`零件已成功裝備！PP ${deltaPP}`);
+        if (action === "remove") {
+          if (deltaPP > 0) {
+            showToast(`已卸下裝備！PP +${deltaPP}`);
+          } else if (deltaPP < 0) {
+            showToast(`已卸下裝備！PP ${deltaPP}`);
+          } else {
+            showToast("已卸下裝備");
+          }
         } else {
-          showToast("零件已成功裝備！性能配置已更新");
+          if (deltaPP > 0) {
+            showToast(`零件已成功裝備！PP +${deltaPP}`);
+          } else if (deltaPP < 0) {
+            showToast(`零件已成功裝備！PP ${deltaPP}`);
+          } else {
+            showToast("零件已成功裝備！性能配置已更新");
+          }
         }
       }
 
@@ -5380,16 +5520,7 @@
          RESET
       ══════════════════════════════ */
       function doReset() {
-        const nextSel = {};
-        Object.entries(CATS).forEach(([cat, category]) => {
-          if (!category || !Array.isArray(category.parts) || !category.parts.length) {
-            return;
-          }
-          const defaultPart =
-            category.parts.find((part) => part.isDefault) || category.parts[0];
-          nextSel[cat] = defaultPart.id;
-        });
-        sel = nextSel;
+        sel = {};
         normalizeSelection();
         curCat = resolveCategoryKey(curCat);
         if (!CATS[curCat]) {
@@ -5399,7 +5530,7 @@
         prevStats = computeStats();
         renderParts();
         renderStats(false);
-        showToast("配置已重置為原廠設定");
+        showToast("配置已重置為未安裝配件狀態");
       }
 
       /* ══════════════════════════════

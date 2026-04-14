@@ -13,21 +13,21 @@
           "desc": "9 輻 Y 字流線型，視覺輕量感最強｜效果：簧下荷重 -3.8 kg/輪、轉向靈敏度提升、輪距外擴。",
           "emoji": "⚙️",
           "price": {
-            "display": "¥108,000 ～ ¥120,000",
-            "currency": "JPY",
-            "min": 108000,
-            "max": 120000,
-            "raw": "¥108,000 ～ ¥120,000"
+            "display": "NT$80,000～95,000",
+            "currency": "NTD",
+            "min": 80000,
+            "max": 95000,
+            "raw": "80000-95000"
           },
           "spec": "18×8.5J ET35 / ET44 / ET51，5×114.3（≈7.5 kg/輪）",
           "unit": "只",
           "isDefault": true,
           "mods": {
-            "weight": -8,
+            "weight": -32,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 6
+            "pp": 0
           },
           "sourceCategory": "輪框"
         },
@@ -37,21 +37,21 @@
           "desc": "SZ 古銅特仕版，輪輻視覺更厚實｜效果：簧下荷重 -4.1 kg/輪、輪距外擴 +8mm、轉向靈敏度提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "¥113,000 ～ ¥126,000",
-            "currency": "JPY",
-            "min": 113000,
-            "max": 126000,
-            "raw": "¥113,000 ～ ¥126,000"
+            "display": "NT$80,000～95,000",
+            "currency": "NTD",
+            "min": 80000,
+            "max": 95000,
+            "raw": "80000-95000"
           },
           "spec": "18×8.5J ET35 / ET44 / ET51，5×114.3（≈7.7 kg/輪）",
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": -9,
+            "weight": -32,
             "power": 0,
-            "torque": 1,
+            "torque": 0,
             "displacement": 0,
-            "pp": 7
+            "pp": 0
           },
           "sourceCategory": "輪框"
         },
@@ -61,21 +61,21 @@
           "desc": "8 輻分叉強化型，高剛性 Club Racer DNA｜效果：簧下荷重 -3.5 kg/輪、輪圈剛性與過彎回饋提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "¥105,000 ～ ¥115,000",
-            "currency": "JPY",
-            "min": 105000,
-            "max": 115000,
-            "raw": "¥105,000 ～ ¥115,000"
+            "display": "NT$80,000～95,000",
+            "currency": "NTD",
+            "min": 80000,
+            "max": 95000,
+            "raw": "80000-95000"
           },
           "spec": "18×8.5J ET45 / 18×9.5J ET45，5×114.3（≈7.7–8.1 kg/輪）",
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": -7,
+            "weight": -32.4,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 5
+            "pp": 0
           },
           "sourceCategory": "輪框"
         },
@@ -85,21 +85,21 @@
           "desc": "10 輻密輻競技型，抗扭曲設計強化｜效果：簧下荷重 -3.2 kg/輪、抗扭剛性與煞車散熱通道提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "¥118,000 ～ ¥128,000",
-            "currency": "JPY",
-            "min": 118000,
-            "max": 128000,
-            "raw": "¥118,000 ～ ¥128,000"
+            "display": "NT$80,000～95,000",
+            "currency": "NTD",
+            "min": 80000,
+            "max": 95000,
+            "raw": "80000-95000"
           },
           "spec": "18×9.5J ET35 / ET45，5×114.3（≈8.6 kg/輪）",
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": -6,
+            "weight": -34.4,
             "power": 0,
-            "torque": 1,
+            "torque": 0,
             "displacement": 0,
-            "pp": 5
+            "pp": 0
           },
           "sourceCategory": "輪框"
         },
@@ -109,21 +109,21 @@
           "desc": "TE37 30 周年貼紙特仕，多色可選｜效果：簧下荷重 -3.5 kg/輪、輪距外擴、底盤極限提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "¥97,000 ～ ¥158,000",
-            "currency": "JPY",
-            "min": 97000,
-            "max": 158000,
-            "raw": "¥97,000 ～ ¥158,000"
+            "display": "NT$80,000～95,000",
+            "currency": "NTD",
+            "min": 80000,
+            "max": 95000,
+            "raw": "80000-95000"
           },
           "spec": "18×8.5J ET35 / 18×9.5J ET38，5×114.3（共 31 種規格）",
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": -10,
+            "weight": -34.4,
             "power": 0,
-            "torque": 1,
+            "torque": 0,
             "displacement": 0,
-            "pp": 8
+            "pp": 0
           },
           "sourceCategory": "輪框"
         },
@@ -133,21 +133,21 @@
           "desc": "30 周年機械切削版，高光層次更強｜效果：簧下荷重 -3.8 kg/輪、高剛性抗扭與接地回饋提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "¥108,000 ～ ¥117,000",
-            "currency": "JPY",
-            "min": 108000,
-            "max": 117000,
-            "raw": "¥108,000 ～ ¥117,000"
+            "display": "NT$80,000～95,000",
+            "currency": "NTD",
+            "min": 80000,
+            "max": 95000,
+            "raw": "80000-95000"
           },
           "spec": "18×8.5J ET35 / 18×9.5J ET38，5×114.3（≈8.1–8.6 kg/輪）",
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": -9,
+            "weight": -34.4,
             "power": 0,
-            "torque": 2,
+            "torque": 0,
             "displacement": 0,
-            "pp": 8
+            "pp": 0
           },
           "sourceCategory": "輪框"
         },
@@ -157,21 +157,21 @@
           "desc": "TA 賽道限定版，降低旋轉慣性｜效果：簧下荷重 -4.0 kg/輪、加速與煞車響應提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "¥100,000 ～ ¥103,000",
-            "currency": "JPY",
-            "min": 100000,
-            "max": 103000,
-            "raw": "¥100,000 ～ ¥103,000"
+            "display": "NT$80,000～95,000",
+            "currency": "NTD",
+            "min": 80000,
+            "max": 95000,
+            "raw": "80000-95000"
           },
           "spec": "18×8.5J ET35 / 18×9.5J ET38，5×114.3（≈8.1 kg/輪）",
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": -11,
+            "weight": -34.4,
             "power": 0,
-            "torque": 2,
+            "torque": 0,
             "displacement": 0,
-            "pp": 9
+            "pp": 0
           },
           "sourceCategory": "輪框"
         },
@@ -181,21 +181,21 @@
           "desc": "TE37 系列最輕量 SL 旗艦｜效果：簧下荷重 -4.5 kg/輪、19 吋極限抓地與高速穩定提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "¥120,000 ～ ¥138,000",
-            "currency": "JPY",
-            "min": 120000,
-            "max": 138000,
-            "raw": "¥120,000 ～ ¥138,000"
+            "display": "NT$80,000～95,000",
+            "currency": "NTD",
+            "min": 80000,
+            "max": 95000,
+            "raw": "80000-95000"
           },
           "spec": "19×9.5J ET35，5×114.3（多尺寸對應）",
           "unit": "只",
           "isDefault": false,
           "mods": {
-            "weight": -12,
+            "weight": -34.4,
             "power": 0,
-            "torque": 2,
+            "torque": 0,
             "displacement": 0,
-            "pp": 10
+            "pp": 0
           },
           "sourceCategory": "輪框"
         }
@@ -214,17 +214,17 @@
             "currency": "NTD",
             "min": 4680,
             "max": 4680,
-            "raw": "NT$4,680"
+            "raw": "4680"
           },
           "spec": "2021- / 2024- 兩款對應",
           "unit": "件",
           "isDefault": true,
           "mods": {
-            "weight": 1,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 3
+            "pp": 0
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -238,17 +238,17 @@
             "currency": "NTD",
             "min": 11000,
             "max": 22400,
-            "raw": "NT$11,000～22,400"
+            "raw": "11000-22400"
           },
           "spec": "GR Yaris 2020- 客製化訂製",
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 2,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 5
+            "pp": 0
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -272,7 +272,7 @@
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 4
+            "pp": 0
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -292,11 +292,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": -2,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 7
+            "pp": 0
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -316,11 +316,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": -3,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 8
+            "pp": 0
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -340,11 +340,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": -4,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 9
+            "pp": 0
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -364,11 +364,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": -5,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 11
+            "pp": 0
           },
           "sourceCategory": "底盤懸吊"
         },
@@ -392,7 +392,7 @@
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 7
+            "pp": 0
           },
           "sourceCategory": "底盤懸吊"
         }
@@ -417,11 +417,11 @@
           "unit": "套",
           "isDefault": true,
           "mods": {
-            "weight": -1,
-            "power": 15,
-            "torque": 2,
+            "weight": 0,
+            "power": 25,
+            "torque": 0,
             "displacement": 0,
-            "pp": 12
+            "pp": 0
           },
           "sourceCategory": "引擎動力"
         },
@@ -442,10 +442,10 @@
           "isDefault": false,
           "mods": {
             "weight": 0,
-            "power": 4,
-            "torque": 1,
+            "power": 10,
+            "torque": 0,
             "displacement": 0,
-            "pp": 3
+            "pp": 0
           },
           "sourceCategory": "引擎動力"
         },
@@ -465,11 +465,11 @@
           "unit": "支",
           "isDefault": false,
           "mods": {
-            "weight": -2,
-            "power": 13,
-            "torque": 2,
+            "weight": 0,
+            "power": 15,
+            "torque": 0,
             "displacement": 0,
-            "pp": 10
+            "pp": 0
           },
           "sourceCategory": "引擎動力"
         },
@@ -489,11 +489,11 @@
           "unit": "套",
           "isDefault": false,
           "mods": {
-            "weight": -3,
+            "weight": 0,
             "power": 10,
-            "torque": 1,
+            "torque": 0,
             "displacement": 0,
-            "pp": 8
+            "pp": 0
           },
           "sourceCategory": "引擎動力"
         },
@@ -513,11 +513,11 @@
           "unit": "套",
           "isDefault": false,
           "mods": {
-            "weight": -4,
-            "power": 18,
-            "torque": 1,
+            "weight": 0,
+            "power": 15,
+            "torque": 0,
             "displacement": 0,
-            "pp": 12
+            "pp": 0
           },
           "sourceCategory": "引擎動力"
         },
@@ -527,21 +527,21 @@
           "desc": "Turn-flow 油冷芯與鋁管配管，控制賽道油溫｜效果：油溫穩定、引擎保護提升、持續輸出更穩。",
           "emoji": "🔥",
           "price": {
-            "display": "TBD",
+            "display": "TBC",
             "currency": "NTD",
             "min": 0,
             "max": 0,
-            "raw": "TBD"
+            "raw": "---TBC---"
           },
           "spec": "GXPA16 / 15004-AT113~AT114 / 2020- Gen1/Gen2",
           "unit": "套",
           "isDefault": false,
           "mods": {
-            "weight": 2,
-            "power": 2,
+            "weight": 0,
+            "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 6
+            "pp": 0
           },
           "sourceCategory": "引擎動力"
         },
@@ -561,11 +561,11 @@
           "unit": "套",
           "isDefault": false,
           "mods": {
-            "weight": -5,
-            "power": 20,
-            "torque": 2,
+            "weight": 0,
+            "power": 10,
+            "torque": 0,
             "displacement": 0,
-            "pp": 13
+            "pp": 0
           },
           "sourceCategory": "引擎動力"
         },
@@ -585,11 +585,11 @@
           "unit": "套",
           "isDefault": false,
           "mods": {
-            "weight": 2,
-            "power": 10,
-            "torque": 1,
+            "weight": 0,
+            "power": 0,
+            "torque": 0,
             "displacement": 0,
-            "pp": 11
+            "pp": 0
           },
           "sourceCategory": "引擎動力"
         }
@@ -614,11 +614,11 @@
           "unit": "套",
           "isDefault": true,
           "mods": {
-            "weight": 3,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 2
+            "pp": 0
           },
           "sourceCategory": "外觀空力"
         },
@@ -638,11 +638,11 @@
           "unit": "支",
           "isDefault": false,
           "mods": {
-            "weight": 2,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 6
+            "pp": 0
           },
           "sourceCategory": "外觀空力"
         },
@@ -662,11 +662,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 1,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 3
+            "pp": 0
           },
           "sourceCategory": "外觀空力"
         },
@@ -686,11 +686,11 @@
           "unit": "組",
           "isDefault": false,
           "mods": {
-            "weight": 2,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 5
+            "pp": 0
           },
           "sourceCategory": "外觀空力"
         },
@@ -710,11 +710,11 @@
           "unit": "套",
           "isDefault": false,
           "mods": {
-            "weight": -10,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 9
+            "pp": 0
           },
           "sourceCategory": "外觀空力"
         },
@@ -734,11 +734,11 @@
           "unit": "套",
           "isDefault": false,
           "mods": {
-            "weight": -6,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 10
+            "pp": 0
           },
           "sourceCategory": "外觀空力"
         },
@@ -758,11 +758,11 @@
           "unit": "套",
           "isDefault": false,
           "mods": {
-            "weight": 1,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 11
+            "pp": 0
           },
           "sourceCategory": "外觀空力"
         },
@@ -782,11 +782,11 @@
           "unit": "套",
           "isDefault": false,
           "mods": {
-            "weight": -12,
+            "weight": 0,
             "power": 0,
             "torque": 0,
             "displacement": 0,
-            "pp": 15
+            "pp": 0
           },
           "sourceCategory": "外觀空力"
         }
