@@ -1601,7 +1601,9 @@
         padding: 2px 14px 10px;
         flex: 1 1 auto;
         min-height: 0;
+        max-height: 290px;
         overflow-y: auto;
+        overscroll-behavior: contain;
         scrollbar-width: thin;
         scrollbar-color: rgba(232, 25, 44, 0.55) transparent;
       }
@@ -1663,6 +1665,36 @@
 
       .cart-item.default .cart-state {
         color: rgba(223, 230, 242, 0.58);
+      }
+
+      .cart-addon-head {
+        margin-top: 10px;
+        margin-bottom: 2px;
+        padding: 6px 8px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        color: rgba(176, 238, 209, 0.9);
+        background: rgba(27, 88, 64, 0.35);
+        border: 1px solid rgba(64, 196, 132, 0.35);
+        border-radius: 6px;
+      }
+
+      .cart-item.addon {
+        margin-top: 8px;
+        padding: 10px 8px;
+        border: 1px solid rgba(64, 196, 132, 0.32);
+        border-radius: 8px;
+        background: linear-gradient(
+          180deg,
+          rgba(23, 60, 47, 0.62) 0%,
+          rgba(13, 35, 27, 0.62) 100%
+        );
+      }
+
+      .cart-item.addon .cart-state {
+        color: rgba(182, 238, 211, 0.86);
       }
 
       .cart-price {
@@ -2532,6 +2564,31 @@
         color: var(--white);
       }
 
+      .modal-addon {
+        flex: 1.4;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        background: linear-gradient(135deg, #1f8f63, #0f5a3c);
+        border: none;
+        border-radius: 2px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 15px;
+        letter-spacing: 0.16em;
+        text-align: center;
+        line-height: 1.1;
+        color: #f2fffa;
+        cursor: pointer;
+        transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .modal-addon:hover {
+        filter: brightness(1.05);
+        transform: translateY(-1px);
+        box-shadow: 0 0 18px rgba(46, 204, 138, 0.35);
+      }
+
       .modal-confirm {
         flex: 2;
         padding: 12px;
@@ -3053,6 +3110,25 @@
         border-bottom: 1px solid rgba(18, 40, 66, 0.08);
       }
 
+      body[data-theme="light"] .cart-addon-head {
+        color: #1f6a4b;
+        background: rgba(107, 214, 166, 0.16);
+        border-color: rgba(52, 150, 108, 0.34);
+      }
+
+      body[data-theme="light"] .cart-item.addon {
+        border-color: rgba(52, 150, 108, 0.36);
+        background: linear-gradient(
+          180deg,
+          rgba(214, 249, 234, 0.95) 0%,
+          rgba(233, 255, 245, 0.95) 100%
+        );
+      }
+
+      body[data-theme="light"] .cart-item.addon .cart-state {
+        color: #2c7a57;
+      }
+
       body[data-theme="light"] .pp-meter {
         border-bottom: 1px solid rgba(18, 40, 66, 0.18);
       }
@@ -3302,6 +3378,11 @@
       body[data-theme="light"] .modal-confirm {
         color: #f8fbff;
         text-shadow: 0 1px 2px rgba(27, 11, 14, 0.32);
+      }
+
+      body[data-theme="light"] .modal-addon {
+        color: #f6fffb;
+        background: linear-gradient(135deg, #299b6c, #16714b);
       }
 
       body[data-theme="light"] .toast {
@@ -3614,6 +3695,7 @@
         }
         .cart-list {
           padding: 2px 12px 8px;
+          max-height: 180px;
         }
         .cart-item {
           grid-template-columns: 66px 1fr auto;
@@ -3724,6 +3806,7 @@
           gap: 8px;
         }
         .modal-cancel,
+        .modal-addon,
         .modal-confirm {
           width: 100%;
         }
@@ -4151,6 +4234,13 @@
           <div class="modal-actions">
             <button class="modal-cancel" onclick="closeMod()">取消</button>
             <button
+              class="modal-addon"
+              id="mod-addon"
+              onclick="togglePendingAddOn()"
+            >
+              額外加購此零件
+            </button>
+            <button
               class="modal-confirm"
               id="mod-confirm"
               onclick="confirmPart()"
@@ -4509,6 +4599,7 @@
           }
           // Initialize with no pre-selected parts
           sel = {};
+          addOns = [];
           normalizeSelection();
           // Initialize after loading
           initApp();
@@ -4530,6 +4621,7 @@
          STATE
       ══════════════════════════════ */
       let sel = {};
+      let addOns = [];
       let curCat = "wheels";
       let pending = null;
       let prevStats = null;
@@ -4547,7 +4639,6 @@
       function normalizeSelection() {
         if (!sel || typeof sel !== "object") {
           sel = {};
-          return;
         }
         const nextSel = {};
         Object.entries(sel).forEach(([cat, id]) => {
@@ -4558,6 +4649,51 @@
           nextSel[resolvedCat] = id;
         });
         sel = nextSel;
+
+        if (!Array.isArray(addOns)) {
+          addOns = [];
+        }
+        const nextAddOns = [];
+        const seen = new Set();
+        addOns.forEach((entry) => {
+          if (!entry) return;
+          const resolvedCat = resolveCategoryKey(entry.cat);
+          const category = CATS[resolvedCat];
+          if (!category || !Array.isArray(category.parts)) return;
+          if (!category.parts.some((part) => part.id === entry.id)) return;
+          if (sel[resolvedCat] === entry.id) return;
+          const key = `${resolvedCat}::${entry.id}`;
+          if (seen.has(key)) return;
+          seen.add(key);
+          nextAddOns.push({ cat: resolvedCat, id: entry.id });
+        });
+        addOns = nextAddOns;
+      }
+
+      function addOnKey(cat, id) {
+        const resolvedCat = resolveCategoryKey(cat);
+        return `${resolvedCat}::${id}`;
+      }
+
+      function findAddOnIndex(cat, id) {
+        const key = addOnKey(cat, id);
+        return addOns.findIndex((entry) => addOnKey(entry.cat, entry.id) === key);
+      }
+
+      function hasAddOn(cat, id) {
+        return findAddOnIndex(cat, id) !== -1;
+      }
+
+      function setAddOn(cat, id, active) {
+        const resolvedCat = resolveCategoryKey(cat);
+        const idx = findAddOnIndex(resolvedCat, id);
+        if (active) {
+          if (idx === -1) {
+            addOns.push({ cat: resolvedCat, id });
+          }
+        } else if (idx !== -1) {
+          addOns.splice(idx, 1);
+        }
       }
 
       function syncCategoryNav() {
@@ -4918,32 +5054,28 @@
           return;
 
         let total = 0;
-        const items = Object.entries(sel)
+        const equippedItems = Object.entries(sel)
           .map(([cat, id]) => {
             const resolvedCat = resolveCategoryKey(cat);
             const category = CATS[resolvedCat];
             if (!category) return null;
-
             const part = category.parts.find((x) => x.id === id);
             if (!part) return null;
-
-            const isDefault = Boolean(part.isDefault);
             const price = getPartPriceValue(part);
             const priceText = getPartPriceText(part);
-            const stateText = isDefault ? "預設配置" : "已裝備";
             const categoryLabel = getCartCategoryLabel(resolvedCat, category);
             total += price;
 
             return {
               categoryLabel,
               name: part.name,
-              stateText,
+              stateText: "已裝備",
               priceText,
-              rowHtml: `<div class="cart-item ${isDefault ? "default" : ""}">
+              rowHtml: `<div class="cart-item">
               <div class="cart-cat">${categoryLabel}</div>
               <div class="cart-main">
                 <div class="cart-name">${part.name}</div>
-                <div class="cart-state">${stateText}</div>
+                <div class="cart-state">已裝備</div>
               </div>
               <div class="cart-price">${priceText}</div>
             </div>`,
@@ -4951,15 +5083,46 @@
           })
           .filter((item) => Boolean(item));
 
-        const rows = items
-          .map((item) => item.rowHtml)
-          .join("");
+        const addOnItems = addOns
+          .map((entry) => {
+            const resolvedCat = resolveCategoryKey(entry.cat);
+            const category = CATS[resolvedCat];
+            if (!category) return null;
+            const part = category.parts.find((x) => x.id === entry.id);
+            if (!part) return null;
+            const price = getPartPriceValue(part);
+            const priceText = getPartPriceText(part);
+            const categoryLabel = getCartCategoryLabel(resolvedCat, category);
+            total += price;
 
-        listEl.innerHTML = rows;
+            return {
+              categoryLabel,
+              name: part.name,
+              stateText: "加購待結帳",
+              priceText,
+              rowHtml: `<div class="cart-item addon">
+              <div class="cart-cat">${categoryLabel}</div>
+              <div class="cart-main">
+                <div class="cart-name">${part.name}</div>
+                <div class="cart-state">加購待結帳</div>
+              </div>
+              <div class="cart-price">${priceText}</div>
+            </div>`,
+            };
+          })
+          .filter((item) => Boolean(item));
+
+        const equippedRows = equippedItems.map((item) => item.rowHtml).join("");
+        const addOnRows = addOnItems.map((item) => item.rowHtml).join("");
+        const addOnSection = addOnRows
+          ? `<div class="cart-addon-head">加購零件</div>${addOnRows}`
+          : "";
+
+        listEl.innerHTML = `${equippedRows}${addOnSection}`;
         totalEl.textContent = formatNTD(total);
-        metaEl.textContent = `已選 ${Object.keys(sel).length} 項 · GR YARIS`;
+        metaEl.textContent = `已裝備 ${equippedItems.length} 項 · 加購 ${addOnItems.length} 項`;
 
-        const preview = items[0];
+        const preview = equippedItems[0] || addOnItems[0];
         if (preview) {
           previewCatEl.textContent = preview.categoryLabel;
           previewNameEl.textContent = preview.name;
@@ -5355,6 +5518,50 @@
         setModalImage(modalGalleryIndex + 1);
       }
 
+      function updateModalActionButtons(cat, id) {
+        const resolvedCat = resolveCategoryKey(cat);
+        const confirmBtn = document.getElementById("mod-confirm");
+        const addOnBtn = document.getElementById("mod-addon");
+        if (!confirmBtn || !addOnBtn) return;
+
+        const equippedId = sel[resolvedCat] || "";
+        const isEquippedSame = equippedId === id;
+        const hasEquippedOther = Boolean(equippedId && equippedId !== id);
+        const isAddOn = hasAddOn(resolvedCat, id);
+
+        confirmBtn.disabled = false;
+        addOnBtn.style.display = "none";
+        addOnBtn.disabled = false;
+
+        if (isEquippedSame) {
+          confirmBtn.textContent = "卸下裝備";
+          return;
+        }
+
+        if (hasEquippedOther) {
+          confirmBtn.textContent = "換裝備此零件";
+          addOnBtn.style.display = "inline-flex";
+          addOnBtn.textContent = isAddOn ? "取消加購" : "額外加購此零件";
+          return;
+        }
+
+        confirmBtn.textContent = "裝備零件";
+        if (isAddOn) {
+          addOnBtn.style.display = "inline-flex";
+          addOnBtn.textContent = "取消加購";
+        }
+      }
+
+      function togglePendingAddOn() {
+        if (!pending) return;
+        const exists = hasAddOn(pending.cat, pending.id);
+        setAddOn(pending.cat, pending.id, !exists);
+        normalizeSelection();
+        renderSummary();
+        updateModalActionButtons(pending.cat, pending.id);
+        showToast(exists ? "已取消加購" : "已加入加購清單");
+      }
+
       function openModal(cat, id) {
         const resolvedCat = resolveCategoryKey(cat);
         const category = CATS[resolvedCat];
@@ -5405,11 +5612,7 @@
             '<div class="modal-chip mchip-neutral">無性能數值變更</div>'
           );
         document.getElementById("modal-chips").innerHTML = chips.join("");
-
-        const already = sel[resolvedCat] === id;
-        const btn = document.getElementById("mod-confirm");
-        btn.textContent = already ? "卸下裝備" : "裝備零件";
-        btn.disabled = false;
+        updateModalActionButtons(resolvedCat, id);
 
         document.getElementById("modal-bg").classList.add("open");
       }
@@ -5417,6 +5620,7 @@
       function closeMod() {
         document.getElementById("modal-bg").classList.remove("open");
         closeImageLightbox();
+        pending = null;
         modalGalleryImages = [];
         modalGalleryIndex = 0;
         modalGalleryPartName = "";
@@ -5438,6 +5642,7 @@
           delete sel[pending.cat];
         } else {
           sel[pending.cat] = pending.id;
+          setAddOn(pending.cat, pending.id, false);
         }
         normalizeSelection();
         const after = computeStats();
@@ -5521,6 +5726,7 @@
       ══════════════════════════════ */
       function doReset() {
         sel = {};
+        addOns = [];
         normalizeSelection();
         curCat = resolveCategoryKey(curCat);
         if (!CATS[curCat]) {
