@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | 暴力鴨專業汽車百貨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/backend/dashboard.css" />
+  </head>
+  <body class="dashboard-home-body">
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <header class="dashboard-topbar app-card">
+      <div class="topbar-title-wrap">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <p class="brand-tag">MOTORSPORT GARAGE SINCE 2020</p>
+          <h1><span class="brand-name-nowrap">暴力鴨專業汽車百貨</span> Dashboard</h1>
+        </div>
+      </div>
+      <button id="logout-button" class="logout-button" type="button">登出</button>
+    </header>
+
+    <main class="dashboard-main">
+      <aside class="dashboard-sidebar app-card">
+        <button class="dash-nav-item active" type="button">控制中心</button>
+        <button class="dash-nav-item" type="button">商品管理</button>
+        <button class="dash-nav-item" type="button">訂單追蹤</button>
+        <button class="dash-nav-item" type="button">客戶資料</button>
+        <button class="dash-nav-item" type="button">營運報表</button>
+      </aside>
+
+      <section class="dashboard-content">
+        <article class="welcome-card app-card">
+          <h2>登入成功</h2>
+          <p>管理者：<strong id="dashboard-username">-</strong></p>
+          <p>這裡先作為後端入口，下一步我們可以接商品管理、訂單、客戶資料等模組。</p>
+        </article>
+
+        <section class="stats-grid">
+          <article class="stat-card app-card">
+            <p class="stat-label">今日訂單</p>
+            <p class="stat-value">128</p>
+          </article>
+          <article class="stat-card app-card">
+            <p class="stat-label">待出貨</p>
+            <p class="stat-value">34</p>
+          </article>
+          <article class="stat-card app-card">
+            <p class="stat-label">熱銷零件</p>
+            <p class="stat-value">TE37 SAGA</p>
+          </article>
+        </section>
+      </section>
+    </main>
+    <script src="/backend/dashboard-home.js"></script>
+  </body>
+</html>

@@ -1,0 +1,429 @@
+:root {
+  --bg-0: #121212;
+  --bg-1: #181818;
+  --bg-2: #1f1f1f;
+  --bg-3: #252525;
+  --line-soft: #323232;
+  --line-mid: #4d4d4d;
+  --text-main: #ffffff;
+  --text-sub: #b3b3b3;
+  --text-soft: #cbcbcb;
+  --brand: #1ed760;
+  --danger: #f3727f;
+  --shadow-1: rgba(0, 0, 0, 0.3) 0px 8px 8px;
+  --shadow-2: rgba(0, 0, 0, 0.5) 0px 8px 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  color: var(--text-main);
+  font-family:
+    "Noto Sans TC",
+    "Helvetica Neue",
+    "Arial",
+    sans-serif;
+  background:
+    radial-gradient(circle at 14% 4%, rgba(30, 215, 96, 0.14), transparent 28%),
+    radial-gradient(circle at 84% 0%, rgba(255, 255, 255, 0.06), transparent 26%),
+    linear-gradient(165deg, #0f0f0f 0%, var(--bg-0) 42%, #101010 100%);
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(transparent 96%, rgba(255, 255, 255, 0.08) 96%),
+    linear-gradient(90deg, transparent 96%, rgba(255, 255, 255, 0.08) 96%);
+  background-size:
+    6px 6px,
+    6px 6px;
+  mix-blend-mode: soft-light;
+}
+
+.app-card {
+  background: linear-gradient(185deg, var(--bg-1), var(--bg-2));
+  box-shadow: var(--shadow-1);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+}
+
+.brand-tag {
+  margin: 0 0 8px;
+  color: var(--text-sub);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 1.9px;
+  text-transform: uppercase;
+}
+
+.brand-mark {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #78ffab, var(--brand) 52%, #0c8e37);
+  box-shadow:
+    0 0 0 4px rgba(30, 215, 96, 0.18),
+    0 10px 22px rgba(30, 215, 96, 0.24);
+}
+
+.dashboard-login-body {
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 3vw, 36px);
+}
+
+.login-shell {
+  position: relative;
+  width: min(1040px, 100%);
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.brand-rail,
+.login-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: var(--shadow-2);
+}
+
+.brand-rail {
+  padding: clamp(28px, 4vw, 48px);
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(30, 215, 96, 0.19), transparent 34%),
+    linear-gradient(180deg, #181818, #141414);
+}
+
+.brand-rail h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  line-height: 1.06;
+}
+
+.brand-subtitle {
+  margin: 2px 0 0;
+  color: var(--text-soft);
+  font-size: 1rem;
+}
+
+.brand-name-nowrap {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.brand-rail .brand-name-nowrap {
+  font-size: clamp(1.72rem, 4.25vw, 3.05rem);
+  line-height: 1.08;
+}
+
+.dashboard-topbar .brand-name-nowrap {
+  font-size: 0.9em;
+}
+
+.brand-feature-list {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.brand-feature-list span {
+  border-radius: 9999px;
+  background: var(--bg-2);
+  color: var(--text-sub);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  padding: 7px 11px;
+}
+
+.login-panel {
+  padding: clamp(26px, 3.6vw, 40px);
+  background:
+    radial-gradient(circle at 112% -8%, rgba(30, 215, 96, 0.14), transparent 42%),
+    linear-gradient(180deg, #1a1a1a, #141414);
+}
+
+.panel-topline {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(30, 215, 96, 0.65), transparent);
+  margin-bottom: 20px;
+}
+
+.login-panel h2 {
+  margin: 0 0 4px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.1rem;
+  letter-spacing: 2.1px;
+}
+
+.panel-note {
+  margin: 0 0 20px;
+  color: var(--text-sub);
+  font-size: 0.92rem;
+}
+
+#dashboard-login-form {
+  display: grid;
+  gap: 12px;
+}
+
+#dashboard-login-form label {
+  color: var(--text-sub);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+#dashboard-login-form input {
+  appearance: none;
+  width: 100%;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--bg-2);
+  color: var(--text-main);
+  padding: 12px 15px;
+  font-size: 0.95rem;
+  box-shadow:
+    rgb(18, 18, 18) 0px 1px 0px,
+    rgb(124, 124, 124) 0px 0px 0px 1px inset;
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+#dashboard-login-form input:focus {
+  outline: none;
+  box-shadow:
+    rgb(18, 18, 18) 0px 1px 0px,
+    rgb(30, 215, 96) 0px 0px 0px 1.5px inset,
+    0 0 0 3px rgba(30, 215, 96, 0.18);
+}
+
+#login-submit,
+.logout-button {
+  appearance: none;
+  border: 0;
+  border-radius: 9999px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform 140ms ease,
+    filter 160ms ease,
+    box-shadow 160ms ease;
+}
+
+#login-submit {
+  margin-top: 10px;
+  background: var(--brand);
+  color: #0f0f0f;
+  padding: 12px 16px;
+  box-shadow:
+    0 6px 16px rgba(30, 215, 96, 0.34),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+}
+
+#login-submit:hover,
+.logout-button:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+#login-submit:active,
+.logout-button:active {
+  transform: translateY(1px);
+}
+
+.status-line {
+  min-height: 22px;
+  margin: 11px 0 0;
+  font-size: 0.87rem;
+  color: var(--text-sub);
+}
+
+.status-line.error {
+  color: var(--danger);
+}
+
+.status-line.success {
+  color: var(--brand);
+}
+
+.dashboard-home-body {
+  padding: clamp(16px, 2.4vw, 30px);
+}
+
+.dashboard-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+}
+
+.topbar-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dashboard-topbar h1 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  letter-spacing: 0.4px;
+}
+
+.logout-button {
+  padding: 10px 18px;
+  color: var(--text-main);
+  background: linear-gradient(180deg, #2a2a2a, #202020);
+  border: 1px solid var(--line-mid);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.dashboard-main {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.dashboard-sidebar {
+  padding: 12px;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.dash-nav-item {
+  appearance: none;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--bg-2);
+  color: var(--text-sub);
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, transform 120ms ease;
+}
+
+.dash-nav-item:hover {
+  color: var(--text-main);
+  background: #2a2a2a;
+}
+
+.dash-nav-item.active {
+  color: #0f0f0f;
+  background: var(--brand);
+}
+
+.dashboard-content {
+  display: grid;
+  gap: 14px;
+}
+
+.welcome-card {
+  padding: 18px 20px;
+}
+
+.welcome-card h2 {
+  margin: 0 0 10px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.95rem;
+  letter-spacing: 1.2px;
+}
+
+.welcome-card p {
+  margin: 6px 0;
+  color: var(--text-sub);
+  font-size: 0.94rem;
+}
+
+.welcome-card strong {
+  color: var(--text-main);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stat-card {
+  padding: 14px 16px;
+  min-height: 118px;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+}
+
+.stat-label {
+  margin: 0;
+  color: var(--text-sub);
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.stat-value {
+  margin: 0;
+  color: var(--text-main);
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-weight: 800;
+}
+
+@media (max-width: 980px) {
+  .login-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-main {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-sidebar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-sidebar {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .dashboard-sidebar {
+    grid-template-columns: 1fr;
+  }
+}

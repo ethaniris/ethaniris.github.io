@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Login | 暴力鴨專業汽車百貨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/backend/dashboard.css" />
+  </head>
+  <body class="dashboard-login-body">
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <main class="login-shell">
+      <section class="brand-rail">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <p class="brand-tag">MOTORSPORT GARAGE SINCE 2020</p>
+        <h1 class="brand-name-nowrap">暴力鴨專業汽車百貨</h1>
+        <p class="brand-subtitle">後台管理系統</p>
+        <div class="brand-feature-list">
+          <span>ORDER CONTROL</span>
+          <span>PRODUCT OPS</span>
+          <span>PERFORMANCE DATA</span>
+        </div>
+      </section>
+
+      <section class="login-panel">
+        <div class="panel-topline" aria-hidden="true"></div>
+        <h2>DASHBOARD SIGN IN</h2>
+        <p class="panel-note">輸入管理帳號後即可進入 /dashboard。</p>
+
+        <form id="dashboard-login-form" autocomplete="off">
+          <label for="username">帳號</label>
+          <input id="username" name="username" type="text" required />
+
+          <label for="password">密碼</label>
+          <input id="password" name="password" type="password" required />
+
+          <button id="login-submit" type="submit">登入後台</button>
+        </form>
+
+        <p class="status-line" id="login-status" aria-live="polite"></p>
+      </section>
+    </main>
+    <script src="/backend/dashboard-login.js"></script>
+  </body>
+</html>
