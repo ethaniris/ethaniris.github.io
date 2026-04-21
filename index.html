@@ -2705,57 +2705,596 @@
       }
 
       /* ═══════════════════════════════════════
-   GARAGE SUCCESS MODAL
+   CHECKOUT MODAL
 ═══════════════════════════════════════ */
       .garage-box {
-        width: 380px;
-        max-width: 90vw;
-        background: linear-gradient(165deg, #0d1828, #070d14);
-        border: 1px solid rgba(232, 25, 44, 0.3);
-        border-radius: 4px;
-        padding: 40px 32px;
-        text-align: center;
-        transform: scale(0.92) translateY(24px);
-        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+        width: min(980px, 94vw);
+        max-height: 90vh;
+        overflow: auto;
+        position: relative;
+        background: linear-gradient(168deg, #0d1828 0%, #080f1b 100%);
+        border: 1px solid rgba(232, 25, 44, 0.35);
+        border-radius: 12px;
+        padding: 24px;
+        transform: scale(0.95) translateY(18px);
+        transition: transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.26s ease;
+        box-shadow: 0 42px 105px rgba(0, 0, 0, 0.78),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04);
       }
       .modal-bg.open .garage-box {
         transform: scale(1) translateY(0);
       }
 
-      .garage-icon {
-        font-size: 48px;
-        margin-bottom: 12px;
+      .checkout-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
       }
+
       .garage-title {
         font-family: "Bebas Neue", sans-serif;
-        font-size: 28px;
-        letter-spacing: 0.15em;
-        color: var(--red);
-        margin-bottom: 8px;
+        font-size: clamp(26px, 4vw, 34px);
+        letter-spacing: 0.12em;
+        color: #f3f7ff;
       }
+
       .garage-sub {
-        font-family: "Barlow", sans-serif;
+        margin-top: 4px;
+        font-family: "Noto Sans TC", sans-serif;
         font-size: 12px;
-        font-weight: 300;
-        color: var(--grey);
-        line-height: 1.7;
-        margin-bottom: 24px;
+        color: rgba(220, 232, 248, 0.76);
+        line-height: 1.55;
       }
+
+      .checkout-close {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.06);
+        color: rgba(245, 251, 255, 0.95);
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .checkout-close:hover {
+        border-color: rgba(232, 25, 44, 0.55);
+        background: rgba(232, 25, 44, 0.15);
+      }
+
+      .checkout-table-wrap {
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 10px;
+        overflow: hidden;
+        background: rgba(4, 10, 18, 0.45);
+      }
+
+      .checkout-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .checkout-table th {
+        text-align: left;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        color: rgba(215, 230, 246, 0.86);
+        padding: 12px 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      }
+
+      .checkout-table td {
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        vertical-align: top;
+      }
+
+      .checkout-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .checkout-item-title {
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        color: #f7fbff;
+        line-height: 1.35;
+      }
+
+      .checkout-item-state {
+        margin-top: 2px;
+        font-size: 11px;
+        color: rgba(216, 228, 241, 0.72);
+      }
+
+      .checkout-col-price {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 12px;
+        letter-spacing: 0.07em;
+        color: rgba(199, 214, 231, 0.86);
+        white-space: nowrap;
+      }
+
+      .checkout-col-money,
+      .checkout-col-qty {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        letter-spacing: 0.04em;
+        color: #f5c842;
+        white-space: nowrap;
+      }
+
+      .checkout-col-qty {
+        color: #dbebff;
+      }
+
+      .checkout-empty {
+        display: none;
+        text-align: center;
+        padding: 18px;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 13px;
+        color: rgba(214, 226, 241, 0.72);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .checkout-total-row {
+        margin-top: 12px;
+        display: flex;
+        align-items: baseline;
+        justify-content: flex-end;
+        gap: 10px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 16px;
+        letter-spacing: 0.08em;
+        color: rgba(215, 230, 246, 0.78);
+      }
+
+      .checkout-total-row strong {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 34px;
+        line-height: 1;
+        color: #f5c842;
+        letter-spacing: 0.06em;
+      }
+
+      .checkout-form {
+        margin-top: 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 14px;
+      }
+
+      .checkout-section-title {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        color: #eff6ff;
+        margin: 0 0 10px;
+      }
+
+      .checkout-pay-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .checkout-pay-option input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .checkout-pay-option label {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 10px 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .checkout-pay-option input:checked + label {
+        border-color: rgba(232, 25, 44, 0.72);
+        box-shadow: 0 0 0 1px rgba(232, 25, 44, 0.34);
+        background: linear-gradient(
+          180deg,
+          rgba(232, 25, 44, 0.18) 0%,
+          rgba(232, 25, 44, 0.08) 100%
+        );
+      }
+
+      .pay-name {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        color: #f5f9ff;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .pay-meta {
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 11px;
+        color: rgba(210, 223, 240, 0.75);
+      }
+
+      .pay-icon {
+        font-size: 14px;
+        line-height: 1;
+      }
+
+      #pay-line + label {
+        border-color: rgba(6, 199, 85, 0.58);
+        background: linear-gradient(
+          180deg,
+          rgba(6, 199, 85, 0.2) 0%,
+          rgba(6, 199, 85, 0.1) 100%
+        );
+      }
+
+      #pay-line + label .pay-name {
+        color: #52ffab;
+      }
+
+      #pay-line + label .pay-meta {
+        color: rgba(191, 255, 223, 0.84);
+      }
+
+      #pay-line:checked + label {
+        border-color: #06c755;
+        box-shadow: 0 0 0 1px rgba(6, 199, 85, 0.45),
+          0 0 20px rgba(6, 199, 85, 0.2);
+        background: linear-gradient(
+          180deg,
+          rgba(6, 199, 85, 0.34) 0%,
+          rgba(6, 199, 85, 0.16) 100%
+        );
+      }
+
+      .checkout-input-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .checkout-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: rgba(216, 231, 249, 0.9);
+      }
+
+      .checkout-field input {
+        height: 42px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.04);
+        color: #f6fbff;
+        padding: 0 12px;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 14px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .checkout-field input::placeholder {
+        color: rgba(196, 212, 234, 0.52);
+      }
+
+      .checkout-field input:focus {
+        outline: none;
+        border-color: rgba(232, 25, 44, 0.6);
+        box-shadow: 0 0 0 3px rgba(232, 25, 44, 0.16);
+      }
+
+      .checkout-feedback {
+        min-height: 18px;
+        margin-top: 10px;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 12px;
+        color: rgba(214, 226, 241, 0.72);
+      }
+
+      .checkout-feedback.error {
+        color: #ff8493;
+      }
+
+      .checkout-feedback.success {
+        color: #7dffb4;
+      }
+
+      .checkout-actions {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .garage-box > :not(.checkout-processing) {
+        transition: opacity 0.26s ease, transform 0.26s ease;
+      }
+
+      .garage-box.is-processing > :not(.checkout-processing) {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(8px) scale(0.985);
+      }
+
+      .garage-box.is-processing {
+        background: transparent !important;
+        border-color: transparent !important;
+        box-shadow: none !important;
+      }
+
+      .checkout-processing {
+        position: absolute;
+        inset: 0;
+        border-radius: 0;
+        background: transparent;
+        backdrop-filter: none;
+        z-index: 40;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        pointer-events: none;
+      }
+
+      .checkout-processing.show {
+        display: flex;
+      }
+
+      .checkout-processing-card {
+        width: min(420px, 100%);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
+        background: linear-gradient(165deg, #0f1e32 0%, #0b1522 62%, #0a1320 100%);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.58);
+        padding: 22px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        overflow: hidden;
+        position: relative;
+        pointer-events: auto;
+      }
+
+      .checkout-processing-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -120%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          112deg,
+          transparent 30%,
+          rgba(0, 229, 255, 0.2) 50%,
+          transparent 70%
+        );
+        animation: processing-sweep 2.5s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      .processing-visual {
+        width: 118px;
+        height: 118px;
+        position: relative;
+        display: grid;
+        place-items: center;
+        margin-top: 2px;
+        margin-bottom: 18px;
+      }
+
+      .processing-spinner {
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 255, 255, 0.16);
+        border-top-color: #00e5ff;
+        border-right-color: #00b7ff;
+        border-bottom-color: #2484ff;
+        animation: processing-spin 0.9s linear infinite;
+        position: relative;
+        z-index: 2;
+      }
+
+      .processing-check {
+        display: none;
+        width: 78px;
+        height: 78px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(140deg, #1ad977, #109a52);
+        color: #ffffff;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 42px;
+        box-shadow: 0 0 0 6px rgba(26, 217, 119, 0.2),
+          0 16px 34px rgba(26, 217, 119, 0.26);
+        transform: scale(0.85);
+        position: relative;
+        z-index: 3;
+      }
+
+      .processing-chip-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .processing-chip {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.09em;
+        font-weight: 700;
+        color: rgba(210, 226, 244, 0.88);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 999px;
+        padding: 5px 10px;
+      }
+
+      .processing-progress-track {
+        width: 100%;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.15);
+        overflow: hidden;
+      }
+
+      .processing-progress-fill {
+        width: 12%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #00e5ff, #00b7ff, #2484ff);
+        transition: width 0.34s ease;
+      }
+
+      .checkout-processing.is-success .processing-spinner {
+        opacity: 0;
+        transform: scale(0.88);
+        transition: opacity 0.28s ease, transform 0.28s ease;
+      }
+
+      .checkout-processing.is-success .processing-check {
+        display: inline-flex;
+        margin-top: -30px;
+        animation: processing-check-pop 0.38s cubic-bezier(0.2, 1.4, 0.36, 1)
+          forwards;
+      }
+
+      .checkout-processing.is-success .processing-chip-row {
+        margin-top: 10px;
+      }
+
+      .checkout-processing.is-success .processing-progress-fill {
+        background: linear-gradient(90deg, #29da7d, #18b765);
+      }
+
+      .processing-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 35px;
+        letter-spacing: 0.09em;
+        color: #f5faff;
+        line-height: 1.08;
+        text-shadow: 0 0 16px rgba(255, 255, 255, 0.14);
+      }
+
+      .processing-sub {
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 13px;
+        color: rgba(216, 230, 247, 0.86);
+        line-height: 1.58;
+      }
+
+      .processing-done-btn {
+        margin-top: 6px;
+        min-width: 118px;
+        height: 40px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(140deg, #1ad977, #109a52);
+        color: #ffffff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.11em;
+        cursor: pointer;
+        display: none;
+      }
+
+      .checkout-processing.is-success .processing-done-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @keyframes processing-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes processing-sweep {
+        0% {
+          left: -120%;
+        }
+        100% {
+          left: 140%;
+        }
+      }
+
+      @keyframes processing-check-pop {
+        0% {
+          transform: scale(0.72);
+          opacity: 0.5;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
       .garage-close {
-        padding: 12px 36px;
+        min-width: 124px;
+        height: 42px;
+        padding: 0 18px;
         background: linear-gradient(135deg, var(--red), #a00c18);
         border: none;
-        border-radius: 2px;
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 15px;
-        letter-spacing: 0.2em;
+        border-radius: 8px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.11em;
         color: var(--white);
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.2s ease;
       }
+
       .garage-close:hover {
-        box-shadow: 0 0 24px rgba(232, 25, 44, 0.5);
+        box-shadow: 0 0 20px rgba(232, 25, 44, 0.45);
+        transform: translateY(-1px);
+      }
+
+      .garage-close:disabled {
+        opacity: 0.42;
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+      }
+
+      .garage-close.ghost {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: rgba(236, 244, 255, 0.9);
+      }
+
+      .garage-close.ghost:hover {
+        box-shadow: none;
+        border-color: rgba(255, 255, 255, 0.24);
       }
 
       body,
@@ -3364,6 +3903,200 @@
         box-shadow: 0 32px 70px rgba(23, 40, 59, 0.22);
       }
 
+      body[data-theme="light"] .garage-title {
+        color: #102438;
+      }
+
+      body[data-theme="light"] .garage-sub {
+        color: #5a6f86;
+      }
+
+      body[data-theme="light"] .checkout-close {
+        color: #17304a;
+        border-color: rgba(18, 40, 66, 0.2);
+        background: rgba(255, 255, 255, 0.86);
+      }
+
+      body[data-theme="light"] .checkout-close:hover {
+        border-color: rgba(199, 58, 70, 0.55);
+        background: rgba(255, 239, 241, 0.92);
+      }
+
+      body[data-theme="light"] .checkout-table-wrap {
+        border-color: rgba(18, 40, 66, 0.14);
+        background: rgba(255, 255, 255, 0.62);
+      }
+
+      body[data-theme="light"] .checkout-table th {
+        color: #29435d;
+        background: rgba(18, 40, 66, 0.05);
+        border-bottom-color: rgba(18, 40, 66, 0.12);
+      }
+
+      body[data-theme="light"] .checkout-table td {
+        border-bottom-color: rgba(18, 40, 66, 0.1);
+      }
+
+      body[data-theme="light"] .checkout-item-title {
+        color: #102438;
+      }
+
+      body[data-theme="light"] .checkout-item-state,
+      body[data-theme="light"] .checkout-col-price,
+      body[data-theme="light"] .checkout-empty {
+        color: #627790;
+      }
+
+      body[data-theme="light"] .checkout-col-money {
+        color: #8a630c;
+      }
+
+      body[data-theme="light"] .checkout-col-qty {
+        color: #253f5b;
+      }
+
+      body[data-theme="light"] .checkout-total-row {
+        color: #4f647d;
+      }
+
+      body[data-theme="light"] .checkout-total-row strong {
+        color: #8a630c;
+      }
+
+      body[data-theme="light"] .checkout-form {
+        border-top-color: rgba(18, 40, 66, 0.12);
+      }
+
+      body[data-theme="light"] .checkout-section-title {
+        color: #19324b;
+      }
+
+      body[data-theme="light"] .checkout-pay-option label {
+        border-color: rgba(18, 40, 66, 0.14);
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      body[data-theme="light"] .checkout-pay-option input:checked + label {
+        border-color: rgba(199, 58, 70, 0.74);
+        box-shadow: 0 0 0 1px rgba(199, 58, 70, 0.28);
+        background: linear-gradient(
+          180deg,
+          rgba(199, 58, 70, 0.15) 0%,
+          rgba(199, 58, 70, 0.08) 100%
+        );
+      }
+
+      body[data-theme="light"] .pay-name {
+        color: #11283f;
+      }
+
+      body[data-theme="light"] .pay-meta {
+        color: #6c829a;
+      }
+
+      body[data-theme="light"] #pay-line + label {
+        border-color: rgba(6, 199, 85, 0.48);
+        background: linear-gradient(
+          180deg,
+          rgba(6, 199, 85, 0.16) 0%,
+          rgba(6, 199, 85, 0.08) 100%
+        );
+      }
+
+      body[data-theme="light"] #pay-line + label .pay-name {
+        color: #049b43;
+      }
+
+      body[data-theme="light"] #pay-line + label .pay-meta {
+        color: #2c8f57;
+      }
+
+      body[data-theme="light"] #pay-line:checked + label {
+        border-color: rgba(6, 199, 85, 0.82);
+        box-shadow: 0 0 0 1px rgba(6, 199, 85, 0.36);
+        background: linear-gradient(
+          180deg,
+          rgba(6, 199, 85, 0.25) 0%,
+          rgba(6, 199, 85, 0.12) 100%
+        );
+      }
+
+      body[data-theme="light"] .checkout-field {
+        color: #2a415a;
+      }
+
+      body[data-theme="light"] .checkout-field input {
+        border-color: rgba(18, 40, 66, 0.22);
+        background: rgba(255, 255, 255, 0.9);
+        color: #132b43;
+      }
+
+      body[data-theme="light"] .checkout-field input::placeholder {
+        color: rgba(82, 106, 130, 0.65);
+      }
+
+      body[data-theme="light"] .checkout-field input:focus {
+        border-color: rgba(199, 58, 70, 0.68);
+        box-shadow: 0 0 0 3px rgba(199, 58, 70, 0.16);
+      }
+
+      body[data-theme="light"] .checkout-feedback {
+        color: #60758d;
+      }
+
+      body[data-theme="light"] .checkout-feedback.error {
+        color: #c64d52;
+      }
+
+      body[data-theme="light"] .checkout-feedback.success {
+        color: #2d8a60;
+      }
+
+      body[data-theme="light"] .garage-close.ghost {
+        border-color: rgba(18, 40, 66, 0.2);
+        background: rgba(255, 255, 255, 0.78);
+        color: #2a415a;
+      }
+
+      body[data-theme="light"] .checkout-processing {
+        background: transparent;
+      }
+
+      body[data-theme="light"] .checkout-processing-card {
+        border-color: rgba(148, 214, 255, 0.34);
+        background: linear-gradient(165deg, #0f1e32 0%, #0b1522 62%, #0a1320 100%);
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.58);
+      }
+
+      body[data-theme="light"] .processing-spinner {
+        border-color: rgba(18, 40, 66, 0.2);
+        border-top-color: #00a9d6;
+        border-right-color: #1f87ab;
+        border-bottom-color: #2e6fcb;
+      }
+
+      body[data-theme="light"] .processing-title {
+        color: #f5faff;
+      }
+
+      body[data-theme="light"] .processing-sub {
+        color: rgba(216, 230, 247, 0.86);
+      }
+
+      body[data-theme="light"] .processing-chip {
+        color: rgba(210, 226, 244, 0.88);
+        border-color: rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      body[data-theme="light"] .processing-progress-track {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      #checkout-submit-btn {
+        color: #ffffff;
+      }
+
       body[data-theme="light"] .modal-visual {
         background: radial-gradient(
           ellipse at 50% 80%,
@@ -3888,14 +4621,47 @@
           width: 100%;
         }
         .garage-box {
-          width: 90vw;
-          padding: 24px 20px;
+          width: 94vw;
+          padding: 18px 14px;
+          border-radius: 10px;
         }
         .garage-title {
           font-size: 24px;
         }
         .garage-sub {
           font-size: 11px;
+        }
+        .checkout-table-wrap {
+          overflow-x: auto;
+        }
+        .checkout-table {
+          min-width: 620px;
+        }
+        .checkout-pay-grid {
+          grid-template-columns: 1fr;
+        }
+        .checkout-input-grid {
+          grid-template-columns: 1fr;
+        }
+        .checkout-actions {
+          flex-direction: column-reverse;
+        }
+        .garage-close {
+          width: 100%;
+        }
+        .checkout-processing-card {
+          padding: 18px 14px;
+          gap: 8px;
+        }
+        .processing-visual {
+          width: 98px;
+          height: 98px;
+        }
+        .processing-title {
+          font-size: 29px;
+        }
+        .processing-sub {
+          font-size: 12px;
         }
       }
     </style>
@@ -4363,10 +5129,155 @@
     <!-- GARAGE MODAL -->
     <div class="modal-bg" id="garage-bg" onclick="bgClose(event,'garage-bg')">
       <div class="garage-box">
-        <div class="garage-icon">🏁</div>
-        <div class="garage-title">已加入車庫</div>
-        <div class="garage-sub" id="garage-sub">配置已成功儲存。</div>
-        <button class="garage-close" onclick="closeGarage()">確認</button>
+        <div class="checkout-head">
+          <div>
+            <div class="garage-title">暴力鴨專業汽車百貨</div>
+            <div class="garage-sub">
+              請確認品項與付款資訊，送出後我們會由專人聯絡您。
+            </div>
+          </div>
+          <button
+            type="button"
+            class="checkout-close"
+            onclick="closeGarage()"
+            aria-label="關閉購買清單"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="checkout-table-wrap">
+          <table class="checkout-table">
+            <thead>
+              <tr>
+                <th>品項</th>
+                <th>價格</th>
+                <th>單價</th>
+                <th>數量</th>
+                <th>小計</th>
+              </tr>
+            </thead>
+            <tbody id="checkout-items-body"></tbody>
+          </table>
+          <div class="checkout-empty" id="checkout-empty">
+            目前沒有可結帳的零件，請先選擇配備。
+          </div>
+        </div>
+
+        <div class="checkout-total-row">
+          <span>合計</span>
+          <strong id="checkout-total-amount">NT$0</strong>
+        </div>
+
+        <form id="checkout-form" class="checkout-form" novalidate>
+          <div class="checkout-section-title">付款方式</div>
+          <div class="checkout-pay-grid">
+            <div class="checkout-pay-option">
+              <input
+                type="radio"
+                id="pay-credit"
+                name="checkout-payment"
+                value="信用卡"
+                checked
+              />
+              <label for="pay-credit">
+                <span class="pay-name"
+                  ><span class="pay-icon" aria-hidden="true">💳</span>信用卡</span
+                >
+                <span class="pay-meta">VISA / Mastercard</span>
+              </label>
+            </div>
+            <div class="checkout-pay-option">
+              <input
+                type="radio"
+                id="pay-line"
+                name="checkout-payment"
+                value="LINE Pay"
+              />
+              <label for="pay-line">
+                <span class="pay-name">LINE Pay</span>
+                <span class="pay-meta">快速付款</span>
+              </label>
+            </div>
+            <div class="checkout-pay-option">
+              <input
+                type="radio"
+                id="pay-transfer"
+                name="checkout-payment"
+                value="匯款"
+              />
+              <label for="pay-transfer">
+                <span class="pay-name">匯款</span>
+                <span class="pay-meta">人工對帳｜004 - 098276 - 357</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="checkout-section-title">聯絡資料（必填）</div>
+          <div class="checkout-input-grid">
+            <label class="checkout-field" for="checkout-name">
+              中文名字
+              <input
+                id="checkout-name"
+                name="checkout-name"
+                type="text"
+                placeholder="請輸入中文全名"
+                required
+              />
+            </label>
+            <label class="checkout-field" for="checkout-phone">
+              電話
+              <input
+                id="checkout-phone"
+                name="checkout-phone"
+                type="tel"
+                placeholder="例如 0912345678"
+                required
+              />
+            </label>
+          </div>
+
+          <p class="checkout-feedback" id="checkout-feedback"></p>
+          <div class="checkout-actions">
+            <button type="button" class="garage-close ghost" onclick="closeGarage()">
+              取消
+            </button>
+            <button type="submit" class="garage-close" id="checkout-submit-btn">
+              確認付款
+            </button>
+          </div>
+        </form>
+
+        <div
+          class="checkout-processing"
+          id="checkout-processing"
+          aria-hidden="true"
+        >
+          <div class="checkout-processing-card">
+            <div class="processing-visual" aria-hidden="true">
+              <div class="processing-spinner"></div>
+              <div class="processing-check">✓</div>
+            </div>
+            <div class="processing-chip-row">
+              <span class="processing-chip">256-bit Secure</span>
+              <span class="processing-chip">Gateway Verified</span>
+            </div>
+            <div class="processing-title" id="processing-title">付款處理中...</div>
+            <div class="processing-sub" id="processing-sub">
+              正在進行付款授權，請稍候。
+            </div>
+            <div class="processing-progress-track" aria-hidden="true">
+              <div class="processing-progress-fill" id="processing-progress-fill"></div>
+            </div>
+            <button
+              type="button"
+              class="processing-done-btn"
+              onclick="finalizeCheckout()"
+            >
+              完成
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -5764,6 +6675,10 @@
           closeMod();
           return;
         }
+        if (id === "garage-bg") {
+          closeGarage();
+          return;
+        }
         document.getElementById(id).classList.remove("open");
       }
 
@@ -5841,17 +6756,309 @@
       /* ══════════════════════════════
          GARAGE
       ══════════════════════════════ */
+      function buildCheckoutData() {
+        let total = 0;
+
+        const equippedItems = Object.entries(sel)
+          .map(([cat, id]) => {
+            const resolvedCat = resolveCategoryKey(cat);
+            const category = CATS[resolvedCat];
+            if (!category) return null;
+            const part = category.parts.find((x) => x.id === id);
+            if (!part) return null;
+
+            const priceValue = getPartPriceValue(part);
+            const priceText = getPartPriceText(part);
+            const unitPriceText = priceValue > 0 ? formatNTD(priceValue) : priceText;
+            total += priceValue;
+
+            return {
+              categoryLabel: getCartCategoryLabel(resolvedCat, category),
+              name: part.name,
+              stateText: "已裝備",
+              priceText,
+              unitPriceText,
+              qty: 1,
+              subtotalText: priceValue > 0 ? formatNTD(priceValue) : priceText,
+            };
+          })
+          .filter((item) => Boolean(item));
+
+        const addOnItems = addOns
+          .map((entry) => {
+            const resolvedCat = resolveCategoryKey(entry.cat);
+            const category = CATS[resolvedCat];
+            if (!category) return null;
+            const part = category.parts.find((x) => x.id === entry.id);
+            if (!part) return null;
+
+            const priceValue = getPartPriceValue(part);
+            const priceText = getPartPriceText(part);
+            const unitPriceText = priceValue > 0 ? formatNTD(priceValue) : priceText;
+            total += priceValue;
+
+            return {
+              categoryLabel: getCartCategoryLabel(resolvedCat, category),
+              name: part.name,
+              stateText: "額外加購",
+              priceText,
+              unitPriceText,
+              qty: 1,
+              subtotalText: priceValue > 0 ? formatNTD(priceValue) : priceText,
+            };
+          })
+          .filter((item) => Boolean(item));
+
+        return {
+          items: [...equippedItems, ...addOnItems],
+          total,
+        };
+      }
+
+      function setCheckoutFeedback(message, type = "") {
+        const feedbackEl = document.getElementById("checkout-feedback");
+        if (!feedbackEl) return;
+        feedbackEl.textContent = message || "";
+        feedbackEl.classList.remove("error", "success");
+        if (type) feedbackEl.classList.add(type);
+      }
+
+      let checkoutProcessingTimers = [];
+
+      function clearCheckoutProcessingTimers() {
+        checkoutProcessingTimers.forEach((timerId) => clearTimeout(timerId));
+        checkoutProcessingTimers = [];
+      }
+
+      function resetCheckoutProcessingContent() {
+        const titleEl = document.getElementById("processing-title");
+        const subEl = document.getElementById("processing-sub");
+        const progressEl = document.getElementById("processing-progress-fill");
+        if (titleEl) titleEl.textContent = "付款處理中...";
+        if (subEl) subEl.textContent = "正在進行付款處理，請稍候。";
+        if (progressEl) progressEl.style.width = "14%";
+      }
+
+      function setCheckoutProcessingStage(stage) {
+        const subEl = document.getElementById("processing-sub");
+        const progressEl = document.getElementById("processing-progress-fill");
+        if (!progressEl) return;
+
+        if (stage === "auth") {
+          progressEl.style.width = "26%";
+          if (subEl) subEl.textContent = "正在建立付款連線，請稍候。";
+          return;
+        }
+
+        if (stage === "risk") {
+          progressEl.style.width = "58%";
+          if (subEl) subEl.textContent = "正在驗證付款資訊...";
+          return;
+        }
+
+        if (stage === "shipping") {
+          progressEl.style.width = "86%";
+          if (subEl) subEl.textContent = "正在完成付款確認...";
+        }
+      }
+
+      function openCheckoutProcessing() {
+        const processingEl = document.getElementById("checkout-processing");
+        const garageBox = document.querySelector("#garage-bg .garage-box");
+        if (!processingEl) return;
+
+        clearCheckoutProcessingTimers();
+        resetCheckoutProcessingContent();
+        if (garageBox) garageBox.classList.add("is-processing");
+        processingEl.classList.add("show");
+        processingEl.classList.remove("is-success");
+        processingEl.setAttribute("aria-hidden", "false");
+
+        const submitBtn = document.getElementById("checkout-submit-btn");
+        if (submitBtn) submitBtn.disabled = true;
+      }
+
+      function showCheckoutPaidSuccess() {
+        const processingEl = document.getElementById("checkout-processing");
+        const titleEl = document.getElementById("processing-title");
+        const subEl = document.getElementById("processing-sub");
+        const progressEl = document.getElementById("processing-progress-fill");
+        if (!processingEl) return;
+
+        processingEl.classList.add("is-success");
+        if (titleEl) titleEl.textContent = "已付款";
+        if (subEl) subEl.textContent = "訂單已成立，請稍待客服人員與您聯繫。";
+        if (progressEl) progressEl.style.width = "100%";
+        showToast("付款完成");
+      }
+
+      function closeCheckoutProcessing() {
+        const processingEl = document.getElementById("checkout-processing");
+        const garageBox = document.querySelector("#garage-bg .garage-box");
+        const submitBtn = document.getElementById("checkout-submit-btn");
+        if (!processingEl) return;
+
+        clearCheckoutProcessingTimers();
+        if (garageBox) garageBox.classList.remove("is-processing");
+        processingEl.classList.remove("show", "is-success");
+        processingEl.setAttribute("aria-hidden", "true");
+        resetCheckoutProcessingContent();
+        if (submitBtn) {
+          const hasItems = buildCheckoutData().items.length > 0;
+          submitBtn.disabled = !hasItems;
+        }
+      }
+
+      function finalizeCheckout() {
+        closeCheckoutProcessing();
+        closeGarage();
+      }
+
+      function renderCheckoutModal() {
+        const bodyEl = document.getElementById("checkout-items-body");
+        const emptyEl = document.getElementById("checkout-empty");
+        const totalEl = document.getElementById("checkout-total-amount");
+        const submitBtn = document.getElementById("checkout-submit-btn");
+        if (!bodyEl || !emptyEl || !totalEl || !submitBtn) return;
+
+        const { items, total } = buildCheckoutData();
+        bodyEl.innerHTML = "";
+
+        items.forEach((item) => {
+          const row = document.createElement("tr");
+
+          const nameTd = document.createElement("td");
+          const nameTitle = document.createElement("div");
+          nameTitle.className = "checkout-item-title";
+          nameTitle.textContent = item.name;
+          const nameState = document.createElement("div");
+          nameState.className = "checkout-item-state";
+          nameState.textContent = `${item.categoryLabel} · ${item.stateText}`;
+          nameTd.appendChild(nameTitle);
+          nameTd.appendChild(nameState);
+
+          const priceTd = document.createElement("td");
+          priceTd.className = "checkout-col-price";
+          priceTd.textContent = item.priceText;
+
+          const unitTd = document.createElement("td");
+          unitTd.className = "checkout-col-money";
+          unitTd.textContent = item.unitPriceText;
+
+          const qtyTd = document.createElement("td");
+          qtyTd.className = "checkout-col-qty";
+          qtyTd.textContent = String(item.qty);
+
+          const subtotalTd = document.createElement("td");
+          subtotalTd.className = "checkout-col-money";
+          subtotalTd.textContent = item.subtotalText;
+
+          row.append(nameTd, priceTd, unitTd, qtyTd, subtotalTd);
+          bodyEl.appendChild(row);
+        });
+
+        emptyEl.style.display = items.length ? "none" : "block";
+        totalEl.textContent = formatNTD(total);
+        submitBtn.disabled = items.length === 0;
+      }
+
+      function validateCheckoutForm() {
+        const nameEl = document.getElementById("checkout-name");
+        const phoneEl = document.getElementById("checkout-phone");
+        const paymentEl = document.querySelector(
+          "input[name='checkout-payment']:checked"
+        );
+        if (!nameEl || !phoneEl || !paymentEl) {
+          return { ok: false, message: "表單載入失敗，請重新開啟。", type: "error" };
+        }
+
+        const name = String(nameEl.value || "").trim();
+        const phone = String(phoneEl.value || "")
+          .trim()
+          .replace(/[^0-9]/g, "");
+
+        if (!name) {
+          return { ok: false, message: "請填寫中文名字。", type: "error" };
+        }
+        if (!/^[\u4e00-\u9fff·]{2,12}$/.test(name)) {
+          return { ok: false, message: "名字需為中文（2-12 字）。", type: "error" };
+        }
+        if (!phone) {
+          return { ok: false, message: "請填寫電話。", type: "error" };
+        }
+        if (!/^0[0-9]{8,9}$/.test(phone)) {
+          return { ok: false, message: "電話格式不正確，請輸入台灣電話號碼。", type: "error" };
+        }
+
+        return {
+          ok: true,
+          name,
+          phone,
+          payment: paymentEl.value,
+        };
+      }
+
+      function submitCheckout(event) {
+        event.preventDefault();
+        const { items, total } = buildCheckoutData();
+        if (!items.length) {
+          setCheckoutFeedback("尚未選擇任何品項，請先加入零件。", "error");
+          return;
+        }
+
+        const validation = validateCheckoutForm();
+        if (!validation.ok) {
+          setCheckoutFeedback(validation.message, validation.type || "error");
+          return;
+        }
+
+        setCheckoutFeedback("");
+        openCheckoutProcessing();
+        setCheckoutProcessingStage("auth");
+
+        checkoutProcessingTimers.push(
+          setTimeout(() => {
+            setCheckoutProcessingStage("risk");
+          }, 540)
+        );
+
+        checkoutProcessingTimers.push(
+          setTimeout(() => {
+            setCheckoutProcessingStage("shipping");
+          }, 1180)
+        );
+
+        checkoutProcessingTimers.push(
+          setTimeout(() => {
+            showCheckoutPaidSuccess();
+            setCheckoutFeedback(
+              `付款完成：${validation.name}／${validation.phone}（${validation.payment}）・ 合計 ${formatNTD(
+                total
+              )}`,
+              "success"
+            );
+          }, 1860)
+        );
+      }
+
       function showGarage() {
-        const s = computeStats();
-        document.getElementById(
-          "garage-sub"
-        ).innerHTML = `您的 <strong style="color:var(--red)">GR YARIS</strong> 客製化配置已儲存至車庫。<br><br>
-          性能評分 <strong style="color:var(--gold)">PP ${s.pp}</strong> ・ 最大馬力 <strong style="color:var(--gold)">${s.power} PS</strong><br>
-          車身重量 <strong style="color:var(--gold)">${s.weight} kg</strong> ・ 重量馬力比 <strong style="color:var(--gold)">${s.ratio} kg/PS</strong>`;
+        renderCheckoutModal();
+        const checkoutForm = document.getElementById("checkout-form");
+        if (checkoutForm) checkoutForm.reset();
+        closeCheckoutProcessing();
+        setCheckoutFeedback("");
         document.getElementById("garage-bg").classList.add("open");
       }
+
       function closeGarage() {
+        closeCheckoutProcessing();
         document.getElementById("garage-bg").classList.remove("open");
+        setCheckoutFeedback("");
+      }
+
+      const checkoutForm = document.getElementById("checkout-form");
+      if (checkoutForm) {
+        checkoutForm.addEventListener("submit", submitCheckout);
       }
 
       /* ══════════════════════════════
