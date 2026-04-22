@@ -5091,6 +5091,10 @@
           max-height: calc(100dvh - 16px);
           padding: 18px 14px;
           border-radius: 10px;
+          transform: none !important;
+        }
+        .modal-bg.open .garage-box {
+          transform: none !important;
         }
         .garage-title {
           font-size: 24px;
@@ -5135,8 +5139,10 @@
           visibility: visible;
         }
         .checkout-processing {
-          position: fixed;
-          inset: 0;
+          position: static;
+          inset: auto;
+          width: 100%;
+          height: 100%;
           z-index: 980;
           align-items: center;
           justify-content: center;
@@ -5145,12 +5151,12 @@
           overscroll-behavior: none;
         }
         .checkout-processing-card {
-          position: fixed;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
+          position: relative;
+          left: auto;
+          top: auto;
+          transform: none;
           width: min(420px, calc(100vw - 24px));
-          margin: 0;
+          margin: 0 auto;
           padding: 18px 14px;
           gap: 8px;
           touch-action: none;
@@ -5159,7 +5165,14 @@
           max-height: none;
         }
         .garage-box.is-processing {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
           overflow: hidden !important;
+        }
+        .garage-box.is-processing > :not(.checkout-processing) {
+          display: none !important;
         }
         .processing-visual {
           width: 98px;
@@ -7708,32 +7721,48 @@
         }
 
         setCheckoutFeedback("");
-        openCheckoutProcessing();
-        setCheckoutProcessingStage("auth");
+        const isMobile = window.matchMedia("(max-width: 600px)").matches;
+        if (isMobile) {
+          const activeEl = document.activeElement;
+          if (activeEl && typeof activeEl.blur === "function") {
+            activeEl.blur();
+          }
+        }
 
-        checkoutProcessingTimers.push(
-          setTimeout(() => {
-            setCheckoutProcessingStage("risk");
-          }, 540)
-        );
+        const kickoffProcessing = () => {
+          openCheckoutProcessing();
+          setCheckoutProcessingStage("auth");
 
-        checkoutProcessingTimers.push(
-          setTimeout(() => {
-            setCheckoutProcessingStage("shipping");
-          }, 1180)
-        );
+          checkoutProcessingTimers.push(
+            setTimeout(() => {
+              setCheckoutProcessingStage("risk");
+            }, 540)
+          );
 
-        checkoutProcessingTimers.push(
-          setTimeout(() => {
-            showCheckoutPaidSuccess();
-            setCheckoutFeedback(
-              `付款完成：${validation.name}／${validation.phone}（${validation.payment}）・ 合計 ${formatNTD(
-                total
-              )}`,
-              "success"
-            );
-          }, 1860)
-        );
+          checkoutProcessingTimers.push(
+            setTimeout(() => {
+              setCheckoutProcessingStage("shipping");
+            }, 1180)
+          );
+
+          checkoutProcessingTimers.push(
+            setTimeout(() => {
+              showCheckoutPaidSuccess();
+              setCheckoutFeedback(
+                `付款完成：${validation.name}／${validation.phone}（${validation.payment}）・ 合計 ${formatNTD(
+                  total
+                )}`,
+                "success"
+              );
+            }, 1860)
+          );
+        };
+
+        if (isMobile) {
+          checkoutProcessingTimers.push(setTimeout(kickoffProcessing, 140));
+        } else {
+          kickoffProcessing();
+        }
       }
 
       function showGarage() {
