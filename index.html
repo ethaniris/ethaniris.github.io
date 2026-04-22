@@ -4361,14 +4361,16 @@
       @media (max-width: 600px) {
         html,
         body {
-          overflow: auto;
+          overflow: hidden;
+          height: 100dvh;
           touch-action: manipulation;
         }
         #app {
           display: flex;
           flex-direction: column;
-          height: auto;
-          min-height: 100vh;
+          height: 100dvh;
+          min-height: 100dvh;
+          overflow: hidden;
           touch-action: manipulation;
         }
         .hud-bar {
@@ -4431,7 +4433,11 @@
         }
         .left-col {
           order: 1;
-          overflow: visible;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          min-height: 0;
+          overflow: hidden;
         }
         .hero-stage {
           width: 100%;
@@ -4791,6 +4797,22 @@
         .config-panel {
           padding: 16px;
         }
+        .config-area {
+          flex: 1;
+          min-height: 0;
+          overflow: hidden;
+        }
+        .cat-nav {
+          flex: 0 0 auto;
+          overflow: hidden;
+        }
+        .parts-scroll {
+          flex: 1;
+          min-height: 0;
+          overflow-y: auto;
+          overscroll-behavior: contain;
+          padding-bottom: 96px;
+        }
         .cat-btn {
           font-size: 12px;
           padding: 8px 12px;
@@ -4835,16 +4857,25 @@
         }
         .stats-col {
           order: 2;
-          border-top: 1px solid rgba(232, 25, 44, 0.2);
-          padding: 8px 12px 14px;
+          height: 0;
+          min-height: 0;
+          padding: 0;
+          border: none;
+          background: transparent;
+          overflow: visible;
+        }
+        .stats-col::before {
+          display: none;
         }
         .pp-meter,
         .stats-list {
           display: none;
         }
         .stats-thumb {
-          padding: 0 0 8px;
-          flex: 0 0 auto;
+          display: none !important;
+        }
+        .cart-drawer {
+          display: none !important;
         }
         .cart-drawer-toggle {
           padding: 7px 10px;
@@ -4931,7 +4962,29 @@
           font-size: 9px;
         }
         .cta-block {
-          padding: 8px 0 14px;
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 120;
+          padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+          background: linear-gradient(
+            180deg,
+            rgba(7, 13, 20, 0) 0%,
+            rgba(7, 13, 20, 0.82) 34%,
+            rgba(7, 13, 20, 0.96) 100%
+          );
+        }
+        .cta-block .btn-primary {
+          width: 100%;
+        }
+        body[data-theme="light"] .cta-block {
+          background: linear-gradient(
+            180deg,
+            rgba(234, 241, 249, 0) 0%,
+            rgba(234, 241, 249, 0.86) 34%,
+            rgba(234, 241, 249, 0.98) 100%
+          );
         }
         .modal-box {
           width: 90vw;
