@@ -1011,6 +1011,10 @@
         z-index: 7;
       }
 
+      .hero-mobile-specs {
+        display: none;
+      }
+
       /* Red diagonal accent bar */
       .hero-accent-bar {
         z-index: 7;
@@ -4366,50 +4370,418 @@
           min-height: 100vh;
         }
         .hud-bar {
-          padding: 0 12px;
+          padding: 7px 14px 8px 12px;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          gap: 0;
+        }
+        .logo-block {
+          order: 1;
+          border-right: none;
+          padding-right: 0;
+          min-width: 0;
         }
         .logo-main {
           font-size: 22px;
           letter-spacing: 0.06em;
         }
+        .hud-sep {
+          display: none;
+        }
         .hud-car-name {
-          font-size: 16px;
+          order: 2;
+          flex-basis: 100%;
+          font-size: 15px;
+          line-height: 1.1;
+          margin: 2px 0 0;
+          white-space: nowrap;
+          letter-spacing: 0.14em;
+          padding-right: 96px;
+        }
+        #hud-meta {
+          display: none;
         }
         .hud-badge {
           font-size: 8px;
           padding: 2px 6px;
         }
         .hud-right {
+          position: absolute;
+          top: 9px;
+          right: 14px;
+          margin-left: 0;
           gap: 8px;
         }
         .hud-reset-btn {
-          height: 30px;
-          padding: 0 10px;
-          font-size: 10px;
-          letter-spacing: 0.09em;
+          display: none;
         }
         .theme-toggle-btn {
-          width: 136px;
+          width: 72px;
           height: 32px;
         }
         .theme-label {
-          font-size: 9px;
-          gap: 4px;
-          letter-spacing: 0.08em;
+          font-size: 0;
+          gap: 0;
+          letter-spacing: 0;
         }
         .theme-label-ico {
-          font-size: 10px;
+          font-size: 14px;
         }
         .left-col {
           order: 1;
+          overflow: visible;
         }
         .hero-stage {
-          height: 300px;
-          transform: scale(0.8);
-          transform-origin: center;
+          width: 100%;
+          height: 348px;
+          margin: 0;
+          transform: none;
+          overflow: hidden;
+          background: radial-gradient(
+            ellipse 95% 78% at 50% 100%,
+            rgba(16, 42, 76, 0.95) 0%,
+            rgba(6, 12, 20, 1) 68%
+          );
+        }
+        .hero-text {
+          top: 12px;
+          left: 14px;
+          z-index: 9;
+        }
+        .hero-brand {
+          font-size: 9px;
+          letter-spacing: 0.3em;
         }
         .hero-model {
-          font-size: 28px;
+          font-size: 30px;
+          letter-spacing: 0.08em;
+          line-height: 0.9;
+        }
+        .hero-trim {
+          font-size: 10px;
+          letter-spacing: 0.14em;
+          margin-top: 2px;
+          opacity: 0.86;
+        }
+        .hero-corner-stat {
+          top: 12px;
+          right: 14px;
+        }
+        .hero-corner-num {
+          font-size: 36px;
+        }
+        .hero-corner-unit {
+          font-size: 10px;
+          letter-spacing: 0.16em;
+        }
+        .hero-accent-bar {
+          left: -8px;
+          width: 180px;
+          bottom: 76px;
+        }
+        .hero-floor {
+          height: 104px;
+        }
+        .car-stage-inner {
+          width: 100%;
+          max-width: none;
+          height: 250px;
+          top: 56%;
+        }
+        .car-glow-under {
+          width: 74%;
+          height: 54px;
+          bottom: -10px;
+        }
+        .rotate-btn {
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+          border-width: 1px;
+          backdrop-filter: blur(3px);
+        }
+        .rotate-btn-left {
+          left: 8px;
+        }
+        .rotate-btn-right {
+          right: 8px;
+        }
+        .car-color-switch {
+          left: auto;
+          right: 12px;
+          transform: none;
+          bottom: 66px;
+          gap: 8px;
+        }
+        .car-color-btn {
+          width: 23px;
+          height: 23px;
+        }
+        .hero-mobile-specs {
+          position: absolute;
+          left: 8px;
+          right: 8px;
+          bottom: 8px;
+          z-index: 19;
+          display: grid;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          gap: 6px;
+        }
+        .hero-mstat {
+          position: relative;
+          overflow: hidden;
+          min-width: 0;
+          padding: 7px 5px 6px;
+          border-radius: 8px;
+          border: 1px solid rgba(0, 229, 255, 0.34);
+          background: linear-gradient(
+            160deg,
+            rgba(9, 27, 47, 0.9) 0%,
+            rgba(4, 12, 24, 0.92) 100%
+          );
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.33),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+          backdrop-filter: blur(2px);
+        }
+        .hero-mstat::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: -36%;
+          width: 34%;
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0),
+            rgba(165, 236, 255, 0.26),
+            rgba(255, 255, 255, 0)
+          );
+          transform: skewX(-18deg);
+          opacity: 0;
+          pointer-events: none;
+        }
+        .hero-mstat-label {
+          font-family: "Noto Sans TC", sans-serif;
+          font-size: 9px;
+          font-weight: 700;
+          line-height: 1.2;
+          letter-spacing: 0.08em;
+          color: rgba(209, 231, 255, 0.82);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .hero-mstat-main {
+          margin-top: 4px;
+          display: flex;
+          align-items: baseline;
+          justify-content: flex-start;
+          gap: 2px;
+          min-width: 0;
+        }
+        .hero-mstat-value {
+          font-family: "Bebas Neue", sans-serif;
+          font-size: 18px;
+          line-height: 1;
+          letter-spacing: 0.04em;
+          color: #f5f9ff;
+          text-shadow: 0 0 10px rgba(0, 170, 255, 0.22);
+        }
+        .hero-mstat-unit {
+          font-family: "Barlow Condensed", sans-serif;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: rgba(183, 201, 224, 0.85);
+          white-space: nowrap;
+        }
+        .hero-mstat-delta {
+          position: absolute;
+          top: 4px;
+          right: 5px;
+          padding: 1px 4px;
+          border-radius: 999px;
+          border: 1px solid transparent;
+          font-family: "Barlow Condensed", sans-serif;
+          font-size: 10px;
+          font-weight: 800;
+          line-height: 1;
+          min-height: 12px;
+          min-width: 16px;
+          text-align: center;
+          color: rgba(183, 201, 224, 0.75);
+          background: rgba(255, 255, 255, 0.08);
+          opacity: 0;
+          transform: translateY(-2px) scale(0.92);
+          transition: opacity 0.18s ease, transform 0.2s ease;
+        }
+        .hero-mstat-delta.up {
+          color: #54ff9a;
+          text-shadow: 0 0 10px rgba(84, 255, 154, 0.46);
+          background: rgba(11, 53, 33, 0.88);
+          border-color: rgba(84, 255, 154, 0.5);
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        .hero-mstat-delta.down {
+          color: #ff5e6b;
+          text-shadow: 0 0 10px rgba(255, 94, 107, 0.46);
+          background: rgba(66, 16, 23, 0.88);
+          border-color: rgba(255, 94, 107, 0.5);
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        .hero-mstat-value.value-up {
+          color: #54ff9a;
+          text-shadow: 0 0 10px rgba(84, 255, 154, 0.46);
+        }
+        .hero-mstat-value.value-down {
+          color: #ff5e6b;
+          text-shadow: 0 0 10px rgba(255, 94, 107, 0.46);
+        }
+        .hero-mstat-value.value-pop {
+          animation: mstat-value-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .hero-mstat.mstat-pop-up {
+          animation: mstat-card-up 0.56s ease-out;
+        }
+        .hero-mstat.mstat-pop-down {
+          animation: mstat-card-down 0.56s ease-out;
+        }
+        .hero-mstat.mstat-pop-up::after,
+        .hero-mstat.mstat-pop-down::after {
+          animation: mstat-sweep 0.6s ease-out;
+        }
+        @keyframes mstat-value-pop {
+          0% {
+            transform: scale(0.88);
+          }
+          58% {
+            transform: scale(1.12);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+        @keyframes mstat-card-up {
+          0% {
+            transform: translateY(0);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.33),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+          }
+          48% {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 10px 22px rgba(36, 194, 120, 0.25),
+              0 0 0 1px rgba(84, 255, 154, 0.22),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+          }
+          100% {
+            transform: translateY(0) scale(1);
+          }
+        }
+        @keyframes mstat-card-down {
+          0% {
+            transform: translateY(0);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.33),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+          }
+          48% {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 10px 22px rgba(208, 67, 85, 0.22),
+              0 0 0 1px rgba(255, 94, 107, 0.2),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+          }
+          100% {
+            transform: translateY(0) scale(1);
+          }
+        }
+        @keyframes mstat-sweep {
+          0% {
+            left: -36%;
+            opacity: 0;
+          }
+          18% {
+            opacity: 1;
+          }
+          100% {
+            left: 120%;
+            opacity: 0;
+          }
+        }
+        .tech-hint {
+          display: block;
+          top: 60px;
+          right: 12px;
+          bottom: auto;
+          font-size: 9px;
+          letter-spacing: 0.06em;
+          text-align: right;
+          text-shadow: 0 0 8px rgba(0, 255, 255, 0.35);
+        }
+        .tech-main-btn {
+          top: 78px;
+          right: 12px;
+          bottom: auto;
+          padding: 8px 10px;
+          font-size: 10px;
+          letter-spacing: 0.06em;
+          border-radius: 10px;
+          max-width: 146px;
+          box-shadow: 0 8px 24px rgba(0, 175, 235, 0.36);
+        }
+        body[data-theme="light"] .hero-stage {
+          background: radial-gradient(
+            ellipse 95% 78% at 50% 100%,
+            rgba(209, 225, 244, 0.95) 0%,
+            rgba(234, 241, 249, 1) 68%
+          );
+        }
+        body[data-theme="light"] .hero-floor {
+          background: linear-gradient(transparent, rgba(196, 212, 231, 0.78));
+        }
+        body[data-theme="light"] .hero-mstat {
+          border-color: rgba(47, 126, 159, 0.36);
+          background: linear-gradient(
+            160deg,
+            rgba(252, 255, 255, 0.9) 0%,
+            rgba(228, 238, 248, 0.95) 100%
+          );
+          box-shadow: 0 8px 18px rgba(31, 58, 86, 0.18),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.78);
+        }
+        body[data-theme="light"] .hero-mstat-label {
+          color: rgba(27, 50, 75, 0.78);
+        }
+        body[data-theme="light"] .hero-mstat-value {
+          color: #14253a;
+          text-shadow: 0 0 10px rgba(31, 135, 171, 0.18);
+        }
+        body[data-theme="light"] .hero-mstat-unit {
+          color: rgba(67, 91, 118, 0.82);
+        }
+        body[data-theme="light"] .hero-mstat-delta {
+          color: rgba(74, 98, 126, 0.8);
+          background: rgba(255, 255, 255, 0.76);
+        }
+        body[data-theme="light"] .hero-mstat-delta.up {
+          color: #13a85d;
+          text-shadow: none;
+          border-color: rgba(19, 168, 93, 0.4);
+          background: rgba(228, 255, 241, 0.92);
+        }
+        body[data-theme="light"] .hero-mstat-delta.down {
+          color: #cf3b48;
+          text-shadow: none;
+          border-color: rgba(207, 59, 72, 0.4);
+          background: rgba(255, 235, 237, 0.93);
+        }
+        body[data-theme="light"] .hero-mstat-value.value-up {
+          color: #13a85d;
+          text-shadow: none;
+        }
+        body[data-theme="light"] .hero-mstat-value.value-down {
+          color: #cf3b48;
+          text-shadow: none;
         }
         .hero-specs {
           font-size: 10px;
@@ -4425,23 +4797,32 @@
           text-align: center;
         }
         .parts-grid {
-          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-          gap: 8px;
+          grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+          gap: 6px;
         }
         .part-card {
           border-radius: 2px;
         }
         .pc-img {
-          height: 80px;
+          height: 66px;
+        }
+        .pc-body {
+          padding: 7px 8px 8px;
         }
         .pc-name {
-          font-size: 11px;
+          font-size: 10px;
+          margin-bottom: 0;
+          line-height: 1.15;
         }
         .pc-desc {
-          font-size: 10px;
+          display: none;
+        }
+        .pc-footer {
+          padding-top: 6px;
         }
         .pc-price {
-          font-size: 10px;
+          font-size: 14px;
+          letter-spacing: 0.06em;
         }
         .pc-mods {
           gap: 4px;
@@ -4453,10 +4834,14 @@
         .stats-col {
           order: 2;
           border-top: 1px solid rgba(232, 25, 44, 0.2);
-          padding: 16px;
+          padding: 8px 12px 14px;
+        }
+        .pp-meter,
+        .stats-list {
+          display: none;
         }
         .stats-thumb {
-          padding: 10px 0 8px;
+          padding: 0 0 8px;
           flex: 0 0 auto;
         }
         .cart-drawer-toggle {
@@ -4778,6 +5163,47 @@
             >
               <span class="car-color-swatch red"></span>
             </button>
+          </div>
+
+          <div class="hero-mobile-specs" id="hero-mobile-specs">
+            <div class="hero-mstat">
+              <div class="hero-mstat-label">排氣量</div>
+              <div class="hero-mstat-main">
+                <span class="hero-mstat-delta" id="mstat-displacement-delta"></span>
+                <span class="hero-mstat-value" id="mstat-displacement">1618</span>
+                <span class="hero-mstat-unit">cc</span>
+              </div>
+            </div>
+            <div class="hero-mstat">
+              <div class="hero-mstat-label">傳動方式</div>
+              <div class="hero-mstat-main">
+                <span class="hero-mstat-value" id="mstat-drivetrain">4wd</span>
+              </div>
+            </div>
+            <div class="hero-mstat">
+              <div class="hero-mstat-label">車身重量</div>
+              <div class="hero-mstat-main">
+                <span class="hero-mstat-delta" id="mstat-weight-delta"></span>
+                <span class="hero-mstat-value" id="mstat-weight">1243</span>
+                <span class="hero-mstat-unit">kg</span>
+              </div>
+            </div>
+            <div class="hero-mstat">
+              <div class="hero-mstat-label">最大馬力</div>
+              <div class="hero-mstat-main">
+                <span class="hero-mstat-delta" id="mstat-power-delta"></span>
+                <span class="hero-mstat-value" id="mstat-power">285</span>
+                <span class="hero-mstat-unit">PS</span>
+              </div>
+            </div>
+            <div class="hero-mstat">
+              <div class="hero-mstat-label">最大扭力</div>
+              <div class="hero-mstat-main">
+                <span class="hero-mstat-delta" id="mstat-torque-delta"></span>
+                <span class="hero-mstat-value" id="mstat-torque">285</span>
+                <span class="hero-mstat-unit">N·m</span>
+              </div>
+            </div>
           </div>
 
           <!-- TECH DIAGNOSIS BUTTON -->
@@ -5894,6 +6320,123 @@
         }
       }
 
+      function setHeroMobileStat(
+        id,
+        value,
+        delta = 0,
+        animate = false,
+        prevValue = null
+      ) {
+        const valueEl = document.getElementById("mstat-" + id);
+        if (!valueEl) return;
+        const cardEl = valueEl.closest(".hero-mstat");
+
+        const isNumeric = id !== "drivetrain" && !Number.isNaN(Number(value));
+        const decimals = getStatDecimals(id);
+        const normalizedDelta = isNumeric
+          ? normalizeByDecimals(delta, decimals)
+          : 0;
+
+        if (
+          isNumeric &&
+          animate &&
+          prevValue !== null &&
+          prevValue !== undefined &&
+          !Number.isNaN(Number(prevValue))
+        ) {
+          animateNumericValue(
+            valueEl,
+            Number(prevValue),
+            Number(value),
+            decimals,
+            560
+          );
+        } else {
+          valueEl.textContent = isNumeric
+            ? formatAnimatedNumber(value, decimals)
+            : String(value);
+        }
+
+        const deltaEl = document.getElementById("mstat-" + id + "-delta");
+        if (!deltaEl) return;
+
+        deltaEl.classList.remove("up", "down");
+        valueEl.classList.remove("value-up", "value-down", "value-pop");
+        if (cardEl) {
+          cardEl.classList.remove("mstat-pop-up", "mstat-pop-down");
+        }
+
+        if (normalizedDelta > 0) {
+          deltaEl.textContent = `+${formatAnimatedNumber(
+            normalizedDelta,
+            decimals
+          )}`;
+          deltaEl.classList.add("up");
+          valueEl.classList.add("value-up");
+        } else if (normalizedDelta < 0) {
+          deltaEl.textContent = formatAnimatedNumber(normalizedDelta, decimals);
+          deltaEl.classList.add("down");
+          valueEl.classList.add("value-down");
+        } else {
+          deltaEl.textContent = "";
+        }
+
+        if (animate && normalizedDelta !== 0) {
+          void valueEl.offsetWidth;
+          valueEl.classList.add("value-pop");
+          if (cardEl) {
+            void cardEl.offsetWidth;
+            cardEl.classList.add(
+              normalizedDelta > 0 ? "mstat-pop-up" : "mstat-pop-down"
+            );
+          }
+          setTimeout(() => {
+            valueEl.classList.remove("value-pop");
+            if (cardEl) {
+              cardEl.classList.remove("mstat-pop-up", "mstat-pop-down");
+            }
+          }, 620);
+        }
+      }
+
+      function renderHeroMobileStats(s, animate = false) {
+        setHeroMobileStat(
+          "displacement",
+          s.displacement,
+          s.displacement - BASE.displacement,
+          animate && prevStats && s.displacement !== prevStats.displacement,
+          prevStats ? prevStats.displacement : null
+        );
+        setHeroMobileStat(
+          "drivetrain",
+          s.drivetrain,
+          0,
+          false,
+          prevStats ? prevStats.drivetrain : null
+        );
+        setHeroMobileStat(
+          "weight",
+          s.weight,
+          s.weight - BASE.weight,
+          animate && prevStats && s.weight !== prevStats.weight,
+          prevStats ? prevStats.weight : null
+        );
+        setHeroMobileStat(
+          "power",
+          s.power,
+          s.power - BASE.power,
+          animate && prevStats && s.power !== prevStats.power,
+          prevStats ? prevStats.power : null
+        );
+        setHeroMobileStat(
+          "torque",
+          s.torque,
+          s.torque - BASE.torque,
+          animate && prevStats && s.torque !== prevStats.torque,
+          prevStats ? prevStats.torque : null
+        );
+      }
+
       function renderStats(animate) {
         const s = computeStats();
 
@@ -5981,6 +6524,7 @@
           "hud-meta"
         ).textContent = `${s.drivetrain} · ${s.power} PS · ${s.weight} kg`;
         document.getElementById("hero-hp").textContent = s.power;
+        renderHeroMobileStats(s, animate);
 
         if (animate && prevStats && delta !== 0) {
           triggerGameFeedback(delta);
