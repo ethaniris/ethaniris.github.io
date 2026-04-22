@@ -5124,9 +5124,15 @@
           bottom: auto;
           left: 50%;
           transform: translate(-50%, -50%) scale(0.94);
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transition: transform 0.24s ease, opacity 0.24s ease;
         }
         .toast.show {
           transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+          visibility: visible;
         }
         .checkout-processing {
           position: fixed;
@@ -7263,7 +7269,7 @@
         setAddOn(pending.cat, pending.id, !exists);
         normalizeSelection();
         renderSummary();
-        updateModalActionButtons(pending.cat, pending.id);
+        closeMod();
         showToast(exists ? "已取消加購" : "已加入加購清單");
       }
 
