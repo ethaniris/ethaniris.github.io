@@ -5088,6 +5088,7 @@
         }
         .garage-box {
           width: 94vw;
+          max-height: calc(100dvh - 16px);
           padding: 18px 14px;
           border-radius: 10px;
         }
@@ -5109,15 +5110,50 @@
         .checkout-input-grid {
           grid-template-columns: 1fr;
         }
+        .checkout-field input {
+          font-size: 16px;
+        }
         .checkout-actions {
           flex-direction: column-reverse;
         }
         .garage-close {
           width: 100%;
         }
+        .toast {
+          top: 50%;
+          bottom: auto;
+          left: 50%;
+          transform: translate(-50%, -50%) scale(0.94);
+        }
+        .toast.show {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        .checkout-processing {
+          position: fixed;
+          inset: 0;
+          z-index: 980;
+          align-items: center;
+          justify-content: center;
+          touch-action: none;
+          overflow: hidden;
+          overscroll-behavior: none;
+        }
         .checkout-processing-card {
+          position: fixed;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: min(420px, calc(100vw - 24px));
+          margin: 0;
           padding: 18px 14px;
           gap: 8px;
+          touch-action: none;
+          overflow: hidden;
+          overscroll-behavior: none;
+          max-height: none;
+        }
+        .garage-box.is-processing {
+          overflow: hidden !important;
         }
         .processing-visual {
           width: 98px;
@@ -7543,7 +7579,6 @@
         if (titleEl) titleEl.textContent = "已付款";
         if (subEl) subEl.textContent = "訂單已成立，請稍待客服人員與您聯繫。";
         if (progressEl) progressEl.style.width = "100%";
-        showToast("付款完成");
       }
 
       function closeCheckoutProcessing() {
