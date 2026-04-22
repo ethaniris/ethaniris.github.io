@@ -4362,12 +4362,14 @@
         html,
         body {
           overflow: auto;
+          touch-action: manipulation;
         }
         #app {
           display: flex;
           flex-direction: column;
           height: auto;
           min-height: 100vh;
+          touch-action: manipulation;
         }
         .hud-bar {
           padding: 7px 14px 8px 12px;
@@ -7939,6 +7941,22 @@
       /* ══════════════════════════════
          INIT
       ══════════════════════════════ */
+      (function setupMobileDoubleTapGuard() {
+        if (!window.matchMedia("(max-width: 600px)").matches) return;
+        let lastTouchEnd = 0;
+        document.addEventListener(
+          "touchend",
+          (event) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 280) {
+              event.preventDefault();
+            }
+            lastTouchEnd = now;
+          },
+          { passive: false }
+        );
+      })();
+
       prevStats = computeStats();
       renderParts();
       renderStats(false);
