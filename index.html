@@ -4815,10 +4815,29 @@
         }
         .cat-btn {
           font-size: 12px;
-          padding: 8px 12px;
+          padding: 7px 4px;
+          gap: 2px;
           flex-direction: column;
           align-items: center;
           text-align: center;
+          min-width: 0;
+        }
+        .cat-btn-text {
+          font-size: clamp(8px, 2.25vw, 10px);
+          letter-spacing: 0.04em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100%;
+        }
+        .cat-btn-cn {
+          font-size: clamp(9px, 2.5vw, 12px);
+          line-height: 1.1;
+          letter-spacing: 0.02em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100%;
         }
         .parts-grid {
           grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
@@ -4834,9 +4853,9 @@
           padding: 7px 8px 8px;
         }
         .pc-name {
-          font-size: 10px;
-          margin-bottom: 0;
-          line-height: 1.15;
+          font-size: 12px;
+          margin-bottom: 4px;
+          line-height: 1.2;
         }
         .pc-desc {
           display: none;
@@ -4845,8 +4864,8 @@
           padding-top: 6px;
         }
         .pc-price {
-          font-size: 14px;
-          letter-spacing: 0.06em;
+          font-size: 17px;
+          letter-spacing: 0.07em;
         }
         .pc-mods {
           gap: 4px;
@@ -5022,9 +5041,14 @@
           height: 36px;
         }
         .modal-price-badge {
-          left: 10px;
-          bottom: 52px;
-          font-size: 17px;
+          position: static;
+          left: auto;
+          bottom: auto;
+          display: inline-block;
+          margin: 0 0 12px;
+          font-size: 20px;
+          letter-spacing: 0.08em;
+          text-shadow: 0 0 14px rgba(245, 200, 66, 0.32);
         }
         .img-lightbox-nav {
           width: 38px;
@@ -5042,7 +5066,9 @@
           font-size: 22px;
         }
         .modal-part-desc {
-          font-size: 11px;
+          font-size: 13px;
+          line-height: 1.58;
+          margin-bottom: 8px;
         }
         .modal-chips {
           gap: 4px;
@@ -7205,6 +7231,33 @@
         showToast(exists ? "已取消加購" : "已加入加購清單");
       }
 
+      function syncModalPricePlacement() {
+        const priceEl = document.getElementById("modal-price");
+        const modalVisual = document.getElementById("modal-vis");
+        const modalBody = document.querySelector("#modal-bg .modal-body");
+        const descEl = document.getElementById("modal-desc");
+        if (!priceEl || !modalVisual || !modalBody || !descEl) return;
+
+        const isMobile = window.matchMedia("(max-width: 600px)").matches;
+        if (isMobile) {
+          if (priceEl.parentElement !== modalBody || descEl.nextElementSibling !== priceEl) {
+            descEl.insertAdjacentElement("afterend", priceEl);
+          }
+          return;
+        }
+
+        if (priceEl.parentElement !== modalVisual) {
+          const thumbsEl = document.getElementById("modal-thumbs");
+          if (thumbsEl && thumbsEl.parentElement === modalVisual) {
+            thumbsEl.insertAdjacentElement("afterend", priceEl);
+          } else {
+            modalVisual.appendChild(priceEl);
+          }
+        }
+      }
+
+      window.addEventListener("resize", syncModalPricePlacement);
+
       function openModal(cat, id) {
         const resolvedCat = resolveCategoryKey(cat);
         const category = CATS[resolvedCat];
@@ -7221,6 +7274,7 @@
           modalVis.classList.remove("wheel-mode");
         }
         setModalGallery(partGallery, p.name, p.emoji);
+        syncModalPricePlacement();
 
         document.getElementById("modal-price").textContent = getPartPriceText(p);
         document.getElementById("modal-title").textContent = p.name;
@@ -7263,6 +7317,7 @@
       function closeMod() {
         document.getElementById("modal-bg").classList.remove("open");
         closeImageLightbox();
+        syncModalPricePlacement();
         pending = null;
         modalGalleryImages = [];
         modalGalleryIndex = 0;
