@@ -5103,10 +5103,115 @@
           font-size: 11px;
         }
         .checkout-table-wrap {
-          overflow-x: auto;
+          overflow: visible;
+          border: none;
+          background: transparent;
         }
         .checkout-table {
-          min-width: 620px;
+          min-width: 0;
+          width: 100%;
+          display: block;
+        }
+        .checkout-table thead {
+          display: none;
+        }
+        .checkout-table tbody {
+          display: grid;
+          gap: 10px;
+        }
+        .checkout-table tr {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) auto;
+          align-items: start;
+          column-gap: 10px;
+          row-gap: 3px;
+          border: 1px solid rgba(255, 255, 255, 0.13);
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.04);
+          padding: 10px;
+        }
+        .checkout-table td {
+          display: flex;
+          align-items: baseline;
+          justify-content: flex-end;
+          gap: 6px;
+          padding: 0;
+          border-bottom: none;
+        }
+        .checkout-table td::before {
+          flex-shrink: 0;
+          font-family: "Barlow Condensed", sans-serif;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: rgba(210, 223, 240, 0.72);
+        }
+        .checkout-table td:nth-child(1) {
+          display: block;
+          grid-column: 1;
+          grid-row: 1 / span 3;
+          padding: 0;
+          margin: 0;
+          border: none;
+        }
+        .checkout-table td:nth-child(1)::before {
+          content: "品項";
+          display: block;
+          margin-bottom: 3px;
+        }
+        .checkout-table td:nth-child(2)::before {
+          content: "價格";
+        }
+        .checkout-table td:nth-child(2) {
+          display: none;
+        }
+        .checkout-table td:nth-child(3) {
+          grid-column: 2;
+          grid-row: 1;
+        }
+        .checkout-table td:nth-child(4) {
+          grid-column: 2;
+          grid-row: 2;
+        }
+        .checkout-table td:nth-child(5) {
+          grid-column: 2;
+          grid-row: 3;
+        }
+        .checkout-table td:nth-child(3)::before {
+          content: "單價";
+        }
+        .checkout-table td:nth-child(4)::before {
+          content: "數量";
+        }
+        .checkout-table td:nth-child(5)::before {
+          content: "小計";
+        }
+        .checkout-item-title {
+          font-size: 14px;
+          line-height: 1.35;
+        }
+        .checkout-item-state {
+          font-size: 11px;
+          margin-top: 2px;
+        }
+        .checkout-col-price {
+          font-size: 12px;
+          text-align: right;
+        }
+        .checkout-col-money,
+        .checkout-col-qty {
+          font-size: 16px;
+          text-align: right;
+        }
+        body[data-theme="light"] .checkout-table tr {
+          border-color: rgba(21, 37, 56, 0.14);
+          background: rgba(255, 255, 255, 0.82);
+        }
+        body[data-theme="light"] .checkout-table td::before {
+          color: rgba(56, 79, 106, 0.74);
+        }
+        body[data-theme="light"] .checkout-table td:nth-child(1) {
+          border-bottom-color: rgba(21, 37, 56, 0.14);
         }
         .checkout-pay-grid {
           grid-template-columns: 1fr;
