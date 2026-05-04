@@ -9,15 +9,15 @@
       "parts": [
         {
           "id": "w0",
-          "name": "RAYS Volk Racing G025",
+          "name": "RAYS Volk Racing G025（18×8.5J／5×114.3）",
           "desc": "9 輻 Y 字流線型，視覺輕量感最強｜效果：簧下荷重 -3.8 kg/輪、轉向靈敏度提升、輪距外擴。",
           "emoji": "⚙️",
           "price": {
-            "display": "NT$80,000～95,000",
+            "display": "NT$90,500",
             "currency": "NTD",
-            "min": 80000,
-            "max": 95000,
-            "raw": "80000-95000"
+            "min": 90500,
+            "max": 90500,
+            "raw": "90500"
           },
           "spec": "18×8.5J ET35 / ET44 / ET51，5×114.3（≈7.5 kg/輪）",
           "unit": "只",
@@ -33,15 +33,15 @@
         },
         {
           "id": "w1",
-          "name": "RAYS Volk Racing G025 SZ Edition",
+          "name": "RAYS Volk Racing G025 SZ Edition（18×8.5J／5×114.3）",
           "desc": "SZ 古銅特仕版，輪輻視覺更厚實｜效果：簧下荷重 -4.1 kg/輪、輪距外擴 +8mm、轉向靈敏度提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "NT$80,000～95,000",
+            "display": "NT$90,500",
             "currency": "NTD",
-            "min": 80000,
-            "max": 95000,
-            "raw": "80000-95000"
+            "min": 90500,
+            "max": 90500,
+            "raw": "90500"
           },
           "spec": "18×8.5J ET35 / ET44 / ET51，5×114.3（≈7.7 kg/輪）",
           "unit": "只",
@@ -57,15 +57,15 @@
         },
         {
           "id": "w2",
-          "name": "RAYS Volk Racing CE28 N-plus M-SPEC",
+          "name": "RAYS Volk Racing CE28 N-plus M-SPEC（18×8.5J·9.5J／5×114.3）",
           "desc": "8 輻分叉強化型，高剛性 Club Racer DNA｜效果：簧下荷重 -3.5 kg/輪、輪圈剛性與過彎回饋提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "NT$80,000～95,000",
+            "display": "NT$93,000",
             "currency": "NTD",
-            "min": 80000,
-            "max": 95000,
-            "raw": "80000-95000"
+            "min": 93000,
+            "max": 93000,
+            "raw": "93000"
           },
           "spec": "18×8.5J ET45 / 18×9.5J ET45，5×114.3（≈7.7–8.1 kg/輪）",
           "unit": "只",
@@ -81,15 +81,15 @@
         },
         {
           "id": "w3",
-          "name": "RAYS Volk Racing CE28 Club Racer II Black Edition",
+          "name": "RAYS Volk Racing CE28 Club Racer II Black Edition（18×9.5J）",
           "desc": "10 輻密輻競技型，抗扭曲設計強化｜效果：簧下荷重 -3.2 kg/輪、抗扭剛性與煞車散熱通道提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "NT$80,000～95,000",
+            "display": "NT$93,000",
             "currency": "NTD",
-            "min": 80000,
-            "max": 95000,
-            "raw": "80000-95000"
+            "min": 93000,
+            "max": 93000,
+            "raw": "93000"
           },
           "spec": "18×9.5J ET35 / ET45，5×114.3（≈8.6 kg/輪）",
           "unit": "只",
@@ -105,15 +105,15 @@
         },
         {
           "id": "w4",
-          "name": "RAYS Volk Racing TE37 SAGA S-plus 30TH STICKER Ver. — MAG Blue",
+          "name": "RAYS Volk Racing TE37 SAGA S-plus STICKER Ver.（MAG Blue）",
           "desc": "TE37 30 周年貼紙特仕，多色可選｜效果：簧下荷重 -3.5 kg/輪、輪距外擴、底盤極限提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "NT$80,000～95,000",
+            "display": "NT$88,000",
             "currency": "NTD",
-            "min": 80000,
-            "max": 95000,
-            "raw": "80000-95000"
+            "min": 88000,
+            "max": 88000,
+            "raw": "88000"
           },
           "spec": "18×8.5J ET35 / 18×9.5J ET38，5×114.3（共 31 種規格）",
           "unit": "只",
@@ -129,15 +129,15 @@
         },
         {
           "id": "w5",
-          "name": "RAYS Volk Racing TE37 SAGA S-plus 30TH MACHINING Ver. — A.S.T. Brushed",
+          "name": "RAYS Volk Racing TE37 SAGA S-plus MACHINING Ver.（A.S.T.）",
           "desc": "30 周年機械切削版，高光層次更強｜效果：簧下荷重 -3.8 kg/輪、高剛性抗扭與接地回饋提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "NT$80,000～95,000",
+            "display": "NT$129,000",
             "currency": "NTD",
-            "min": 80000,
-            "max": 95000,
-            "raw": "80000-95000"
+            "min": 129000,
+            "max": 129000,
+            "raw": "129000"
           },
           "spec": "18×8.5J ET35 / 18×9.5J ET38，5×114.3（≈8.1–8.6 kg/輪）",
           "unit": "只",
@@ -157,11 +157,11 @@
           "desc": "TA 賽道限定版，降低旋轉慣性｜效果：簧下荷重 -4.0 kg/輪、加速與煞車響應提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "NT$80,000～95,000",
+            "display": "NT$89,000",
             "currency": "NTD",
-            "min": 80000,
-            "max": 95000,
-            "raw": "80000-95000"
+            "min": 89000,
+            "max": 89000,
+            "raw": "89000"
           },
           "spec": "18×8.5J ET35 / 18×9.5J ET38，5×114.3（≈8.1 kg/輪）",
           "unit": "只",
@@ -177,15 +177,15 @@
         },
         {
           "id": "w7",
-          "name": "RAYS Volk Racing TE37SL SAGA — 19 吋旗艦",
+          "name": "RAYS Volk Racing TE37SL SAGA（19×9.5J／超輕量版）",
           "desc": "TE37 系列最輕量 SL 旗艦｜效果：簧下荷重 -4.5 kg/輪、19 吋極限抓地與高速穩定提升。",
           "emoji": "⚙️",
           "price": {
-            "display": "NT$80,000～95,000",
+            "display": "NT$89,000",
             "currency": "NTD",
-            "min": 80000,
-            "max": 95000,
-            "raw": "80000-95000"
+            "min": 89000,
+            "max": 89000,
+            "raw": "89000"
           },
           "spec": "19×9.5J ET35，5×114.3（多尺寸對應）",
           "unit": "只",
@@ -206,15 +206,15 @@
       "parts": [
         {
           "id": "s0",
-          "name": "CUSCO TYPE-OS 引擎室拉桿",
+          "name": "CUSCO TYPE-OS 引擎室拉桿（2021- / 2024-）",
           "desc": "連結避震器塔頂，強化車頭抗扭剛性｜效果：車頭剛性、轉向精準度、入彎指向性提升。",
           "emoji": "🔧",
           "price": {
-            "display": "NT$4,680",
+            "display": "NT$4,980",
             "currency": "NTD",
-            "min": 4680,
-            "max": 4680,
-            "raw": "4680"
+            "min": 4980,
+            "max": 4980,
+            "raw": "4980"
           },
           "spec": "2021- / 2024- 兩款對應",
           "unit": "件",
@@ -234,11 +234,11 @@
           "desc": "加粗管徑增加抗扭力，抑制過彎側傾｜效果：側傾角下降 15–25%、彎道極限與循跡提升。",
           "emoji": "🔧",
           "price": {
-            "display": "NT$11,000～22,400",
+            "display": "NT$18,000",
             "currency": "NTD",
-            "min": 11000,
-            "max": 22400,
-            "raw": "11000-22400"
+            "min": 18000,
+            "max": 18000,
+            "raw": "18000"
           },
           "spec": "GR Yaris 2020- 客製化訂製",
           "unit": "組",
@@ -258,11 +258,11 @@
           "desc": "降低車身重心並縮短懸吊行程｜效果：車高下降 20–30mm、側傾下降、視覺改變最大。",
           "emoji": "🔧",
           "price": {
-            "display": "NT$10,800",
+            "display": "NT$9,780",
             "currency": "NTD",
-            "min": 10800,
-            "max": 10800,
-            "raw": "NT$10,800"
+            "min": 9780,
+            "max": 9780,
+            "raw": "9780"
           },
           "spec": "2021-2024 / 2024- 全年份",
           "unit": "組",
@@ -282,11 +282,11 @@
           "desc": "複筒式街道設定，16 段阻尼可調｜效果：車高下降 30–50mm，可在舒適與競技間切換。",
           "emoji": "🔧",
           "price": {
-            "display": "NT$44,000～48,000",
+            "display": "NT$45,000",
             "currency": "NTD",
-            "min": 44000,
-            "max": 48000,
-            "raw": "NT$44,000～48,000"
+            "min": 45000,
+            "max": 45000,
+            "raw": "45000"
           },
           "spec": "2021- / 2024- 全年份",
           "unit": "組",
@@ -302,15 +302,15 @@
         },
         {
           "id": "s4",
-          "name": "Core's 全客製化 36段可調阻尼含魚眼上座避震器",
+          "name": "Core's 36段可調阻尼含魚眼上座避震器",
           "desc": "全客製化 36 段阻尼設定，含魚眼上座｜效果：車高下降 30–60mm、剛性與賽道適應性大幅提升。",
           "emoji": "🔧",
           "price": {
-            "display": "NT$63,000",
+            "display": "NT$45,000",
             "currency": "NTD",
-            "min": 63000,
-            "max": 63000,
-            "raw": "NT$63,000"
+            "min": 45000,
+            "max": 45000,
+            "raw": "45000"
           },
           "spec": "2021- 專用",
           "unit": "組",
@@ -330,11 +330,11 @@
           "desc": "單筒競技阻尼設定，抑制多餘彈跳｜效果：車高下降 50–70mm、過彎支撐性明顯提升。",
           "emoji": "🔧",
           "price": {
-            "display": "NT$65,000",
+            "display": "NT$97,499",
             "currency": "NTD",
-            "min": 65000,
-            "max": 65000,
-            "raw": "NT$65,000"
+            "min": 97499,
+            "max": 97499,
+            "raw": "97499"
           },
           "spec": "專車專用",
           "unit": "組",
@@ -350,15 +350,15 @@
         },
         {
           "id": "s6",
-          "name": "KW V3 避震器",
+          "name": "KW V3 避震器（壓縮/回彈雙向獨立可調）",
           "desc": "壓縮/回彈雙向獨立可調｜效果：車高下降 50–80mm，彈跳控制精準，賽道設定更細緻。",
           "emoji": "🔧",
           "price": {
-            "display": "NT$92,000",
+            "display": "NT$86,388",
             "currency": "NTD",
-            "min": 92000,
-            "max": 92000,
-            "raw": "NT$92,000"
+            "min": 86388,
+            "max": 86388,
+            "raw": "86388"
           },
           "spec": "2021-2024",
           "unit": "組",
@@ -374,15 +374,15 @@
         },
         {
           "id": "s7",
-          "name": "Endless CC43 來令片（前後組）",
+          "name": "Endless CC43 來令片（前後組）EP558＋EP559",
           "desc": "陶瓷碳纖稀土複合材質，耐溫 300–800°C｜效果：制動力、耐溫與賽道穩定性全面提升。",
           "emoji": "🔧",
           "price": {
-            "display": "NT$15,000",
+            "display": "NT$14,260",
             "currency": "NTD",
-            "min": 15000,
-            "max": 15000,
-            "raw": "NT$15000"
+            "min": 14260,
+            "max": 14260,
+            "raw": "14260"
           },
           "spec": "EP558+EP559 (N35S) / 全車份",
           "unit": "組",
@@ -403,15 +403,15 @@
       "parts": [
         {
           "id": "e0",
-          "name": "MST Performance 冷空氣進氣套件 V2",
+          "name": "MST Performance 冷空氣進氣套件 V2（TY-GRY06）",
           "desc": "密封冷空氣集氣箱設計｜效果：馬力 +14～16ps、扭力 +2.1kgm@3500rpm、進氣溫度下降。",
           "emoji": "🔥",
           "price": {
-            "display": "NT$22,000",
+            "display": "NT$18,500",
             "currency": "NTD",
-            "min": 22000,
-            "max": 22000,
-            "raw": "$22000"
+            "min": 18500,
+            "max": 18500,
+            "raw": "18500"
           },
           "spec": "TY-GRY06 / 2020- 全年份",
           "unit": "套",
@@ -427,15 +427,15 @@
         },
         {
           "id": "e1",
-          "name": "K&N / SPRINT FILTER 高流量空氣濾芯",
+          "name": "K&N / SPRINT FILTER 高流量空氣濾芯（原廠交換型）",
           "desc": "原廠交換型高流量濾芯｜效果：進氣量、油門靈敏度與加速輕快感提升。",
           "emoji": "🔥",
           "price": {
-            "display": "NT$2,200～4,200",
+            "display": "NT$2,500",
             "currency": "NTD",
-            "min": 2200,
-            "max": 4200,
-            "raw": "NT$2,200～4,200"
+            "min": 2500,
+            "max": 2500,
+            "raw": "2500"
           },
           "spec": "2021- / 原廠交換型",
           "unit": "個",
@@ -451,15 +451,15 @@
         },
         {
           "id": "e2",
-          "name": "MST Performance 觸媒當派",
+          "name": "MST Performance 觸媒當派（TY-GRCY03DP）",
           "desc": "5 吋管徑高流量當派，內建 350cell Euro 6 觸媒｜效果：馬力 +12～15ps、渦輪提速加快、排壓下降。",
           "emoji": "🔥",
           "price": {
-            "display": "NT$35,000",
+            "display": "NT$32,000",
             "currency": "NTD",
-            "min": 35000,
-            "max": 35000,
-            "raw": "Nt$35000"
+            "min": 32000,
+            "max": 32000,
+            "raw": "32000"
           },
           "spec": "TY-GRCY03DP / 2020- (OPF/GPF)",
           "unit": "支",
@@ -475,15 +475,15 @@
         },
         {
           "id": "e3",
-          "name": "FUJITSUBO A-R 排氣管",
+          "name": "FUJITSUBO A-R 排氣管（中尾段）",
           "desc": "兼顧街道低轉與高轉延伸，聲浪低沉不共鳴｜效果：馬力 +8～12ps、扭力 +0.8kgm、重量 -3.2kg。",
           "emoji": "🔥",
           "price": {
-            "display": "NT$49,000",
+            "display": "NT$49,800",
             "currency": "NTD",
-            "min": 49000,
-            "max": 49000,
-            "raw": "NT$49000"
+            "min": 49800,
+            "max": 49800,
+            "raw": "49800"
           },
           "spec": "中尾段 / 2021-2024",
           "unit": "套",
@@ -499,15 +499,15 @@
         },
         {
           "id": "e4",
-          "name": "HKS Super Turbo 排氣管",
+          "name": "HKS Super Turbo 排氣管（2021-2024）",
           "desc": "提升排氣流速並減少渦輪遲滯｜效果：馬力 +15～20ps、扭力 +1.2kgm、重量 -4.1kg。",
           "emoji": "🔥",
           "price": {
-            "display": "NT$63,000",
+            "display": "NT$73,000",
             "currency": "NTD",
-            "min": 63000,
-            "max": 63000,
-            "raw": "NT$63,000"
+            "min": 73000,
+            "max": 73000,
+            "raw": "73000"
           },
           "spec": "2021-2024 主力款",
           "unit": "套",
@@ -523,15 +523,15 @@
         },
         {
           "id": "e5",
-          "name": "HKS OIL COOLER KIT BLACK",
+          "name": "HKS OIL COOLER KIT BLACK（GXPA16）",
           "desc": "Turn-flow 油冷芯與鋁管配管，控制賽道油溫｜效果：油溫穩定、引擎保護提升、持續輸出更穩。",
           "emoji": "🔥",
           "price": {
-            "display": "TBC",
+            "display": "NT$55,000",
             "currency": "NTD",
-            "min": 0,
-            "max": 0,
-            "raw": "---TBC---"
+            "min": 55000,
+            "max": 55000,
+            "raw": "55000"
           },
           "spec": "GXPA16 / 15004-AT113~AT114 / 2020- Gen1/Gen2",
           "unit": "套",
@@ -547,15 +547,15 @@
         },
         {
           "id": "e6",
-          "name": "HKS Super Turbo Urban Matte Edition",
+          "name": "HKS Super Turbo Urban Matte Edition 排氣管",
           "desc": "消光塗層特仕排氣，優化增壓反應與高轉輸出｜效果：馬力 +18～22ps、扭力 +1.5kgm、重量 -4.8kg。",
           "emoji": "🔥",
           "price": {
-            "display": "NT$75,000",
+            "display": "NT$72,000",
             "currency": "NTD",
-            "min": 75000,
-            "max": 75000,
-            "raw": "NT$75,000"
+            "min": 72000,
+            "max": 72000,
+            "raw": "72000"
           },
           "spec": "小改前 / 小改後",
           "unit": "套",
@@ -571,15 +571,15 @@
         },
         {
           "id": "e7",
-          "name": "HKS INTERCOOLER KIT 中冷",
+          "name": "HKS INTERCOOLER KIT 中冷（2021-2024 手排）",
           "desc": "強化進氣冷卻效率，抑制高溫退點火｜效果：進氣溫度下降 20°C、爆震防護提升、高溫馬力保持提升。",
           "emoji": "🔥",
           "price": {
-            "display": "NT$79,000",
+            "display": "NT$68,000",
             "currency": "NTD",
-            "min": 79000,
-            "max": 79000,
-            "raw": "NT$79000"
+            "min": 68000,
+            "max": 68000,
+            "raw": "68000"
           },
           "spec": "2021-2024 手排專用",
           "unit": "套",
@@ -600,15 +600,15 @@
       "parts": [
         {
           "id": "i0",
-          "name": "GR (TOYOTA) 原廠部品",
+          "name": "Result Japan CARBON 尾翼 TOYOTA GR YARIS",
           "desc": "原廠精準密合（晴雨窗/下護板/定風翼/拉花）｜效果：密合度 100%、底盤氣流平整與車身保護提升。",
           "emoji": "🛡️",
           "price": {
-            "display": "NT$5,800～110,000",
+            "display": "NT$52,000",
             "currency": "NTD",
-            "min": 5800,
-            "max": 110000,
-            "raw": "NT$5,800～110,000"
+            "min": 52000,
+            "max": 52000,
+            "raw": "52000"
           },
           "spec": "塑膠/鋁合金/乙烯 / 全車各部位",
           "unit": "套",
@@ -624,15 +624,15 @@
         },
         {
           "id": "i1",
-          "name": "SARD LSR CARBON 尾翼",
+          "name": "SARD LSR CARBON 尾翼 TOYOTA GR YARIS",
           "desc": "濕式碳纖維 Twill Weave｜效果：後部下壓力與高速穩定性提升（翼幅 1470mm / 重量 2.5kg / 角度 9°）。",
           "emoji": "🛡️",
           "price": {
-            "display": "NT$65,000",
+            "display": "NT$63,000",
             "currency": "NTD",
-            "min": 65000,
-            "max": 65000,
-            "raw": "65000"
+            "min": 63000,
+            "max": 63000,
+            "raw": "63000"
           },
           "spec": "81068 / GXPA16・MXPA12 / 需鑽孔安裝",
           "unit": "支",
@@ -648,15 +648,15 @@
         },
         {
           "id": "i2",
-          "name": "Grazio&Co 車頂左右小翼",
+          "name": "VARIS CARBON 車頂尾翼 TOYOTA GR YARIS",
           "desc": "車頂渦流梳理外觀件｜效果：車尾真空阻力下降、高速直線穩定性與亂流控制提升。",
           "emoji": "🛡️",
           "price": {
-            "display": "NT$16,800",
+            "display": "NT$85,000",
             "currency": "NTD",
-            "min": 16800,
-            "max": 16800,
-            "raw": "NT$16,800"
+            "min": 85000,
+            "max": 85000,
+            "raw": "85000"
           },
           "spec": "ABS 樹脂 / 車頂兩側",
           "unit": "組",
@@ -676,11 +676,11 @@
           "desc": "品牌中階空力件｜效果：前輪下壓力提升、風阻係數下降、後視野改善。",
           "emoji": "🛡️",
           "price": {
-            "display": "NT$33,000",
+            "display": "NT$31,500",
             "currency": "NTD",
-            "min": 33000,
-            "max": 33000,
-            "raw": "NT$33000"
+            "min": 31500,
+            "max": 31500,
+            "raw": "31500"
           },
           "spec": "PP 樹脂 / 鋁合金 / 尾翼",
           "unit": "組",
@@ -696,15 +696,15 @@
         },
         {
           "id": "i4",
-          "name": "KANSAI SERVICE 碳纖引擎蓋 / 側裙 / 定風翼",
+          "name": "Result Japan CARBON 引擎蓋",
           "desc": "乾式碳纖維開孔散熱設計｜效果：車頭重量減輕 8～15kg、引擎散熱與高速氣流穩定提升。",
           "emoji": "🛡️",
           "price": {
-            "display": "NT$9,600～64,800",
+            "display": "NT$72,000",
             "currency": "NTD",
-            "min": 9600,
-            "max": 64800,
-            "raw": "NT$9,600～64,800"
+            "min": 72000,
+            "max": 72000,
+            "raw": "72000"
           },
           "spec": "C 柱定風翼 / 前下巴 / 引擎蓋與車身各部",
           "unit": "套",
@@ -720,15 +720,15 @@
         },
         {
           "id": "i5",
-          "name": "Gazoo Racing x GROW Design 空力套件組",
+          "name": "VARIS CARBON 引擎蓋 TOYOTA GR YARIS",
           "desc": "GR 官方認證乾式碳纖空力｜效果：後輪下壓力提升、重量更輕、御用空力認證加持。",
           "emoji": "🛡️",
           "price": {
-            "display": "NT$46,000",
+            "display": "NT$97,000",
             "currency": "NTD",
-            "min": 46000,
-            "max": 46000,
-            "raw": "NT$46000"
+            "min": 97000,
+            "max": 97000,
+            "raw": "97000"
           },
           "spec": "Dry Carbon 尾翼 / 前下巴 / 側裙 / 後下巴",
           "unit": "套",
@@ -744,15 +744,15 @@
         },
         {
           "id": "i6",
-          "name": "SARD GT-WING / GT1 空力套件 / 前下巴",
+          "name": "SARD GT-WING / GT1 空力套件",
           "desc": "GT 賽事空力數據認證｜效果：前輪循跡與後軸高速穩定性雙提升。",
           "emoji": "🛡️",
           "price": {
-            "display": "NT$46,800～106,800",
+            "display": "NT$145,000",
             "currency": "NTD",
-            "min": 46800,
-            "max": 106800,
-            "raw": "NT$46,800～106,800"
+            "min": 145000,
+            "max": 145000,
+            "raw": "145000"
           },
           "spec": "FRP / 乾式碳纖 / 前後全套件",
           "unit": "套",
@@ -768,15 +768,15 @@
         },
         {
           "id": "i7",
-          "name": "VARIS ARISING-1 空力套件組 TOYOTA GR YARIS 2024-",
+          "name": "SARD GT-WING Fuji mini CARBON 尾翼 TOYOTA GR YARIS",
           "desc": "JDM 頂級乾式碳纖全車套件｜效果：車頭重量減輕 10～18kg、最大下壓力大幅提升。",
           "emoji": "🛡️",
           "price": {
-            "display": "NT$335,000",
+            "display": "NT$78,000",
             "currency": "NTD",
-            "min": 335000,
-            "max": 335000,
-            "raw": "NT$335000"
+            "min": 78000,
+            "max": 78000,
+            "raw": "78000"
           },
           "spec": "前下巴/擾流/側裙/後下巴/輪拱/引擎蓋 全套",
           "unit": "套",

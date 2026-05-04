@@ -7003,14 +7003,13 @@
           e7: "assets/images/part_images/engine/e7.jpg",
         },
         aero: {
-          i0: "assets/images/part_images/aero/i0.jpg",
+          i0: "assets/images/part_images/aero/i0.webp",
           i1: "assets/images/part_images/aero/i1.jpg",
-          i2: "assets/images/part_images/aero/i2.jpg",
+          i2: "assets/images/part_images/aero/i2.webp",
           i3: "assets/images/part_images/aero/i3.jpg",
-          i4: "assets/images/part_images/aero/i4.jpg",
-          i5: "assets/images/part_images/aero/i5.jpg",
+          i4: "assets/images/part_images/aero/i4.webp",
           i6: "assets/images/part_images/aero/i6.jpg",
-          i7: "assets/images/part_images/aero/i7.jpg",
+          i7: "assets/images/part_images/aero/i7.webp",
         },
       };
 
@@ -7054,14 +7053,33 @@
           e7: buildPartGallery("e7", 2),
         },
         aero: {
-          i0: buildPartGallery("i0", 1),
+          i0: [
+            "assets/images/part_gallery/i0/01.webp",
+            "assets/images/part_gallery/i0/02.webp",
+            "assets/images/part_gallery/i0/03.webp",
+          ],
           i1: buildPartGallery("i1", 5),
-          i2: buildPartGallery("i2", 5),
+          i2: [
+            "assets/images/part_gallery/i2/01.webp",
+            "assets/images/part_gallery/i2/02.webp",
+            "assets/images/part_gallery/i2/04.webp",
+            "assets/images/part_gallery/i2/05.webp",
+            "assets/images/part_gallery/i2/06.webp",
+          ],
           i3: buildPartGallery("i3", 5),
-          i4: buildPartGallery("i4", 3),
-          i5: buildPartGallery("i5", 5),
+          i4: [
+            "assets/images/part_gallery/i4/01.webp",
+            "assets/images/part_gallery/i4/02.webp",
+            "assets/images/part_gallery/i4/03.webp",
+            "assets/images/part_gallery/i4/04.webp",
+          ],
           i6: buildPartGallery("i6", 4),
-          i7: buildPartGallery("i7", 7),
+          i7: [
+            "assets/images/part_gallery/i7/01.webp",
+            "assets/images/part_gallery/i7/02.webp",
+            "assets/images/part_gallery/i7/03.webp",
+            "assets/images/part_gallery/i7/04.webp",
+          ],
         },
       };
 
@@ -7092,10 +7110,15 @@
         const galleryMap = PART_IMAGE_GALLERY[imageCat];
         const fallbackMap = PART_IMAGE_FALLBACK_MAP[imageCat];
         if (!galleryMap && !fallbackMap) return [];
+        const partId = part.id ? String(part.id) : "";
+        const hasGalleryEntry =
+          !!partId && !!galleryMap && Object.prototype.hasOwnProperty.call(galleryMap, partId);
+        const hasFallbackEntry =
+          !!partId && !!fallbackMap && Object.prototype.hasOwnProperty.call(fallbackMap, partId);
 
         const result = [];
-        if (galleryMap && part.id && Array.isArray(galleryMap[part.id])) {
-          result.push(...galleryMap[part.id]);
+        if (hasGalleryEntry && Array.isArray(galleryMap[partId])) {
+          result.push(...galleryMap[partId]);
         }
 
         const grouped = uniqueImageList(result);
@@ -7103,12 +7126,16 @@
           return grouped;
         }
 
+        if (partId && !hasGalleryEntry && !hasFallbackEntry) {
+          return [];
+        }
+
         if (fallbackMap) {
-          if (part.id && fallbackMap[part.id]) {
-            return uniqueImageList([fallbackMap[part.id]]);
+          if (hasFallbackEntry && fallbackMap[partId]) {
+            return uniqueImageList([fallbackMap[partId]]);
           }
           const pool = Object.values(fallbackMap);
-          const idx = Number.parseInt(String(part.id || "").replace(/\D/g, ""), 10);
+          const idx = Number.parseInt(String(partId || "").replace(/\D/g, ""), 10);
           if (pool.length) {
             return uniqueImageList([pool[(Number.isNaN(idx) ? 0 : idx) % pool.length]]);
           }
