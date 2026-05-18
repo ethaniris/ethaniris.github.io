@@ -5799,6 +5799,7 @@
           transform: none !important;
           transition: none !important;
           will-change: auto;
+          overflow-x: hidden;
           overscroll-behavior: contain;
           -webkit-overflow-scrolling: touch;
         }
@@ -5937,10 +5938,27 @@
         }
         .checkout-delivery-grid {
           grid-template-columns: 1fr;
+          width: 100%;
+          min-width: 0;
         }
         .checkout-delivery-option label {
           grid-template-columns: 1fr;
           gap: 8px;
+          width: 100%;
+          min-width: 0;
+          overflow: hidden;
+        }
+        .checkout-delivery-option,
+        .install-card-content,
+        .install-card-title,
+        .install-card-address {
+          min-width: 0;
+          max-width: 100%;
+        }
+        .install-card-title,
+        .install-card-address {
+          overflow-wrap: anywhere;
+          word-break: break-word;
         }
         .delivery-badge {
           width: max-content;
