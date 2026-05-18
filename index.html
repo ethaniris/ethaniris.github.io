@@ -399,6 +399,32 @@
         color: #99ffff;
       }
 
+      .tech-progress {
+        margin-bottom: 12px;
+        color: #6eeeff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .tech-choice-code {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        margin-right: 10px;
+        border-radius: 9px;
+        background: rgba(0, 229, 255, 0.16);
+        color: #ffffff;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 18px;
+        letter-spacing: 0.08em;
+        vertical-align: middle;
+      }
+
       /* DIAGNOSIS RESULT STYLES */
       .diagnosis-card {
         margin-top: 20px;
@@ -459,6 +485,84 @@
         font-family: "Barlow Condensed", sans-serif;
         font-weight: 600;
         letter-spacing: 0.02em;
+      }
+
+      .diagnosis-grid {
+        display: grid;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .diagnosis-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+        padding: 12px 14px;
+        border-radius: 12px;
+        background: linear-gradient(
+          120deg,
+          rgba(7, 28, 48, 0.94),
+          rgba(3, 13, 25, 0.9)
+        );
+        border: 1px solid rgba(0, 229, 255, 0.18);
+      }
+
+      .diagnosis-row-meta {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 4px;
+        color: #79edff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .diagnosis-row-mode {
+        color: #fff;
+        background: rgba(0, 229, 255, 0.18);
+        border: 1px solid rgba(0, 229, 255, 0.24);
+        border-radius: 999px;
+        padding: 2px 8px;
+      }
+
+      .diagnosis-row-name {
+        color: #f0fbff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 17px;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        line-height: 1.35;
+      }
+
+      .diagnosis-row-config {
+        margin-top: 3px;
+        color: #9edcec;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .diagnosis-row-price {
+        color: #2ecc8a;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+      }
+
+      .diagnosis-note {
+        margin: 14px 0 0;
+        color: #b9edf7;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.55;
+        text-align: left;
       }
 
       .diagnosis-stats {
@@ -2728,6 +2832,57 @@
         color: rgba(190, 208, 228, 0.72);
       }
 
+      .install-card {
+        position: relative;
+        padding: 13px 15px;
+        border-radius: 16px;
+        background:
+          linear-gradient(135deg, rgba(0, 214, 255, 0.12), rgba(5, 12, 22, 0.62)),
+          radial-gradient(circle at 12% 12%, rgba(255, 255, 255, 0.11), transparent 34%);
+        border: 1px solid rgba(0, 229, 255, 0.22);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.05),
+          0 14px 28px rgba(0, 0, 0, 0.18);
+        overflow: hidden;
+      }
+
+      .install-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 3px;
+        background: linear-gradient(180deg, #00d6ff, #f5c842, #e8192c);
+        opacity: 0.86;
+      }
+
+      .install-card-kicker {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        color: #79edff;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+
+      .install-card-title {
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 14px;
+        font-weight: 900;
+        color: #f3f8ff;
+        line-height: 1.35;
+      }
+
+      .install-card-address,
+      .install-card-note {
+        margin-top: 4px;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(210, 226, 244, 0.82);
+        line-height: 1.5;
+      }
+
       .modal-qty-control {
         display: inline-flex;
         align-items: center;
@@ -3148,6 +3303,109 @@
           rgba(232, 25, 44, 0.18) 0%,
           rgba(232, 25, 44, 0.08) 100%
         );
+      }
+
+      .checkout-delivery-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .checkout-delivery-option > input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .checkout-delivery-option label {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+        border: 1px solid rgba(0, 229, 255, 0.22);
+        border-radius: 16px;
+        background:
+          linear-gradient(135deg, rgba(0, 214, 255, 0.12), rgba(255, 255, 255, 0.03)),
+          rgba(255, 255, 255, 0.02);
+        padding: 13px 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .checkout-delivery-option label::after {
+        content: "✓";
+        position: absolute;
+        top: 9px;
+        right: 9px;
+        display: grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #20d481, #0e9f5a);
+        color: #ffffff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 15px;
+        font-weight: 900;
+        line-height: 1;
+        box-shadow: 0 0 0 2px rgba(9, 20, 16, 0.8),
+          0 8px 16px rgba(32, 212, 129, 0.28);
+        opacity: 0;
+        transform: scale(0.72);
+        transition: opacity 0.18s ease, transform 0.18s ease;
+      }
+
+      .checkout-delivery-option > input:not(:checked) + label {
+        opacity: 0.46;
+        filter: saturate(0.55);
+        border-color: rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.025);
+      }
+
+      .checkout-delivery-option > input:not(:checked) + label:hover {
+        opacity: 0.72;
+        filter: saturate(0.78);
+      }
+
+      .checkout-delivery-option > input:checked + label {
+        opacity: 1;
+        filter: saturate(1);
+        border-color: rgba(0, 229, 255, 0.64);
+        box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.22),
+          0 16px 34px rgba(0, 158, 220, 0.14);
+      }
+
+      .checkout-delivery-option > input:checked + label::after {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .delivery-badge {
+        border-radius: 999px;
+        padding: 7px 10px;
+        background: rgba(0, 229, 255, 0.14);
+        color: #bff7ff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        white-space: nowrap;
+      }
+
+      .delivery-address-field {
+        display: none;
+        grid-column: 1 / -1;
+        margin-top: 8px;
+      }
+
+      .delivery-address-field.show {
+        display: flex;
+      }
+
+      #delivery-home:checked + label .delivery-address-field {
+        display: flex;
       }
 
       .pay-name {
@@ -4414,6 +4672,57 @@
         color: #70849a;
       }
 
+      body[data-theme="light"] .install-card {
+        background:
+          linear-gradient(135deg, rgba(47, 126, 159, 0.1), rgba(255, 255, 255, 0.9)),
+          radial-gradient(circle at 12% 12%, rgba(47, 126, 159, 0.13), transparent 34%);
+        border-color: rgba(47, 126, 159, 0.18);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.68),
+          0 14px 28px rgba(31, 52, 76, 0.1);
+      }
+
+      body[data-theme="light"] .install-card-kicker {
+        color: #2f7e9f;
+      }
+
+      body[data-theme="light"] .install-card-title {
+        color: #1d2d42;
+      }
+
+      body[data-theme="light"] .install-card-address,
+      body[data-theme="light"] .install-card-note {
+        color: #526b85;
+      }
+
+      body[data-theme="light"] .checkout-delivery-option label {
+        border-color: rgba(47, 126, 159, 0.18);
+        background:
+          linear-gradient(135deg, rgba(47, 126, 159, 0.08), rgba(255, 255, 255, 0.88)),
+          rgba(255, 255, 255, 0.72);
+      }
+
+      body[data-theme="light"] .checkout-delivery-option > input:not(:checked) + label {
+        border-color: rgba(18, 40, 66, 0.08);
+        background: rgba(255, 255, 255, 0.52);
+      }
+
+      body[data-theme="light"] .checkout-delivery-option > input:checked + label {
+        border-color: rgba(47, 126, 159, 0.48);
+        box-shadow: 0 0 0 1px rgba(47, 126, 159, 0.16),
+          0 16px 34px rgba(60, 100, 145, 0.12);
+      }
+
+      body[data-theme="light"] .checkout-delivery-option label::after {
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.92),
+          0 8px 16px rgba(32, 212, 129, 0.22);
+      }
+
+      body[data-theme="light"] .delivery-badge {
+        background: rgba(47, 126, 159, 0.11);
+        color: #2f7e9f;
+      }
+
       body[data-theme="light"] .modal-qty-control {
         background: rgba(245, 249, 253, 0.95);
         border-color: rgba(18, 40, 66, 0.12);
@@ -4562,6 +4871,15 @@
         color: #17283d;
       }
 
+      body[data-theme="light"] .tech-progress {
+        color: #2f7e9f;
+      }
+
+      body[data-theme="light"] .tech-choice-code {
+        color: #f8fbff;
+        background: linear-gradient(135deg, #2f7e9f, #486f95);
+      }
+
       body[data-theme="light"] .tech-choice:hover,
       body[data-theme="light"] .tech-choice.selected {
         border-color: rgba(31, 135, 171, 0.52);
@@ -4594,6 +4912,37 @@
 
       body[data-theme="light"] .parts-list {
         color: #364d67;
+      }
+
+      body[data-theme="light"] .diagnosis-row {
+        background: linear-gradient(145deg, #ffffff, #eef5fb);
+        border: 1px solid rgba(21, 37, 56, 0.1);
+      }
+
+      body[data-theme="light"] .diagnosis-row-meta {
+        color: #52708f;
+      }
+
+      body[data-theme="light"] .diagnosis-row-mode {
+        color: #f8fbff;
+        background: linear-gradient(135deg, #2f7e9f, #486f95);
+        border-color: rgba(47, 126, 159, 0.26);
+      }
+
+      body[data-theme="light"] .diagnosis-row-name {
+        color: #1d2d42;
+      }
+
+      body[data-theme="light"] .diagnosis-row-config {
+        color: #55708c;
+      }
+
+      body[data-theme="light"] .diagnosis-row-price {
+        color: #0f8f58;
+      }
+
+      body[data-theme="light"] .diagnosis-note {
+        color: #40566f;
       }
 
       body[data-theme="light"] .stat-box {
@@ -5564,6 +5913,16 @@
         .checkout-pay-grid {
           grid-template-columns: 1fr;
         }
+        .checkout-delivery-grid {
+          grid-template-columns: 1fr;
+        }
+        .checkout-delivery-option label {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+        .delivery-badge {
+          width: max-content;
+        }
         .checkout-input-grid {
           grid-template-columns: 1fr;
         }
@@ -6030,7 +6389,7 @@
 
         <div class="cta-block">
           <button class="btn-primary" onclick="showGarage()">
-            🏁 &nbsp;加入我的車庫
+            🏁 &nbsp;瀏覽車庫清單
           </button>
         </div>
       </aside>
@@ -6302,6 +6661,49 @@
                 required
               />
             </label>
+          </div>
+
+          <div class="checkout-section-title">配送方式</div>
+          <div class="checkout-delivery-grid">
+            <div class="checkout-delivery-option">
+              <input
+                type="radio"
+                id="delivery-store"
+                name="checkout-delivery"
+                value="配送安裝到指定店家"
+                checked
+              />
+              <label for="delivery-store">
+                <div class="install-card-content">
+                  <div class="install-card-kicker">配送安裝</div>
+                  <div class="install-card-title">KTSP 凱斯特斯行能車庫</div>
+                  <div class="install-card-address">台北市中山區松江路532號1樓</div>
+                </div>
+              </label>
+            </div>
+            <div class="checkout-delivery-option">
+              <input
+                type="radio"
+                id="delivery-home"
+                name="checkout-delivery"
+                value="宅配"
+              />
+              <label for="delivery-home">
+                <div class="install-card-content">
+                  <div class="install-card-kicker">宅配到府</div>
+                  <div class="install-card-title">填寫收件地址</div>
+                </div>
+                <span class="checkout-field delivery-address-field" id="checkout-address-field">
+                  <input
+                    id="checkout-address"
+                    name="checkout-address"
+                    type="text"
+                    placeholder="請輸入完整收件地址"
+                    autocomplete="street-address"
+                  />
+                </span>
+              </label>
+            </div>
           </div>
 
           <p class="checkout-feedback" id="checkout-feedback"></p>
@@ -8710,8 +9112,12 @@
       function validateCheckoutForm() {
         const nameEl = document.getElementById("checkout-name");
         const phoneEl = document.getElementById("checkout-phone");
+        const addressEl = document.getElementById("checkout-address");
         const paymentEl = document.querySelector(
           "input[name='checkout-payment']:checked"
+        );
+        const deliveryEl = document.querySelector(
+          "input[name='checkout-delivery']:checked"
         );
         if (!nameEl || !phoneEl || !paymentEl) {
           return { ok: false, message: "表單載入失敗，請重新開啟。", type: "error" };
@@ -8721,6 +9127,8 @@
         const phone = String(phoneEl.value || "")
           .trim()
           .replace(/[^0-9]/g, "");
+        const delivery = deliveryEl ? deliveryEl.value : "配送安裝到指定店家";
+        const address = String(addressEl?.value || "").trim();
 
         if (!name) {
           return { ok: false, message: "請填寫中文名字。", type: "error" };
@@ -8734,13 +9142,34 @@
         if (!/^0[0-9]{8,9}$/.test(phone)) {
           return { ok: false, message: "電話格式不正確，請輸入台灣電話號碼。", type: "error" };
         }
+        if (delivery === "宅配" && address.length < 6) {
+          return { ok: false, message: "選擇宅配時，請填寫完整收件地址。", type: "error" };
+        }
 
         return {
           ok: true,
           name,
           phone,
           payment: paymentEl.value,
+          delivery,
+          address,
         };
+      }
+
+      function updateCheckoutDeliveryUI() {
+        const deliveryEl = document.querySelector(
+          "input[name='checkout-delivery']:checked"
+        );
+        const addressField = document.getElementById("checkout-address-field");
+        const addressInput = document.getElementById("checkout-address");
+        const isHomeDelivery = deliveryEl && deliveryEl.value === "宅配";
+        if (addressField) {
+          addressField.classList.toggle("show", Boolean(isHomeDelivery));
+        }
+        if (addressInput) {
+          addressInput.required = Boolean(isHomeDelivery);
+          if (!isHomeDelivery) addressInput.value = "";
+        }
       }
 
       function submitCheckout(event) {
@@ -8785,8 +9214,12 @@
           checkoutProcessingTimers.push(
             setTimeout(() => {
               showCheckoutPaidSuccess();
+              const deliveryDetail =
+                validation.delivery === "宅配" && validation.address
+                  ? `${validation.delivery}：${validation.address}`
+                  : validation.delivery;
               setCheckoutFeedback(
-                `付款完成：${validation.name}／${validation.phone}（${validation.payment}）・ 合計 ${formatNTD(
+                `付款完成：${validation.name}／${validation.phone}（${validation.payment}／${deliveryDetail}）・ 合計 ${formatNTD(
                   total
                 )}`,
                 "success"
@@ -8806,6 +9239,7 @@
         renderCheckoutModal();
         const checkoutForm = document.getElementById("checkout-form");
         if (checkoutForm) checkoutForm.reset();
+        updateCheckoutDeliveryUI();
         closeCheckoutProcessing();
         setCheckoutFeedback("");
         document.getElementById("garage-bg").classList.add("open");
@@ -8821,6 +9255,10 @@
       if (checkoutForm) {
         checkoutForm.addEventListener("submit", submitCheckout);
       }
+      document
+        .querySelectorAll("input[name='checkout-delivery']")
+        .forEach((input) => input.addEventListener("change", updateCheckoutDeliveryUI));
+      updateCheckoutDeliveryUI();
 
       /* ══════════════════════════════
          RESET
@@ -8857,86 +9295,343 @@
       const techQuestions = [
         {
           id: "q1",
-          text: "Q1：【情境確認】這台車在你生活中的「角色」佔比最重的是？",
+          text: "第1題｜你最常在哪裡開 GR Yaris？",
           choices: [
             {
               label: "A",
-              text: "靈魂通勤者：平日上下班、市區代步，週末偶爾去山上吹吹風。",
+              text: "市區＋高速公路為主，偶爾出遊。",
             },
             {
               label: "B",
-              text: "假日獵人：它平時安靜待在車庫，出門就是要去跑山路或賽道。",
+              text: "假日固定跑山，彎道是樂趣所在。",
+            },
+            {
+              label: "C",
+              text: "參加計時賽／封閉場地練習，追求極限。",
             },
           ],
         },
         {
           id: "q2",
-          text: "Q2：【乘客考量】你的副駕或後座，是否經常載著「非車友」的重要人士？",
+          text: "第2題｜你對車高的期待是？",
           choices: [
             {
               label: "A",
-              text: "是的，我必須考慮他們的舒適度與路感，不能太顛簸或太吵。",
+              text: "稍微降一點，視覺好看就好，舒適不能差太多。",
             },
             {
               label: "B",
-              text: "我通常是一個人開，或者乘客也是熱血玩家，操控與回饋高於一切。",
+              text: "明顯降低重心，彎道穩定感提升。",
+            },
+            {
+              label: "C",
+              text: "最大幅度降低，犧牲舒適換取過彎極限。",
             },
           ],
         },
         {
           id: "q3",
-          text: "Q3：【操駕頻率】你一年大約會去「麗寶」或「大鵬灣」這類國際賽道幾次？",
+          text: "第3題｜你對聲浪的接受度？",
           choices: [
-            { label: "A", text: "0 - 1 次：主要以山路巡航和街頭視覺為主。" },
+            { label: "A", text: "安靜低調，不想引人注意。" },
             {
               label: "B",
-              text: "3 次以上：我是認真在刷單圈數據，追求每一秒的進步。",
+              text: "油門踩下去有點聲音，有感覺就好。",
+            },
+            {
+              label: "C",
+              text: "想要讓人回頭看，渦輪聲＋排氣聲都要有。",
             },
           ],
         },
         {
           id: "q4",
-          text: "Q4：【操駕風格】在攻克連續彎道時，你更傾向於哪種風格？",
+          text: "第4題｜你對馬力提升的期待？",
           choices: [
-            {
-              label: "A",
-              text: "流暢導向：喜歡平穩、精準的入彎感，不喜歡過於暴力的動態。",
-            },
+            { label: "A", text: "原廠馬力已經夠用，不是首要考量。" },
             {
               label: "B",
-              text: "暴力導向：喜歡晚煞車、重灌油門，享受與車身剛性抗衡的極限感。",
+              text: "想有感提升，油門更靈敏、中段加速更爽。",
+            },
+            {
+              label: "C",
+              text: "追求最大化輸出，所有可以榨的馬力都要榨。",
             },
           ],
         },
         {
           id: "q5",
-          text: "Q5：【外觀價值觀】當你把車停好後回頭看它，你希望它的氣場是？",
+          text: "第5題｜你的輪框偏好風格？",
           choices: [
             {
               label: "A",
-              text: "低調鋼砲：原廠基礎上加一點質感，懂的人自然懂。",
+              text: "低調百搭，黑色或深灰，日常不突兀。",
             },
             {
               label: "B",
-              text: "賽道廠車：誇張的寬體、巨型尾翼，必須在 100 公尺外就讓人感到威壓。",
+              text: "有個性但不誇張，古銅或深藍帶點識別度。",
+            },
+            {
+              label: "C",
+              text: "賽道感強烈，TIME ATTACK 字樣或限定款。",
+            },
+            {
+              label: "D",
+              text: "我想保留原廠輪框，預算放在其他地方。",
             },
           ],
         },
         {
           id: "q6",
-          text: "Q6：【改裝決策】對於這台二代鴨，你的預算投入哲學是？",
+          text: "第6題｜你對煞車的要求？",
           choices: [
-            {
-              label: "A",
-              text: "精準投資：解決最困擾我的痛點（如過熱、側傾）就好。",
-            },
+            { label: "A", text: "原廠煞車夠用，暫時不考慮升級。" },
             {
               label: "B",
-              text: "全領域制霸：我有攻頂焦慮，只要有最好的，我就不想用次好的。",
+              text: "想要煞車腳感更紮實，提升信心。",
+            },
+            {
+              label: "C",
+              text: "需要耐高溫賽道等級，多圈連續使用不衰退。",
             },
           ],
         },
+        {
+          id: "q7",
+          text: "第7題｜外觀空力件對你來說是？",
+          choices: [
+            { label: "A", text: "不裝也沒關係，實用為主。" },
+            {
+              label: "B",
+              text: "裝個小件增加辨識度，不要太誇張。",
+            },
+            {
+              label: "C",
+              text: "要有完整空力套件，下壓力＋視覺衝擊都要。",
+            },
+            {
+              label: "D",
+              text: "我只想保留原廠外觀，預算全放機械件。",
+            },
+          ],
+        },
+        {
+          id: "q8",
+          text: "第8題｜你預計一次投入的改裝預算範圍？",
+          choices: [
+            { label: "A", text: "NT$50,000 以內。" },
+            { label: "B", text: "NT$50,000～150,000。" },
+            { label: "C", text: "NT$150,000 以上。" },
+          ],
+        },
+        {
+          id: "q9",
+          text: "第9題｜你希望幾個月內完成改裝？",
+          choices: [
+            { label: "A", text: "慢慢來，分批改沒關係。" },
+            { label: "B", text: "3～6 個月內完成主要項目。" },
+            { label: "C", text: "越快越好，一次全部完成。" },
+          ],
+        },
+        {
+          id: "q10",
+          text: "第10題｜你有配合的施工店家嗎？",
+          choices: [
+            { label: "A", text: "還沒有，希望推薦。" },
+            { label: "B", text: "有固定合作的改裝店。" },
+            { label: "C", text: "參加賽事，有車隊技師。" },
+          ],
+        },
       ];
+
+      const TECH_BUDGET_MAP = {
+        A: "1",
+        B: "2",
+        C: "3",
+      };
+
+      const INSTALL_STORE = {
+        name: "KTSP 凱斯特斯行能車庫",
+        address: "台北市中山區松江路532號1樓",
+        note: "所有標示「需舉升機」安裝之商品，請前往本店施工。",
+      };
+
+      const TECH_PACE_NOTES = {
+        A: "改裝節奏：適合分批安裝，先從裝備品項開始，後續加購件可分階段補上。",
+        B: "改裝節奏：建議 3～6 個月內把主要品項排程完成，避免設定與定位反覆調整。",
+        C: "改裝節奏：適合一次整理完成，結帳前可一起確認輪框規格、定位與施工順序。",
+      };
+
+      const TECH_INSTALL_NOTES = {
+        A: `施工條件：尚未有合作店家，可由客服協助安排至 ${INSTALL_STORE.name}。`,
+        B: "施工條件：已有固定改裝店，可直接把購買清單提供店家確認安裝細節。",
+        C: "施工條件：賽事／車隊技師導向，建議同步確認賽道設定、耗材與熱管理需求。",
+      };
+
+      const TECH_GRAZIO_SUBSTITUTE_NOTE =
+        "Grazio&Co 車頂小翼目前不在商品表，已先以 VARIS CARBON 車頂尾翼 TOYOTA GR YARIS 代入。";
+
+      const TECH_PACKAGES = {
+        "A-1": {
+          tier: "STREET STYLE",
+          title: "方案 A-1｜街道走行姿態",
+          subtitle: "日常好開、外觀有型、舒適不打折",
+          budget: "預算 NT$50,000 以內",
+          note:
+            "輪框保留原廠；剩餘預算可追加 CUSCO 防傾桿前段。 " +
+            TECH_GRAZIO_SUBSTITUTE_NOTE,
+          items: [
+            { cat: "suspension", id: "s0" },
+            { cat: "suspension", id: "s2" },
+            { cat: "engine", id: "e1" },
+            { cat: "interior", id: "i2", sourceLabel: "Grazio&Co 車頂小翼" },
+          ],
+        },
+        "A-2": {
+          tier: "STREET STYLE",
+          title: "方案 A-2｜街道走行姿態",
+          subtitle: "日常好開、外觀有型、舒適不打折",
+          budget: "預算 NT$50,000～150,000",
+          note:
+            "輪框選 D：省下輪框預算，可改升級避震器與車頂空力件。",
+          items: [
+            {
+              cat: "wheels",
+              id: "w0",
+              wheelConfigKey: "18×8.5J|5/114.3|ET35|KK",
+            },
+            { cat: "suspension", id: "s0" },
+            { cat: "suspension", id: "s2" },
+            { cat: "engine", id: "e1" },
+          ],
+        },
+        "A-3": {
+          tier: "STREET STYLE",
+          title: "方案 A-3｜街道走行姿態",
+          subtitle: "日常好開、外觀有型、舒適不打折",
+          budget: "預算 NT$150,000 以上",
+          note:
+            "輪框選 D：可把預算轉往 Core's 36段可調避震器與 MST 觸媒當派。",
+          items: [
+            {
+              cat: "wheels",
+              id: "w1",
+              wheelConfigKey: "18×8.5J|5/114.3|ET35|SZ",
+            },
+            { cat: "suspension", id: "s0" },
+            { cat: "suspension", id: "s1" },
+            { cat: "suspension", id: "s3" },
+            { cat: "engine", id: "e0" },
+            { cat: "engine", id: "e1" },
+            { cat: "interior", id: "i3" },
+          ],
+        },
+        "B-1": {
+          tier: "MOUNTAIN RESPONSE",
+          title: "方案 B-1｜山路舒壓",
+          subtitle: "彎道靈活、聲浪有感、操控全面升級",
+          budget: "預算 NT$50,000 以內",
+          note:
+            "50K 以內輪框、排氣管暫緩；先強化底盤剛性與操控基礎。 " +
+            TECH_GRAZIO_SUBSTITUTE_NOTE,
+          items: [
+            { cat: "suspension", id: "s0" },
+            { cat: "suspension", id: "s1" },
+            { cat: "engine", id: "e1" },
+            { cat: "interior", id: "i2", sourceLabel: "Grazio&Co 車頂小翼" },
+          ],
+        },
+        "B-2": {
+          tier: "MOUNTAIN RESPONSE",
+          title: "方案 B-2｜山路舒壓",
+          subtitle: "彎道靈活、聲浪有感、操控全面升級",
+          budget: "預算 NT$50,000～150,000",
+          note:
+            "輪框選 D：可追加 Fujitsubo A-R 排氣管與 TEIN FLEX Z 避震器，操控升級更完整。",
+          items: [
+            {
+              cat: "wheels",
+              id: "w4",
+              wheelConfigKey: "18×8.5J|5/114.3|ET35|BL",
+            },
+            { cat: "suspension", id: "s0" },
+            { cat: "suspension", id: "s1" },
+          ],
+        },
+        "B-3": {
+          tier: "MOUNTAIN RESPONSE",
+          title: "方案 B-3｜山路舒壓",
+          subtitle: "彎道靈活、聲浪有感、操控全面升級",
+          budget: "預算 NT$150,000 以上",
+          note:
+            "輪框選 D：可升級 Core's 36段可調避震器；空力選 D：可把尾翼預算轉往 MST 觸媒當派。",
+          items: [
+            {
+              cat: "wheels",
+              id: "w4",
+              wheelConfigKey: "18×8.5J|5/114.3|ET35|MZ",
+            },
+            { cat: "suspension", id: "s0" },
+            { cat: "suspension", id: "s1" },
+            { cat: "suspension", id: "s3" },
+            { cat: "engine", id: "e3" },
+            { cat: "engine", id: "e0" },
+            { cat: "interior", id: "i3" },
+          ],
+        },
+        "C-1": {
+          tier: "TRACK ATTACK",
+          title: "方案 C-1｜極限競技賽道",
+          subtitle: "全面戰鬥化、賽道計時首選、一次到位",
+          budget: "預算 NT$50,000 以內",
+          note:
+            "輪框保留原廠；避震是最重要的下一步，建議列入下階段首選。",
+          items: [
+            { cat: "suspension", id: "s0" },
+            { cat: "suspension", id: "s1" },
+            { cat: "suspension", id: "s7" },
+            { cat: "engine", id: "e0" },
+          ],
+        },
+        "C-2": {
+          tier: "TRACK ATTACK",
+          title: "方案 C-2｜極限競技賽道",
+          subtitle: "全面戰鬥化、賽道計時首選、一次到位",
+          budget: "預算 NT$50,000～150,000",
+          note:
+            "輪框選 D：預算內已包含完整底盤升級；若預算接近 150K，可把排氣列入下一階段。",
+          items: [
+            { cat: "suspension", id: "s0" },
+            { cat: "suspension", id: "s1" },
+            { cat: "suspension", id: "s4" },
+            { cat: "suspension", id: "s7" },
+            { cat: "engine", id: "e0" },
+          ],
+        },
+        "C-3": {
+          tier: "TRACK ATTACK",
+          title: "方案 C-3｜極限競技賽道",
+          subtitle: "全面戰鬥化、賽道計時首選、一次到位",
+          budget: "預算 NT$150,000 以上",
+          note:
+            "輪框選 D：可追加 HKS Oil Cooler 油溫管理；空力選 D：可升級至 HKS Super Turbo Urban Matte Edition 旗艦排氣。",
+          items: [
+            {
+              cat: "wheels",
+              id: "w6",
+              wheelConfigKey: "18×8.5J|5/114.3|ET35|KR",
+            },
+            { cat: "suspension", id: "s0" },
+            { cat: "suspension", id: "s1" },
+            { cat: "suspension", id: "s6" },
+            { cat: "suspension", id: "s7" },
+            { cat: "engine", id: "e4" },
+            { cat: "engine", id: "e0" },
+            { cat: "engine", id: "e7" },
+            { cat: "interior", id: "i1" },
+          ],
+        },
+      };
 
       const techState = {
         current: 0,
@@ -8965,12 +9660,14 @@
           return;
         }
 
-        container.innerHTML = `<div class=\"tech-question active\"><h3>${
+        container.innerHTML = `<div class="tech-progress">STEP ${
+          techState.current + 1
+        } / ${techQuestions.length}</div><div class=\"tech-question active\"><h3>${
           q.text
         }</h3>${q.choices
           .map(
             (c) =>
-              `<button class=\"tech-choice\" onclick=\"selectTechChoice('${q.id}','${c.label}')\">${c.label}. ${c.text}</button>`
+              `<button class=\"tech-choice\" data-answer=\"${c.label}\" onclick=\"selectTechChoice('${q.id}','${c.label}')\"><span class=\"tech-choice-code\">${c.label}</span>${c.text}</button>`
           )
           .join("")}<\/div>`;
 
@@ -8978,7 +9675,7 @@
         if (existing) {
           const all = container.querySelectorAll(".tech-choice");
           all.forEach((el) => {
-            if (el.textContent.startsWith(existing + ".")) {
+            if (el.dataset.answer === existing) {
               el.classList.add("selected");
             }
           });
@@ -8997,7 +9694,7 @@
       }
 
       function techNext() {
-        // 保留兼容，但現在不需要 NEXT 按鈕
+        // 保留兼容，但現在不需要 NEXT 按鈕。
         if (techState.current < techQuestions.length - 1) {
           techState.current++;
           renderTechQuestion();
@@ -9006,153 +9703,219 @@
         }
       }
 
-      function finalizeTechDiagnosis() {
-        const scoreB = Object.values(techState.answers).filter(
-          (v) => v === "B"
-        ).length;
+      function getTechPackagePart(item) {
+        const cat = resolveCategoryKey(item.cat);
+        const category = CATS[cat];
+        if (!category || !Array.isArray(category.parts)) return null;
+        const part = category.parts.find((x) => x.id === item.id);
+        if (!part) return null;
+        return { cat, category, part };
+      }
 
-        // Diagnosis configurations based on B answers
-        const configs = {
-          0: {
-            tier: "COMFORT CLASS",
-            title: "【1. 街道紳士版】",
-            parts: "RSR Best*i + TOM'S 雙出排氣管 + CUSCO 減震拉桿",
-            price: "$148,000",
-            stats: { Comfort: "★★★★★", Handling: "+15" },
-            selParts: {
-              wheels: "w1",
-              suspension: "s1",
-              engine: "e1",
-              interior: "i1",
-            },
-          },
-          1: {
-            tier: "COMFORT CLASS",
-            title: "【1. 街道紳士版】",
-            parts: "RSR Best*i + TOM'S 雙出排氣管 + CUSCO 減震拉桿",
-            price: "$148,000",
-            stats: { Comfort: "★★★★★", Handling: "+15" },
-            selParts: {
-              wheels: "w1",
-              suspension: "s1",
-              engine: "e1",
-              interior: "i1",
-            },
-          },
-          2: {
-            tier: "HANDLING CLASS",
-            title: "【2. 山道攻堅版】",
-            parts: "ARAGOSTA TYPE-S + RAYS TE37 SAGA + CUSCO 防傾桿",
-            price: "$225,000",
-            stats: { Handling: "★★★★★", Response: "★★★★" },
-            selParts: {
-              wheels: "w2",
-              suspension: "s2",
-              engine: "e2",
-              interior: "i2",
-            },
-          },
-          3: {
-            tier: "THERMAL CLASS",
-            title: "【4. 熱管理優化版】",
-            parts: "HKS 冷卻雙塔 + Result Japan 散熱引擎蓋",
-            price: "$163,600",
-            stats: { Temp_Drop: "-18°C", Reliability: "★★★★★" },
-            selParts: {
-              wheels: "w2",
-              suspension: "s2",
-              engine: "e2",
-              interior: "i2",
-            },
-          },
-          4: {
-            tier: "RACE CLASS",
-            title: "【3. 賽道競技版】",
-            parts: "ENDLESS 6POT + TEIN MONO RACING + HKS 鈦排氣",
-            price: "$358,000",
-            stats: { Braking: "★★★★★", Lap_Time: "-3.0s" },
-            selParts: {
-              wheels: "w3",
-              suspension: "s3",
-              engine: "e3",
-              interior: "i3",
-            },
-          },
-          5: {
-            tier: "🏆 ULTIMATE TIER",
-            title: "【究極攻頂版】",
-            parts: "上述所有頂規零件【一鍵同步全上】",
-            price: "$1,318,600",
-            stats: { PP_Value: "720+", Dominance: "全領域制霸" },
-            selParts: {
-              wheels: "w3",
-              suspension: "s3",
-              engine: "e3",
-              interior: "i3",
-            },
-          },
-          6: {
-            tier: "🏆 ULTIMATE TIER",
-            title: "【究極攻頂版】",
-            parts: "上述所有頂規零件【一鍵同步全上】",
-            price: "$1,318,600",
-            stats: { PP_Value: "720+", Dominance: "全領域制霸" },
-            selParts: {
-              wheels: "w3",
-              suspension: "s3",
-              engine: "e3",
-              interior: "i3",
-            },
-          },
+      function renderInstallStoreCard() {
+        return `
+          <div class="install-card diagnosis-install-card">
+            <div class="install-card-kicker">施工指定店家</div>
+            <div class="install-card-title">${INSTALL_STORE.name}</div>
+            <div class="install-card-address">${INSTALL_STORE.address}</div>
+            <div class="install-card-note">${INSTALL_STORE.note}</div>
+          </div>
+        `;
+      }
+
+      function resolveTechScenario() {
+        const counts = { A: 0, B: 0, C: 0 };
+        ["q1", "q2", "q3", "q4", "q5", "q6", "q7"].forEach((questionId) => {
+          const answer = techState.answers[questionId];
+          if (answer === "A" || answer === "B" || answer === "C") {
+            counts[answer] += 1;
+          }
+        });
+
+        let winner = "A";
+        ["B", "C"].forEach((key) => {
+          if (counts[key] >= counts[winner]) {
+            winner = key;
+          }
+        });
+        return winner;
+      }
+
+      function resolveTechBudgetTier() {
+        return TECH_BUDGET_MAP[techState.answers.q8] || "1";
+      }
+
+      function buildTechRecommendation() {
+        const scenario = resolveTechScenario();
+        const budget = resolveTechBudgetTier();
+        const planKey = `${scenario}-${budget}`;
+        const plan = TECH_PACKAGES[planKey] || TECH_PACKAGES["A-1"];
+        const keepWheel = techState.answers.q5 === "D";
+        const keepAero = techState.answers.q7 === "D";
+        const paceNote = TECH_PACE_NOTES[techState.answers.q9] || "";
+        const installNote = TECH_INSTALL_NOTES[techState.answers.q10] || "";
+        const items = plan.items.filter((item) => {
+          const cat = resolveCategoryKey(item.cat);
+          if (keepWheel && cat === "wheels") return false;
+          if (keepAero && (cat === "interior" || cat === "aero")) return false;
+          return Boolean(getTechPackagePart(item));
+        });
+
+        return {
+          planKey,
+          plan,
+          items,
+          keepWheel,
+          keepAero,
+          scenario,
+          budget,
+          paceNote,
+          installNote,
         };
+      }
 
-        const config = configs[scoreB] || configs[3];
-        const { tier, title, parts, price, stats, selParts } = config;
+      function getTechPackageTotal(items) {
+        return items.reduce((sum, item) => {
+          const resolved = getTechPackagePart(item);
+          if (!resolved) return sum;
+          const qty = getDefaultPartQty(resolved.cat);
+          return sum + getPurchaseSubtotalValue(resolved.part, resolved.cat, qty);
+        }, 0);
+      }
 
-        // Apply parts
-        sel = { ...sel, ...selParts };
-        normalizeSelection();
-        renderParts();
-        renderStats(true);
+      function renderTechPackageRows(items) {
+        const seenCats = new Set();
+        return items
+          .map((item) => {
+            const resolved = getTechPackagePart(item);
+            if (!resolved) return "";
+            const { cat, category, part } = resolved;
+            const categoryLabel = getCartCategoryLabel(cat, category);
+            const mode = seenCats.has(cat) ? "加購" : "裝備";
+            seenCats.add(cat);
+            const qty = getDefaultPartQty(cat);
+            const priceText = getPurchaseSubtotalText(part, cat, qty);
+            const wheelConfig = isWheelCategory(cat)
+              ? getWheelConfigOption(part.id, item.wheelConfigKey)
+              : null;
+            const sourceNote =
+              item.sourceLabel && item.sourceLabel !== part.name
+                ? `<div class="diagnosis-row-config">原方案：${item.sourceLabel}</div>`
+                : "";
+            const wheelNote = wheelConfig
+              ? `<div class="diagnosis-row-config">${wheelConfig.summary}</div>`
+              : "";
 
-        // Build result HTML
-        const statsHtml = Object.entries(stats)
-          .map(
-            ([label, value]) => `
-            <div class="stat-box">
-              <div class="stat-box-label">${label}</div>
-              <div class="stat-box-value">${value}</div>
-            </div>
-          `
-          )
+            return `
+              <div class="diagnosis-row">
+                <div>
+                  <div class="diagnosis-row-meta">
+                    <span>${categoryLabel}</span>
+                    <span class="diagnosis-row-mode">${mode}</span>
+                    <span>x${qty}</span>
+                  </div>
+                  <div class="diagnosis-row-name">${part.name}</div>
+                  ${wheelNote}
+                  ${sourceNote}
+                </div>
+                <div class="diagnosis-row-price">${priceText}</div>
+              </div>
+            `;
+          })
           .join("");
+      }
 
+      function finalizeTechDiagnosis() {
+        const recommendation = buildTechRecommendation();
+        const { plan, items, keepWheel, keepAero, paceNote, installNote } =
+          recommendation;
+        const total = getTechPackageTotal(items);
+        const optionNotes = [];
+        if (keepWheel) {
+          optionNotes.push("輪框選 D：本次保留原廠輪框，輪框品項不加入清單。");
+        }
+        if (keepAero) {
+          optionNotes.push("空力選 D：本次保留原廠空力件，外觀空力品項不加入清單。");
+        }
+
+        document.getElementById("tech-question-list").innerHTML = "";
+        const rowsHtml = renderTechPackageRows(items);
+        const emptyHtml =
+          '<div class="diagnosis-note">目前選項沒有可加入的商品，請回上一步調整輪框或空力選擇。</div>';
         const resultHtml = `
           <div class="diagnosis-card">
-            <div class="diagnosis-tier">${tier}</div>
-            <div class="diagnosis-title">${title}</div>
-            
+            <div class="diagnosis-tier">${plan.tier}</div>
+            <div class="diagnosis-title">${plan.title}</div>
+            <div class="diagnosis-note">${plan.subtitle}｜${plan.budget}</div>
+
             <div class="diagnosis-parts">
-              <div class="parts-label">核心推薦配套</div>
-              <div class="parts-list">${parts}</div>
+              <div class="parts-label">推薦搭配清單</div>
+              <div class="diagnosis-grid">${rowsHtml || emptyHtml}</div>
             </div>
 
-            <div class="price-tag">${price}</div>
+            <div class="price-tag">${total > 0 ? formatNTD(total) : "—"}</div>
+            <div class="diagnosis-note">${plan.note}</div>
+            ${
+              optionNotes.length
+                ? `<div class="diagnosis-note">${optionNotes.join(" ")}</div>`
+                : ""
+            }
+            ${
+              paceNote || installNote
+                ? `<div class="diagnosis-note">${[paceNote, installNote]
+                    .filter(Boolean)
+                    .join(" ")}</div>`
+                : ""
+            }
+            ${renderInstallStoreCard()}
 
-            <div class="diagnosis-stats">
-              ${statsHtml}
-            </div>
-
-            <button class="confirm-btn-diagnosis" onclick="confirmTechDiagnosis()">使用建議配置</button>
+            <button class="confirm-btn-diagnosis" onclick="confirmTechDiagnosis()">套用此方案到購物車</button>
           </div>
         `;
 
         document.getElementById("tech-result").innerHTML = resultHtml;
-        showToast(`診斷結果：${title}`);
+        showToast(`診斷結果：${plan.title}`);
       }
 
       function confirmTechDiagnosis() {
+        const recommendation = buildTechRecommendation();
+        const before = computeStats();
+        sel = {};
+        addOns = [];
+        itemQuantities = {};
+        itemWheelConfigs = {};
+
+        const equippedCats = new Set();
+        recommendation.items.forEach((item) => {
+          const resolved = getTechPackagePart(item);
+          if (!resolved) return;
+          const { cat, part } = resolved;
+          const mode = equippedCats.has(cat) ? "addon" : "equip";
+          if (mode === "equip") {
+            sel[cat] = part.id;
+            equippedCats.add(cat);
+          } else {
+            addOns.push({ cat, id: part.id });
+          }
+          setItemQuantity(cat, part.id, mode, getDefaultPartQty(cat));
+          if (isWheelCategory(cat)) {
+            setItemWheelConfig(cat, part.id, mode, item.wheelConfigKey);
+          }
+        });
+
+        normalizeSelection();
+        const after = computeStats();
         closeTechMode();
+        renderParts();
+        renderStats(true);
+        const deltaPP = after.pp - before.pp;
+        showToast(
+          deltaPP === 0
+            ? `${recommendation.plan.title} 已套用`
+            : `${recommendation.plan.title} 已套用 · PP ${
+                deltaPP > 0 ? "+" : ""
+              }${deltaPP}`
+        );
       }
 
       /* ══════════════════════════════
