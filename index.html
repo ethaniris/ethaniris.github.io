@@ -2255,10 +2255,13 @@
       .modal-box {
         width: 560px;
         max-width: 92vw;
+        max-height: min(92vh, 860px);
         background: linear-gradient(165deg, #0d1828 0%, #070d14 100%);
         border: 1px solid rgba(232, 25, 44, 0.25);
         border-radius: 4px;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
         transform: scale(0.92) translateY(24px);
         opacity: 0;
         transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -2594,6 +2597,10 @@
 
       .modal-body {
         padding: 22px 24px 24px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        min-height: 0;
+        -webkit-overflow-scrolling: touch;
       }
 
       .modal-part-title {
@@ -2618,6 +2625,111 @@
         flex-wrap: wrap;
         gap: 6px;
         margin-bottom: 20px;
+      }
+
+      .modal-purchase-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 18px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.04),
+          0 14px 30px rgba(0, 0, 0, 0.18);
+      }
+
+      .modal-purchase-copy {
+        min-width: 0;
+      }
+
+      .modal-purchase-label {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: rgba(219, 233, 247, 0.64);
+        margin-bottom: 4px;
+      }
+
+      .modal-purchase-meta {
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 12px;
+        color: rgba(240, 246, 255, 0.9);
+        line-height: 1.45;
+      }
+
+      .modal-purchase-sub {
+        margin-top: 3px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        color: rgba(190, 208, 228, 0.72);
+      }
+
+      .modal-qty-control {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px;
+        border-radius: 999px;
+        background: rgba(5, 11, 18, 0.84);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.04),
+          0 10px 24px rgba(0, 0, 0, 0.22);
+      }
+
+      .modal-qty-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+        color: #f4f8ff;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 22px;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition: transform 0.18s ease, border-color 0.18s ease, filter 0.18s ease;
+      }
+
+      .modal-qty-btn:hover {
+        transform: translateY(-1px);
+        border-color: rgba(245, 200, 66, 0.42);
+        filter: brightness(1.06);
+      }
+
+      .modal-qty-btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        transform: none;
+        filter: none;
+      }
+
+      .modal-qty-readout {
+        min-width: 78px;
+        text-align: center;
+      }
+
+      .modal-qty-caption {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        color: rgba(206, 221, 238, 0.58);
+      }
+
+      .modal-qty-value {
+        margin-top: 1px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 30px;
+        line-height: 1;
+        letter-spacing: 0.06em;
+        color: #f7fbff;
       }
 
       .modal-chip {
@@ -4190,6 +4302,50 @@
         text-shadow: 0 0 12px rgba(138, 103, 36, 0.24);
       }
 
+      body[data-theme="light"] .modal-purchase-panel {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(240, 246, 252, 0.72));
+        border-color: rgba(18, 40, 66, 0.12);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.55),
+          0 18px 32px rgba(31, 52, 76, 0.12);
+      }
+
+      body[data-theme="light"] .modal-purchase-label {
+        color: #6a7f97;
+      }
+
+      body[data-theme="light"] .modal-purchase-meta {
+        color: #18324d;
+      }
+
+      body[data-theme="light"] .modal-purchase-sub,
+      body[data-theme="light"] .modal-qty-caption {
+        color: #70849a;
+      }
+
+      body[data-theme="light"] .modal-qty-control {
+        background: rgba(245, 249, 253, 0.95);
+        border-color: rgba(18, 40, 66, 0.12);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.75),
+          0 12px 26px rgba(31, 52, 76, 0.1);
+      }
+
+      body[data-theme="light"] .modal-qty-btn {
+        color: #18314a;
+        border-color: rgba(18, 40, 66, 0.12);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(233, 240, 247, 0.92));
+      }
+
+      body[data-theme="light"] .modal-qty-btn:hover {
+        border-color: rgba(199, 58, 70, 0.4);
+      }
+
+      body[data-theme="light"] .modal-qty-value {
+        color: #10243a;
+      }
+
       body[data-theme="light"] .modal-image-counter {
         color: #3f5670;
         background: rgba(255, 255, 255, 0.78);
@@ -5059,12 +5215,17 @@
             rgba(234, 241, 249, 0.98) 100%
           );
         }
+        .modal-bg {
+          padding: 10px;
+        }
         .modal-box {
-          width: 90vw;
-          max-width: 90vw;
+          width: 92vw;
+          max-width: 92vw;
+          max-height: calc(100dvh - 20px);
+          border-radius: 10px;
         }
         .modal-visual {
-          height: 230px;
+          height: 184px;
         }
         .modal-nav-btn {
           width: 30px;
@@ -5099,8 +5260,8 @@
           left: auto;
           bottom: auto;
           display: inline-block;
-          margin: 0 0 12px;
-          font-size: 20px;
+          margin: 0 0 8px;
+          font-size: 18px;
           letter-spacing: 0.08em;
           text-shadow: 0 0 14px rgba(245, 200, 66, 0.32);
         }
@@ -5116,29 +5277,72 @@
           height: 36px;
           font-size: 21px;
         }
+        .modal-body {
+          padding: 14px 14px 16px;
+        }
         .modal-part-title {
-          font-size: 22px;
+          font-size: 20px;
         }
         .modal-part-desc {
-          font-size: 13px;
-          line-height: 1.58;
-          margin-bottom: 8px;
+          font-size: 12px;
+          line-height: 1.52;
+          margin-bottom: 6px;
         }
         .modal-chips {
           gap: 4px;
+          margin-bottom: 12px;
         }
         .modal-chip {
           font-size: 9px;
-          padding: 4px 8px;
+          padding: 4px 7px;
+        }
+        .modal-purchase-panel {
+          grid-template-columns: minmax(0, 1fr) auto;
+          gap: 10px;
+          padding: 10px 12px;
+          border-radius: 12px;
+          margin-bottom: 10px;
+        }
+        .modal-purchase-meta {
+          font-size: 12px;
+        }
+        .modal-purchase-sub {
+          font-size: 10px;
+        }
+        .modal-qty-control {
+          width: auto;
+          justify-content: flex-end;
+          gap: 6px;
+          padding: 5px 6px;
+        }
+        .modal-qty-btn {
+          width: 36px;
+          height: 36px;
+          font-size: 20px;
+        }
+        .modal-qty-readout {
+          min-width: 56px;
+          flex: 0 0 auto;
+        }
+        .modal-qty-value {
+          font-size: 24px;
         }
         .modal-actions {
           flex-direction: column;
-          gap: 8px;
+          gap: 7px;
         }
         .modal-cancel,
         .modal-addon,
         .modal-confirm {
           width: 100%;
+          padding: 10px;
+        }
+        .modal-cancel,
+        .modal-addon {
+          font-size: 13px;
+        }
+        .modal-confirm {
+          font-size: 15px;
         }
         .garage-box {
           width: 94vw;
@@ -5804,6 +6008,37 @@
         <div class="modal-body">
           <div class="modal-part-title" id="modal-title">PART NAME</div>
           <div class="modal-part-desc" id="modal-desc">Description</div>
+          <div class="modal-purchase-panel">
+            <div class="modal-purchase-copy">
+              <div class="modal-purchase-label">PURCHASE CONFIG</div>
+              <div class="modal-purchase-meta" id="modal-price-meta">單件售價 NT$0</div>
+              <div class="modal-purchase-sub" id="modal-price-sub">單價 NT$0 · 小計 NT$0</div>
+            </div>
+            <div class="modal-qty-control" aria-label="選擇購買數量">
+              <button
+                type="button"
+                class="modal-qty-btn"
+                id="modal-qty-minus"
+                onclick="adjustPendingQty(-1)"
+                aria-label="減少數量"
+              >
+                −
+              </button>
+              <div class="modal-qty-readout">
+                <div class="modal-qty-caption">數量</div>
+                <div class="modal-qty-value" id="modal-qty-value">1</div>
+              </div>
+              <button
+                type="button"
+                class="modal-qty-btn"
+                id="modal-qty-plus"
+                onclick="adjustPendingQty(1)"
+                aria-label="增加數量"
+              >
+                +
+              </button>
+            </div>
+          </div>
           <div class="modal-chips" id="modal-chips"></div>
           <div class="modal-actions">
             <button class="modal-cancel" onclick="closeMod()">取消</button>
@@ -6192,6 +6427,12 @@
         return `NT$${Number(value).toLocaleString("zh-TW")}`;
       }
 
+      function clampInteger(value, min = 1, max = 99) {
+        const num = Math.round(Number(value));
+        if (!Number.isFinite(num)) return min;
+        return Math.min(max, Math.max(min, num));
+      }
+
       function normalizePriceObject(priceInput) {
         const fallback = {
           display: "—",
@@ -6282,6 +6523,50 @@
         return Number.isFinite(min) ? min : 0;
       }
 
+      function isWheelCategory(cat) {
+        return resolveCategoryKey(cat) === "wheels";
+      }
+
+      function getDefaultPartQty(cat) {
+        return isWheelCategory(cat) ? 4 : 1;
+      }
+
+      function getPartBaseQty(cat) {
+        return isWheelCategory(cat) ? 4 : 1;
+      }
+
+      function getPurchaseUnitValue(part, cat) {
+        const baseValue = getPartPriceValue(part);
+        const baseQty = getPartBaseQty(cat);
+        if (!baseValue || !baseQty) return 0;
+        return baseValue / baseQty;
+      }
+
+      function getPurchaseSubtotalValue(part, cat, qty = 1) {
+        const unitValue = getPurchaseUnitValue(part, cat);
+        if (!unitValue) return 0;
+        return Math.round(unitValue * clampInteger(qty));
+      }
+
+      function getPurchaseUnitText(part, cat) {
+        const unitValue = getPurchaseUnitValue(part, cat);
+        if (unitValue > 0) return formatNTD(Math.round(unitValue));
+        return getPartPriceText(part);
+      }
+
+      function getPurchaseSubtotalText(part, cat, qty = 1) {
+        const subtotalValue = getPurchaseSubtotalValue(part, cat, qty);
+        if (subtotalValue > 0) return formatNTD(subtotalValue);
+        return getPartPriceText(part);
+      }
+
+      function getPurchaseBaseLabel(part, cat) {
+        if (isWheelCategory(cat)) {
+          return `4顆整組售價 ${getPartPriceText(part)}`;
+        }
+        return `單件售價 ${getPartPriceText(part)}`;
+      }
+
       function getPartPriceText(part) {
         const display = String(part?.price?.display || "").trim();
         if (display) return display;
@@ -6319,6 +6604,7 @@
           // Initialize with no pre-selected parts
           sel = {};
           addOns = [];
+          itemQuantities = {};
           normalizeSelection();
           // Initialize after loading
           initApp();
@@ -6341,8 +6627,10 @@
       ══════════════════════════════ */
       let sel = {};
       let addOns = [];
+      let itemQuantities = {};
       let curCat = "wheels";
       let pending = null;
+      let pendingQty = 1;
       let prevStats = null;
       let modalGalleryImages = [];
       let modalGalleryIndex = 0;
@@ -6372,6 +6660,9 @@
         if (!Array.isArray(addOns)) {
           addOns = [];
         }
+        if (!itemQuantities || typeof itemQuantities !== "object") {
+          itemQuantities = {};
+        }
         const nextAddOns = [];
         const seen = new Set();
         addOns.forEach((entry) => {
@@ -6387,11 +6678,47 @@
           nextAddOns.push({ cat: resolvedCat, id: entry.id });
         });
         addOns = nextAddOns;
+
+        const validQuantityKeys = new Set();
+        Object.entries(sel).forEach(([cat, id]) => {
+          validQuantityKeys.add(itemStateKey(cat, id, "equip"));
+        });
+        addOns.forEach((entry) => {
+          validQuantityKeys.add(itemStateKey(entry.cat, entry.id, "addon"));
+        });
+
+        itemQuantities = Object.fromEntries(
+          Object.entries(itemQuantities).filter(([key]) => validQuantityKeys.has(key))
+        );
       }
 
       function addOnKey(cat, id) {
         const resolvedCat = resolveCategoryKey(cat);
         return `${resolvedCat}::${id}`;
+      }
+
+      function itemStateKey(cat, id, mode = "equip") {
+        const resolvedCat = resolveCategoryKey(cat);
+        return `${resolvedCat}::${id}::${mode}`;
+      }
+
+      function setItemQuantity(cat, id, mode = "equip", qty = 1) {
+        const resolvedCat = resolveCategoryKey(cat);
+        itemQuantities[itemStateKey(resolvedCat, id, mode)] = clampInteger(
+          qty,
+          1,
+          99
+        );
+      }
+
+      function clearItemQuantity(cat, id, mode = "equip") {
+        delete itemQuantities[itemStateKey(cat, id, mode)];
+      }
+
+      function getItemQuantity(cat, id, mode = "equip") {
+        const key = itemStateKey(cat, id, mode);
+        const storedQty = itemQuantities[key];
+        return clampInteger(storedQty ?? getDefaultPartQty(cat), 1, 99);
       }
 
       function findAddOnIndex(cat, id) {
@@ -6412,6 +6739,7 @@
           }
         } else if (idx !== -1) {
           addOns.splice(idx, 1);
+          clearItemQuantity(resolvedCat, id, "addon");
         }
       }
 
@@ -6898,21 +7226,22 @@
             if (!category) return null;
             const part = category.parts.find((x) => x.id === id);
             if (!part) return null;
-            const price = getPartPriceValue(part);
-            const priceText = getPartPriceText(part);
+            const qty = getItemQuantity(resolvedCat, part.id, "equip");
+            const price = getPurchaseSubtotalValue(part, resolvedCat, qty);
+            const priceText = getPurchaseSubtotalText(part, resolvedCat, qty);
             const categoryLabel = getCartCategoryLabel(resolvedCat, category);
             total += price;
 
             return {
               categoryLabel,
               name: part.name,
-              stateText: "已裝備",
+              stateText: `已裝備 · x${qty}`,
               priceText,
               rowHtml: `<div class="cart-item">
               <div class="cart-cat">${categoryLabel}</div>
               <div class="cart-main">
                 <div class="cart-name">${part.name}</div>
-                <div class="cart-state">已裝備</div>
+                <div class="cart-state">已裝備 · 數量 x${qty}</div>
               </div>
               <div class="cart-actions">
                 <div class="cart-price">${priceText}</div>
@@ -6936,21 +7265,22 @@
             if (!category) return null;
             const part = category.parts.find((x) => x.id === entry.id);
             if (!part) return null;
-            const price = getPartPriceValue(part);
-            const priceText = getPartPriceText(part);
+            const qty = getItemQuantity(resolvedCat, part.id, "addon");
+            const price = getPurchaseSubtotalValue(part, resolvedCat, qty);
+            const priceText = getPurchaseSubtotalText(part, resolvedCat, qty);
             const categoryLabel = getCartCategoryLabel(resolvedCat, category);
             total += price;
 
             return {
               categoryLabel,
               name: part.name,
-              stateText: "加購待結帳",
+              stateText: `加購待結帳 · x${qty}`,
               priceText,
               rowHtml: `<div class="cart-item addon">
               <div class="cart-cat">${categoryLabel}</div>
               <div class="cart-main">
                 <div class="cart-name">${part.name}</div>
-                <div class="cart-state">加購待結帳</div>
+                <div class="cart-state">加購待結帳 · 數量 x${qty}</div>
               </div>
               <div class="cart-actions">
                 <div class="cart-price">${priceText}</div>
@@ -7009,6 +7339,7 @@
 
         if (sel[resolvedCat] !== id) return;
         const before = computeStats();
+        clearItemQuantity(resolvedCat, id, "equip");
         delete sel[resolvedCat];
         normalizeSelection();
         const after = computeStats();
@@ -7453,7 +7784,7 @@
         addOnBtn.disabled = false;
 
         if (isEquippedSame) {
-          confirmBtn.textContent = "卸下裝備";
+          confirmBtn.textContent = "更新裝備數量";
           return;
         }
 
@@ -7475,10 +7806,53 @@
         if (!pending) return;
         const exists = hasAddOn(pending.cat, pending.id);
         setAddOn(pending.cat, pending.id, !exists);
+        if (!exists) {
+          setItemQuantity(pending.cat, pending.id, "addon", pendingQty);
+        }
         normalizeSelection();
         renderSummary();
         closeMod();
         showToast(exists ? "已取消加購" : "已加入加購清單");
+      }
+
+      function renderModalPurchasePanel(cat, part) {
+        const qtyEl = document.getElementById("modal-qty-value");
+        const metaEl = document.getElementById("modal-price-meta");
+        const subEl = document.getElementById("modal-price-sub");
+        const priceEl = document.getElementById("modal-price");
+        const minusBtn = document.getElementById("modal-qty-minus");
+        if (!qtyEl || !metaEl || !subEl || !priceEl || !minusBtn) return;
+
+        const qty = clampInteger(pendingQty, 1, 99);
+        const subtotalText = getPurchaseSubtotalText(part, cat, qty);
+        qtyEl.textContent = String(qty);
+        metaEl.textContent = getPurchaseBaseLabel(part, cat);
+        subEl.textContent = `單價 ${getPurchaseUnitText(part, cat)} · 小計 ${subtotalText}`;
+        priceEl.textContent = subtotalText;
+        minusBtn.disabled = qty <= 1;
+      }
+
+      function setPendingQty(qty) {
+        pendingQty = clampInteger(qty, 1, 99);
+        if (!pending) return;
+        const category = CATS[pending.cat];
+        if (!category || !Array.isArray(category.parts)) return;
+        const part = category.parts.find((x) => x.id === pending.id);
+        if (!part) return;
+
+        if (sel[pending.cat] === pending.id) {
+          setItemQuantity(pending.cat, pending.id, "equip", pendingQty);
+          renderSummary();
+        } else if (hasAddOn(pending.cat, pending.id)) {
+          setItemQuantity(pending.cat, pending.id, "addon", pendingQty);
+          renderSummary();
+        }
+
+        renderModalPurchasePanel(pending.cat, part);
+      }
+
+      function adjustPendingQty(delta) {
+        setPendingQty(pendingQty + delta);
       }
 
       function syncModalPricePlacement() {
@@ -7525,10 +7899,15 @@
         }
         setModalGallery(partGallery, p.name, p.emoji);
         syncModalPricePlacement();
-
-        document.getElementById("modal-price").textContent = getPartPriceText(p);
         document.getElementById("modal-title").textContent = p.name;
         document.getElementById("modal-desc").textContent = p.desc;
+        if (sel[resolvedCat] === p.id) {
+          pendingQty = getItemQuantity(resolvedCat, p.id, "equip");
+        } else if (hasAddOn(resolvedCat, p.id)) {
+          pendingQty = getItemQuantity(resolvedCat, p.id, "addon");
+        } else {
+          pendingQty = getDefaultPartQty(resolvedCat);
+        }
 
         const labels = {
           weight: "車身重量",
@@ -7559,6 +7938,7 @@
             '<div class="modal-chip mchip-neutral">無性能數值變更</div>'
           );
         document.getElementById("modal-chips").innerHTML = chips.join("");
+        renderModalPurchasePanel(resolvedCat, p);
         updateModalActionButtons(resolvedCat, id);
 
         document.getElementById("modal-bg").classList.add("open");
@@ -7569,6 +7949,7 @@
         closeImageLightbox();
         syncModalPricePlacement();
         pending = null;
+        pendingQty = 1;
         modalGalleryImages = [];
         modalGalleryIndex = 0;
         modalGalleryPartName = "";
@@ -7589,28 +7970,28 @@
       function confirmPart() {
         if (!pending) return;
         const before = computeStats();
-        const isRemoving = sel[pending.cat] === pending.id;
-        if (isRemoving) {
-          delete sel[pending.cat];
+        const appliedQty = pendingQty;
+        const isUpdatingSame = sel[pending.cat] === pending.id;
+        if (isUpdatingSame) {
+          setItemQuantity(pending.cat, pending.id, "equip", appliedQty);
         } else {
+          const previousId = sel[pending.cat];
+          if (previousId && previousId !== pending.id) {
+            clearItemQuantity(pending.cat, previousId, "equip");
+          }
           sel[pending.cat] = pending.id;
+          setItemQuantity(pending.cat, pending.id, "equip", appliedQty);
           setAddOn(pending.cat, pending.id, false);
         }
         normalizeSelection();
         const after = computeStats();
         const deltaPP = after.pp - before.pp;
-        const action = isRemoving ? "remove" : "equip";
+        const action = isUpdatingSame ? "update" : "equip";
         closeMod();
         renderParts();
         renderStats(true);
-        if (action === "remove") {
-          if (deltaPP > 0) {
-            showToast(`已卸下裝備！PP +${deltaPP}`);
-          } else if (deltaPP < 0) {
-            showToast(`已卸下裝備！PP ${deltaPP}`);
-          } else {
-            showToast("已卸下裝備");
-          }
+        if (action === "update") {
+          showToast(`已更新數量 · x${appliedQty}`);
         } else {
           if (deltaPP > 0) {
             showToast(`零件已成功裝備！PP +${deltaPP}`);
@@ -7671,9 +8052,10 @@
             const part = category.parts.find((x) => x.id === id);
             if (!part) return null;
 
-            const priceValue = getPartPriceValue(part);
-            const priceText = getPartPriceText(part);
-            const unitPriceText = priceValue > 0 ? formatNTD(priceValue) : priceText;
+            const qty = getItemQuantity(resolvedCat, part.id, "equip");
+            const priceValue = getPurchaseSubtotalValue(part, resolvedCat, qty);
+            const priceText = getPurchaseBaseLabel(part, resolvedCat);
+            const unitPriceText = getPurchaseUnitText(part, resolvedCat);
             total += priceValue;
 
             return {
@@ -7682,7 +8064,7 @@
               stateText: "已裝備",
               priceText,
               unitPriceText,
-              qty: 1,
+              qty,
               subtotalText: priceValue > 0 ? formatNTD(priceValue) : priceText,
             };
           })
@@ -7696,9 +8078,10 @@
             const part = category.parts.find((x) => x.id === entry.id);
             if (!part) return null;
 
-            const priceValue = getPartPriceValue(part);
-            const priceText = getPartPriceText(part);
-            const unitPriceText = priceValue > 0 ? formatNTD(priceValue) : priceText;
+            const qty = getItemQuantity(resolvedCat, part.id, "addon");
+            const priceValue = getPurchaseSubtotalValue(part, resolvedCat, qty);
+            const priceText = getPurchaseBaseLabel(part, resolvedCat);
+            const unitPriceText = getPurchaseUnitText(part, resolvedCat);
             total += priceValue;
 
             return {
@@ -7707,7 +8090,7 @@
               stateText: "額外加購",
               priceText,
               unitPriceText,
-              qty: 1,
+              qty,
               subtotalText: priceValue > 0 ? formatNTD(priceValue) : priceText,
             };
           })
@@ -7986,6 +8369,7 @@
       function doReset() {
         sel = {};
         addOns = [];
+        itemQuantities = {};
         normalizeSelection();
         curCat = resolveCategoryKey(curCat);
         if (!CATS[curCat]) {
