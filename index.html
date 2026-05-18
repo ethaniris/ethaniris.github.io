@@ -2,7 +2,10 @@
 <html lang="zh-TW">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>APEX MOTORSPORT — GARAGE CONFIGURATOR</title>
     <link rel="icon" href="data:," />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -200,6 +203,11 @@
         grid-template-rows: 56px 1fr;
         height: 100vh;
         overflow: hidden;
+      }
+
+      body.checkout-modal-open {
+        overflow: hidden;
+        overscroll-behavior: none;
       }
 
       /* ═══════════════════════════════════════
@@ -5785,10 +5793,24 @@
         }
         .garage-box {
           width: 94vw;
-          max-height: calc(100dvh - 16px);
+          max-height: calc(100svh - 24px);
           padding: 18px 14px;
           border-radius: 10px;
           transform: none !important;
+          transition: none !important;
+          will-change: auto;
+          overscroll-behavior: contain;
+          -webkit-overflow-scrolling: touch;
+        }
+        #garage-bg.modal-bg {
+          height: 100svh;
+          min-height: 100svh;
+          padding: 0;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          overscroll-behavior: none;
+          touch-action: none;
         }
         .modal-bg.open .garage-box {
           transform: none !important;
@@ -9242,12 +9264,14 @@
         updateCheckoutDeliveryUI();
         closeCheckoutProcessing();
         setCheckoutFeedback("");
+        document.body.classList.add("checkout-modal-open");
         document.getElementById("garage-bg").classList.add("open");
       }
 
       function closeGarage() {
         closeCheckoutProcessing();
         document.getElementById("garage-bg").classList.remove("open");
+        document.body.classList.remove("checkout-modal-open");
         setCheckoutFeedback("");
       }
 
