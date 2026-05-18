@@ -1721,6 +1721,14 @@
         color: rgba(223, 230, 242, 0.72);
       }
 
+      .cart-spec {
+        margin-top: 3px;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 10px;
+        line-height: 1.35;
+        color: rgba(206, 221, 238, 0.62);
+      }
+
       .cart-item.default .cart-state {
         color: rgba(223, 230, 242, 0.58);
       }
@@ -2643,6 +2651,55 @@
           0 14px 30px rgba(0, 0, 0, 0.18);
       }
 
+      .modal-wheel-config-panel {
+        display: none;
+        margin-bottom: 12px;
+      }
+
+      .modal-wheel-config-panel.show {
+        display: block;
+      }
+
+      .modal-wheel-config-label {
+        margin-bottom: 6px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: rgba(219, 233, 247, 0.64);
+      }
+
+      .modal-wheel-config-select {
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(180deg, rgba(10, 17, 27, 0.94), rgba(6, 10, 17, 0.94));
+        color: #f2f7ff;
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 13px;
+        letter-spacing: 0.04em;
+        outline: none;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.04),
+          0 12px 24px rgba(0, 0, 0, 0.16);
+      }
+
+      .modal-wheel-config-select:focus {
+        border-color: rgba(245, 200, 66, 0.44);
+        box-shadow:
+          0 0 0 3px rgba(245, 200, 66, 0.12),
+          0 12px 24px rgba(0, 0, 0, 0.18);
+      }
+
+      .modal-wheel-config-note {
+        margin-top: 6px;
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 11px;
+        color: rgba(190, 208, 228, 0.72);
+        line-height: 1.45;
+      }
+
       .modal-purchase-copy {
         min-width: 0;
       }
@@ -2983,6 +3040,13 @@
         margin-top: 2px;
         font-size: 11px;
         color: rgba(216, 228, 241, 0.72);
+      }
+
+      .checkout-item-config {
+        margin-top: 4px;
+        font-size: 11px;
+        line-height: 1.45;
+        color: rgba(216, 228, 241, 0.68);
       }
 
       .checkout-col-price {
@@ -3850,6 +3914,7 @@
 
       body[data-theme="light"] .cart-meta,
       body[data-theme="light"] .cart-state,
+      body[data-theme="light"] .cart-spec,
       body[data-theme="light"] .cart-cat,
       body[data-theme="light"] .cart-preview-cat,
       body[data-theme="light"] .cart-preview-state {
@@ -4112,6 +4177,7 @@
       }
 
       body[data-theme="light"] .checkout-item-state,
+      body[data-theme="light"] .checkout-item-config,
       body[data-theme="light"] .checkout-col-price,
       body[data-theme="light"] .checkout-empty {
         color: #627790;
@@ -4313,6 +4379,30 @@
 
       body[data-theme="light"] .modal-purchase-label {
         color: #6a7f97;
+      }
+
+      body[data-theme="light"] .modal-wheel-config-label {
+        color: #6a7f97;
+      }
+
+      body[data-theme="light"] .modal-wheel-config-select {
+        color: #18324d;
+        border-color: rgba(18, 40, 66, 0.12);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(239, 245, 251, 0.92));
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.7),
+          0 12px 24px rgba(31, 52, 76, 0.1);
+      }
+
+      body[data-theme="light"] .modal-wheel-config-select:focus {
+        border-color: rgba(199, 58, 70, 0.44);
+        box-shadow:
+          0 0 0 3px rgba(199, 58, 70, 0.12),
+          0 12px 24px rgba(31, 52, 76, 0.12);
+      }
+
+      body[data-theme="light"] .modal-wheel-config-note {
+        color: #70849a;
       }
 
       body[data-theme="light"] .modal-purchase-meta {
@@ -6008,6 +6098,17 @@
         <div class="modal-body">
           <div class="modal-part-title" id="modal-title">PART NAME</div>
           <div class="modal-part-desc" id="modal-desc">Description</div>
+          <div class="modal-wheel-config-panel" id="modal-wheel-config-panel">
+            <div class="modal-wheel-config-label">WHEEL CONFIG</div>
+            <select
+              id="modal-wheel-config-select"
+              class="modal-wheel-config-select"
+              onchange="updatePendingWheelConfig(this.value)"
+            ></select>
+            <div class="modal-wheel-config-note" id="modal-wheel-config-note">
+              選擇輪框尺寸、PCD、ET與顏色配置
+            </div>
+          </div>
           <div class="modal-purchase-panel">
             <div class="modal-purchase-copy">
               <div class="modal-purchase-label">PURCHASE CONFIG</div>
@@ -6567,6 +6668,230 @@
         return `單件售價 ${getPartPriceText(part)}`;
       }
 
+      function expandWheelConfigs(rows) {
+        const options = [];
+        rows.forEach((row) => {
+          row.ets.forEach((et) => {
+            row.colors.forEach((color) => {
+              const colorLabel = `${color.label}（${color.code}）`;
+              options.push({
+                key: `${row.size}|${row.pcd}|ET${et}|${color.code}`,
+                label: `${row.size} ${row.pcd} ET${et} · ${colorLabel}`,
+                summary: `${row.size} / ${row.pcd} / ET${et} / ${colorLabel}`,
+              });
+            });
+          });
+        });
+        return options;
+      }
+
+      const WHEEL_CONFIGS = {
+        w0: expandWheelConfigs([
+          {
+            size: "18×8.5J",
+            pcd: "5×114.3",
+            ets: ["35", "42", "50"],
+            colors: [{ code: "KK", label: "壓鑄消光黑" }],
+          },
+          {
+            size: "18×9J",
+            pcd: "5×114.3",
+            ets: ["35", "45"],
+            colors: [{ code: "KK", label: "壓鑄消光黑" }],
+          },
+          {
+            size: "18×9.5J",
+            pcd: "5×114.3",
+            ets: ["22", "30", "38", "45"],
+            colors: [{ code: "KK", label: "壓鑄消光黑" }],
+          },
+        ]),
+        w1: expandWheelConfigs([
+          {
+            size: "18×8.5J",
+            pcd: "5×114.3",
+            ets: ["35", "42", "50"],
+            colors: [{ code: "SZ", label: "亮面古銅金屬" }],
+          },
+          {
+            size: "18×9J",
+            pcd: "5×114.3",
+            ets: ["35", "45"],
+            colors: [{ code: "SZ", label: "亮面古銅金屬" }],
+          },
+          {
+            size: "18×9.5J",
+            pcd: "5×114.3",
+            ets: ["22", "30", "38", "45"],
+            colors: [{ code: "SZ", label: "亮面古銅金屬" }],
+          },
+        ]),
+        w2: expandWheelConfigs([
+          {
+            size: "18×8.5J",
+            pcd: "5×114.3",
+            ets: ["35", "42", "50"],
+            colors: [{ code: "BW", label: "噴砂深灰金屬" }],
+          },
+          {
+            size: "18×9J",
+            pcd: "5×114.3",
+            ets: ["35", "45"],
+            colors: [{ code: "BW", label: "噴砂深灰金屬" }],
+          },
+          {
+            size: "18×9.5J",
+            pcd: "5×114.3",
+            ets: ["22", "30", "38", "45"],
+            colors: [{ code: "BW", label: "噴砂深灰金屬" }],
+          },
+        ]),
+        w3: expandWheelConfigs([
+          {
+            size: "18×8.5J",
+            pcd: "5×114.3",
+            ets: ["35", "42", "50"],
+            colors: [{ code: "MM", label: "鑽石深灰消光黑" }],
+          },
+          {
+            size: "18×9J",
+            pcd: "5×114.3",
+            ets: ["35", "45"],
+            colors: [{ code: "MM", label: "鑽石深灰消光黑" }],
+          },
+          {
+            size: "18×9.5J",
+            pcd: "5×114.3",
+            ets: ["22", "30", "38", "45"],
+            colors: [{ code: "MM", label: "鑽石深灰消光黑" }],
+          },
+        ]),
+        w4: expandWheelConfigs([
+          {
+            size: "18×8.5J",
+            pcd: "5×114.3",
+            ets: ["35", "42", "50"],
+            colors: [
+              { code: "WH", label: "珍珠白" },
+              { code: "BR", label: "古銅陽極" },
+              { code: "DS", label: "鑽石銀" },
+              { code: "DB", label: "鑽石黑" },
+              { code: "BL", label: "MAG深藍" },
+              { code: "MZ", label: "消光槍銅" },
+              { code: "GO", label: "金色" },
+            ],
+          },
+          {
+            size: "18×9J",
+            pcd: "5×114.3",
+            ets: ["35", "45"],
+            colors: [
+              { code: "WH", label: "珍珠白" },
+              { code: "BR", label: "古銅陽極" },
+              { code: "DS", label: "鑽石銀" },
+              { code: "DB", label: "鑽石黑" },
+              { code: "BL", label: "MAG深藍" },
+              { code: "MZ", label: "消光槍銅" },
+              { code: "GO", label: "金色" },
+            ],
+          },
+          {
+            size: "18×9.5J",
+            pcd: "5×114.3",
+            ets: ["22", "30", "38", "45"],
+            colors: [
+              { code: "WH", label: "珍珠白" },
+              { code: "BR", label: "古銅陽極" },
+              { code: "DS", label: "鑽石銀" },
+              { code: "DB", label: "鑽石黑" },
+              { code: "BL", label: "MAG深藍" },
+              { code: "MZ", label: "消光槍銅" },
+              { code: "GO", label: "金色" },
+            ],
+          },
+        ]),
+        w5: expandWheelConfigs([
+          {
+            size: "18×8.5J",
+            pcd: "5×114.3",
+            ets: ["35", "42", "50"],
+            colors: [
+              { code: "AB", label: "機械拉絲銀" },
+              { code: "CB", label: "機械拋光水晶" },
+            ],
+          },
+          {
+            size: "18×9J",
+            pcd: "5×114.3",
+            ets: ["35", "45"],
+            colors: [
+              { code: "AB", label: "機械拉絲銀" },
+              { code: "CB", label: "機械拋光水晶" },
+            ],
+          },
+          {
+            size: "18×9.5J",
+            pcd: "5×114.3",
+            ets: ["22", "30", "38", "45"],
+            colors: [
+              { code: "AB", label: "機械拉絲銀" },
+              { code: "CB", label: "機械拋光水晶" },
+            ],
+          },
+        ]),
+        w6: expandWheelConfigs([
+          {
+            size: "18×8.5J",
+            pcd: "5×114.3",
+            ets: ["35", "42", "50"],
+            colors: [
+              { code: "KR", label: "消光黑×紅字" },
+              { code: "WR", label: "競速白×紅字" },
+            ],
+          },
+          {
+            size: "18×9J",
+            pcd: "5×114.3",
+            ets: ["35", "45"],
+            colors: [
+              { code: "KR", label: "消光黑×紅字" },
+              { code: "WR", label: "競速白×紅字" },
+            ],
+          },
+          {
+            size: "18×9.5J",
+            pcd: "5×114.3",
+            ets: ["22", "30", "38", "45"],
+            colors: [
+              { code: "KR", label: "消光黑×紅字" },
+              { code: "WR", label: "競速白×紅字" },
+            ],
+          },
+        ]),
+        w7: expandWheelConfigs([
+          {
+            size: "19×9.5J",
+            pcd: "5×114.3",
+            ets: ["35"],
+            colors: [{ code: "PG", label: "壓鑄石墨灰" }],
+          },
+        ]),
+      };
+
+      function getWheelConfigOptions(partId) {
+        return Array.isArray(WHEEL_CONFIGS[partId]) ? WHEEL_CONFIGS[partId] : [];
+      }
+
+      function getDefaultWheelConfigKey(partId) {
+        return getWheelConfigOptions(partId)[0]?.key || "";
+      }
+
+      function getWheelConfigOption(partId, key) {
+        const options = getWheelConfigOptions(partId);
+        if (!options.length) return null;
+        return options.find((option) => option.key === key) || options[0];
+      }
+
       function getPartPriceText(part) {
         const display = String(part?.price?.display || "").trim();
         if (display) return display;
@@ -6605,6 +6930,7 @@
           sel = {};
           addOns = [];
           itemQuantities = {};
+          itemWheelConfigs = {};
           normalizeSelection();
           // Initialize after loading
           initApp();
@@ -6628,9 +6954,11 @@
       let sel = {};
       let addOns = [];
       let itemQuantities = {};
+      let itemWheelConfigs = {};
       let curCat = "wheels";
       let pending = null;
       let pendingQty = 1;
+      let pendingWheelConfigKey = "";
       let prevStats = null;
       let modalGalleryImages = [];
       let modalGalleryIndex = 0;
@@ -6663,6 +6991,9 @@
         if (!itemQuantities || typeof itemQuantities !== "object") {
           itemQuantities = {};
         }
+        if (!itemWheelConfigs || typeof itemWheelConfigs !== "object") {
+          itemWheelConfigs = {};
+        }
         const nextAddOns = [];
         const seen = new Set();
         addOns.forEach((entry) => {
@@ -6689,6 +7020,9 @@
 
         itemQuantities = Object.fromEntries(
           Object.entries(itemQuantities).filter(([key]) => validQuantityKeys.has(key))
+        );
+        itemWheelConfigs = Object.fromEntries(
+          Object.entries(itemWheelConfigs).filter(([key]) => validQuantityKeys.has(key))
         );
       }
 
@@ -6721,6 +7055,24 @@
         return clampInteger(storedQty ?? getDefaultPartQty(cat), 1, 99);
       }
 
+      function setItemWheelConfig(cat, id, mode = "equip", key = "") {
+        if (!isWheelCategory(cat)) return;
+        const resolvedCat = resolveCategoryKey(cat);
+        const option = getWheelConfigOption(id, key);
+        if (!option) return;
+        itemWheelConfigs[itemStateKey(resolvedCat, id, mode)] = option.key;
+      }
+
+      function clearItemWheelConfig(cat, id, mode = "equip") {
+        delete itemWheelConfigs[itemStateKey(cat, id, mode)];
+      }
+
+      function getItemWheelConfig(cat, id, mode = "equip") {
+        if (!isWheelCategory(cat)) return null;
+        const key = itemStateKey(cat, id, mode);
+        return getWheelConfigOption(id, itemWheelConfigs[key] || getDefaultWheelConfigKey(id));
+      }
+
       function findAddOnIndex(cat, id) {
         const key = addOnKey(cat, id);
         return addOns.findIndex((entry) => addOnKey(entry.cat, entry.id) === key);
@@ -6740,6 +7092,7 @@
         } else if (idx !== -1) {
           addOns.splice(idx, 1);
           clearItemQuantity(resolvedCat, id, "addon");
+          clearItemWheelConfig(resolvedCat, id, "addon");
         }
       }
 
@@ -7230,6 +7583,7 @@
             const price = getPurchaseSubtotalValue(part, resolvedCat, qty);
             const priceText = getPurchaseSubtotalText(part, resolvedCat, qty);
             const categoryLabel = getCartCategoryLabel(resolvedCat, category);
+            const wheelConfig = getItemWheelConfig(resolvedCat, part.id, "equip");
             total += price;
 
             return {
@@ -7237,11 +7591,17 @@
               name: part.name,
               stateText: `已裝備 · x${qty}`,
               priceText,
+              configText: wheelConfig ? wheelConfig.summary : "",
               rowHtml: `<div class="cart-item">
               <div class="cart-cat">${categoryLabel}</div>
               <div class="cart-main">
                 <div class="cart-name">${part.name}</div>
                 <div class="cart-state">已裝備 · 數量 x${qty}</div>
+                ${
+                  wheelConfig
+                    ? `<div class="cart-spec">${wheelConfig.summary}</div>`
+                    : ""
+                }
               </div>
               <div class="cart-actions">
                 <div class="cart-price">${priceText}</div>
@@ -7269,6 +7629,7 @@
             const price = getPurchaseSubtotalValue(part, resolvedCat, qty);
             const priceText = getPurchaseSubtotalText(part, resolvedCat, qty);
             const categoryLabel = getCartCategoryLabel(resolvedCat, category);
+            const wheelConfig = getItemWheelConfig(resolvedCat, part.id, "addon");
             total += price;
 
             return {
@@ -7276,11 +7637,17 @@
               name: part.name,
               stateText: `加購待結帳 · x${qty}`,
               priceText,
+              configText: wheelConfig ? wheelConfig.summary : "",
               rowHtml: `<div class="cart-item addon">
               <div class="cart-cat">${categoryLabel}</div>
               <div class="cart-main">
                 <div class="cart-name">${part.name}</div>
                 <div class="cart-state">加購待結帳 · 數量 x${qty}</div>
+                ${
+                  wheelConfig
+                    ? `<div class="cart-spec">${wheelConfig.summary}</div>`
+                    : ""
+                }
               </div>
               <div class="cart-actions">
                 <div class="cart-price">${priceText}</div>
@@ -7340,6 +7707,7 @@
         if (sel[resolvedCat] !== id) return;
         const before = computeStats();
         clearItemQuantity(resolvedCat, id, "equip");
+        clearItemWheelConfig(resolvedCat, id, "equip");
         delete sel[resolvedCat];
         normalizeSelection();
         const after = computeStats();
@@ -7808,11 +8176,69 @@
         setAddOn(pending.cat, pending.id, !exists);
         if (!exists) {
           setItemQuantity(pending.cat, pending.id, "addon", pendingQty);
+          setItemWheelConfig(
+            pending.cat,
+            pending.id,
+            "addon",
+            pendingWheelConfigKey
+          );
         }
         normalizeSelection();
         renderSummary();
         closeMod();
         showToast(exists ? "已取消加購" : "已加入加購清單");
+      }
+
+      function renderWheelConfigPanel(cat, part) {
+        const panel = document.getElementById("modal-wheel-config-panel");
+        const select = document.getElementById("modal-wheel-config-select");
+        const note = document.getElementById("modal-wheel-config-note");
+        if (!panel || !select || !note) return;
+
+        if (!isWheelCategory(cat)) {
+          panel.classList.remove("show");
+          select.innerHTML = "";
+          note.textContent = "";
+          return;
+        }
+
+        const options = getWheelConfigOptions(part.id);
+        panel.classList.add("show");
+        select.innerHTML = options
+          .map((option) => `<option value="${option.key}">${option.label}</option>`)
+          .join("");
+
+        const currentOption =
+          getWheelConfigOption(part.id, pendingWheelConfigKey) || options[0] || null;
+        pendingWheelConfigKey = currentOption ? currentOption.key : "";
+        select.value = pendingWheelConfigKey;
+        note.textContent = currentOption
+          ? `已選配置：${currentOption.summary}`
+          : "請選擇輪框完整配置";
+      }
+
+      function updatePendingWheelConfig(value) {
+        if (!pending || !isWheelCategory(pending.cat)) return;
+        const option = getWheelConfigOption(pending.id, value);
+        pendingWheelConfigKey = option ? option.key : "";
+        renderWheelConfigPanel(pending.cat, { id: pending.id });
+        if (sel[pending.cat] === pending.id) {
+          setItemWheelConfig(
+            pending.cat,
+            pending.id,
+            "equip",
+            pendingWheelConfigKey
+          );
+          renderSummary();
+        } else if (hasAddOn(pending.cat, pending.id)) {
+          setItemWheelConfig(
+            pending.cat,
+            pending.id,
+            "addon",
+            pendingWheelConfigKey
+          );
+          renderSummary();
+        }
       }
 
       function renderModalPurchasePanel(cat, part) {
@@ -7903,10 +8329,17 @@
         document.getElementById("modal-desc").textContent = p.desc;
         if (sel[resolvedCat] === p.id) {
           pendingQty = getItemQuantity(resolvedCat, p.id, "equip");
+          pendingWheelConfigKey =
+            getItemWheelConfig(resolvedCat, p.id, "equip")?.key ||
+            getDefaultWheelConfigKey(p.id);
         } else if (hasAddOn(resolvedCat, p.id)) {
           pendingQty = getItemQuantity(resolvedCat, p.id, "addon");
+          pendingWheelConfigKey =
+            getItemWheelConfig(resolvedCat, p.id, "addon")?.key ||
+            getDefaultWheelConfigKey(p.id);
         } else {
           pendingQty = getDefaultPartQty(resolvedCat);
+          pendingWheelConfigKey = getDefaultWheelConfigKey(p.id);
         }
 
         const labels = {
@@ -7938,6 +8371,7 @@
             '<div class="modal-chip mchip-neutral">無性能數值變更</div>'
           );
         document.getElementById("modal-chips").innerHTML = chips.join("");
+        renderWheelConfigPanel(resolvedCat, p);
         renderModalPurchasePanel(resolvedCat, p);
         updateModalActionButtons(resolvedCat, id);
 
@@ -7950,6 +8384,7 @@
         syncModalPricePlacement();
         pending = null;
         pendingQty = 1;
+        pendingWheelConfigKey = "";
         modalGalleryImages = [];
         modalGalleryIndex = 0;
         modalGalleryPartName = "";
@@ -7971,16 +8406,30 @@
         if (!pending) return;
         const before = computeStats();
         const appliedQty = pendingQty;
+        const appliedWheelConfigKey = pendingWheelConfigKey;
         const isUpdatingSame = sel[pending.cat] === pending.id;
         if (isUpdatingSame) {
           setItemQuantity(pending.cat, pending.id, "equip", appliedQty);
+          setItemWheelConfig(
+            pending.cat,
+            pending.id,
+            "equip",
+            appliedWheelConfigKey
+          );
         } else {
           const previousId = sel[pending.cat];
           if (previousId && previousId !== pending.id) {
             clearItemQuantity(pending.cat, previousId, "equip");
+            clearItemWheelConfig(pending.cat, previousId, "equip");
           }
           sel[pending.cat] = pending.id;
           setItemQuantity(pending.cat, pending.id, "equip", appliedQty);
+          setItemWheelConfig(
+            pending.cat,
+            pending.id,
+            "equip",
+            appliedWheelConfigKey
+          );
           setAddOn(pending.cat, pending.id, false);
         }
         normalizeSelection();
@@ -8056,12 +8505,14 @@
             const priceValue = getPurchaseSubtotalValue(part, resolvedCat, qty);
             const priceText = getPurchaseBaseLabel(part, resolvedCat);
             const unitPriceText = getPurchaseUnitText(part, resolvedCat);
+            const wheelConfig = getItemWheelConfig(resolvedCat, part.id, "equip");
             total += priceValue;
 
             return {
               categoryLabel: getCartCategoryLabel(resolvedCat, category),
               name: part.name,
               stateText: "已裝備",
+              configText: wheelConfig ? wheelConfig.summary : "",
               priceText,
               unitPriceText,
               qty,
@@ -8082,12 +8533,14 @@
             const priceValue = getPurchaseSubtotalValue(part, resolvedCat, qty);
             const priceText = getPurchaseBaseLabel(part, resolvedCat);
             const unitPriceText = getPurchaseUnitText(part, resolvedCat);
+            const wheelConfig = getItemWheelConfig(resolvedCat, part.id, "addon");
             total += priceValue;
 
             return {
               categoryLabel: getCartCategoryLabel(resolvedCat, category),
               name: part.name,
               stateText: "額外加購",
+              configText: wheelConfig ? wheelConfig.summary : "",
               priceText,
               unitPriceText,
               qty,
@@ -8220,8 +8673,14 @@
           const nameState = document.createElement("div");
           nameState.className = "checkout-item-state";
           nameState.textContent = `${item.categoryLabel} · ${item.stateText}`;
+          const configState = document.createElement("div");
+          configState.className = "checkout-item-config";
+          configState.textContent = item.configText || "";
           nameTd.appendChild(nameTitle);
           nameTd.appendChild(nameState);
+          if (item.configText) {
+            nameTd.appendChild(configState);
+          }
 
           const priceTd = document.createElement("td");
           priceTd.className = "checkout-col-price";
@@ -8370,6 +8829,7 @@
         sel = {};
         addOns = [];
         itemQuantities = {};
+        itemWheelConfigs = {};
         normalizeSelection();
         curCat = resolveCategoryKey(curCat);
         if (!CATS[curCat]) {
