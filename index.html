@@ -1335,11 +1335,11 @@
 
       .pc-name {
         font-family: "Barlow Condensed", sans-serif;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 700;
         letter-spacing: 0.06em;
         color: var(--white);
-        margin-bottom: 3px;
+        margin-bottom: 6px;
         line-height: 1.2;
       }
 
@@ -1389,15 +1389,6 @@
         color: #e84040;
         background: rgba(232, 64, 64, 0.1);
         border: 1px solid rgba(232, 64, 64, 0.2);
-      }
-
-      .pc-spec {
-        font-size: 9px;
-        color: var(--cyan);
-        line-height: 1.4;
-        margin-bottom: 4px;
-        padding-bottom: 4px;
-        border-bottom: 1px solid var(--border);
       }
 
       .pc-unit {
@@ -4916,9 +4907,9 @@
           padding: 7px 8px 8px;
         }
         .pc-name {
-          font-size: 12px;
+          font-size: 14px;
           margin-bottom: 4px;
-          line-height: 1.2;
+          line-height: 1.24;
         }
         .pc-desc {
           display: none;
@@ -7272,7 +7263,6 @@
             </div>
             <div class="pc-body">
               <div class="pc-name">${p.name}</div>
-              ${p.spec ? `<div class="pc-spec">${p.spec}</div>` : ""}
               <div class="pc-desc">${p.desc}</div>
               <div class="pc-footer">
                 <span class="pc-price">${getPartPriceText(p)}</span>
