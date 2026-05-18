@@ -58,12 +58,14 @@
         position: fixed;
         inset: 0;
         z-index: 1000;
-        background: #04060a;
+        background:
+          radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent 38%),
+          #000;
         display: flex;
         align-items: center;
         justify-content: center;
         opacity: 1;
-        transition: opacity 1s ease-out;
+        transition: opacity 0.95s ease-out;
       }
 
       #loading-screen.hidden {
@@ -74,45 +76,106 @@
       .loading-content {
         position: relative;
         z-index: 2;
-        text-align: center;
-        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .loading-text {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 32px;
-        letter-spacing: 0.08em;
-        color: #00e5ff;
-        text-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
-        margin-bottom: 20px;
-        opacity: 0;
-        animation: text-fade-in 0.5s ease-out forwards;
+      .loading-emblem-shell {
+        position: relative;
+        width: min(32vw, 360px);
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .loading-progress {
-        width: 200px;
-        height: 2px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 1px;
-        overflow: hidden;
-        margin: 0 auto;
+      .loading-ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
       }
 
-      .loading-progress-bar {
-        height: 100%;
-        background: linear-gradient(90deg, #00e5ff, #e8192c);
-        width: 0%;
-        transition: width 2s ease-out;
+      .loading-ring::before,
+      .loading-ring::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
       }
 
-      @keyframes text-fade-in {
+      .loading-ring::before {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        opacity: 0.8;
+      }
+
+      .loading-ring::after {
+        background:
+          conic-gradient(
+            from 0deg,
+            rgba(255, 255, 255, 0) 0deg,
+            rgba(255, 255, 255, 0.06) 190deg,
+            rgba(255, 255, 255, 0.34) 270deg,
+            rgba(255, 255, 255, 0.98) 322deg,
+            rgba(255, 255, 255, 0.18) 350deg,
+            rgba(255, 255, 255, 0) 360deg
+          );
+        -webkit-mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 5px),
+          #000 calc(100% - 4px)
+        );
+        mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 5px),
+          #000 calc(100% - 4px)
+        );
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.22));
+        animation: loading-orbit 1.15s linear infinite;
+      }
+
+      .loading-emblem-image {
+        position: relative;
+        z-index: 2;
+        width: 60%;
+        height: auto;
+        display: block;
+        filter:
+          drop-shadow(0 10px 26px rgba(0, 0, 0, 0.55))
+          drop-shadow(0 0 14px rgba(255, 255, 255, 0.08));
+      }
+
+      @keyframes loading-orbit {
         from {
-          opacity: 0;
-          transform: translateY(20px);
+          transform: rotate(0deg);
         }
         to {
-          opacity: 1;
-          transform: translateY(0);
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes loading-breathe {
+        0%,
+        100% {
+          transform: scale(0.985);
+          opacity: 0.42;
+        }
+        50% {
+          transform: scale(1.03);
+          opacity: 0.9;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .loading-emblem-shell {
+          width: min(58vw, 250px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .loading-ring::before,
+        .loading-ring::after {
+          animation: none;
         }
       }
 
@@ -5302,9 +5365,13 @@
     <!-- LOADING SCREEN -->
     <div id="loading-screen">
       <div class="loading-content">
-        <div class="loading-text" id="loading-text">動力模組同步中</div>
-        <div class="loading-progress">
-          <div class="loading-progress-bar" id="loading-progress-bar"></div>
+        <div class="loading-emblem-shell">
+          <div class="loading-ring" aria-hidden="true"></div>
+          <img
+            src="assets/images/gr-loading.png"
+            alt="GR"
+            class="loading-emblem-image"
+          />
         </div>
       </div>
     </div>
@@ -8284,53 +8351,19 @@
       /* ══════════════════════════════
    LOADING SEQUENCE
 ══════════════════════════════ */
-      const loadingMessages = [
-        "動力模組同步中",
-        "性能資料載入中",
-        "底盤與動力設定初始化",
-        "GR YARIS 即將登場...",
-      ];
-
-      let currentMessageIndex = 0;
-      const LOADING_SPEED_MULTIPLIER = 1.5;
-      const LOADING_MESSAGE_INTERVAL = Math.round(
-        1000 / LOADING_SPEED_MULTIPLIER
-      );
-      const LOADING_TRANSITION_DELAY = Math.round(
-        500 / LOADING_SPEED_MULTIPLIER
-      );
-      const loadingText = document.getElementById("loading-text");
-      const loadingProgressBar = document.getElementById(
-        "loading-progress-bar"
-      );
+      const LOADING_SHOW_DURATION = 1200;
+      const LOADING_FADE_DURATION = 950;
       const loadingScreen = document.getElementById("loading-screen");
-
-      function updateLoadingMessage() {
-        loadingText.style.opacity = 0;
-        setTimeout(() => {
-          loadingText.textContent = loadingMessages[currentMessageIndex];
-          loadingText.style.opacity = 1;
-          loadingProgressBar.style.width = `${
-            ((currentMessageIndex + 1) / loadingMessages.length) * 100
-          }%`;
-          currentMessageIndex++;
-          if (currentMessageIndex < loadingMessages.length) {
-            setTimeout(updateLoadingMessage, LOADING_MESSAGE_INTERVAL);
-          } else {
-            setTimeout(() => {
-              loadingScreen.classList.add("hidden");
-              setTimeout(() => {
-                loadingScreen.style.display = "none";
-              }, LOADING_MESSAGE_INTERVAL);
-            }, LOADING_MESSAGE_INTERVAL);
-          }
-        }, LOADING_TRANSITION_DELAY);
-      }
 
       // Start loading sequence when DOM is loaded
       document.addEventListener("DOMContentLoaded", () => {
         setCartDrawer(false);
-        setTimeout(updateLoadingMessage, LOADING_MESSAGE_INTERVAL);
+        setTimeout(() => {
+          loadingScreen.classList.add("hidden");
+          setTimeout(() => {
+            loadingScreen.style.display = "none";
+          }, LOADING_FADE_DURATION);
+        }, LOADING_SHOW_DURATION);
       });
 
       const car3D = {
